@@ -19,7 +19,9 @@ export default class LogIn extends Component {
     const socket = io.connect('http://localhost:8080');
     console.log(sessionStorage.getItem('current_user'));
     if (sessionStorage.getItem('current_user')) {
-      socket.emit('new user', sessionStorage.getItem('current_user'));
+      let name = JSON.parse(sessionStorage.getItem('current_user')).username
+      this.setState({currentUser:name})
+      socket.emit('new user',name);
     }
   }
 
@@ -29,7 +31,7 @@ export default class LogIn extends Component {
 
     socket.on('new message', dataNewMassg => {
       console.log({ dataNewMassg });
-      if (dataNewMassg.to == sessionStorage.getItem('current_user')) {
+      if (dataNewMassg.to == this.state.currentUser) {
         this.setState({ isDialogOpen: true });
         // alert(`${dataNewMassg.from} send you massg`);
       }
@@ -38,8 +40,6 @@ export default class LogIn extends Component {
 
   getUser = socket => {
     socket.on('usernames', username => {
-      console.log(username, 'username from DID moun');
-
       this.setState({
         clients: username,
       });
@@ -49,7 +49,7 @@ export default class LogIn extends Component {
   sendAcceptance = (socket, selectedUser) => {
     const data = {};
     data.to = selectedUser;
-    data.from = sessionStorage.getItem('current_user'); // current user
+    data.from = this.state.currentUser; // current user
     data.type = 'invite';
     socket.emit('sendMessage', data);
   };

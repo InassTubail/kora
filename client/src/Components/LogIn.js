@@ -34,7 +34,17 @@ export default class LogIn extends Component {
       this.setState({ error: 'error ' });
     } else {
       socket.emit('new user', this.state.name);
-      sessionStorage.setItem('current_user', this.state.name);
+      sessionStorage.setItem(
+        'current_user',
+        JSON.stringify({
+          username: this.state.name,
+          data: {
+            is_playing: false,
+            with: null,
+            room: null,
+          },
+        })
+      );
       this.props.history.push('/player-Character');
     }
   };
