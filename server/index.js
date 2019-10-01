@@ -6,43 +6,69 @@ const {
   join
 } = require('path');
 
-var clients = [];
-
-// app.get('/', function(req, res) {
-//   res.sendFile(__dirname + '/index.html');
-// });
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.get('*', (_req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });
+var clients = [];
+let currentUserID;
+//generate private room name for two users
+function getARoom(user1, user2) {
+  return 'privateRooom' + user1.name + "And" + user2.name;
+}
 
+function findUserById(id) {
+  for (socketID of clients) {
+    if (socketID.id === id) {
+      return test = socketID;
+    }
+  }
+}
 io.sockets.on('connection', function (socket) {
   socket.on('username', function (username) {
     socket.username = username;
+    currentUserID = socket.id
     clients.push({
       name: socket.username,
       id: socket.id
     })
-    // socket.on('disconnect', function(username) {
-    //   console.log('-**-*-*-*-*-');
-    // io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
+    socket.join(`user/${socket.id}`);
   });
 
   io.emit('username', clients);
+  io.emit('currentUser', currentUserID);
   socket.on('disconnect', function (username) {
-    clients.map((client, index) => {      
+    clients.map((client, index) => {
       if (client.id == socket.id) {
         clients.splice(index, 1);
       }
     })
-    // io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
     io.emit('username', clients);
   })
 
-  // socket.on('chat_message', function(message) {
-  //     io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
-  // });
+  socket.on('initiate private message', function (data) {
+    var selectedUserId = data.selectedUserId;
+    var currentUser = findUserById(currentUserID);
+    if(currentUser){
+      // var receiver = people[currentUser];
+      // var room = getARoom(people[socket.id], receiver);
+      let privatechannel =  getARoom(currentUser.id, selectedUserId)
+
+      //join the anonymous user
+      socket.join(privatechannel);
+      //join the registered user 
+      socket[currentUser].join(privatechannel);
+
+
+      //notify the client of this
+      socket.in(privatechannel).emit('private privatechannel created', privatechannel)
+    }
+  });
+
+
+
+
 
 });
 

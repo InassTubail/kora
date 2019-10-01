@@ -5,41 +5,60 @@ const io = require('socket.io-client');
 export default class LogIn extends Component {
   state = {
     clients: [],
+    currentUser: '',
   };
 
   componentDidMount() {
     const socket = io.connect('http://localhost:8080');
-    socket.on('username', username => {
-      this.setState({ clients: username });
-    });
+    this.getUser(socket);
+
+    // socket.on(`initiate private message`, data => {
+    //   console.log({ data });
+    // });
   }
 
-  render() {
-    const { clients } = this.state;
-    console.log({ clients });
+  getUser = socket => {
+    socket.on('username', username => {
+      this.setState({
+        clients: username,
+      });
+      socket.on(`currentUser`, usernamr => {
+        this.setState({
+          currentUser: usernamr,
+        });
+      });
+    });
+  };
 
+  onSelectUser = e => {
+    const socket = io.connect('http://localhost:8080');
+    console.log(this.state.currentUser, e.target.id);
+
+    // socket.emit('initiate private message', {
+    //   selectedUserId: e.target.id,
+    // });
+  };
+
+  render() {
+    // const socket = io.connect('http://localhost:8080');
+
+    const { clients } = this.state;
     return (
       <React.Fragment>
-        <h2>Members</h2>
+        <h2> Members </h2>{' '}
         <ul id="ulist">
+          {' '}
           {clients.map(element => (
             <li key={element.id}>
-              {' '}
-              <button> {element.name} </button>
+              <button id={element.id} onClick={this.onSelectUser}>
+                {' '}
+                {element.name}{' '}
+              </button>{' '}
             </li>
-          ))}
-        </ul>
+          ))}{' '}
+        </ul>{' '}
       </React.Fragment>
     );
   }
 }
 
-// هان بدنا نبين اسماء المتصلين الاون والاوف
-// socket.on('username', function (username) {
-//   console.log(username, 'array');
-//   $('#ulist').html("");
-//   const list = $('#ulist')
-//   username.forEach(element => {
-//     list.append($('<li>').html(element))
-//   });
-// });
