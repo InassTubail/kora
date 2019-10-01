@@ -11,52 +11,50 @@ export default class LogIn extends Component {
   componentDidMount() {
     const socket = io.connect('http://localhost:8080');
     this.getUser(socket);
-
-    // socket.on(`initiate private message`, data => {
-    //   console.log({ data });
-    // });
+    socket.on('new message', dataNewMassg => {
+      console.log({ dataNewMassg });
+     if(dataNewMassg.to == localStorage.getItem('current_user')){
+      alert(`${dataNewMassg.from} send you massg`);
+     }
+    });
   }
 
   getUser = socket => {
-    socket.on('username', username => {
+    socket.on('usernames', username => {
       this.setState({
         clients: username,
-      });
-      socket.on(`currentUser`, usernamr => {
-        this.setState({
-          currentUser: usernamr,
-        });
       });
     });
   };
 
+  sendAcceptance = (socket, selectedUser) => {
+    let data = {}
+    data.to = selectedUser;
+    data.from = localStorage.getItem('current_user'); // current user
+    data.type = 'invite';
+    socket.emit('sendMessage', data);
+  };
   onSelectUser = e => {
     const socket = io.connect('http://localhost:8080');
-    console.log(this.state.currentUser, e.target.id);
-
-    // socket.emit('initiate private message', {
-    //   selectedUserId: e.target.id,
-    // });
+    console.log(e.target.id,'e.target.id');
+    // new message
+    this.sendAcceptance(socket, e.target.id)
   };
 
   render() {
-    // const socket = io.connect('http://localhost:8080');
-
     const { clients } = this.state;
     return (
       <React.Fragment>
-        <h2> Members </h2>{' '}
+        <h2> Members </h2>
         <ul id="ulist">
-          {' '}
           {clients.map(element => (
-            <li key={element.id}>
-              <button id={element.id} onClick={this.onSelectUser}>
-                {' '}
-                {element.name}{' '}
-              </button>{' '}
+            <li>
+              <button id={element} onClick={this.onSelectUser}>
+                {element}
+              </button>
             </li>
-          ))}{' '}
-        </ul>{' '}
+          ))}
+        </ul>
       </React.Fragment>
     );
   }

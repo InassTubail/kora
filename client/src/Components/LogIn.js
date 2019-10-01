@@ -15,8 +15,11 @@ export default class LogIn extends Component {
 
   onClick = e => {
     e.preventDefault();
-    socket.emit('username', this.state.name);
+    // console.log('//////////////////////////');
+    socket.emit('new user', this.state.name);
+    localStorage.setItem('current_user', this.state.name);
     this.props.history.push('/player-Character');
+
   };
 
   render() {
