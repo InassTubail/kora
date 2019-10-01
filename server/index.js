@@ -11,21 +11,21 @@ app.use(express.static(join(__dirname, '..', 'client', 'build')));
 app.get('*', (_req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });
-var clients = [];
-let currentUserID;
+// var clients = [];
+// let currentUserID;
 var usernames = [];
 //generate private room name for two users
-function getARoom(user1, user2) {
-  return 'privateRooom' + user1.name + "And" + user2.name;
-}
+// function getARoom(user1, user2) {
+//   return 'privateRooom' + user1.name + "And" + user2.name;
+// }
 
-function findUserById(id) {
-  for (socketID of clients) {
-    if (socketID.id === id) {
-      return test = socketID;
-    }
-  }
-}
+// function findUserById(id) {
+//   for (socketID of clients) {
+//     if (socketID.id === id) {
+//       return test = socketID;
+//     }
+//   }
+// }
 io.sockets.on('connection', function (socket) {
   // socket.on('username', function (username) {
   //   // socket.username = username;
@@ -103,22 +103,21 @@ io.sockets.on('connection', function (socket) {
 
 
   io.sockets.on('connection', function (socket) {
+
     socket.on('new user', function (data) {
-      if (data in usernames) {
-        // callback(false);
-      } else {
+      // if (data in usernames) {
+      //   // callback(false);
+      // } else {
         socket.username = data;
-        console.log(socket.username, 'socket.username when Login');
         usernames[socket.username] = socket;
         io.sockets.emit('usernames', Object.keys(usernames));
 
-      }
+      // }
     });
     io.sockets.emit('usernames', Object.keys(usernames));
-
+    
     socket.on('sendMessage', function (data) {
       if (data.type == 'invite') {
-        console.log(socket.username, 'socket.username when invite');
         io.sockets.emit('new message', { message: 'msg', from: data.from, to: data.to });
       }
 
@@ -126,13 +125,8 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('disconnect', function (data) {
       if (!socket.username) return;
-      //NEW
-      console.log(socket.nickname, 'socket.nickname disConnct');
-
-      delete usernames[socket.nickname];
-      // OLD
-      //usernames.splice(usernames.indexOf(socket.username), 1);
-      io.sockets.emit('usernames', usernames);
+      delete usernames[socket.username];
+      io.emit('usernames', Object.keys(usernames));
     });
   });
 
