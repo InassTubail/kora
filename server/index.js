@@ -26,7 +26,7 @@ var usernames = [];
 //     }
 //   }
 // }
-io.sockets.on('connection', function (socket) {
+// io.sockets.on('connection', function (socket) {
   // socket.on('username', function (username) {
   //   // socket.username = username;
   //   currentUserID = socket.id
@@ -108,19 +108,40 @@ io.sockets.on('connection', function (socket) {
       // if (data in usernames) {
       //   // callback(false);
       // } else {
-        socket.username = data;
-        usernames[socket.username] = socket;
-        io.sockets.emit('usernames', Object.keys(usernames));
-
+      socket.username = data;
+      usernames[socket.username] = 
+      JSON.stringify({
+        // socket,
+        //add personalty
+        data: {
+          is_playing: false,
+          with: null,
+          room: null
+        }
+      });
+      io.sockets.emit('usernames', Object.keys(usernames));
       // }
     });
     io.sockets.emit('usernames', Object.keys(usernames));
-    
+
     socket.on('sendMessage', function (data) {
       if (data.type == 'invite') {
-        io.sockets.emit('new message', { message: 'msg', from: data.from, to: data.to });
+        console.log({data});
+        
+        let from = usernames[data.from]
+        let to = usernames[data.to]
+        // JSON.parse(from).data.with = data.to
+        // JSON.parse(to).data.with = data.from
+        // usernames[data.from] = JSON.stringify(from)
+        // usernames[data.to] = JSON.stringify(to)
+        console.log({from,to},'*********************************');
+        io.sockets.emit('new message', {
+          message: 'msg',
+          from: data.from,
+          to: data.to
+        });
       }
-
+      
     });
 
     socket.on('disconnect', function (data) {
@@ -130,7 +151,7 @@ io.sockets.on('connection', function (socket) {
     });
   });
 
-});
+// });
 
 const server = http.listen(8080, function () {
   console.log('listening on *:8080');

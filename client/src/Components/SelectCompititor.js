@@ -7,7 +7,7 @@ const io = require('socket.io-client');
 export default class LogIn extends Component {
   state = {
     clients: [],
-    currentUser: '',
+    currentUser: {},
     isDialogOpen: false,
   };
 
@@ -15,26 +15,39 @@ export default class LogIn extends Component {
 
   handleClose = () => this.setState({ isDialogOpen: false });
 
-  componentWillMount() {
-    const socket = io.connect('http://localhost:8080');
-    console.log(sessionStorage.getItem('current_user'));
-    if (sessionStorage.getItem('current_user')) {
-      let name = JSON.parse(sessionStorage.getItem('current_user')).username
-      this.setState({currentUser:name})
-      socket.emit('new user',name);
-    }
-  }
+  handleAccept = () => {};
+
+  // componentWillMount() {
+  //   const socket = io.connect('http://localhost:8080');
+  //   console.log(sessionStorage.getItem('current_user'));
+  //   if (sessionStorage.getItem('current_user')) {
+  //     const name = JSON.parse(sessionStorage.getItem('current_user'));
+  //     this.setState({ currentUser: name.username });
+  //     socket.emit('new user', name.username);
+  //   }
+  // }
 
   componentDidMount() {
     const socket = io.connect('http://localhost:8080');
     this.getUser(socket);
+    const name = JSON.parse(sessionStorage.getItem('current_user'));
+    this.setState({ currentUser: name });
+    console.log(this.state.currentUser, 'this.state.currentUser');
 
     socket.on('new message', dataNewMassg => {
-      console.log({ dataNewMassg });
-      if (dataNewMassg.to == this.state.currentUser) {
+      // console.log({ dataNewMassg });
+      if (dataNewMassg.to == this.state.currentUser.username) {
         this.setState({ isDialogOpen: true });
         // alert(`${dataNewMassg.from} send you massg`);
       }
+    });
+    window.addEventListener('beforeunload', event => {
+      console.log(event);
+      event.returnValue = `Are you sure you want to leave?`;
+      if (event.currentTarget.confirm) this.props.history.push('/login');
+
+      // if (!event.cancelBubble) {
+      // }
     });
   }
 
@@ -49,7 +62,7 @@ export default class LogIn extends Component {
   sendAcceptance = (socket, selectedUser) => {
     const data = {};
     data.to = selectedUser;
-    data.from = this.state.currentUser; // current user
+    data.from = this.state.currentUser.username; // current user
     data.type = 'invite';
     socket.emit('sendMessage', data);
   };
@@ -69,17 +82,21 @@ export default class LogIn extends Component {
 
         {this.state.isDialogOpen && (
           <Dialog
-            title="Dialog Title"
+            title="Lets play"
             modal
             onClose={this.handleClose}
             buttons={[
               {
-                text: 'Close',
+                text: 'Accept',
+                onClick: () => this.handleAccept(),
+              },
+              {
+                text: 'Refuse',
                 onClick: () => this.handleClose(),
               },
             ]}
           >
-            <h1>Dialog Content</h1>
+            <h1>do you want</h1>
             <p>More Content. Anything goes here</p>
           </Dialog>
         )}
