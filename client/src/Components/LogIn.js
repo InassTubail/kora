@@ -1,86 +1,70 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { login } from '../store/actionCreators/user';
 import './LogIn.css';
 
-const io = require('socket.io-client');
-
-const socket = io.connect('http://localhost:8080');
-export default class LogIn extends Component {
+class LogIn extends Component {
   state = {
     name: '',
-    clients: [],
     error: '',
   };
 
+  // eslint-disable-next-line react/sort-comp
   onChange = e => {
     const { value } = e.target;
     this.setState({ name: value });
   };
 
-  componentDidMount() {
-    const socket = io.connect('http://localhost:8080');
-    this.getUser(socket);
-  }
-
-  getUser = socket => {
-    socket.on('usernames', username => {
-      this.setState({
-        clients: username,
-      });
-    });
-  };
-
   onClick = e => {
     e.preventDefault();
-    if (this.state.clients.includes(this.state.name)) {
-      this.setState({ error: 'error ' });
+    let isExit = false
+    this.props.users && this.props.users.forEach((cc) => {
+      if (cc.username === this.state.name) {
+        isExit = true;
+      }
+    });
+    if (isExit) {
+      this.setState({ error: 'هذا الاسم مستخدم ,حاول باسم أخر ' });
     } else {
-      socket.emit('new user', this.state.name);
-      sessionStorage.setItem(
-        'current_user',
-        JSON.stringify({
-          username: this.state.name,
-          data: {
-            is_playing: false,
-            with: null,
-            room: null,
-          },
-        })
-      );
-      this.props.history.push('/player-Character');
+      this.props.login(this.state.name);
     }
   };
 
   render() {
-    return (
-      <div id="signInBox" className="signInBox">
-        <div className="signInContainer">
-          <h1 className="signInTitle">Sign in</h1>
-          {this.state.error ? <p>{this.state.error}</p> : null}
-          <input
-            id="name"
-            className="name"
-            type="text"
-            name="name"
-            onChange={this.onChange}
-            placeholder="type your namee here..."
-          />
-          <button className="send" onClick={this.onClick}>
-            Send
+    return this.props.isLoggedIn ? (
+      <Redirect to="/player-Character" />
+    ) : (
+        <div id="signInBox" className="signInBox">
+          <div className="signInContainer">
+            <h1 className="signInTitle">Sign in</h1>
+            {this.state.error ? <p>{this.state.error}</p> : null}
+            <input
+              id="name"
+              className="name"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              placeholder="type your namee here..."
+            />
+            <button className="send" onClick={this.onClick}>
+              Send
           </button>
-
-        
+          </div>
         </div>
-      </div>
-
-      // <form id="nameForm">
-      //   {this.state.error ? <p>{this.state.error}</p> : null}
-      //   <input
-      //     id="name"
-      //     onChange={this.onChange}
-      //     placeholder="type your namee here..."
-      //   />
-      //   <button onClick={this.onClick}>Send</button>
-      // </form>
-    );
+      );
   }
 }
+
+const mapDispatchToProps = { login };
+const mapStateToProps = state => ({
+  user_info: state.user.info,
+  users: state.user.users,
+  isLoggedIn: state.user.isLoggedIn,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LogIn);
