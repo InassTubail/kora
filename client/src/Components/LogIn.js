@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './LogIn.css';
+import InputImg from '../assets/inputImg.png';
 
 const io = require('socket.io-client');
 
@@ -54,21 +55,22 @@ export default class LogIn extends Component {
     return (
       <div id="signInBox" className="signInBox">
         <div className="signInContainer">
-          <h1 className="signInTitle">Sign in</h1>
+          {/* <h1 className="signInTitle">تسجيل الدخول</h1> */}
           {this.state.error ? <p>{this.state.error}</p> : null}
-          <input
-            id="name"
-            className="name"
-            type="text"
-            name="name"
-            onChange={this.onChange}
-            placeholder="type your namee here..."
-          />
-          <button className="send" onClick={this.onClick}>
-            Send
-          </button>
-
-        
+          <form id="nameForm">
+            <img src={InputImg} alt="jj" />
+            <input
+              id="name"
+              className="name"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              placeholder="ادخــل اسمــك هنــا"
+            />
+            <button className="send" onClick={this.onClick} type="submit">
+              دخـــول
+            </button>
+          </form>
         </div>
       </div>
 
