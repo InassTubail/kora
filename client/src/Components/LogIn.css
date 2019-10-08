@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #ddd;
+}
+
+.signInBox {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.signInTitle {
+  color: white;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 28px;
+}
+
+.signInContainer img {
+  height: 140px;
+}
+
+input[type="text"] {
+  margin-bottom: 50px;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #BEBEBE;
+  padding: 7px;
+
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  border-radius: 3px;
+  position: absolute;
+  top: 73px;
+  left: 47px;
+  width: 120px;
+  height: 34px;
+  font-size: 12px;
+}
+
+form#nameForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover {
+  -moz-box-shadow: 0 0 8px #8cc63f;
+  -webkit-box-shadow: 0 0 8px #8cc63f;
+  box-shadow: 0 0 8px #8cc63f;
+  border: 1px solid #8cc63f;
+}
+
+
+.send {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  padding: 10px 20px;
+  border-radius: 42px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+  margin-top: -34px;
+  position: relative;
+  bottom: -140px;
+  width: 150px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.send:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}

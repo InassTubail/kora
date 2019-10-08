@@ -22,6 +22,15 @@ class App extends Component {
   getUser = socket => {
     socket.on('usernames', username => {
       this.props.getUsers(JSON.parse(username));
+      this.props.users.map((value) => {
+        if (this.props.user_info.username == value.username) {
+          console.log('************************');
+          console.log({ value });
+          this.props.updateUser(value);
+          // usernames.splice(index, 1)
+        }
+        return value;
+      })
     });
   };
 

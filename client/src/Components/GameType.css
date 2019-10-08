@@ -1,0 +1,71 @@
+.mainDivv {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/backgroundSelectCha2.png");
+  /* background-image: url("../assets/gameType.jpg"); */
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+
+.button1 {
+  top: 25%;
+  left: 28%
+}
+
+.button2 {
+  bottom: 5%;
+  left: 28%
+}
+
+.button1,
+.button2 {
+  position: absolute;
+  width: 200px;
+  height: 64px;
+}
+
+.centerKora {
+  width: 80%;
+}
+
+.kora {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  position: relative;
+}
+
+.kora:after,
+.kora:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 10px;
+  width: 200%;
+  background: #fff;
+}
+
+.kora:after {
+  left: -200%;
+}
+
+.kora:before {
+  right: -200%;
+}
