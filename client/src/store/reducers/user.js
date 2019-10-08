@@ -7,6 +7,7 @@ const initialState = {
     is_playing: false,
     with: null,
     room: null,
+    person: null,
   },
   users: [],
   error: null,
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
           is_playing: false,
           with: null,
           room: null,
+          person: null
         },
       };
     case `${USER.USERS}`:

@@ -21,13 +21,22 @@ io.sockets.on('connection', function (socket) {
         "username": socket.username,
         "is_playing": false,
         "with": null,
-        "room": null
+        "room": null,
+        "person": null
       })
     io.sockets.emit('usernames', JSON.stringify(usernames));
-
+    
   });
   io.sockets.emit('usernames', JSON.stringify(usernames));
-
+  socket.on('update_pic',function(data){
+    usernames.map((value, index) => {
+      if (data.username == value.username) {
+        usernames[index] = {...usernames[index],person: data.person}
+      }
+      return value
+    })
+    io.sockets.emit('usernames', JSON.stringify(usernames));
+  })
   socket.on('sendInviteToPlay', function (data) {
     if(data.type == 'invite'){
       let from, to
@@ -39,19 +48,24 @@ io.sockets.on('connection', function (socket) {
           to = index
         }
       })
+      // let person = usernames[from].person 
       usernames[from] =
         {
-          "username": data.from,
+          ...usernames[from],
+          // "username": data.from,
           "is_playing": 'pending',
           "with": data.to,
-          "room": null
+          "room": null,
+          // "person": person
         }
+        let person = usernames[to].person 
       usernames[to] =
         {
-          "username": data.to,
+          ...usernames[to],
+          // "username": data.to,
           "is_playing": 'pending',
           "with": data.from,
-          "room": null
+          "room": null,
         }
       io.sockets.emit('new message', {
         from: data.from,
@@ -74,17 +88,21 @@ io.sockets.on('connection', function (socket) {
       })
       usernames[from] =
         {
-          "username": data.from,
+          ...usernames[from],
+          // "username": data.from,
           "is_playing": 'accept',
           "with": data.to,
-          "room": `user/${data.from}/${data.to}`
+          "room": `user/${data.from}/${data.to}`,
+          // "person": null
         }
       usernames[to] =
         {
-          "username": data.to,
+          ...usernames[to],
+          // "username": data.to,
           "is_playing": 'accept',
           "with": data.from,
-          "room": `user/${data.from}/${data.to}`
+          "room": `user/${data.from}/${data.to}`,
+          // "person": null
         }
 
     } else if(data.type == 'reject') {
@@ -100,17 +118,21 @@ io.sockets.on('connection', function (socket) {
       })
       usernames[from] =
         {
-          "username": data.from,
+          ...usernames[from],
+          // "username": data.from,
           "is_playing": false,
           "with": null,
-          "room": null
+          "room": null,
+          // "person": null
         }
       usernames[to] =
         {
-          "username": data.to,
+          ...usernames[to],
+          // "username": data.to,
           "is_playing": false,
           "with": null,
-          "room": null
+          "room": null,
+          // "person": null
         }
     }
     io.sockets.emit('new message', {
