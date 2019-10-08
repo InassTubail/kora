@@ -18,9 +18,9 @@ const images = [
   { id: 6, src: person6, title: 'foo', description: 'bar' },
 
   { id: 7, src: person11, title: 'foo', description: 'bar' },
-  { id: 6, src: person12, title: 'foo', description: 'bar' },
-  { id: 6, src: person13, title: 'foo', description: 'bar' },
-  { id: 6, src: person14, title: 'foo', description: 'bar' },
+  { id: 8, src: person12, title: 'foo', description: 'bar' },
+  { id: 9, src: person13, title: 'foo', description: 'bar' },
+  { id: 10, src: person14, title: 'foo', description: 'bar' },
 ];
 
 function imageLoader() {
