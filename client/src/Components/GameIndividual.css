@@ -86,7 +86,7 @@
 }
 
 .counterParag {
-  left: 10%;
+  left: 8%;
   height: 60px;
   position: absolute;
   top: 17%;
@@ -97,18 +97,18 @@
 
 .counter {
   height: 98px;
-  width: 92px;
+  width: 86px;
 }
 
 .subHeader33 {
   position: relative;
-  top: 35%
+  top: 39%
 }
 
 .subHeader4 {
   position: relative;
-  top: 15%;
-  left: 69%;
+  top: 18%;
+  left: 72%;
 }
 
 .quesDiv {
