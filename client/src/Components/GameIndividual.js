@@ -53,9 +53,14 @@ const GameIndividual = () => {
       <img src={koraImg} alt="kora" edt className="koraImg" />
       <img src={player} alt="kora" edt className="playerImg" />
 
-      <div className="subHeader3">
-        <img src={frame} title="ti" alt="dss" className="selectedImageFrame3" />
-        <img src={person} title="sdd" alt="dd" className="selectedImage3" />
+      <div className="subHeader33">
+        <img
+          src={frame}
+          title="ti"
+          alt="dss"
+          className="selectedImageFrame33"
+        />
+        <img src={person} title="sdd" alt="dd" className="selectedImage33" />
       </div>
       <div className="subHeader4">
         <img src={counter} title="sdd" alt="dd" className="counter" />
