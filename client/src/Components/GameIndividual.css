@@ -1,0 +1,135 @@
+.gameScreen {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/gameScreen2.png");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  position: relative;
+}
+
+.titleGame {
+  width: 50%;
+  position: absolute;
+}
+
+.koraImg {
+  width: 15%;
+  position: absolute;
+  top: 80%;
+  left: 44%;
+}
+
+
+.playerImg {
+  position: absolute;
+  top: 80%;
+  left: 26%;
+  height: 21%;
+}
+
+.hares {
+  position: absolute;
+  width: 15%;
+  top: 63%;
+  left: 44%;
+}
+
+.answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer1,
+.answer2,
+.answer3 {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.answer1 {
+  text-align: center;
+  top: 60%;
+  right: 20%;
+}
+
+.answer2 {
+  top: 52%;
+  text-align: center;
+}
+
+.answer3 {
+  top: 60%;
+  text-align: center;
+  left: 20%;
+}
+
+.selectedImageFrame3 {
+  height: 115px;
+}
+
+.selectedImage3 {
+  position: absolute;
+  height: 60px;
+  left: 30px;
+  top: 20px;
+}
+
+.counterParag {
+  left: 10%;
+  height: 60px;
+  position: absolute;
+  top: 17%;
+  color: white;
+  font-weight: bold;
+  font-size: 170%;
+}
+
+.counter {
+  height: 98px;
+  width: 92px;
+}
+
+.subHeader3 {
+  position: relative;
+  top: 35%
+}
+
+.subHeader4 {
+  position: relative;
+  top: 15%;
+  left: 69%;
+}
+
+.quesDiv {
+  position: relative;
+}
+
+.questionStatement {
+  position: absolute;
+  top: 65%;
+  width: 48%;
+  left: 25%;
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.answers p {
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 10px
+}

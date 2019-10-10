@@ -10,7 +10,7 @@ const GameType = () => {
   return (
     <React.Fragment>
       <div className="mainDivv">
-        <Link to="/individualGame">
+        <Link to="/game-individual">
           <img className="button1" src={button1} alt="individual game" />
         </Link>
         <div className="kora">

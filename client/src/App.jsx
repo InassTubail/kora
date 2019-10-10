@@ -7,6 +7,7 @@ import Dailog from './Components/Dialog';
 import playerCharacter from './Components/PlayerCharacter';
 import GameType from './Components/GameType';
 import SelectCompititor from './Components/SelectCompititor';
+import GameIndividual from './Components/GameIndividual';
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
 import history from './history';
 
@@ -22,7 +23,7 @@ class App extends Component {
   getUser = socket => {
     socket.on('usernames', username => {
       this.props.getUsers(JSON.parse(username));
-      this.props.users.map((value) => {
+      this.props.users.map(value => {
         if (this.props.user_info.username == value.username) {
           // console.log('************************');
           // console.log({ value });
@@ -30,7 +31,7 @@ class App extends Component {
           // usernames.splice(index, 1)
         }
         return value;
-      })
+      });
     });
   };
 
@@ -109,6 +110,7 @@ class App extends Component {
               path="/select-compititor"
               component={SelectCompititor}
             />
+            <Route exact path="/game-individual" component={GameIndividual} />
           </Switch>
         </Router>
       </div>

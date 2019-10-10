@@ -1,0 +1,200 @@
+.selectCompititorsDiv {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/backgroundSelectCha.png");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+
+}
+
+.subHeaderMain {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.subHeader2,
+.subHeader3 {
+  position: relative;
+  top: 25px
+}
+
+.selectedImageFrame2,
+.selectedImageFrame3 {
+  height: 155px;
+
+}
+
+.vs {
+  height: 70px;
+  margin-top: 120px;
+}
+
+.selectedImage2,
+.selectedImage3 {
+  position: absolute;
+  height: 90px;
+  top: 20px;
+
+}
+
+.selectedImage2 {
+  left: 30px;
+}
+
+
+.selectedImage3 {
+
+  right: 19px;
+}
+
+.searchDiv {
+  display: flex;
+  margin-top: 12px;
+}
+
+.searchInput {
+  height: 50px;
+  width: 100%;
+}
+
+.searchButton {
+  height: 50px;
+
+}
+
+.inputDiv {
+  position: relative;
+  max-width: 260px;
+  justify-content: center;
+
+}
+
+.enteringSearchInput {
+  position: absolute;
+  left: 4px;
+  width: 213px;
+  height: 33px;
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  padding: 5px 10px;
+}
+
+.searchDiv {
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.buttons {
+  height: 45px;
+}
+
+.onButton,
+.invButton,
+.busyButton {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 42px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+}
+
+.onButton {
+  background-image: url('../assets/onColor.png');
+
+}
+
+.invButton {
+  background-image: url('../assets/invColor.png');
+
+}
+
+.busyButton {
+  background-image: url('../assets/busyColor.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.compiteButton {
+  height: 60px;
+  margin-top: 10px
+}
+
+.onlinePlayers {
+  overflow: auto;
+  background-color: white;
+  height: 22%;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.onlinePlayersDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 89%;
+}
+
+
+
+ul {
+  list-style: none;
+}
+
+.rows {
+
+  display: flex;
+  flex-direction: row;
+}
+
+
+.titleImage1 {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.titleImage {
+  width: 96%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.playersName {
+  position: relative;
+}
+
+.enteringName {
+  position: absolute;
+  text-align: center;
+  left: 4px;
+  height: 33px;
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  padding: 5px 10px;
+}
+
+.compiteButtonDiv {
+  text-align: center;
+}
