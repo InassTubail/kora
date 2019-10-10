@@ -6,7 +6,6 @@ import InputImg from '../assets/inputImg.png';
 
 import { login } from '../store/actionCreators/user';
 
-
 class LogIn extends Component {
   state = {
     name: '',
@@ -47,7 +46,7 @@ class LogIn extends Component {
             <img src={InputImg} alt="jj" />
             <input
               id="name"
-              className="name"
+              className="nameToLogIn"
               type="text"
               name="name"
               onChange={this.onChange}
