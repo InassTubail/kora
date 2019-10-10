@@ -2,45 +2,30 @@ body {
   margin: 0;
   padding: 0;
   background: #ddd;
-  font-size: 16px;
-  color: #222;
-  background-image: url("../assets/background.png");
-  background-size: cover;
-  background-position: center;
-  font-weight: 300;
 }
 
 .signInBox {
-  margin: 0;
-  padding: 0;
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
   background: #ddd;
-  font-size: 16px;
-  color: #222;
   background-image: url("../assets/background.png");
   background-size: cover;
   background-position: center;
-  font-weight: 300;
-  max-width: 700px;
-  /* position: relative;
-  margin: 10% auto;
-  width: 600px;
-  height: 400px;
-  border-radius: 2px;
-  background: rgba(31, 31, 31, 0.7);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .signInContainer {
-  position: absolute;
-  box-sizing: border-box;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
-
-
 
 .signInTitle {
   color: white;
@@ -50,25 +35,69 @@ body {
   font-size: 28px;
 }
 
-input[type="text"] {
-  margin-bottom: 20px;
+.signInContainer img {
+  height: 140px;
 }
+
+input[type="text"] {
+  margin-bottom: 50px;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #BEBEBE;
+  padding: 7px;
+
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  border-radius: 3px;
+  position: absolute;
+  top: 73px;
+  left: 47px;
+  width: 120px;
+  height: 34px;
+  font-size: 12px;
+}
+
+form#nameForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover {
+  -moz-box-shadow: 0 0 8px #8cc63f;
+  -webkit-box-shadow: 0 0 8px #8cc63f;
+  box-shadow: 0 0 8px #8cc63f;
+  border: 1px solid #8cc63f;
+}
+
 
 .send {
-  width: 220px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  padding: 10px 20px;
+  border-radius: 42px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+  margin-top: -34px;
+  position: relative;
+  bottom: -140px;
+  width: 150px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-/* input[type="submit"]:hover,
-input[type="submit"]:focus {
-  opacity: 0.8;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  transition: 0.1s ease;
-} */
-/* 
-input[type="submit"]:active {
-  opacity: 1;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  transition: 0.1s ease;
-} */
+
+.send:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
