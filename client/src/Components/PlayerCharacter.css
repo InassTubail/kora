@@ -55,7 +55,9 @@
 }
 
 .selectedImageFrame {
+  /* height: 200px; */
   height: 155px;
+
 }
 
 .selectedImage {
@@ -80,16 +82,20 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
+  /*  */
   width: 80%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   left: 9%;
-
+  /*  */
 }
 
 
 .enterButton {
+  /* width: 150px;
+  height: 150px; */
   width: 80px;
   height: 80px;
   display: flex;
