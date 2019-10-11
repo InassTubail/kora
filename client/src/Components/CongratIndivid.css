@@ -1,0 +1,26 @@
+.congratIndivid {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/congratIndivid.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winnerPlayerDiv {
+  position: absolute;
+  position: absolute;
+  top: 4%;
+  color: #d0f400;
+  font-size: 60px;
+}

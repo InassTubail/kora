@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import LogIn from './Components/LogIn';
 import Dailog from './Components/Dialog';
 import playerCharacter from './Components/PlayerCharacter';
 import GameType from './Components/GameType';
 import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
+import CongratIndivid from './Components/CongratIndivid';
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
 import history from './history';
 
@@ -111,6 +111,7 @@ class App extends Component {
               component={SelectCompititor}
             />
             <Route exact path="/game-individual" component={GameIndividual} />
+            <Route exact path="/congrat-individ" component={CongratIndivid} />
           </Switch>
         </Router>
       </div>
