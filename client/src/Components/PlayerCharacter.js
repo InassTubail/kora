@@ -12,7 +12,6 @@ import './PlayerCharacter.css';
 // import { Socket } from 'net';
 const io = require('socket.io-client');
 
-
 class PlayerCharacter extends Component {
   state = {
     images: [],
@@ -40,7 +39,7 @@ class PlayerCharacter extends Component {
       username: this.props.user_info.username,
       person: this.state.selectedImage.id,
     });
-    this.props.history.push(`/select-game-type`)
+    this.props.history.push(`/select-game-type`);
   };
 
   render() {
@@ -69,7 +68,7 @@ class PlayerCharacter extends Component {
           </div>
 
           <div className="enterButton">
-            <button className="enter" onClick={this.selectPerson}>
+            <button onClick={this.selectPerson}>
               {/* //to="/select-game-type" */}
               <img src={enter} title="دخول" alt="Sss" className="enter" />
             </button>
