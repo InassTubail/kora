@@ -9,7 +9,7 @@ import GameType from './Components/GameType';
 import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
-import history from './history';
+// import history from './history';
 
 const io = require('socket.io-client');
 
@@ -18,17 +18,26 @@ class App extends Component {
     const socket = io.connect('http://localhost:8080');
     this.getUser(socket);
     this.newInvitation(socket);
+    this.refresh(socket)
   }
-
+  refresh = socket => {
+    var isExit = false;
+    this.props.users.map(value => {
+      if (this.props.user_info.username === value.username) {
+        isExit = true;
+      }
+      return value;
+    });
+    if (isExit && this.props.isLoggedIn) {
+      socket.emit('addRefresh', this.props.user_info);
+    }
+  }
   getUser = socket => {
     socket.on('usernames', username => {
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
-        if (this.props.user_info.username == value.username) {
-          // console.log('************************');
-          // console.log({ value });
+        if (this.props.user_info.username === value.username) {
           this.props.updateUser(value);
-          // usernames.splice(index, 1)
         }
         return value;
       });
@@ -50,13 +59,14 @@ class App extends Component {
         if (dataNewMassg.type === 'reject') {
           this.props.openDialog({ from: dataNewMassg.from, type: 'reject' });
         }
-      } else if (
+      }
+      if (
         dataNewMassg.to === this.props.user_info.username ||
         dataNewMassg.from === this.props.user_info.username
       ) {
         if (dataNewMassg.type === 'accept') {
-          // return <Redirect to="/player" />;
-          history.push('/competitor');
+          // history.push('/competitor');
+          this.props.history.push(`/competitor`);
           // room, redirect to ثنائي
         }
       }
@@ -67,6 +77,8 @@ class App extends Component {
     const socket = io.connect('http://localhost:8080');
     const data = {};
     data.to = this.props.user_info.with;
+    console.log(data.to, 'data.to');
+
     data.from = this.props.user_info.username; // current user
     data.type = 'accept';
     socket.emit('replyInvite', data);
