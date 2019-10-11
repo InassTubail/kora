@@ -8,6 +8,8 @@ const initialState = {
     with: null,
     room: null,
     person: null,
+    level: 1,
+    score: 0,
   },
   users: [],
   error: null,
@@ -27,7 +29,9 @@ export default (state = initialState, action) => {
           is_playing: false,
           with: null,
           room: null,
-          person: null
+          person: null,
+          level: 1,
+          score: 0,
         },
       };
     case `${USER.USERS}`:

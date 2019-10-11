@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser } from '../store/actions';
+import { updateUser, closeDialog } from '../store/actions';
 import Frame from '../assets/frame.png';
 import Vs from '../assets/VS.png';
 import person from '../assets/playerInitial.png';
@@ -17,6 +17,7 @@ import './SelectCompititor.css';
 const io = require('socket.io-client');
 
 class Select extends Component {
+  // eslint-disable-next-line react/sort-comp
   sendInvite = (socket, selectedUser) => {
     const data = {};
     data.to = selectedUser;
@@ -35,6 +36,21 @@ class Select extends Component {
     const socket = io.connect('http://localhost:8080');
     this.sendInvite(socket, e.target.id);
   };
+
+  componentDidUpdate() {
+    const { open } = this.props;
+    if (open) {
+      setTimeout(() => {
+        this.props.closeDialog();
+        this.props.updateUser({
+           ...this.props.user_info.username,
+          is_playing: false,
+          with: null,
+          room: null,
+        });
+      }, 10000);
+    }
+  }
 
   render() {
     return (
@@ -75,16 +91,10 @@ class Select extends Component {
             </div>
 
             <div className="vsDiv">
-              <img src={Vs} title="sss" alt="Sss" className="vs" />
+              <img src={Vs} className="vs" />
             </div>
             <div className="subHeader3">
-              <img
-                src={Frame}
-                title="sss"
-                alt="Sss"
-                className="selectedImageFrame3"
-              />
-
+              <img src={Frame} className="selectedImageFrame3" />
               <img
                 src={person}
                 title="ti"
@@ -118,190 +128,58 @@ class Select extends Component {
           <div className="onlinePlayers">
             <div className="onlinePlayersDiv">
               <ul>
-                <li>
-                  <div className="rows">
-                    <div className="onlineButtons">
-                      {' '}
-                      {/* <img
+                {this.props.users.map(element => (
+                  <li>
+                    <div className="rows">
+                      <div className="onlineButtons">
+                        {' '}
+                        {/* <img
                       src={online}
                       title="compiteButton"
                       alt="compiteButton"
                       className="compiteButton"
                     /> */}
-                      <button className="buttons onButton">متـصل</button>
-                    </div>
-                    <div className="playersName">
-                      {' '}
-                      <img
-                        src={playerName}
-                        title="compiteButton"
-                        alt="compiteButton"
-                        className="buttons"
-                      />
-                      <input
-                        type="text"
-                        className="enteringName"
-                        placeholder="اسـم اللاعــب"
-                      />
-                    </div>
-                    <div className="inviteButtons">
-                      {' '}
-                      {/* <img
+                        {!this.props.user_info.is_playing ? (
+                          <span className="buttons onButton">متـصل</span>
+                        ) : (
+                          <span className="buttons onButton">مشغول</span>
+                        )}
+                      </div>
+                      <div className="playersName">
+                        {' '}
+                        <img
+                          src={playerName}
+                          title="compiteButton"
+                          alt="compiteButton"
+                          className="buttons"
+                        />
+                        <span
+                          // type="text"
+                          className="enteringName"
+                        >
+                          {element.username}{' '}
+                        </span>
+                      </div>
+                      <div className="inviteButtons">
+                        {' '}
+                        {/* <img
                       src={inviteFreind}
                       title="compiteButton"
                       alt="compiteButton"
                       className="compiteButton"
                     /> */}
-                      <button className="buttons invButton">دعــوة</button>
+                        <button
+                          className="buttons invButton"
+                          id={element.username}
+                          key={element}
+                          onClick={this.onSelectUser}
+                        >
+                          دعــوة
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="rows">
-                    <div className="onlineButtons">
-                      {' '}
-                      {/* <img
-                      src={online}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons onButton">متـصل</button>
-                    </div>
-                    <div className="playersName">
-                      {' '}
-                      <img
-                        src={playerName}
-                        title="compiteButton"
-                        alt="compiteButton"
-                        className="buttons"
-                      />
-                      <input
-                        type="text"
-                        className="enteringName"
-                        placeholder="اسـم اللاعــب"
-                      />
-                    </div>
-                    <div className="inviteButtons">
-                      {' '}
-                      {/* <img
-                      src={inviteFreind}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons invButton">دعــوة</button>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="rows">
-                    <div className="onlineButtons">
-                      {' '}
-                      {/* <img
-                      src={online}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons onButton">متـصل</button>
-                    </div>
-                    <div className="playersName">
-                      {' '}
-                      <img
-                        src={playerName}
-                        title="compiteButton"
-                        alt="compiteButton"
-                        className="buttons"
-                      />
-                      <input
-                        type="text"
-                        className="enteringName"
-                        placeholder="اسـم اللاعــب"
-                      />
-                    </div>
-                    <div className="inviteButtons">
-                      {' '}
-                      {/* <img
-                      src={inviteFreind}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons invButton">دعــوة</button>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="rows">
-                    <div className="onlineButtons">
-                      {' '}
-                      {/* <img
-                      src={online}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons onButton">متـصل</button>
-                    </div>
-                    <div className="playersName">
-                      {' '}
-                      <img
-                        src={playerName}
-                        title="compiteButton"
-                        alt="compiteButton"
-                        className="buttons"
-                      />
-                      <input
-                        type="text"
-                        className="enteringName"
-                        placeholder="اسـم اللاعــب"
-                      />
-                    </div>
-                    <div className="inviteButtons">
-                      {' '}
-                      {/* <img
-                      src={inviteFreind}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                      <button className="buttons invButton">دعــوة</button>
-                    </div>
-                  </div>
-                </li>
-                {/* <li>
-                <div className="rows">
-                  <div className="onlineButtons">
-                    {' '}
-                    <img
-                      src={online}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    />
-                  </div>
-                  <div className="playersName">
-                    {' '}
-                    <img
-                      src={playerName}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="buttons"
-                    />
-                  </div>
-                  <div className="inviteButtons">
-                    {' '}
-                    <img
-                      src={inviteFreind}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="buttons"
-                    />
-                  </div>
-                </div>
-              </li>
-             */}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -334,9 +212,10 @@ class Select extends Component {
     );
   }
 }
-const mapDispatchToProps = { updateUser };
+const mapDispatchToProps = { updateUser, closeDialog };
 
 const mapStateToProps = state => ({
+  open: state.dialog.open,
   user_info: state.user.info,
   users: state.user.users,
   isLoggedIn: state.user.isLoggedIn,
