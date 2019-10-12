@@ -8,8 +8,8 @@ import { login } from '../store/actionCreators/user';
 
 class LogIn extends Component {
   state = {
+    error: "",
     name: '',
-    error: '',
   };
 
   // eslint-disable-next-line react/sort-comp
@@ -27,11 +27,16 @@ class LogIn extends Component {
           isExit = true;
         }
       });
-    if (isExit) {
-      this.setState({ error: 'هذا الاسم مستخدم ,حاول باسم أخر ' });
-    } else {
-      this.props.login(this.state.name);
-    }
+      if(this.state.name){
+        if (isExit) {
+          this.setState({ error: 'هذا الاسم مستخدم ,حاول باسم أخر ' });
+        } else {
+          this.props.login(this.state.name);
+        }
+      }else{
+        this.setState({ error: 'يجـب ادخـال اسم مستخدم' });
+
+      }
   };
 
   render() {
@@ -41,10 +46,11 @@ class LogIn extends Component {
       <div id="signInBox" className="signInBox">
         <div className="signInContainer">
           {/* <h1 className="signInTitle">تسجيل الدخول</h1> */}
-          {this.state.error ? <p>{this.state.error}</p> : null}
           <form id="nameForm">
             <img src={InputImg} alt="jj" />
-            <input
+            {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
+            
+            <input 
               id="name"
               className="nameToLogIn"
               type="text"
