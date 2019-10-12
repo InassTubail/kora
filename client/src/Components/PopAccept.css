@@ -1,0 +1,71 @@
+.popupAccept {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url('../assets/accept.png');
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center
+}
+
+
+.containerGame {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.quesTitl {
+  font-size: 70%;
+  color: #ff4c27;
+
+}
+
+.popup_innerAccept {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.acceptInPop,
+.rejectInPop {
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.acceptInPop {
+  background-image: url('../assets/no.png');
+}
+
+.rejectInPop {
+  background-image: url('../assets/yes.png');
+}
+
+.buttonPop {
+  color: #fff;
+  font-size: 90%;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+
+  width: 65px;
+  height: 55px;
+}

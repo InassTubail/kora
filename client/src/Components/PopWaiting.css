@@ -1,0 +1,40 @@
+.popWaiting {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  background-image: url('../assets/wait.png');
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.popup_innerWaiting {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 122px;
+  position: relative;
+}
+
+.cancelInvitation {
+  position: absolute;
+  height: 36%;
+  top: 60%;
+  background-image: url('../assets/invColor.png');
+  color: #fff;
+  font-size: 90%;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+}

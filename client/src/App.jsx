@@ -8,6 +8,11 @@ import playerCharacter from './Components/PlayerCharacter';
 import GameType from './Components/GameType';
 import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
+import PopWaiting from './Components/PopWaiting';
+import PopAccept from './Components/PopAccept';
+import popUpCongrat from './Components/popUpCongrat';
+import popUpLose from './Components/popUpLose';
+
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
 // import history from './history';
 
@@ -123,6 +128,15 @@ class App extends Component {
               component={SelectCompititor}
             />
             <Route exact path="/game-individual" component={GameIndividual} />
+            <Route exact path="/popupWaiting" component={PopWaiting} />
+            <Route exact path="/popupAccept" component={PopAccept} />
+            <Route exact path="/popUpCongrat" component={popUpCongrat} />
+            <Route exact path="/popUpLose" component={popUpLose} />
+
+
+
+
+
           </Switch>
         </Router>
       </div>
