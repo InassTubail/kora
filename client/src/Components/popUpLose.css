@@ -44,7 +44,7 @@
 }
 .nextStage {
   position: absolute;
-  top: 67%;
+  top: 60%;
   background-image: url('../assets/tryAgain.png');
   background-size: cover;
   background-position: center;

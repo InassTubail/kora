@@ -149,7 +149,9 @@ class GameIndividual extends Component {
           </div>
           <div className="subHeader4">
             <img src={counter} title="sdd" alt="dd" className="counter" />
-            <p className="counterParag">33</p>
+            <p className="counterParag">{this.props.user_info.level} / 4</p>
+            {/* --- */}
+            {/* <p className="counterParag">{this.props.user_info.level}</p> */}
           </div>
         </div>
       </React.Fragment>
