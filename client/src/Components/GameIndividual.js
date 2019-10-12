@@ -74,7 +74,7 @@ class GameIndividual extends Component {
   componentDidUpdate() {
     const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;
     const { level } = this.props.user_info
-    if (level === 4) {
+    if (level !== 4) {
       if (NOQuestion === 6) {
         if (NOTrue >= 3 && !showCongratePopup) {
           this.setState({ showCongratePopup: true, NOQuestion: 0, NOTrue: 0 })
@@ -91,7 +91,7 @@ class GameIndividual extends Component {
         }, 2000);
       }
     } else {
-      this.props.history.push(`/congrats`);
+      this.props.history.push(`/congrat-individ`);
     }
   }
   componentDidMount() {
