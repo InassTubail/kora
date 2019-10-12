@@ -126,3 +126,9 @@
 .enterButton:before {
   right: -250%;
 }
+
+.errorMeassage2 {
+  color: red;
+  text-align: center;
+  font-weight: bold
+}

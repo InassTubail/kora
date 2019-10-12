@@ -16,6 +16,7 @@ class PlayerCharacter extends Component {
   state = {
     images: [],
     selectedImage: { id: 0, src: '', title: '', description: '' },
+    error:""
   };
 
   componentDidMount() {
@@ -25,11 +26,16 @@ class PlayerCharacter extends Component {
 
   onClick = e => {
     const selectedImage = e.target;
+    console.log(selectedImage.id,'selectedImageselectedImage');
+  
     this.setState({ selectedImage });
   };
 
   selectPerson = e => {
     const socket = io.connect('http://localhost:8080');
+    if(this.state.selectedImage.id === 0 ){
+      this.setState({ error: "يجب ان تختار صورة لشخصيتك" });
+    }else {
     this.props.updateUser({
       ...this.props.user_info,
       person: this.state.selectedImage.id,
@@ -40,7 +46,7 @@ class PlayerCharacter extends Component {
       person: this.state.selectedImage.id,
     });
     this.props.history.push(`/select-game-type`);
-  };
+  }};
 
   render() {
     return (
@@ -66,10 +72,10 @@ class PlayerCharacter extends Component {
               ) : null}
             </div>
           </div>
+          {this.state.error ? <p className="errorMeassage2"> {this.state.error} *</p> : null}
 
           <div className="enterButton">
             <button onClick={this.selectPerson}>
-              {/* //to="/select-game-type" */}
               <img src={enter} title="دخول" alt="Sss" className="enter" />
             </button>
           </div>
