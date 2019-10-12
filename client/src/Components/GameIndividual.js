@@ -10,6 +10,9 @@ import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counter from '../assets/counter.png';
 import player from '../assets/player.png';
+import PopUpCongrat from './popUpCongrat';
+import PopUpLose from './popUpLose';
+import { updateUser } from '../store/actions';
 import './GameIndividual.css';
 
 function shuffle(array) {
@@ -21,7 +24,6 @@ function shuffle(array) {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
   }
-
   return array;
 }
 function questionsAndAnswers(level) {
@@ -49,7 +51,7 @@ function questionsAndAnswers(level) {
     answers.push({ answer: number1 * number2, style: "correct" })
     while (answers.length !== 3) {
       let randomly = ({ answer: (number1 * number2) + Math.floor(Math.random() * 12), style: "incorrect" })
-      if (!answers.every((el)=>el.answer === randomly.answer)) {
+      if (!answers.every((el) => el.answer === randomly.answer)) {
         answers.push(randomly)
       }
     }
@@ -65,25 +67,31 @@ class GameIndividual extends Component {
     person: "",
     NOTrue: 0,
     isClick: false,
+    showPopup: false,
+    showCongratePopup: false,
     NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
   }
-  // did upfate for changing level next props !== next state
   componentDidUpdate() {
-    const { NOQuestion, NOTrue, isClick } = this.state;
-    if (NOQuestion === 6) {
-      if (NOTrue >= 3) {
-        //popup sucess
-        // chamge level to +1
-      } else {
-        //popup again game
+    const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;
+    const { level } = this.props.user_info
+    if (level === 4) {
+      if (NOQuestion === 6) {
+        if (NOTrue >= 3 && !showCongratePopup) {
+          this.setState({ showCongratePopup: true, NOQuestion: 0, NOTrue: 0 })
+          this.props.updateUser({ ...this.props.user_info, level: this.props.user_info.level + 1 })
+        } else if (NOTrue < 3 && !showPopup) {
+          this.setState({ showPopup: true, NOQuestion: 0, NOTrue: 0 })
+        }
       }
-    }
-    if (isClick) {
-      setTimeout(async () => {
-        this.setState({ isClick: false })
-        const { number1, number2, answers } = questionsAndAnswers(this.props.user_info.level);
-        this.setState({ number1, number2, answers })
-      }, 2000);
+      if (isClick) {
+        setTimeout(async () => {
+          this.setState({ isClick: false })
+          const { number1, number2, answers } = questionsAndAnswers(this.props.user_info.level);
+          this.setState({ number1, number2, answers })
+        }, 2000);
+      }
+    } else {
+      this.props.history.push(`/congrats`);
     }
   }
   componentDidMount() {
@@ -101,48 +109,55 @@ class GameIndividual extends Component {
       this.setState({ NOQuestion: NOQuestion + 1 })
     }
   }
+  closePopUp = () => {
+    this.setState({ showCongratePopup: false, showPopup: false })
+  }
   render() {
-    const { number1, number2, answers } = this.state;
+    const { number1, number2, answers, showPopup, showCongratePopup } = this.state;
     return (
-      <div className="gameScreen">
-        <div className="header">
-          <img src={titleImg} alt="title" className="titleImage" />
-          <div className="quesDiv">
-            <img src={questions} alt="title" className="titleImage" />
-            <input type="text" className="questionStatement" value={`${number1} * ${number2}`} />
+      <React.Fragment>
+        <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
+        <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
+        <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
+          <div className="header">
+            <img src={titleImg} alt="title" className="titleImage" />
+            <div className="quesDiv">
+              <img src={questions} alt="title" className="titleImage" />
+              <input type="text" className="questionStatement" value={`${number1} * ${number2}`} />
+            </div>
+          </div>
+          <img src={hares} alt="hares" className="hares" />
+
+          <div className="answers">
+            {answers.map((el, index) =>
+              <button className={!this.state.isClick ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
+                {el.answer}
+              </button>
+            )}
+          </div>
+          <img src={koraImg} alt="kora" edt className="koraImg" />
+          <img src={player} alt="kora" edt className="playerImg" />
+
+          <div className="subHeader33">
+            <img
+              src={frame}
+              title="ti"
+              alt="dss"
+              className="selectedImageFrame33"
+            />
+            <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
+          </div>
+          <div className="subHeader4">
+            <img src={counter} title="sdd" alt="dd" className="counter" />
+            <p className="counterParag">33</p>
           </div>
         </div>
-        <img src={hares} alt="hares" className="hares" />
-
-        <div className="answers">
-          {answers.map((el, index) =>
-            <button className={!this.state.isClick ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
-              {el.answer}
-            </button>
-          )}
-        </div>
-        <img src={koraImg} alt="kora" edt className="koraImg" />
-        <img src={player} alt="kora" edt className="playerImg" />
-
-        <div className="subHeader33">
-          <img
-            src={frame}
-            title="ti"
-            alt="dss"
-            className="selectedImageFrame33"
-          />
-          <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
-        </div>
-        <div className="subHeader4">
-          <img src={counter} title="sdd" alt="dd" className="counter" />
-          <p className="counterParag">33</p>
-        </div>
-      </div>
+      </React.Fragment>
     );
   }
 };
 
-// const mapDispatchToProps = { getUsers, openDialog, closeDialog, updateUser };
+const mapDispatchToProps = { updateUser };
 const mapStateToProps = state => ({
   user_info: state.user.info,
   users: state.user.users,
@@ -152,5 +167,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
+  mapDispatchToProps
 )(GameIndividual);
