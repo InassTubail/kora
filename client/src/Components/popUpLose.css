@@ -1,0 +1,41 @@
+.popupCongrat {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center
+}
+
+
+.excellentDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.excellent {
+  width: 333px;
+}
+
+.nextStage {
+  position: absolute;
+  top: 67%;
+  background-image: url('../assets/tryAgain.png');
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 36%;
+  height: 33px;
+  border: none
+}

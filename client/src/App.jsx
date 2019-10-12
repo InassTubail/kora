@@ -11,6 +11,7 @@ import GameIndividual from './Components/GameIndividual';
 import PopWaiting from './Components/PopWaiting';
 import PopAccept from './Components/PopAccept';
 import popUpCongrat from './Components/popUpCongrat';
+import popUpLose from './Components/popUpLose';
 
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
 // import history from './history';
@@ -130,6 +131,9 @@ class App extends Component {
             <Route exact path="/popupWaiting" component={PopWaiting} />
             <Route exact path="/popupAccept" component={PopAccept} />
             <Route exact path="/popUpCongrat" component={popUpCongrat} />
+            <Route exact path="/popUpLose" component={popUpLose} />
+
+
 
 
 
