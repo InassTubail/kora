@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './CongratIndivid.css';
 
- const CongratIndivid = () => {
-  return (
-    <React.Fragment>
-      <div className="congratIndivid">
-        <div className="winnerPlayerDiv">
-          <p className="winnerPlayer">samar fayez</p>
+class GameIndividual extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <div className="congratIndivid">
+          <div className="winnerPlayerDiv">
+            <p className="winnerPlayer">{this.props.user_info.username}</p>
+          </div>
         </div>
-      </div>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 };
 
- export default CongratIndivid;
+const mapStateToProps = state => ({
+  user_info: state.user.info,
+});
+export default connect(
+  mapStateToProps,
+)(GameIndividual);

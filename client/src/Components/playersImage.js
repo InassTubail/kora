@@ -9,7 +9,7 @@ import person12 from '../assets/12.png';
 import person13 from '../assets/13.png';
 import person14 from '../assets/14.png';
 
-const images = [
+export const images = [
   { id: 1, src: person1, title: 'foo', description: 'bar' },
   { id: 2, src: person2, title: 'foo', description: 'bar' },
   { id: 3, src: person3, title: 'foo', description: 'bar' },
@@ -25,5 +25,15 @@ const images = [
 
 function imageLoader() {
   return images;
+}
+export function person(id) {
+  let src;
+  images.map((el)=>{
+    if(el.id == id){
+      src = el.src 
+    }
+    return el;
+  })
+  return src;
 }
 export default imageLoader;

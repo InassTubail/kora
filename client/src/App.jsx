@@ -84,37 +84,11 @@ class App extends Component {
     const socket = io.connect('http://localhost:8080');
     const data = {};
     data.to = this.props.user_info.with;
-    console.log(data.to, 'data.to');
-
     data.from = this.props.user_info.username; // current user
     data.type = 'accept';
     socket.emit('replyInvite', data);
     this.props.closeDialog();
   };
-
-  // when refrsh
-  // componentWillUnmount () { // or get derived state from props
-  //   let isExit = false
-  //   this.props.users && this.props.users.forEach((cc)=>{
-  //     if(cc.username == this.props.user_info.username){
-  //       isExit = true;
-  //     }
-  //   })
-  //   console.log({isExit});
-  //   if(isExit){
-  //     // login
-  //   }
-  // }
-  // or
-  // componentWillMount() {
-  //   const socket = io.connect('http://localhost:8080');
-  //   console.log(sessionStorage.getItem('current_user'));
-  //   if (sessionStorage.getItem('current_user')) {
-  //     const name = JSON.parse(sessionStorage.getItem('current_user'));
-  //     this.setState({ currentUser: name.username });
-  //     socket.emit('new user', name.username);
-  //   }
-  // }
   render() {
     return (
       <div>
@@ -130,16 +104,11 @@ class App extends Component {
               component={SelectCompititor}
             />
             <Route exact path="/game-individual" component={GameIndividual} />
-            <Route exact path="/popupWaiting" component={PopWaiting} />
+            {/* <Route exact path="/popupWaiting" component={PopWaiting} />
             <Route exact path="/popupAccept" component={PopAccept} />
             <Route exact path="/popUpCongrat" component={popUpCongrat} />
-            <Route exact path="/popUpLose" component={popUpLose} />
+            <Route exact path="/popUpLose" component={popUpLose} /> */}
             <Route exact path="/congrat-individ" component={CongratIndivid} />
-
-
-
-
-
           </Switch>
         </Router>
       </div>
