@@ -19,8 +19,16 @@
 
 .winnerPlayerDiv {
   position: absolute;
-  position: absolute;
   top: 4%;
   color: #d0f400;
   font-size: 60px;
+}
+
+.playAgain {
+  position: absolute;
+  top: 80%;
+}
+
+.playAgain img {
+  height: 90px;
 }
