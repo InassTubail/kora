@@ -13,6 +13,7 @@ import PopAccept from './Components/PopAccept';
 import popUpCongrat from './Components/popUpCongrat';
 import popUpLose from './Components/popUpLose';
 import CongratIndivid from './Components/CongratIndivid';
+import GamePersinWithPerson from './Components/GamePersonWithPerson'
 
 
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
@@ -108,6 +109,8 @@ class App extends Component {
             <Route exact path="/popupAccept" component={PopAccept} />
             <Route exact path="/popUpCongrat" component={popUpCongrat} />
             <Route exact path="/popUpLose" component={popUpLose} /> */}
+
+            <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
             <Route exact path="/congrat-individ" component={CongratIndivid} />
           </Switch>
         </Router>
