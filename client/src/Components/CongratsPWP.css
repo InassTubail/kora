@@ -1,0 +1,54 @@
+.congratIndivid1 {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/PWP.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.winnerPlayerDiv {
+  position: absolute;
+  top: 22%;
+  color: #d0f400;
+  font-size: 60px;
+}
+
+.playAgainn {
+  position: absolute;
+  top: 85%;
+}
+
+.playAgainn img {
+  height: 70px;
+}
+
+
+.subHeaderPWP {
+  margin-top: -104%;
+  position: relative;
+  top: 25px
+}
+
+
+.selectedImageFramePWP {
+  /* height: 200px; */
+  height: 155px;
+}
+
+.selectedImagePWP {
+  position: absolute;
+  height: 90px;
+  left: 30px;
+  top: 20px;
+}

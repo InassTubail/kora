@@ -14,6 +14,7 @@ import popUpCongrat from './Components/popUpCongrat';
 import popUpLose from './Components/popUpLose';
 import CongratIndivid from './Components/CongratIndivid';
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
+import CongratsPWP from './Components/CongratsPWP'
 
 
 import { getUsers, openDialog, closeDialog, updateUser } from './store/actions';
@@ -110,6 +111,7 @@ class App extends Component {
             <Route exact path="/popUpCongrat" component={popUpCongrat} />
             <Route exact path="/popUpLose" component={popUpLose} /> */}
 
+            <Route exact path="/CongratsPWP" component={CongratsPWP} />
             <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
             <Route exact path="/congrat-individ" component={CongratIndivid} />
           </Switch>
