@@ -8,7 +8,9 @@ import frame from '../assets/frame.png';
 import hares from '../assets/hares.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
-import counter from '../assets/counter.png';
+import counterRed from '../assets/counterRed.png';
+import counterBlue from '../assets/counterBlue.png';
+
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
@@ -169,13 +171,13 @@ class GamePersonWithPerson extends Component {
 
           <div className="subHeader42">
 
-          <div>
-          <img src={counter} title="sdd" alt="dd" className="counter2" />
+          <div >
+          <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
             <p className="counterParag2">{this.props.user_info.level} / 4</p>
           </div>
 
           <div>
-          <img src={counter} title="sdd" alt="dd" className="counter2" />
+          <img src={counterRed} title="sdd" alt="dd" className="counter2" />
             <p className="counterParag2">{this.props.user_info.level} / 4</p>
           </div>
            
