@@ -5,7 +5,6 @@
   margin-left: auto;
   background: #ddd;
   background-image: url("../assets/backgroundSelectCha2.png");
-  /* background-image: url("../assets/gameType.jpg"); */
   background-size: cover;
   background-position: center;
   background-position: center center;
@@ -18,22 +17,20 @@
   position: relative;
 }
 
-
 .button1 {
   top: 25%;
-  left: 28%
 }
 
 .button2 {
   bottom: 5%;
-  left: 28%
 }
 
 .button1,
 .button2 {
   position: absolute;
-  width: 200px;
-  height: 64px;
+  width: 150px;
+  height: 50px;
+  left: 30%;
 }
 
 .centerKora {
