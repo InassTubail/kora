@@ -123,7 +123,7 @@ class GameIndividual extends Component {
             <img src={titleImg} alt="title" className="titleImage" />
             <div className="quesDiv">
               <img src={questions} alt="title" className="titleImage" />
-              <input type="text" className="questionStatement" value={`${number1} * ${number2}`} />
+              <p  className="questionStatement">{`${number1} * ${number2}`}</p>
             </div>
           </div>
           <img src={hares} alt="hares" className="hares" />

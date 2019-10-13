@@ -11,7 +11,6 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow: hidden;
-
 }
 
 .subHeaderMain {
@@ -52,7 +51,6 @@
 
 
 .selectedImage3 {
-
   right: 19px;
 }
 
@@ -68,6 +66,13 @@
 
 .searchButton {
   height: 50px;
+  background-color: #cd8e50;
+
+  /* background-image: url('../assets/InputDiv.png');
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat; */
 
 }
 
