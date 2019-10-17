@@ -1,9 +1,13 @@
 import React from 'react';
 import './PopAccept.css';
+import './PopWaiting.css';
+
 
 function PopAccept(propss) {
   const { props } = propss;
   return props.open ? (props.type == 'invite' ? (
+    <div className="popup1">
+    <div className="popupCongrat1">
     <div className='popupAccept'>
       <div className="containerGame">
         <div className="quesTitl">
@@ -23,14 +27,23 @@ function PopAccept(propss) {
           </div>
         </div>
       </div>
+      </div>
+      </div>
     </div>
-  ) : (<div className='popWaiting'>
-    <div className='popup_innerWaiting'>
-      <button 
-      // onClick={this.togglePopup} 
-      className="cancelInvitation">الغـاء الدعـوة</button>
-    </div>
-  </div>)) : null
+  ) : ( 
+    
+    <div className="popup1">
+    <div className="popupCongrat1">
+      <div className='popWaiting'>
+        <div className='popup_innerWaiting'>
+          <button 
+          // onClick={this.togglePopup} 
+          className="cancelInvitation">انسـحاب</button>
+        </div>
+      </div>
+      </div>
+      </div>
+)) : null
 }
 
 export default PopAccept;
