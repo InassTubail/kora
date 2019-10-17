@@ -38,10 +38,12 @@
 .excellent1 {
   width: 333px;
 }
-.gameScreen.popupBlur{
+
+.gameScreen.popupBlur {
   filter: blur(5px);
   -webkit-filter: blur(6px);
 }
+
 .nextStage1 {
   position: absolute;
   top: 67%;
