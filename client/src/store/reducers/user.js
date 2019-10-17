@@ -9,11 +9,26 @@ const initialState = {
     room: null,
     person: null,
     level: 1,
-    score: 0,
+    invite: [],
+    accpet: []
   },
   users: [],
   error: null,
   success: '',
+  play: {
+    // room: '',
+    role: '',
+    isMyRole: false,
+    color: '',
+    number1: 0,
+    number2: 0,
+    answers: [],
+    redScore:0,
+    blueScore:0,
+    redTeam:[],
+    blueTeam:[],
+    numberOfQuestion: 0,
+  }
 };
 
 export default (state = initialState, action) => {
@@ -31,7 +46,8 @@ export default (state = initialState, action) => {
           room: null,
           person: null,
           level: 1,
-          score: 0,
+          invite: [],
+          accpet: []
         },
       };
     case `${USER.USERS}`:
@@ -50,6 +66,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         info: payload,
+      }
+    case `${USER.UPDATE_GAME}`:
+      return {
+        ...state,
+        play: payload,
       }
     default:
       return state;

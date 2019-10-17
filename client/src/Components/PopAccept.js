@@ -1,56 +1,36 @@
-import React, { Component } from 'react';  
-import './PopAccept.css';  
+import React from 'react';
+import './PopAccept.css';
 
-class PopAccept extends Component {  
+function PopAccept(propss) {
+  const { props } = propss;
+  return props.open ? (props.type == 'invite' ? (
+    <div className='popupAccept'>
+      <div className="containerGame">
+        <div className="quesTitl">
+          <h1>هل تود اللعب مع ...</h1>
+        </div>
+        <div className='popup_innerAccept'>
+          <div className="cancelInvitationAccept">
+            <button
+              onClick={propss.handleAccept}
+              className="buttonPop acceptInPop" />
+          </div>
 
-state = { showPopup: false };  
-
-
-  togglePopup= () =>{  
-this.setState({  
-     showPopup: !this.state.showPopup  
-});  
- }  
-
-  render() {  
-return (  
-<div>  
-<button onClick={this.togglePopup}> Click To Launch Popup</button>  
-{this.state.showPopup ?    
-  <div className='popupAccept'>
-
-<div className="containerGame">
-
-
-  <div className="quesTitl">
-  <h1>هل تود اللعب مع ...</h1>
-</div>
-
-
-
- <div className='popup_innerAccept'>  
- <div className="cancelInvitationAccept">
- <button onClick={this.togglePopup}  className="buttonPop acceptInPop"/> 
- </div>
- 
- <div className="acceptInvitation">
- <button onClick={this.togglePopup}  className="buttonPop rejectInPop"/> 
- </div>
-
- </div> 
-
-
-</div>
-
-
-
-</div> 
-: null  
-}  
-</div>  
-
-);  
-}  
-}  
+          <div className="acceptInvitation">
+            <button
+              onClick={propss.handleReject} 
+              className="buttonPop rejectInPop" />
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : (<div className='popWaiting'>
+    <div className='popup_innerWaiting'>
+      <button 
+      // onClick={this.togglePopup} 
+      className="cancelInvitation">الغـاء الدعـوة</button>
+    </div>
+  </div>)) : null
+}
 
 export default PopAccept;

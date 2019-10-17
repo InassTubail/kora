@@ -5,12 +5,13 @@ import Frame from '../assets/frame.png';
 import Vs from '../assets/VS.png';
 import person from '../assets/playerInitial.png';
 import inputDiv from '../assets/InputDiv.png';
-import buttonDiv from '../assets/buttonDiv.png';
+// import buttonDiv from '../assets/buttonDiv.png';
 import compiteButton from '../assets/compiteButton.png';
 import playerName from '../assets/playerName.png';
-import online from '../assets/online.png';
-import inviteFreind from '../assets/inviteFreind.png';
+// import online from '../assets/online.png';
+// import inviteFreind from '../assets/inviteFreind.png';
 import title2 from '../assets/title2.png';
+import { questionsAndAnswers } from '../utils/questionAndAnswer'
 
 import './SelectCompititor.css';
 
@@ -25,10 +26,11 @@ class Select extends Component {
     data.type = 'invite';
     socket.emit('sendInviteToPlay', data);
     this.props.updateUser({
-      username: data.from,
+      ...this.props.user_info,
       is_playing: 'pending',
-      with: data.to,
+      with: data.from,
       room: null,
+      invite: this.props.user_info.invite.push(data.to)
     });
   };
 
@@ -36,39 +38,36 @@ class Select extends Component {
     const socket = io.connect('http://localhost:8080');
     this.sendInvite(socket, e.target.id);
   };
-
-  componentDidUpdate() {
-    const { open } = this.props;
-    if (open) {
-      setTimeout(() => {
-        this.props.closeDialog();
-        this.props.updateUser({
-           ...this.props.user_info.username,
-          is_playing: false,
-          with: null,
-          room: null,
-        });
-      }, 10000);
+  startPlay = () => {
+    const socket = io.connect('http://localhost:8080');
+    const { username, accpet } = this.props.user_info
+    let room = JSON.stringify([username, ...accpet])
+    const { number1, number2, answers } = questionsAndAnswers(4);
+    let data = {
+      number1, number2, answers, currentPlayer: username, result: false
     }
+    // console.log('startPlay', { room });
+    socket.emit('startGame', { room, data })
+    // socket.emit(room, data)
   }
+  // componentDidUpdate() {
+  //   const { open } = this.props;
+  //   if (open) {
+  //     setTimeout(() => {
+  //       this.props.closeDialog();
+  //       this.props.updateUser({
+  //          ...this.props.user_info.username,
+  //         is_playing: false,
+  //         with: null,
+  //         room: null,
+  //       });
+  //     }, 10000);
+  //   }
+  // }
 
   render() {
     return (
       <React.Fragment>
-        {/* <h2> Members </h2>
-        <ul id="ulist">
-          {this.props.users.map(element => (
-            <li>
-              <button
-                id={element.username}
-                key={element}
-                onClick={this.onSelectUser}
-              >
-                {element.username}
-              </button>
-            </li>
-          ))}
-        </ul> */}
         <div className="selectCompititorsDiv">
           <div className="titleImage1">
             <img src={title2} title="sss" alt="Sss" className="titleImage" />
@@ -106,12 +105,6 @@ class Select extends Component {
 
           <div className="searchDiv">
             <div className="buttonDiv">
-              {/* <img
-                src={buttonDiv}
-                title="ti"
-                alt="dss"
-                className="searchButton"
-              /> */}
               <button className="searchButton">بدء البحـث</button>
             </div>
             <div className="inputDiv">
@@ -132,18 +125,11 @@ class Select extends Component {
                   <li>
                     <div className="rows">
                       <div className="onlineButtons">
-                        {' '}
-                        {/* <img
-                      src={online}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
-                        {!this.props.user_info.is_playing ? (
+                        {!element.is_playing ? (
                           <span className="buttons onButton">متـصل</span>
                         ) : (
-                          <span className="buttons onButton">مشغول</span>
-                        )}
+                            <span className="buttons onButton">مشغول</span>
+                          )}
                       </div>
                       <div className="playersName">
                         {' '}
@@ -161,13 +147,6 @@ class Select extends Component {
                         </span>
                       </div>
                       <div className="inviteButtons">
-                        {' '}
-                        {/* <img
-                      src={inviteFreind}
-                      title="compiteButton"
-                      alt="compiteButton"
-                      className="compiteButton"
-                    /> */}
                         <button
                           className="buttons invButton"
                           id={element.username}
@@ -184,7 +163,7 @@ class Select extends Component {
             </div>
           </div>
 
-          <div className="compiteButtonDiv">
+          <div className="compiteButtonDiv" onClick={this.startPlay}>
             <img
               src={compiteButton}
               title="compiteButton"
@@ -192,21 +171,6 @@ class Select extends Component {
               className="compiteButton"
             />
           </div>
-          {/* <img src={Vs} title="sss" alt="Sss" className="Vs" /> */}
-
-          {/* <ul id="ulist">
-            {this.props.users.map(element => (
-              <li>
-                <button
-                  id={element.username}
-                  key={element}
-                  onClick={this.onSelectUser}
-                >
-                  {element.username}
-                </button>
-              </li>
-            ))}
-          </ul> */}
         </div>
       </React.Fragment>
     );
