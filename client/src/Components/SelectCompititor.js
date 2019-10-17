@@ -72,37 +72,9 @@ class Select extends Component {
           <div className="titleImage1">
             <img src={title2} title="sss" alt="Sss" className="titleImage" />
           </div>
-          <div className="subHeaderMain">
-            <div className="subHeader2">
-              <img
-                src={Frame}
-                title="sss"
-                alt="Sss"
-                className="selectedImageFrame2"
-              />
+          
 
-              <img
-                src={person}
-                title="ti"
-                alt="dss"
-                className="selectedImage2"
-              />
-            </div>
-
-            <div className="vsDiv">
-              <img src={Vs} className="vs" />
-            </div>
-            <div className="subHeader3">
-              <img src={Frame} className="selectedImageFrame3" />
-              <img
-                src={person}
-                title="ti"
-                alt="dss"
-                className="selectedImage3"
-              />
-            </div>
-          </div>
-
+        
           <div className="searchDiv">
             <div className="buttonDiv">
               <button className="searchButton">بدء البحـث</button>
@@ -119,14 +91,13 @@ class Select extends Component {
           </div>
 
           <div className="onlinePlayers">
-            <div className="onlinePlayersDiv">
               <ul>
                 {this.props.users.map(element => (
                   <li>
                     <div className="rows">
                       <div className="onlineButtons">
                         {!element.is_playing ? (
-                          <span className="buttons onButton">متـصل</span>
+                          <span className="buttons onButton">متصل</span>
                         ) : (
                             <span className="buttons onButton">مشغول</span>
                           )}
@@ -160,17 +131,17 @@ class Select extends Component {
                   </li>
                 ))}
               </ul>
-            </div>
           </div>
+          <div className="fasel"><p>الأشخاص الذين قبلوا الدعوة</p></div>
 
-          <div className="compiteButtonDiv" onClick={this.startPlay}>
+          {/* <div className="compiteButtonDiv" onClick={this.startPlay}>
             <img
               src={compiteButton}
               title="compiteButton"
               alt="compiteButton"
               className="compiteButton"
             />
-          </div>
+          </div> */}
         </div>
       </React.Fragment>
     );
