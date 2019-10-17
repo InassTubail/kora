@@ -20,11 +20,12 @@ io.sockets.on('connection', function (socket) {
       ({
         "username": socket.username,
         "is_playing": false,
-        "with": null,
+        "with": "",
         "room": null,
         "person": null,
         "level": 1,
-        "score": 0,
+        "invite": [],
+        "accpet": []
       })
     io.sockets.emit('usernames', JSON.stringify(usernames));
 
@@ -63,21 +64,19 @@ io.sockets.on('connection', function (socket) {
           to = index
         }
       })
-      // let person = usernames[from].person 
+      let withI = usernames[from].invite
       usernames[from] =
         {
           ...usernames[from],
-          // "username": data.from,
           "is_playing": 'pending',
-          "with": data.to,
+          "with": data.from,
           "room": null,
-          // "person": person
+          "invite": withI.concat(data.to)
         }
-      let person = usernames[to].person
+      // let person = usernames[to].person
       usernames[to] =
         {
           ...usernames[to],
-          // "username": data.to,
           "is_playing": 'pending',
           "with": data.from,
           "room": null,
@@ -106,17 +105,19 @@ io.sockets.on('connection', function (socket) {
           ...usernames[from],
           "is_playing": 'accept',
           "with": data.to,
-          "room": `user/${data.from}/${data.to}`,
+          // "room": null,
         }
+      let invite = usernames[to].invite
+      let accpet = usernames[to].accpet
       usernames[to] =
         {
           ...usernames[to],
           "is_playing": 'accept',
-          "with": data.from,
-          "room": `user/${data.from}/${data.to}`,
+          "with": data.to,
+          "invite": invite.filter((value, index, arr) => value !== data.from),
+          "accpet": accpet.concat(data.from),
         }
     } else if (data.type == 'reject') {
-      // type reject
       let from, to
       usernames.forEach((el, index) => {
         if (el.username == data.from) {
@@ -126,6 +127,7 @@ io.sockets.on('connection', function (socket) {
           to = index
         }
       })
+      let invite = usernames[to].invite
       usernames[from] =
         {
           ...usernames[from],
@@ -136,8 +138,7 @@ io.sockets.on('connection', function (socket) {
       usernames[to] =
         {
           ...usernames[to],
-          "is_playing": false,
-          "with": null,
+          "invite": invite.filter((value) => value !== data.from),
           "room": null,
         }
     }
@@ -148,7 +149,21 @@ io.sockets.on('connection', function (socket) {
     });
     io.emit('usernames', JSON.stringify(usernames));
   });
+  socket.on('startGame',function(data){
+    console.log({data});
+    
+    let player = JSON.parse(data.room);
+    usernames.map((el, index) => {
+      if (player.includes(el.username)) {
+          el.room = data.room
+      }
+      return el
+    })
+    io.sockets.emit('usernames', JSON.stringify(usernames));
+    io.sockets.emit('data.room', data)
+    // console.log({usernames});
 
+  })
   socket.on('disconnect', function (data) {
     if (!socket.username) return;
     let clients = usernames.map((value, index) => {
@@ -159,7 +174,7 @@ io.sockets.on('connection', function (socket) {
     })
 
     io.emit('usernames', JSON.stringify(usernames));
-    console.log({ usernames }, ['from disconnect']);
+    // console.log({ usernames }, ['from disconnect']);
   });
 });
 

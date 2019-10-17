@@ -20,6 +20,11 @@ export const updateUser = payload => ({
   payload,
 });
 
+export const updateGame = payload => ({
+  type: `${USER.UPDATE_GAME}`,
+  payload,
+});
+
 export const clearError = () => ({ type: USER.CLEAR_ERROR });
 export const hideUpdateSuccessMessage = () => ({
   type: USER.CLEAR_SUCCESS,
