@@ -124,7 +124,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  border-radius: 42px;
+  border-radius: 8px;
   display: inline-block;
   border: 3px solid #fff;
   transition: all 0.4s ease 0s;
@@ -134,7 +134,11 @@
   background-image: url('../assets/onColor.png');
   text-align: center;
   vertical-align: middle;
+}
 
+.invButton2 {
+  height: 80%;
+  font-size: 64%;
 }
 
 .invButton {
@@ -169,6 +173,13 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
+.playersToPlayWith {
+  margin-top: 6%;
+  height: 22%;
+  background: rgba(0, 0, 0, 0.5);
+
+}
+
 .onlinePlayersDiv {
   /* display: flex;
   justify-content: center;
@@ -200,8 +211,17 @@ ul {
   position: relative;
 }
 
+.playersName2 {
+  height: 8%;
+  position: relative;
+}
+
 .playersName img {
   height: 32px;
+}
+
+.playersName2 img {
+  height: 27px;
 }
 
 .enteringName {
@@ -213,6 +233,17 @@ ul {
   border: none;
   font-size: 96%;
   top: 15%;
+}
+
+.enteringName2 {
+  position: absolute;
+  text-align: center;
+  left: 8%;
+  height: 33px;
+  background: transparent;
+  border: none;
+  font-size: 96%;
+  top: 29%;
 }
 
 /* .compiteButtonDiv {
@@ -232,6 +263,11 @@ ul {
   text-align: center;
   margin-top: 4px;
   color: white;
-  font-size: 21px;
+  font-size: 15px;
   font-weight: bold;
+}
+
+.true,
+.false {
+  height: 25px
 }

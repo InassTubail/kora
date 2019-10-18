@@ -8,10 +8,10 @@ import inputDiv from '../assets/InputDiv.png';
 // import buttonDiv from '../assets/buttonDiv.png';
 import compiteButton from '../assets/compiteButton.png';
 import playerName from '../assets/playerName.png';
-// import online from '../assets/online.png';
-// import inviteFreind from '../assets/inviteFreind.png';
+import True from '../assets/true.png';
+import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
-import { questionsAndAnswers } from '../utils/questionAndAnswer'
+import { questionsAndAnswers } from '../utils/questionAndAnswer';
 
 import './SelectCompititor.css';
 
@@ -95,12 +95,15 @@ class Select extends Component {
                 {this.props.users.map(element => (
                   <li>
                     <div className="rows">
-                      <div className="onlineButtons">
-                        {!element.is_playing ? (
-                          <span className="buttons onButton">متصل</span>
-                        ) : (
-                            <span className="buttons onButton">مشغول</span>
-                          )}
+                    <div className="inviteButtons">
+                        <button
+                          className="buttons invButton"
+                          id={element.username}
+                          key={element}
+                          onClick={this.onSelectUser}
+                        >
+                          دعــوة
+                        </button>
                       </div>
                       <div className="playersName">
                         {' '}
@@ -117,22 +120,70 @@ class Select extends Component {
                           {element.username}{' '}
                         </span>
                       </div>
-                      <div className="inviteButtons">
-                        <button
-                          className="buttons invButton"
-                          id={element.username}
-                          key={element}
-                          onClick={this.onSelectUser}
-                        >
-                          دعــوة
-                        </button>
+
+                       <div className="onlineButtons">
+                        {!element.is_playing ? (
+                          <span className="buttons onButton">متصل</span>
+                        ) : (
+                            <span className="buttons busyButton">مشغول</span>
+                          )}
                       </div>
+
+                     
                     </div>
                   </li>
                 ))}
               </ul>
           </div>
-          <div className="fasel"><p>الأشخاص الذين قبلوا الدعوة</p></div>
+          <div className="fasel"><p>الأشخاص الذين أرسل لهم دعوة</p></div>
+
+
+
+          <div className="playersToPlayWith">
+              <ul>
+                {this.props.users.map(element => (
+                  <li>
+                    <div className="rows">
+                      
+                    <div className="inviteButtons">
+                        <button
+                          className="buttons invButton invButton2 "
+                          id={element.username}
+                          key={element}
+                          onClick={this.onSelectUser}
+                        >الغاء الدعوة</button>
+                      </div>
+                      <div className="playersName2">
+                        {' '}
+                        <img
+                          src={playerName}
+                          title="compiteButton"
+                          alt="compiteButton"
+                          className="buttons"
+                        />
+                        <span
+                          // type="text"
+                          className="enteringName2"
+                        >
+                          {element.username}{' '}
+                        </span>
+                      </div>
+                      <div className="onlineButtons">
+                        {!element.is_playing ? (
+                          <span className="buttons onButton">قبل الدعوة</span>
+                        ) : (
+                            <span className="buttons busyButton">بانتظار القبول</span>
+                          )}
+                      </div>
+                      <img src={True} alt="true" className="true"/>
+                      {/* <img src={False} alt="false" className="false"/> */}
+                    
+                    </div>
+                  </li>
+                ))}
+              </ul>
+          </div>
+
 
           {/* <div className="compiteButtonDiv" onClick={this.startPlay}>
             <img
