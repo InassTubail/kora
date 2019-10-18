@@ -6,7 +6,7 @@ import koraImg from '../assets/kora.png';
 import { person } from './playersImage';
 import frame from '../assets/frame.png';
 import hares from '../assets/hares.png';
-import titleImg from '../assets/tit.png';
+import gWithg from '../assets/gWithg.png';
 import questions from '../assets/questions.png';
 import counterRed from '../assets/counterRed.png';
 import counterBlue from '../assets/counterBlue.png';
@@ -14,10 +14,10 @@ import player from '../assets/player.png';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 
-import './GamePersonWithPerson.css';
+import './GameGroupWithGroup.css';
 const io = require('socket.io-client');
 
-class GamePersonWithPerson extends Component {
+class GameGroupWithGroup extends Component {
   state = {
     blueTeam: {
     },
@@ -50,65 +50,86 @@ class GamePersonWithPerson extends Component {
     const { number1, number2, answers, result } = this.props.play
     return (
       <React.Fragment>
-        <div className="gameScreen2">
-          <div className="header2">
+        <div className="gameScreen2g">
+          <div className="header2g">
             <div>
-              <img src={titleImg} alt="title" className="titleImage2" />
+              <img src={gWithg} alt="title" className="titleImage2g" />
             </div>
 
-            <div className="quesDiv2">
-              <img src={questions} alt="title" className="titleImage2" />
-              <p className="questionStatement2">{`${number1} * ${number2}`}</p>
+            <div className="quesDiv2g">
+              <img src={questions} alt="title" className="titleImage2g" />
+              <p className="questionStatement2g">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          <img src={hares} alt="hares" className="hares2" />
+          <img src={hares} alt="hares" className="hares2g" />
 
-          <div className="answers2">
+          <div className="answers">
             {answers.map((el, index) =>
-              <button className={!result ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
+              <button className={!this.state.isClick ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
                 {el.answer}
               </button>
             )}
           </div>
-          <img src={koraImg} alt="kora" edt className="koraImg2" />
-          <img src={player} alt="kora" edt className="playerImg2" />
+          <img src={koraImg} alt="kora" edt className="koraImg2g" />
+          <img src={player} alt="kora" edt className="playerImg2g" />
 
 
-          <div className="subHeadersGroup">
-            <div className="subHeader332">
+          <div className="subHeadersGroupg">
+            <div className="subHeader332g">
               <img
                 src={frame}
                 title="ti"
                 alt="dss"
-                className="selectedImageFrame332"
+                className="selectedImageFrame332g"
               />
-              <img src={person(this.props.user_info.person)} title="sdd" alt="dsdd" className="selectedImage332" />
-              <div className="blueColor"><p>اسم اللاعب</p></div>
+              <img src={person(this.props.user_info.person)} title="sdd" alt="dsdd" className="selectedImage332g" />
+              <div className="blueColorg"><p>اسم اللاعب</p></div>
+
+            </div>
+            <div className="subHeader332g">
+              <img
+                src={frame}
+                title="ti"
+                alt="dss"
+                className="selectedImageFrame332g"
+              />
+              <img src={person(this.props.user_info.person)} title="sdd" alt="dsdd" className="selectedImage332g" />
+              <div className="blueColorg"><p>اسم اللاعب</p></div>
 
             </div>
 
-            <div className="subHeader3321">
+            <div className="subHeader3321g">
               <img
                 src={frame}
                 title="ti"
                 alt="dss"
-                className="selectedImageFrame332"
+                className="selectedImageFrame332g"
               />
-              <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage332" />
-              <div className="redColor"><p>اسم اللاعب</p></div>
+              <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage332g" />
+              <div className="redColorg"><p>اسم اللاعب</p></div>
+            </div>
+            <div className="subHeader3321g">
+              <img
+                src={frame}
+                title="ti"
+                alt="dss"
+                className="selectedImageFrame332g"
+              />
+              <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage332g" />
+              <div className="redColorg"><p>اسم اللاعب</p></div>
             </div>
           </div>
 
-          <div className="subHeader42">
+          <div className="subHeader42g">
 
             <div >
-              <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
+              <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
               <p className="counterParag2">{this.props.play.redScore}</p>
             </div>
 
             <div>
-              <img src={counterRed} title="sdd" alt="dd" className="counter2" />
-              <p className="counterParag2">{this.props.play.blueScore}</p>
+              <img src={counterRed} title="sdd" alt="dd" className="counter2g" />
+              <p className="counterParag2g">{this.props.play.blueScore}</p>
             </div>
           </div>
         </div>
@@ -129,4 +150,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GamePersonWithPerson);
+)(GameGroupWithGroup);

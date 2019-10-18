@@ -12,6 +12,7 @@ import PopAccept from './Components/PopAccept';
 // import popUpCongrat from './Components/popUpCongrat';
 // import popUpLose from './Components/popUpLose';
 import CongratIndivid from './Components/CongratIndivid';
+import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 // import { Redirect } from 'react-router-dom';
@@ -170,6 +171,7 @@ class App extends Component {
           {/* <Route exact path="/GamePersinWithPerson">
             <GamePersinWithPerson />
           </Route> */}
+          <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} />
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
         </Switch>
