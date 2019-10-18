@@ -1,0 +1,189 @@
+.gameScreen2g {
+  max-width: 600px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/gameScreen2.png");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  position: relative;
+}
+
+.header2g {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 9px
+}
+
+.titleImage2g {
+  width: 75%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.correct2g {
+  background: green;
+}
+
+.incorrect2g {
+  background: red;
+}
+
+.titleGame2g {
+  width: 50%;
+  position: absolute;
+}
+
+.koraImg2g {
+  width: 15%;
+  position: absolute;
+  top: 80%;
+  left: 44%;
+}
+
+
+.playerImg2g {
+  position: absolute;
+  top: 80%;
+  left: 26%;
+  height: 21%;
+}
+
+.hares2g {
+  position: absolute;
+  width: 15%;
+  top: 63%;
+  left: 44%;
+}
+
+
+.answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer1,
+.answer2,
+.answer3 {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.answer1 {
+  text-align: center;
+  top: 60%;
+  right: 20%;
+}
+
+.answer2 {
+  top: 52%;
+  text-align: center;
+}
+
+.answer3 {
+  top: 60%;
+  text-align: center;
+  left: 20%;
+}
+
+.selectedImageFrame332g {
+  height: 95px;
+}
+
+.selectedImage332g {
+  position: absolute;
+  height: 48px;
+  left: 30px;
+  top: 20px;
+}
+
+.counterParag2g {
+  left: 5%;
+  height: 60px;
+  position: absolute;
+  top: 17%;
+  color: white;
+  font-weight: bold;
+  font-size: 170%;
+}
+
+.counter2g {
+  height: 95px;
+  width: 96px;
+}
+
+.subHeader332g {
+  position: relative;
+}
+
+.subHeader3321g {
+
+  position: relative;
+}
+
+.subHeader42g {
+  display: flex;
+  margin-top: 82%;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.quesDiv2g {
+  margin-top: 106px;
+  position: relative;
+}
+
+.questionStatement2g {
+  position: absolute;
+  top: 53%;
+  width: 48%;
+  left: 25%;
+  background: transparent;
+  border: none;
+  font-size: 19px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.answers p {
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 10px
+}
+
+.subHeadersGroupg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -66%;
+}
+
+.redColorg,
+.blueColorg {
+  text-align: center;
+  margin-top: -50%;
+  width: 95%;
+  height: 28%;
+  color: white;
+}
+
+.redColorg {
+  background-color: #cf002c;
+}
+
+.blueColorg {
+  background-color: #3f198d;
+}
