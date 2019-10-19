@@ -23,6 +23,19 @@ import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './sto
 
 const io = require('socket.io-client');
 
+async function detrmineRedABlue(red_team, blue_team, users) {
+  let redTeam = [], blueTeam = []
+  let s = users.map((el) => {
+    if (blue_team.findIndex(elment => elment === el.username) !== -1) {
+      blueTeam = blueTeam.concat({ username: el.username, person: el.person })
+    }
+    if (red_team.findIndex(elment => elment === el.username) !== -1) {
+      redTeam = redTeam.concat({ username: el.username, person: el.person })
+    }
+  })
+  await Promise.all(s)
+  return { redTeam, blueTeam }
+}
 class App extends Component {
   componentDidMount() {
     const socket = io.connect('http://localhost:8080');
@@ -58,19 +71,26 @@ class App extends Component {
   gamingRoom = socket => {
     let { redScore, blueScore, numberOfQuestion } = this.props.play;
     let role, color, isMyRole
-    socket.on('data.room', data => {
+
+    socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
       const { location } = this.props;
       if (location.pathname !== '/GamePersinWithPerson') {
+        this.props.closeDialog();
         this.props.history.push('/GamePersinWithPerson')
       }
+      let finalData = {}
       let { number1, number2, answers, result } = data.data
-      let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.currentPlayer)
+      let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+        let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
+        let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
+        const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users);
       if (result) {
         let currentPlayerColor = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
-        if (currentPlayerColor === 'red' && this.props.play.number1 * this.props.play.number2 === result) {
+        let isTrue = this.props.play.number1 * this.props.play.number2 === parseInt(result, 10)
+        if (currentPlayerColor === 'red' && isTrue) {
           redScore++
-        } else if (currentPlayerColor === 'blue' && this.props.play.number1 * this.props.play.number2 === result) {
+        } else if (currentPlayerColor === 'blue' && isTrue) {
           blueScore++
         }
         this.props.updateGame({
@@ -78,30 +98,31 @@ class App extends Component {
           resultPrevPlayer: result, //نتيحة سؤال اللاعب الحالي ي سمر
         })
       }
-
       if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
         role = JSON.parse(this.props.user_info.room)[0]
       } else {
-        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1]
+        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1]        
       }
       color = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
       isMyRole = role === this.props.user_info.username;
-
       // بعد 2 ثانيه بدو يغير السزال
+      finalData = {
+        ...finalData,
+        role,
+        isMyRole,
+        color,
+        number1,
+        number2,
+        answers,
+        numberOfQuestion: numberOfQuestion++,
+        redScore,
+        redTeam, blueTeam,
+        blueScore,
+        resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
+        // resultPrevPlayer
+      }
       setTimeout(() => {
-        this.props.updateGame({
-          role,
-          isMyRole,
-          color,
-          number1,
-          number2,
-          answers,
-          numberOfQuestion: numberOfQuestion++,
-          redScore,
-          blueScore,
-          redTeam: [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]],
-          blueTeam: [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]],
-        })
+        this.props.updateGame(finalData)
       }, 2000);
     })
   }
@@ -110,7 +131,7 @@ class App extends Component {
       if (dataNewMassg.to === this.props.user_info.username) {
         if (dataNewMassg.type === 'invite') {
           this.props.updateUser({
-            username: this.props.user_info.username,
+            ...this.props.user_info,
             is_playing: 'pending',
             with: dataNewMassg.from,
             room: null,

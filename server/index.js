@@ -149,20 +149,16 @@ io.sockets.on('connection', function (socket) {
     });
     io.emit('usernames', JSON.stringify(usernames));
   });
-  socket.on('startGame',function(data){
-    console.log({data});
-    
+  socket.on('startGame', function (data) {
     let player = JSON.parse(data.room);
     usernames.map((el, index) => {
       if (player.includes(el.username)) {
-          el.room = data.room
+        el.room = data.room
       }
       return el
     })
     io.sockets.emit('usernames', JSON.stringify(usernames));
     io.sockets.emit('data.room', data)
-    // console.log({usernames});
-
   })
   socket.on('disconnect', function (data) {
     if (!socket.username) return;
@@ -174,7 +170,6 @@ io.sockets.on('connection', function (socket) {
     })
 
     io.emit('usernames', JSON.stringify(usernames));
-    // console.log({ usernames }, ['from disconnect']);
   });
 });
 
