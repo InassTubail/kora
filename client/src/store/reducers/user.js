@@ -28,6 +28,7 @@ const initialState = {
     redTeam:[],
     blueTeam:[],
     numberOfQuestion: 0,
+    resultPrevPlayer: 0
   }
 };
 

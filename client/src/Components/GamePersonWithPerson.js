@@ -19,30 +19,43 @@ const io = require('socket.io-client');
 class GamePersonWithPerson extends Component {
   state = {
     blueTeam: [],
-    redTeam: []
+    redTeam: [],
+    error: ""
+  }
+  componentDidUpdate() {
+    if (this.state.error) {
+      setTimeout(async () => {
+        this.setState({ error: "" })
+      }, 2000);
+    }
   }
   selectAnswer = (el) => {
-    const isMyRole = this.props.play
-    if (!isMyRole) return;
-    const socket = io.connect('http://localhost:8080');
-    const result = el.currentTarget.id
-    const { room } = this.props.user_info
-    const { number1, number2, answers } = questionsAndAnswers(4);
-    let data = {
-      result, number1, number2, answers, currentPlayer: this.props.play.role
+    const { isMyRole } = this.props.play
+    if (isMyRole) {
+      const socket = io.connect('http://localhost:8080');
+      const result = el.currentTarget.id
+      const { room } = this.props.user_info
+      const { number1, number2, answers } = questionsAndAnswers(4);
+      let data = {
+        result, number1, number2, answers, currentPlayer: this.props.play.role
+      }
+      socket.emit('startGame', { room, data })
+    } else {
+      this.setState({ error: 'انتظر دورك' });
     }
-    socket.emit('startGame', { room, data })
   }
   render() {
-    const { number1, number2, answers, result, blueTeam, redTeam, role } = this.props.play
+    const { number1, number2, answers, blueTeam, redTeam, role, resultPrevPlayer } = this.props.play
     return (
       <React.Fragment>
+
         <div className="gameScreen2">
           <div className="header2">
             <div>
               <img src={titleImg} alt="title" className="titleImage2" />
             </div>
             <p>{role} يلعب الان</p>
+            {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
             <div className="quesDiv2">
               <img src={questions} alt="title" className="titleImage2" />
               <p className="questionStatement2">{`${number1} * ${number2}`}</p>
@@ -52,7 +65,7 @@ class GamePersonWithPerson extends Component {
 
           <div className="answers2">
             {answers.map((el, index) =>
-              <button className={!result ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
+              <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
                 {el.answer}
               </button>
             )}

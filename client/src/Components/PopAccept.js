@@ -30,8 +30,7 @@ function PopAccept(propss) {
       </div>
       </div>
     </div>
-  ) : ( 
-    
+  ) : (
     <div className="popup1">
     <div className="popupCongrat1">
       <div className='popWaiting'>

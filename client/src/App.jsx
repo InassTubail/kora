@@ -76,22 +76,15 @@ class App extends Component {
       if (data.room !== this.props.user_info.room) return;
       const { location } = this.props;
       if (location.pathname !== '/GamePersinWithPerson') {
+        this.props.closeDialog();
         this.props.history.push('/GamePersinWithPerson')
       }
       let finalData = {}
       let { number1, number2, answers, result } = data.data
-      // console.log(JSON.parse(this.props.user_info.room),'JSON.parse(this.props.user_info.room)');
-      // console.log(data.currentPlayer,'data.currentPlayer');
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
-      // console.log({currentPlayer},'1111');
-      
-      // if (!result) {
         let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
         let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
-        const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users)
-        // finalData = { ...finalData, redTeam, blueTeam }
-      // }/
-
+        const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users);
       if (result) {
         let currentPlayerColor = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
         let isTrue = this.props.play.number1 * this.props.play.number2 === parseInt(result, 10)
@@ -123,7 +116,10 @@ class App extends Component {
         answers,
         numberOfQuestion: numberOfQuestion++,
         redScore,
+        redTeam, blueTeam,
         blueScore,
+        resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
+        // resultPrevPlayer
       }
       setTimeout(() => {
         this.props.updateGame(finalData)
@@ -135,7 +131,7 @@ class App extends Component {
       if (dataNewMassg.to === this.props.user_info.username) {
         if (dataNewMassg.type === 'invite') {
           this.props.updateUser({
-            username: this.props.user_info.username,
+            ...this.props.user_info,
             is_playing: 'pending',
             with: dataNewMassg.from,
             room: null,

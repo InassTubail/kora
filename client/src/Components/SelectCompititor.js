@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, closeDialog } from '../store/actions';
-import Frame from '../assets/frame.png';
-import Vs from '../assets/VS.png';
-import person from '../assets/playerInitial.png';
+// import Frame from '../assets/frame.png';
+// import Vs from '../assets/VS.png';
+// import person from '../assets/playerInitial.png';
 import inputDiv from '../assets/InputDiv.png';
 // import buttonDiv from '../assets/buttonDiv.png';
 import compiteButton from '../assets/compiteButton.png';
 import playerName from '../assets/playerName.png';
 import True from '../assets/true.png';
-import False from '../assets/false.png';
+// import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
 
@@ -18,20 +18,30 @@ import './SelectCompititor.css';
 const io = require('socket.io-client');
 
 class Select extends Component {
+  state = {
+    error: ""
+  }
   // eslint-disable-next-line react/sort-comp
+
   sendInvite = (socket, selectedUser) => {
-    const data = {};
-    data.to = selectedUser;
-    data.from = this.props.user_info.username; // current user
-    data.type = 'invite';
-    socket.emit('sendInviteToPlay', data);
-    this.props.updateUser({
-      ...this.props.user_info,
-      is_playing: 'pending',
-      with: data.from,
-      room: null,
-      invite: this.props.user_info.invite.push(data.to)
-    });
+    const { invite, accpet } = this.props.user_info
+    let total = invite.length + accpet.length;
+    if (total !== 1 && total !== 3) {
+      const data = {};
+      data.to = selectedUser;
+      data.from = this.props.user_info.username; // current user
+      data.type = 'invite';
+      socket.emit('sendInviteToPlay', data);
+      this.props.updateUser({
+        ...this.props.user_info,
+        is_playing: 'pending',
+        with: data.from,
+        room: null,
+        invite: this.props.user_info.invite.push(data.to)
+      });
+    } else {
+      this.setState({ error: 'لم يتم ارسال الدعوة, قد دعوت شخص او 3 اشخاص بالفعل' })
+    }
   };
 
   onSelectUser = e => {
@@ -41,12 +51,16 @@ class Select extends Component {
   startPlay = () => {
     const socket = io.connect('http://localhost:8080');
     const { username, accpet } = this.props.user_info
-    let room = JSON.stringify([username, ...accpet])
-    const { number1, number2, answers } = questionsAndAnswers(4);
-    let data = {
-      number1, number2, answers, currentPlayer: username, result: false
+    if (accpet.length !== 3 && accpet.length !== 1) {
+      this.setState({ error: 'يجب قبول شخص أو 3 اشخاص لبدء اللعبه' })
+    } else {
+      let room = JSON.stringify([username, ...accpet])
+      const { number1, number2, answers } = questionsAndAnswers(4);
+      let data = {
+        number1, number2, answers, currentPlayer: username, result: false
+      }
+      socket.emit('startGame', { room, data })
     }
-    socket.emit('startGame', { room, data })
     // socket.emit(room, data)
   }
   // componentDidUpdate() {
@@ -71,9 +85,6 @@ class Select extends Component {
           <div className="titleImage1">
             <img src={title2} title="sss" alt="Sss" className="titleImage" />
           </div>
-          
-
-        
           <div className="searchDiv">
             <div className="buttonDiv">
               <button className="searchButton">بدء البحـث</button>
@@ -89,68 +100,101 @@ class Select extends Component {
             </div>
           </div>
 
+          {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
           <div className="onlinePlayers">
-              <ul>
-                {this.props.users.map(element => (
-                  <li>
-                    <div className="rows">
+            <ul>
+              {this.props.users.map(element => (
+                <li>
+                  <div className="rows">
                     <div className="inviteButtons">
-                        <button
-                          className="buttons invButton"
-                          id={element.username}
-                          key={element}
-                          onClick={this.onSelectUser}
-                        >
-                          دعــوة
+                      <button
+                        className="buttons invButton"
+                        id={element.username}
+                        key={element}
+                        onClick={this.onSelectUser}
+                      >
+                        دعــوة
                         </button>
-                      </div>
-                      <div className="playersName">
-                        {' '}
-                        <img
-                          src={playerName}
-                          title="compiteButton"
-                          alt="compiteButton"
-                          className="buttons"
-                        />
-                        <span
-                          // type="text"
-                          className="enteringName"
-                        >
-                          {element.username}{' '}
-                        </span>
-                      </div>
-
-                       <div className="onlineButtons">
-                        {!element.is_playing ? (
-                          <span className="buttons onButton">متصل</span>
-                        ) : (
-                            <span className="buttons busyButton">مشغول</span>
-                          )}
-                      </div>
-
-                     
                     </div>
-                  </li>
-                ))}
-              </ul>
+                    <div className="playersName">
+                      {' '}
+                      <img
+                        src={playerName}
+                        title="compiteButton"
+                        alt="compiteButton"
+                        className="buttons"
+                      />
+                      <span
+                        // type="text"
+                        className="enteringName"
+                      >
+                        {element.username}{' '}
+                      </span>
+                    </div>
+
+                    <div className="onlineButtons">
+                      {!element.is_playing ? (
+                        <span className="buttons onButton">متصل</span>
+                      ) : (
+                          <span className="buttons busyButton">مشغول</span>
+                        )}
+                    </div>
+
+
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="fasel"><p>الأشخاص الذين أرسل لهم دعوة</p></div>
-
-
-
           <div className="playersToPlayWith">
-              <ul>
-                {this.props.users.map(element => (
+            <ul>{
+              this.props.user_info.invite.length > 0 && this.props.user_info.invite.map(element => (
+                <li>
+                  <div className="rows">
+
+                    <div className="inviteButtons">
+                      <button
+                        className="buttons invButton invButton2 "
+                        id={element}
+                        key={element}
+                        onClick={this.onSelectUser}
+                      >الغاء الدعوة</button>
+                    </div>
+                    <div className="playersName2">
+                      {' '}
+                      <img
+                        src={playerName}
+                        title="compiteButton"
+                        alt="compiteButton"
+                        className="buttons"
+                      />
+                      <span
+                        // type="text"
+                        className="enteringName2"
+                      >
+                        {element}{' '}
+                      </span>
+                    </div>
+                    <div className="onlineButtons">
+                      <span className="buttons busyButton">بانتظار القبول</span>
+                    </div>
+                    <img src={True} alt="true" className="true" />
+                  </div>
+                </li>
+              ))}
+              {
+                this.props.user_info.accpet.length > 0 && this.props.user_info.accpet.map(element => (
                   <li>
                     <div className="rows">
-                      
-                    <div className="inviteButtons">
+
+                      <div className="inviteButtons">
                         <button
                           className="buttons invButton invButton2 "
-                          id={element.username}
+                          id={element}
                           key={element}
                           onClick={this.onSelectUser}
-                        >الغاء الدعوة</button>
+                        >الغاء الصديق</button>
                       </div>
                       <div className="playersName2">
                         {' '}
@@ -164,26 +208,21 @@ class Select extends Component {
                           // type="text"
                           className="enteringName2"
                         >
-                          {element.username}{' '}
+                          {element}{' '}
                         </span>
                       </div>
                       <div className="onlineButtons">
-                        {!element.is_playing ? (
-                          <span className="buttons onButton">قبل الدعوة</span>
-                        ) : (
-                            <span className="buttons busyButton">بانتظار القبول</span>
-                          )}
+                        <span className="buttons onButton">قبل الدعوة</span>
                       </div>
-                      <img src={True} alt="true" className="true"/>
-                      {/* <img src={False} alt="false" className="false"/> */}
-                    
+                      <img src={True} alt="true" className="true" />
                     </div>
                   </li>
-                ))}
-              </ul>
+                ))
+              }
+              {/* </React.Fragment> */}
+              {/* } */}
+            </ul>
           </div>
-
-
           {/* <div className="compiteButtonDiv" onClick={this.startPlay}>
             <img
               src={compiteButton}
@@ -192,6 +231,11 @@ class Select extends Component {
               className="compiteButton"
             />
           </div> */}
+          <div className="searchDiv">
+            <div className="buttonDiv">
+              <button className="searchButton" onClick={this.startPlay}>بدء اللعبه</button>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );
