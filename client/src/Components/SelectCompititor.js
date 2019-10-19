@@ -46,7 +46,6 @@ class Select extends Component {
     let data = {
       number1, number2, answers, currentPlayer: username, result: false
     }
-    // console.log('startPlay', { room });
     socket.emit('startGame', { room, data })
     // socket.emit(room, data)
   }
