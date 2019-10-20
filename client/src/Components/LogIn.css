@@ -5,7 +5,7 @@ body {
 }
 
 .signInBox {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -104,5 +104,34 @@ form#nameForm {
 
 .errorMeassage {
   color: red;
-  font-weight: bold
+  font-weight: bold;
+  text-align: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 19px;
+  margin-top: 47px;
+}
+
+@media (min-width: 576px) {
+
+  .signInContainer img {
+    height: 220px;
+  }
+
+  .nameToLogIn {
+
+    top: 115px;
+    left: 74px;
+    width: 188px;
+    height: 54px;
+    font-size: 18px;
+  }
+
+  .send {
+    font-size: 30px;
+    padding: 15px 20px;
+    width: 250px;
+
+  }
 }

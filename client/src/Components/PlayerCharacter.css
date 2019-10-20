@@ -1,5 +1,5 @@
 .mainView {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -130,4 +130,55 @@
   color: red;
   text-align: center;
   font-weight: bold
+}
+
+@media (min-width:567px) {
+
+  .selectedImageFrame {
+    height: 250px;
+  }
+
+  .selectedImage {
+    position: absolute;
+    height: 160px;
+    left: 60px;
+    top: 30px;
+  }
+
+  .enterButton:after,
+  .enterButton:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 10px;
+    width: 500%;
+    background: #fff;
+  }
+
+  .enterButton:before {
+    right: -500%;
+  }
+
+  .enterButton:after {
+    left: -500%;
+  }
+
+  .enterButton {
+    width: 180px;
+    height: 180px;
+
+  }
+
+  .imagesDiv {
+    height: 130px;
+    margin-bottom: 40px;
+  }
+
+  .charactersImage {
+    height: 150px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

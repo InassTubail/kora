@@ -1,5 +1,5 @@
 .mainDivv {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -14,24 +14,92 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-direction: column;
   position: relative;
 }
 
-.button1 {
+.selectGameTypes {
+  position: absolute;
+  top: 5%;
+}
+
+.selectGameTypesImg {
+  width: 99%;
+  /* margin-bottom: 146%; */
+}
+
+.playIndividual {
+  text-align: center;
+  top: 15%;
+  position: absolute;
+
+}
+
+.playIndividualImg {
+  width: 50%;
+  /* margin-bottom: 100%; */
+}
+
+.game-individualButton {
+  position: absolute;
+  text-align: center;
   top: 25%;
 }
 
-.button2 {
-  bottom: 5%;
+.button-game-individual {
+  width: 41%;
 }
 
-.button1,
-.button2 {
+
+.playWithGroup {
   position: absolute;
-  width: 150px;
-  height: 50px;
-  left: 30%;
+  top: 67%;
+  text-align: center;
 }
+
+.playWithGroupImg {
+  width: 50%;
+}
+
+.vsPlayTypeImg {
+  max-width: 40px;
+  height: 50px;
+  object-fit: contain;
+  margin: 0 15px;
+}
+
+.vsPlayType {
+  font-size: 20px;
+  position: absolute;
+  top: 73%;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+/* .vsPlayType {
+  position: absolute;
+  top: 75%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+} */
+
+.select-compititorButton {
+  position: absolute;
+  top: 85%;
+  text-align: center;
+}
+
+.button2-select-compititor {
+  width: 52%;
+
+}
+
+/* .vsPlayTypeImg {
+  width: 22%;
+} */
 
 .centerKora {
   width: 80%;
@@ -45,7 +113,9 @@
   align-items: center;
   border: 10px solid #fff;
   border-radius: 50%;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .kora:after,
@@ -65,4 +135,21 @@
 
 .kora:before {
   right: -200%;
+}
+
+@media (min-width: 576px) {
+  .vsPlayTypeImg {
+    max-width: 57%;
+    height: 76px;
+  }
+
+  .vsPlayType {
+    font-size: 40px;
+    margin-top: 4%;
+  }
+
+  .kora {
+    width: 200px;
+    height: 200px;
+  }
 }

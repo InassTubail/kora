@@ -115,7 +115,7 @@ class Select extends Component {
             </div>
           </div>
 
-          {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
+          {this.state.error ? <p className="errorMeassageG">* {this.state.error}</p> : null}
           <div className="onlinePlayers">
             <ul>
               {this.props.users.map(element => (
@@ -248,7 +248,7 @@ class Select extends Component {
           </div> */}
           <div className="searchDiv">
             <div className="buttonDiv">
-              <button className="searchButton" onClick={this.startPlay}>بدء اللعبه</button>
+              <button className="startButton" onClick={this.startPlay}>بدء اللعبه</button>
             </div>
           </div>
         </div>

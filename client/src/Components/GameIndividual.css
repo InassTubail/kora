@@ -1,5 +1,5 @@
 .gameScreen {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -14,12 +14,23 @@
   position: relative;
 }
 
+.headerGameIndivid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+}
+
 .correct {
-  background: green;
+  background-image: url('../assets/greenColor.png') !important;
+  background-size: cover;
+  /* background: green; */
 }
 
 .incorrect {
-  background: red;
+  background-image: url('../assets/redColor.png') !important;
+  background-size: cover;
+  /* background: red; */
 }
 
 .titleGame {
@@ -58,11 +69,24 @@
 .answer1,
 .answer2,
 .answer3 {
+  font-weight: bold;
+  font-size: 19px;
   width: 50px;
   height: 50px;
   border: 3px solid #fff;
   border-radius: 50%;
   position: absolute;
+  background-image: url('../assets/defaultColor.png');
+  background-size: cover;
+
+  /* background-color: springgreen */
+}
+
+.answers p {
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 10px
 }
 
 .answer1 {
@@ -93,8 +117,7 @@
   top: 20px;
 }
 
-.counterParag {
-  left: 5%;
+.counterParagGameInd {
   height: 60px;
   position: absolute;
   top: 17%;
@@ -108,15 +131,16 @@
   width: 86px;
 }
 
-.subHeader33 {
+.subHeader33Game {
   position: relative;
-  top: 39%
+  /* top: 39% */
 }
 
-.subHeader4 {
+.subHeader4Game {
   position: relative;
-  top: 18%;
-  left: 72%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .quesDiv {
@@ -135,9 +159,30 @@
   font-weight: bold;
 }
 
-.answers p {
-  color: white;
-  font-weight: bold;
-  font-size: 27px;
-  margin-top: 10px
+
+
+.bottomHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 70%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+
+@media (min-width: 576px) {
+  .questionStatement {
+    font-size: 39px;
+  }
+
+  .answer3,
+  .answer1,
+  .answer2 {
+    width: 95px !important;
+    height: 95px !important;
+    font-size: 34px !important;
+    font-weight: bold !important;
+  }
+
 }

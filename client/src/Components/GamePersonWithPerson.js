@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import koraImg from '../assets/kora.png';
 import frame from '../assets/frame.png';
-import hares from '../assets/hares.png';
+import haresBlue from '../assets/haresBlue.png';
+import haresRed from '../assets/haresRed.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counterRed from '../assets/counterRed.png';
@@ -13,6 +14,7 @@ import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import './GamePersonWithPerson.css';
+// import './GameIndividual.css'
 
 const io = require('socket.io-client');
 
@@ -53,16 +55,19 @@ class GamePersonWithPerson extends Component {
             <div>
               <img src={titleImg} alt="title" className="titleImage2" />
             </div>
-            <p>{role} يلعب الان</p>
+            <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
+
             {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
             <div className="quesDiv2">
               <img src={questions} alt="title" className="titleImage2" />
               <p className="questionStatement2">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          <img src={hares} alt="hares" className="hares2" />
+          <img src={haresBlue} alt="hares" className="hares2" />
+          {/* <img src={haresRed} alt="hares" className="hares2" /> */}
 
-          <div className="answers2">
+
+         <div className="answers2">
             {answers.map((el, index) =>
               <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
                 {el.answer}
@@ -103,12 +108,12 @@ class GamePersonWithPerson extends Component {
           </div>
 
           <div className="subHeader42">
-            <div >
+            <div className="countPP">
               <img src={counterRed} title="sdd" alt="dd" className="counter2" />
               <p className="counterParag2">{this.props.play.redScore}</p>
             </div>
 
-            <div>
+            <div className="countPP">
               <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
               <p className="counterParag2">{this.props.play.blueScore}</p>
             </div>
