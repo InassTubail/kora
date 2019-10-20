@@ -16,7 +16,7 @@ import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 // import { Redirect } from 'react-router-dom';
-
+import Snackbar from './Components/snackpar'
 
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
 // import history from './history';
@@ -41,8 +41,44 @@ class App extends Component {
     const socket = io.connect('http://localhost:8080');
     this.getUser(socket);
     this.newInvitation(socket);
-    this.refresh(socket)
-    this.gamingRoom(socket)
+    this.refresh(socket);
+    this.gamingRoom(socket);
+    this.cancelInvite(socket);
+    this.cancelPlayer(socket);
+    this.handleWithdrawal(socket);
+  }
+  handleWithdrawal = socket => {
+    socket.on('withdrawal', data => {
+      data = JSON.parse(data);
+      if (data.to.username === this.props.user_info.username) {
+        this.props.openDialog({ from: data.from, type: 'withdrawal' });
+        setTimeout(() => {
+          this.props.closeDialog();
+        }, 5000);
+      }
+    })
+  }
+  cancelInvite = socket => {
+    socket.on('cancelInvite', data => {
+      data = JSON.parse(data);
+      if (data.to.username === this.props.user_info.username) {
+        this.props.openDialog({ from: data.from, type: 'cancelInvite' });
+        setTimeout(() => {
+          this.props.closeDialog();
+        }, 5000);
+      }
+    })
+  }
+  cancelPlayer = socket => {
+    socket.on('cancelPlayer', data => {
+      data = JSON.parse(data);
+      if (data.to.username === this.props.user_info.username) {
+        this.props.openDialog({ from: data.from, type: 'cancelPlayer' });
+        setTimeout(() => {
+          this.props.closeDialog();
+        }, 5000);
+      }
+    })
   }
   refresh = socket => {
     var isExit = false;
@@ -82,9 +118,9 @@ class App extends Component {
       let finalData = {}
       let { number1, number2, answers, result } = data.data
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
-        let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
-        let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
-        const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users);
+      let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
+      let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
+      const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users);
       if (result) {
         let currentPlayerColor = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
         let isTrue = this.props.play.number1 * this.props.play.number2 === parseInt(result, 10)
@@ -101,7 +137,7 @@ class App extends Component {
       if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
         role = JSON.parse(this.props.user_info.room)[0]
       } else {
-        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1]        
+        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1]
       }
       color = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
       isMyRole = role === this.props.user_info.username;
@@ -139,7 +175,7 @@ class App extends Component {
           this.props.openDialog({ from: dataNewMassg.from, type: 'invite' });
         }
         if (dataNewMassg.type === 'reject') {
-          // this.props.openDialog({ from: dataNewMassg.from, type: 'reject' });
+          this.props.openDialog({ from: dataNewMassg.from, type: 'reject' });
         }
       }
       if (
@@ -154,7 +190,6 @@ class App extends Component {
       }
     });
   };
-
   handleAccept = () => {
     const socket = io.connect('http://localhost:8080');
     const data = {};
@@ -174,10 +209,24 @@ class App extends Component {
     socket.emit('replyInvite', data);
     this.props.closeDialog();
   };
+  withdrawal = () => {
+    const socket = io.connect('http://localhost:8080');
+    const data = {};
+    data.to = this.props.user_info.with;
+    data.from = this.props.user_info.username;
+    data.type = 'withdrawal';
+    socket.emit('replyInvite', data);
+    this.props.closeDialog();
+  }
   render() {
     return (
       <div>
-        <PopAccept props={this.props} handleAccept={this.handleAccept} handleReject={this.handleReject} />
+        <Snackbar props={this.props} />
+        {this.props.type !== 'cancelInvite' &&
+          this.props.type !== 'withdrawal' &&
+          this.props.type !== 'cancelPlayer' &&
+          this.props.type !== 'reject' &&
+          <PopAccept props={this.props} handleAccept={this.handleAccept} handleReject={this.handleReject} withdrawal={this.withdrawal} />}
         <Switch>
           <Route exact path="/" component={LogIn} />
           <Route exact path="/player-Character" component={playerCharacter} />
@@ -189,9 +238,6 @@ class App extends Component {
           />
           <Route exact path="/game-individual" component={GameIndividual} />
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
-          {/* <Route exact path="/GamePersinWithPerson">
-            <GamePersinWithPerson />
-          </Route> */}
           <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} />
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />

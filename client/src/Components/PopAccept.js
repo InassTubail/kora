@@ -5,7 +5,7 @@ import './PopWaiting.css';
 
 function PopAccept(propss) {
   const { props } = propss;
-  return props.open ? (props.type == 'invite' ? (
+  return props.open ? (props.type === 'invite' ? (
     <div className="popup1">
     <div className="popupCongrat1">
     <div className='popupAccept'>
@@ -36,7 +36,7 @@ function PopAccept(propss) {
       <div className='popWaiting'>
         <div className='popup_innerWaiting'>
           <button 
-          // onClick={this.togglePopup} 
+          onClick={propss.withdrawal} 
           className="cancelInvitation">انسـحاب</button>
         </div>
       </div>

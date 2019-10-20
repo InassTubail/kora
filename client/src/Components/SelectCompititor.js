@@ -77,7 +77,22 @@ class Select extends Component {
   //     }, 10000);
   //   }
   // }
-
+  cancelInvite = (e) => {
+    const socket = io.connect('http://localhost:8080');
+    let data = {}
+    data.to = e.target.id;
+    data.from = this.props.user_info.username; // current user
+    data.type = 'cancelInvite';
+    socket.emit('sendInviteToPlay', data)
+  }
+  cancelPlayer = (e) => {
+    const socket = io.connect('http://localhost:8080');
+    let data = {}
+    data.to = e.target.id;
+    data.from = this.props.user_info.username; // current user
+    data.type = 'cancelPlayer';
+    socket.emit('sendInviteToPlay', data)
+  }
   render() {
     return (
       <React.Fragment>
@@ -158,7 +173,7 @@ class Select extends Component {
                         className="buttons invButton invButton2 "
                         id={element}
                         key={element}
-                        onClick={this.onSelectUser}
+                        onClick={this.cancelInvite}
                       >الغاء الدعوة</button>
                     </div>
                     <div className="playersName2">
@@ -193,7 +208,7 @@ class Select extends Component {
                           className="buttons invButton invButton2 "
                           id={element}
                           key={element}
-                          onClick={this.onSelectUser}
+                          onClick={this.cancelPlayer}
                         >الغاء الصديق</button>
                       </div>
                       <div className="playersName2">

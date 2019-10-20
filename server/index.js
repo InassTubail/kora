@@ -53,17 +53,18 @@ io.sockets.on('connection', function (socket) {
     })
     io.sockets.emit('usernames', JSON.stringify(usernames));
   })
+
   socket.on('sendInviteToPlay', function (data) {
+    let from, to
+    usernames.forEach((el, index) => {
+      if (el.username == data.from) {
+        from = index
+      }
+      if (el.username == data.to) {
+        to = index
+      }
+    })
     if (data.type == 'invite') {
-      let from, to
-      usernames.forEach((el, index) => {
-        if (el.username == data.from) {
-          from = index
-        }
-        if (el.username == data.to) {
-          to = index
-        }
-      })
       let withI = usernames[from].invite
       usernames[from] =
         {
@@ -73,7 +74,6 @@ io.sockets.on('connection', function (socket) {
           "room": null,
           "invite": withI.concat(data.to)
         }
-      // let person = usernames[to].person
       usernames[to] =
         {
           ...usernames[to],
@@ -86,6 +86,57 @@ io.sockets.on('connection', function (socket) {
         to: data.to,
         type: data.type
       });
+    }
+    if (data.type == 'cancelInvite') {
+      let withI = usernames[from].invite;
+      usernames[from] =
+        {
+          ...usernames[from],
+          "invite": withI.filter((el) => el !== data.to)
+        }
+      if (usernames[from].accpet.length === 0 && usernames[from].invite.length === 0) {
+        usernames[from] =
+          {
+            ...usernames[from],
+            "is_playing": false,
+            "with": null,
+            "room": null,
+          }
+      }
+      usernames[to] =
+        {
+          ...usernames[to],
+          "is_playing": false,
+          "with": null,
+          "room": null,
+        }
+
+      io.emit('cancelInvite', JSON.stringify({ to: usernames[to], from: usernames[from].username }));
+    }
+    if (data.type == 'cancelPlayer') {
+      let withI = usernames[from].accpet
+      usernames[from] =
+        {
+          ...usernames[from],
+          "accpet": withI.filter((el) => el !== data.to)
+        }
+      if (usernames[from].accpet.length === 0 && usernames[from].invite.length === 0) {
+        usernames[from] =
+          {
+            ...usernames[from],
+            "is_playing": false,
+            "with": null,
+            "room": null,
+          }
+      }
+      usernames[to] =
+        {
+          ...usernames[to],
+          "is_playing": false,
+          "with": null,
+          "room": null,
+        }
+      io.emit('cancelPlayer', JSON.stringify({ to: usernames[to], from: usernames[from].username }));
     }
     io.emit('usernames', JSON.stringify(usernames));
   });
@@ -105,7 +156,6 @@ io.sockets.on('connection', function (socket) {
           ...usernames[from],
           "is_playing": 'accept',
           "with": data.to,
-          // "room": null,
         }
       let invite = usernames[to].invite
       let accpet = usernames[to].accpet
@@ -139,8 +189,52 @@ io.sockets.on('connection', function (socket) {
         {
           ...usernames[to],
           "invite": invite.filter((value) => value !== data.from),
+        }
+      if (usernames[to].accpet.length === 0 && usernames[to].invite.length === 0) {
+        usernames[to] =
+          {
+            ...usernames[to],
+            "is_playing": false,
+            "with": null,
+            "room": null,
+          }
+      }
+
+    } else if (data.type == 'withdrawal') {
+      let from, to
+      usernames.forEach((el, index) => {
+        if (el.username == data.from) {
+          from = index
+        }
+        if (el.username == data.to) {
+          to = index
+        }
+      })
+      let withI = usernames[from].accpet
+      usernames[from] =
+        {
+          ...usernames[from],
+          "accpet": [],
+          "invite": [],
+          "is_playing": false,
+          "with": null,
           "room": null,
         }
+      usernames[to] =
+        {
+          ...usernames[to],
+          "accpet": withI.filter((el) => el !== data.to)
+        }
+      if (usernames[to].accpet.length === 0 && usernames[to].invite.length === 0) {
+        usernames[to] =
+          {
+            ...usernames[to],
+            "is_playing": false,
+            "with": null,
+            "room": null,
+          }
+      }
+      io.emit('withdrawal', JSON.stringify({ to: usernames[to], from: usernames[from].username }));
     }
     io.sockets.emit('new message', {
       from: data.from,
