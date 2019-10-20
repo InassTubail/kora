@@ -26,7 +26,7 @@ class Select extends Component {
   sendInvite = (socket, selectedUser) => {
     const { invite, accpet } = this.props.user_info
     let total = invite.length + accpet.length;
-    if (total !== 1 && total !== 3) {
+    if (total < 3) {
       const data = {};
       data.to = selectedUser;
       data.from = this.props.user_info.username; // current user
