@@ -50,7 +50,6 @@ class GamePersonWithPerson extends Component {
     const { number1, number2, answers, blueTeam, redTeam, role, resultPrevPlayer } = this.props.play
     return (
       <React.Fragment>
-
         <div className="gameScreen2">
           <div className="header2">
             <div>
