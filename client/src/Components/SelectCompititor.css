@@ -1,5 +1,5 @@
 .selectCompititorsDiv {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -15,47 +15,19 @@
   flex-direction: column
 }
 
-/* 
-.subHeaderMain {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+.startButton {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #8cc63f;
+  padding: 10px 20px;
+  border-radius: 42px;
+  display: inline-block;
+  border: 3px solid #fff;
+  transition: all 0.4s ease 0s;
+  width: 130px;
 }
-
-.subHeader2,
-.subHeader3 {
-  position: relative;
-  top: 25px
-}
-
-.selectedImageFrame2,
-.selectedImageFrame3 {
-  height: 155px;
-
-}
-
-.vs {
-  height: 70px;
-  margin-top: 120px;
-}
-
-.selectedImage2,
-.selectedImage3 {
-  position: absolute;
-  height: 90px;
-  top: 20px;
-
-}
-
-.selectedImage2 {
-  left: 30px;
-}
-
-
-.selectedImage3 {
-  right: 19px;
-} */
 
 .searchDiv {
   display: flex;
@@ -128,6 +100,8 @@
   display: inline-block;
   border: 3px solid #fff;
   transition: all 0.4s ease 0s;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .onButton {
@@ -243,7 +217,7 @@ ul {
   background: transparent;
   border: none;
   font-size: 96%;
-  top: 29%;
+  top: 18%;
 }
 
 /* .compiteButtonDiv {
@@ -259,6 +233,17 @@ ul {
   box-shadow: 0 1px 6px rgba(0, 0, 0, 1), 0 1px 4px rgba(0, 0, 0, 1);
 }
 
+.errorMeassageG {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  background: #fff;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  margin-top: 13px;
+}
+
 .fasel p {
   text-align: center;
   margin-top: 4px;
@@ -271,3 +256,101 @@ ul {
 .false {
   height: 25px
 }
+
+
+@media (min-width: 576px) {
+  .onlinePlayers {
+    height: 33%;
+  }
+
+  .fasel p {
+    font-size: 32px;
+  }
+
+  .invButton,
+  .busyButton,
+  .onButton {
+    height: 73px;
+    width: 117px;
+  }
+
+  .onButton,
+  .invButton,
+  .busyButton {
+    font-size: 27px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .playersName img {
+    height: 56px;
+  }
+
+  .onlineButtons {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .enteringName {
+    font-size: 199%;
+    top: 15%;
+    left: 14px;
+  }
+
+  .rows {
+    margin-bottom: 13px;
+  }
+
+  .playersName2 img {
+    height: 56px;
+  }
+
+  .enteringName2 {
+    font-size: 199%;
+    top: 15%;
+    left: 14px;
+  }
+
+  .true,
+  .false {
+    height: 51px;
+    margin-left: 16px;
+  }
+
+  .searchDiv {
+    margin: 2%;
+  }
+
+  .searchInput {
+    height: 71px;
+    width: 133%;
+  }
+
+  .searchButton {
+    height: 68px;
+    font-size: 29px
+  }
+
+
+  .startButton {
+    font-size: 30px;
+    padding: 15px 20px;
+    width: 250px;
+  }
+
+  .errorMeassageG {
+    margin-top: 13px;
+    font-size: 22px;
+  }
+
+  .playersToPlayWith {
+    height: 30%;
+  }
+}
+
+/* .invButton {
+  height: 56px;
+  width: 114px;
+
+.onButton, .invButton, .busyButton {
+  font-size: 27px; */

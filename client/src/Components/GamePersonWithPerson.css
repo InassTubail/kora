@@ -1,5 +1,5 @@
 .gameScreen2 {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -29,12 +29,64 @@
 }
 
 
-.correct2 {
-  background: green;
+.correct {
+  background-image: url('../assets/greenColor.png') !important;
+  background-size: cover;
+  /* background: green; */
 }
 
-.incorrect2 {
-  background: red;
+.incorrect {
+  background-image: url('../assets/redColor.png') !important;
+  background-size: cover;
+  /* background: red; */
+}
+
+
+
+.answers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer1,
+.answer2,
+.answer3 {
+  font-weight: bold;
+  font-size: 19px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  background-image: url('../assets/defaultColor.png');
+  background-size: cover;
+
+  /* background-color: springgreen */
+}
+
+.answers2 p {
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 10px
+}
+
+.answer1 {
+  text-align: center;
+  top: 60%;
+  right: 20%;
+}
+
+.answer2 {
+  top: 52%;
+  text-align: center;
+}
+
+.answer3 {
+  top: 60%;
+  text-align: center;
+  left: 20%;
 }
 
 .titleGame2 {
@@ -64,39 +116,6 @@
   left: 44%;
 }
 
-.answers2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.answer1,
-.answer2,
-.answer3 {
-  width: 50px;
-  height: 50px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  position: absolute;
-}
-
-.answer1 {
-  text-align: center;
-  top: 60%;
-  right: 20%;
-}
-
-.answer2 {
-  top: 52%;
-  text-align: center;
-}
-
-.answer3 {
-  top: 60%;
-  text-align: center;
-  left: 20%;
-}
-
 .selectedImageFrame332 {
   height: 115px;
 }
@@ -108,11 +127,11 @@
   top: 20px;
 }
 
+
 .counterParag2 {
-  left: 5%;
+  top: 18%;
   height: 60px;
   position: absolute;
-  top: 17%;
   color: white;
   font-weight: bold;
   font-size: 170%;
@@ -134,19 +153,21 @@
 
 .subHeader42 {
   display: flex;
-  margin-top: 69%;
+  margin-top: 66%;
+  margin-right: 5px;
+  margin-left: 5px;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .quesDiv2 {
-  margin-top: 60px;
+  margin-top: 33px;
+  position: relative;
 }
+
 
 .questionStatement2 {
   position: absolute;
-  top: 37%;
+  top: 56%;
   width: 48%;
   left: 25%;
   background: transparent;
@@ -156,12 +177,12 @@
   font-weight: bold;
 }
 
-.answers2 p {
+/* .answers2 p {
   color: white;
   font-weight: bold;
   font-size: 27px;
   margin-top: 10px
-}
+} */
 
 .subHeadersGroup {
   display: flex;
@@ -186,4 +207,125 @@
 
 .blueColor {
   background-color: #3f198d;
+}
+
+.countPP {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+
+.answers2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer1,
+.answer2,
+.answer3 {
+  font-weight: bold;
+  font-size: 19px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  background-image: url('../assets/defaultColor.png');
+  background-size: cover;
+
+  /* background-color: springgreen */
+}
+
+.answer1 {
+  text-align: center;
+  top: 60%;
+  right: 20%;
+}
+
+.answer2 {
+  top: 52%;
+  text-align: center;
+}
+
+.answer3 {
+  top: 60%;
+  text-align: center;
+  left: 20%;
+}
+
+
+.answers p {
+  color: white;
+  font-weight: bold;
+  font-size: 27px;
+  margin-top: 10px
+}
+
+.playNow {
+  font-weight: bold;
+}
+
+.playNowName {
+  color: green;
+  font-weight: bold;
+  font-size: 148%;
+}
+
+@media (min-width: 576px) {
+  .questionStatement2 {
+    font-size: 39px;
+  }
+
+  .answer3,
+  .answer1,
+  .answer2 {
+    width: 95px !important;
+    height: 95px !important;
+    font-size: 34px !important;
+    font-weight: bold !important;
+  }
+
+  .subHeadersGroup {
+    margin-top: -59%;
+  }
+
+  .selectedImageFrame332 {
+    height: 175px;
+  }
+
+  .selectedImage332 {
+    position: absolute;
+    height: 116px;
+    left: 30px;
+    top: 6px;
+  }
+
+  .quesDiv2 {
+    margin-top: -26px;
+  }
+
+  .playNow {
+    font-size: 150%;
+  }
+
+  .counter2 {
+    height: 171px;
+    width: 184px;
+  }
+
+  .subHeader42 {
+    display: flex;
+    margin-top: 66%;
+  }
+
+  .counterParag2 {
+    top: 14%;
+  }
+
+  .subHeader42 {
+    font-size: 30px;
+  }
+
 }

@@ -5,7 +5,7 @@ import koraImg from '../assets/kora.png';
 // import person from '../assets/1.png';
 import { person } from './playersImage';
 import frame from '../assets/frame.png';
-import hares from '../assets/hares.png';
+import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counter from '../assets/counter.png';
@@ -119,14 +119,14 @@ class GameIndividual extends Component {
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
-          <div className="header">
+          <div className="headerGameIndivid">
             <img src={titleImg} alt="title" className="titleImage" />
             <div className="quesDiv">
               <img src={questions} alt="title" className="titleImage" />
               <p  className="questionStatement">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          <img src={hares} alt="hares" className="hares" />
+          <img src={haresBlue} alt="hares" className="hares" />
 
           <div className="answers">
             {answers.map((el, index) =>
@@ -138,7 +138,8 @@ class GameIndividual extends Component {
           <img src={koraImg} alt="kora" edt className="koraImg" />
           <img src={player} alt="kora" edt className="playerImg" />
 
-          <div className="subHeader33">
+         <div className="bottomHead">
+          <div className="subHeader33Game">
             <img
               src={frame}
               title="ti"
@@ -147,12 +148,14 @@ class GameIndividual extends Component {
             />
             <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
           </div>
-          <div className="subHeader4">
+          <div className="subHeader4Game">
             <img src={counter} title="sdd" alt="dd" className="counter" />
-            <p className="counterParag">{this.props.user_info.level} / 4</p>
+            <p className="counterParagGameInd">{this.props.user_info.level} / 4</p>
             {/* --- */}
             {/* <p className="counterParag">{this.props.user_info.level}</p> */}
           </div>
+          </div>
+
         </div>
       </React.Fragment>
     );

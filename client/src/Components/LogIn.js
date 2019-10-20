@@ -55,6 +55,7 @@ class LogIn extends Component {
               className="nameToLogIn"
               type="text"
               name="name"
+              autocomplete="off"
               onChange={this.onChange}
               placeholder="ادخــل اسمــك هنــا"
             />

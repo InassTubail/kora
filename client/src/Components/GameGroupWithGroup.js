@@ -5,7 +5,8 @@ import koraImg from '../assets/kora.png';
 // import person from '../assets/1.png';
 import { person } from './playersImage';
 import frame from '../assets/frame.png';
-import hares from '../assets/hares.png';
+import haresBlue from '../assets/haresBlue.png';
+import haresRed from '../assets/haresRed.png';
 import gWithg from '../assets/gWithg.png';
 import questions from '../assets/questions.png';
 import counterRed from '../assets/counterRed.png';
@@ -61,7 +62,8 @@ class GameGroupWithGroup extends Component {
               <p className="questionStatement2g">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          <img src={hares} alt="hares" className="hares2g" />
+          <img src={haresBlue} alt="hares" className="hares2g" />
+          {/* <img src={haresRed} alt="hares" className="hares2g" /> */}
 
           <div className="answers">
             {answers.map((el, index) =>
