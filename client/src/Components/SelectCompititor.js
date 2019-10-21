@@ -22,11 +22,7 @@ class Select extends Component {
     error: "",
     filteredOptions: [],
     // showOptions: false,
-<<<<<<< HEAD
-    alluser: []
-=======
     alluser:[]
->>>>>>> d9d7c22f4e9874e1a838296bb228f7a4acf78e75
 
   }
   // eslint-disable-next-line react/sort-comp
