@@ -12,11 +12,11 @@ import True from '../assets/true.png';
 // import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
-import socket from '../utils/api';
 
 import './SelectCompititor.css';
 
-// const io = require('socket.io-client');
+const io = require('socket.io-client');
+
 class Select extends Component {
   state = {
     error: "",
@@ -44,14 +44,16 @@ class Select extends Component {
         invite: this.props.user_info.invite.push(data.to)
       });
     } else {
-      this.setState({ error: 'لم يتم ارسال الدعوة, قد دعوت 3 اشخاص بالفعل' })
+      this.setState({ error: 'لم يتم ارسال الدعوة, قد دعوت شخص او 3 اشخاص بالفعل' })
     }
   };
 
   onSelectUser = e => {
+    const socket = io.connect('http://localhost:8080');
     this.sendInvite(socket, e.target.id);
   };
   startPlay = () => {
+    const socket = io.connect('http://localhost:8080');
     const { username, accpet } = this.props.user_info
     if (accpet.length !== 3 && accpet.length !== 1) {
       this.setState({ error: 'يجب قبول شخص أو 3 اشخاص لبدء اللعبه' })
@@ -63,6 +65,7 @@ class Select extends Component {
       }
       socket.emit('startGame', { room, data })
     }
+    // socket.emit(room, data)
   }
   // componentDidUpdate() {
   //   const { open } = this.props;
@@ -79,6 +82,7 @@ class Select extends Component {
   //   }
   // }
   cancelInvite = (e) => {
+    const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user
@@ -86,6 +90,7 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
   cancelPlayer = (e) => {
+    const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user

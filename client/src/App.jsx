@@ -151,6 +151,7 @@ class App extends Component {
         redScore,
         redTeam, blueTeam,
         blueScore,
+        count: 0,
         resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
       }
