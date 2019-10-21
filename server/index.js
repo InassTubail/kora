@@ -6,6 +6,8 @@ const {
   join
 } = require('path');
 
+app.use('/', express.static('./public'));
+
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.get('*', (_req, res) => {
