@@ -22,6 +22,7 @@ class Select extends Component {
     error: "",
     filteredOptions: [],
     // showOptions: false,
+    alluser: []
 
   }
   // eslint-disable-next-line react/sort-comp
@@ -43,7 +44,7 @@ class Select extends Component {
         invite: this.props.user_info.invite.push(data.to)
       });
     } else {
-      this.setState({ error: 'لم يتم ارسال الدعوة, قد دعوت شخص او 3 اشخاص بالفعل' })
+      this.setState({ error: 'لم يتم ارسال الدعوة, قد دعوت 3 اشخاص بالفعل' })
     }
   };
 
@@ -62,7 +63,6 @@ class Select extends Component {
       }
       socket.emit('startGame', { room, data })
     }
-    // socket.emit(room, data)
   }
   // componentDidUpdate() {
   //   const { open } = this.props;
@@ -93,33 +93,38 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
 
-  //   search = (e) =>{
-  //   const myValue=  this.props.users.filter(element => (
+  // search = (e) =>{
+  // const myValue=  this.props.users.filter(element => (
   // element.username === e.target.value)
   // );
   // console.log(myValue,'ll'); 
-  //     }
+  // }
 
   search = (e) => {
-    const options = this.props.users;
+    const options = this.props.users.filter(element => (element.username !== this.props.user_info.username));
     const userInput = e.target.value;
     const filteredOptions = options.filter(
       (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-    console.log(filteredOptions, 'filteredOptions ')
+    // console.log(filteredOptions, 'filteredOptions ')
     this.setState({
       filteredOptions,
       // showOptions: true,
     });
   };
-
+  // componentDidMount= () => {
+  //   console.log({alluser},'DID')
+  //   this.setState({alluser})
+  // }
 
   render() {
-    let alluser = this.state.filteredOptions || this.props.users;
-    console.log(this.props.user_info.username, 'this.props.user_info');
-
-    const alluserWithoutMe = this.props.users.filter(element => (element.username !== this.props.user_info.username))
-    console.log(alluserWithoutMe, 'alluserWithoutMe');
+    let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
+    // console.log({ alluser });
+    let filterop = this.state.filteredOptions.length > 0 && this.state.filteredOptions
+    // console.log({ filterop });
+    let alluser2 = filterop || alluser
+    // console.log({ alluser2 });
+    // console.log(this.state.alluser,'this.state.alluser');
 
     return (
       <React.Fragment>
@@ -142,10 +147,10 @@ class Select extends Component {
             </div>
           </div>
 
-          {this.state.error ? <p className="errorMeassageG">* {this.state.error}</p> : null}
+          {this.state.error ? <p className="errorMeassageG"> {this.state.error}</p> : null}
           <div className="onlinePlayers">
             <ul>
-              {alluserWithoutMe.map(element => (
+              {alluser2.map(element => (
                 <li>
                   <div className="rows">
                     <div className="inviteButtons">
