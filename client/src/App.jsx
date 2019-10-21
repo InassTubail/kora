@@ -16,6 +16,8 @@ import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 // import { Redirect } from 'react-router-dom';
+import Congrat from './Components/Congrat'
+import Equal from './Components/Equal'
 import Snackbar from './Components/snackpar'
 import socket from './utils/api'
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
@@ -239,6 +241,9 @@ class App extends Component {
           {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
+          <Route exact path="/congrat" component={Congrat} />
+          <Route exact path="/equal" component={Equal} />
+
         </Switch>
       </div>
     );
