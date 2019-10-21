@@ -22,7 +22,11 @@ class Select extends Component {
     error: "",
     filteredOptions: [],
     // showOptions: false,
+<<<<<<< HEAD
     alluser: []
+=======
+    alluser:[]
+>>>>>>> d9d7c22f4e9874e1a838296bb228f7a4acf78e75
 
   }
   // eslint-disable-next-line react/sort-comp
@@ -93,39 +97,39 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
 
-  // search = (e) =>{
-  // const myValue=  this.props.users.filter(element => (
-  // element.username === e.target.value)
-  // );
-  // console.log(myValue,'ll'); 
-  // }
+//   search = (e) =>{
+//   const myValue=  this.props.users.filter(element => (
+// element.username === e.target.value)
+// );
+// console.log(myValue,'ll'); 
+//     }
 
-  search = (e) => {
-    const options = this.props.users.filter(element => (element.username !== this.props.user_info.username));
-    const userInput = e.target.value;
-    const filteredOptions = options.filter(
-      (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-    // console.log(filteredOptions, 'filteredOptions ')
-    this.setState({
-      filteredOptions,
-      // showOptions: true,
-    });
-  };
-  // componentDidMount= () => {
-  //   console.log({alluser},'DID')
-  //   this.setState({alluser})
-  // }
+search = (e) => {
+  const  options  = this.props.users.filter(element => (element.username !== this.props.user_info.username));
+  const userInput = e.target.value;
+const filteredOptions = options.filter(
+    (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+  );
+  console.log(filteredOptions ,'filteredOptions ')
+this.setState({
+    filteredOptions ,  
+    // showOptions: true,
+  });
+};
+// componentDidMount= () => {
+//   console.log({alluser},'DID')
+//   this.setState({alluser})
+// }
 
-  render() {
-    let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
-    // console.log({ alluser });
-    let filterop = this.state.filteredOptions.length > 0 && this.state.filteredOptions
-    // console.log({ filterop });
-    let alluser2 = filterop || alluser
-    // console.log({ alluser2 });
-    // console.log(this.state.alluser,'this.state.alluser');
-
+render() {
+  let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
+  console.log({alluser});
+  let filterop =  this.state.filteredOptions.length > 0 && this.state.filteredOptions
+  console.log({filterop});
+  let alluser2 = filterop || alluser
+  console.log({alluser2});
+  // console.log(this.state.alluser,'this.state.alluser');
+  
     return (
       <React.Fragment>
         <div className="selectCompititorsDiv">
