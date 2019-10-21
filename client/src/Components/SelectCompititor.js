@@ -12,7 +12,7 @@ import True from '../assets/true.png';
 // import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
-
+import socket from '../utils/api';
 import './SelectCompititor.css';
 
 const io = require('socket.io-client');
@@ -49,11 +49,11 @@ class Select extends Component {
   };
 
   onSelectUser = e => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     this.sendInvite(socket, e.target.id);
   };
   startPlay = () => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     const { username, accpet } = this.props.user_info
     if (accpet.length !== 3 && accpet.length !== 1) {
       this.setState({ error: 'يجب قبول شخص أو 3 اشخاص لبدء اللعبه' })
@@ -82,7 +82,7 @@ class Select extends Component {
   //   }
   // }
   cancelInvite = (e) => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user
@@ -90,7 +90,7 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
   cancelPlayer = (e) => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user
@@ -111,7 +111,7 @@ search = (e) => {
 const filteredOptions = options.filter(
     (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
   );
-  console.log(filteredOptions ,'filteredOptions ')
+  // console.log(filteredOptions ,'filteredOptions ')
 this.setState({
     filteredOptions ,  
     // showOptions: true,

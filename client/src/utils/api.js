@@ -6,7 +6,7 @@ console.log(process.env.PORT,'PORT');
 
 console.log({port});
 
-const socket = io.connect(port);
+const socket = io.connect('/');
 console.log({socket});
 
 export default socket; 
