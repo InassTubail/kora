@@ -26,6 +26,7 @@ class GameIndividual extends Component {
     isClick: false,
     showPopup: false,
     showCongratePopup: false,
+    classKora: '',
     NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
   }
   componentDidUpdate() {
@@ -44,7 +45,7 @@ class GameIndividual extends Component {
         setTimeout(async () => {
           this.setState({ isClick: false })
           const { number1, number2, answers } = questionsAndAnswers(this.props.user_info.level);
-          this.setState({ number1, number2, answers })
+          this.setState({ number1, number2, answers, classKora: "" })
         }, 2000);
       }
     } else {
@@ -58,6 +59,8 @@ class GameIndividual extends Component {
   }
   selectAnswer = (el) => {
     const { id } = el.currentTarget
+    // console.log(el.currentTarget.className,'***');
+    this.setState({ classKora: `${el.currentTarget.className}-f`  })
     const { number2, number1, NOQuestion, NOTrue } = this.state;
     this.setState({ isClick: true })
     if (number2 * number1 == id) {
@@ -65,6 +68,7 @@ class GameIndividual extends Component {
     } else {
       this.setState({ NOQuestion: NOQuestion + 1 })
     }
+
   }
   closePopUp = () => {
     this.setState({ showCongratePopup: false, showPopup: false })
@@ -80,7 +84,7 @@ class GameIndividual extends Component {
             <img src={titleImg} alt="title" className="titleImage" />
             <div className="quesDiv">
               <img src={questions} alt="title" className="titleImage" />
-              <p  className="questionStatement">{`${number1} * ${number2}`}</p>
+              <p className="questionStatement">{`${number1} * ${number2}`}</p>
             </div>
           </div>
           <img src={haresBlue} alt="hares" className="hares" />
@@ -92,25 +96,25 @@ class GameIndividual extends Component {
               </button>
             )}
           </div>
-          <img src={koraImg} alt="kora" edt className="koraImg" />
+          <img src={koraImg} alt="kora" edt className="koraImg" className={this.state.classKora} />
           <img src={player} alt="kora" edt className="playerImg" />
 
-         <div className="bottomHead">
-          <div className="subHeader33Game">
-            <img
-              src={frame}
-              title="ti"
-              alt="dss"
-              className="selectedImageFrame33"
-            />
-            <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
-          </div>
-          <div className="subHeader4Game">
-            <img src={counter} title="sdd" alt="dd" className="counter" />
-            <p className="counterParagGameInd">{this.props.user_info.level} / 4</p>
-            {/* --- */}
-            {/* <p className="counterParag">{this.props.user_info.level}</p> */}
-          </div>
+          <div className="bottomHead">
+            <div className="subHeader33Game">
+              <img
+                src={frame}
+                title="ti"
+                alt="dss"
+                className="selectedImageFrame33"
+              />
+              <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
+            </div>
+            <div className="subHeader4Game">
+              <img src={counter} title="sdd" alt="dd" className="counter" />
+              <p className="counterParagGameInd">{this.props.user_info.level} / 4</p>
+              {/* --- */}
+              {/* <p className="counterParag">{this.props.user_info.level}</p> */}
+            </div>
           </div>
 
         </div>
