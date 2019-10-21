@@ -127,9 +127,9 @@ this.setState({
             <img src={title2} title="sss" alt="Sss" className="titleImage" />
           </div>
           <div className="searchDiv">
-            <div className="buttonDiv">
+            {/* <div className="buttonDiv">
               <button className="searchButton">بدء البحـث</button>
-            </div>
+            </div> */}
             <div className="inputDiv">
               <img
                 src={inputDiv}
@@ -137,7 +137,7 @@ this.setState({
                 alt="dss"
                 className="searchInput"
               />
-              <input type="txt" className="enteringSearchInput" onChange={this.search} />
+              <input type="txt" className="enteringSearchInput" onChange={this.search} placeholder="ادخل اسم اللاعب الذي تريد البحث عنه" />
             </div>
           </div>
 
