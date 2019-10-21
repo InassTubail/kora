@@ -7,7 +7,7 @@
     "node": "10.3.0"
   },
   "scripts": {
-    "start": "node ./server/index.js",
+    "start": "node server/index.js",
     "heroku-postbuild": "NODE_ENV=production cd client && npm install && npm run build",
     "server": "NODE_ENV=development nodemon server/index.js",
     "client": "npm start --prefix client",
