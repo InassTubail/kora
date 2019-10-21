@@ -16,15 +16,18 @@ import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import './GamePersonWithPerson.css';
 // import './GameIndividual.css'
+import socket from '../utils/api';
 
-const io = require('socket.io-client');
+// const io = require('socket.io-client');
 
 class GamePersonWithPerson extends Component {
   state = {
     blueTeam: [],
     redTeam: [],
-    error: ""
+    error: "",
+    count: 0
   }
+
   componentDidUpdate() {
     if (this.state.error) {
       setTimeout(async () => {
@@ -35,7 +38,6 @@ class GamePersonWithPerson extends Component {
   selectAnswer = (el) => {
     const { isMyRole } = this.props.play
     if (isMyRole) {
-      const socket = io.connect('http://localhost:8080');
       const result = el.currentTarget.id
       const { room } = this.props.user_info
       const { number1, number2, answers } = questionsAndAnswers(4);
@@ -56,6 +58,7 @@ class GamePersonWithPerson extends Component {
             <div>
               <img src={titleImg} alt="title" className="titleImage2" />
             </div>
+            {/* <p>{this.state.count}</p> */}
             <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
 
             {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
@@ -64,11 +67,11 @@ class GamePersonWithPerson extends Component {
               <p className="questionStatement2">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2" />:
-          <img src={haresRed} alt="hares" className="hares2" />}
+          {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2" /> :
+            <img src={haresRed} alt="hares" className="hares2" />}
 
 
-         <div className="answers2">
+          <div className="answers2">
             {answers.map((el, index) =>
               <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
                 {el.answer}
@@ -76,7 +79,7 @@ class GamePersonWithPerson extends Component {
             )}
           </div>
           <img src={koraImg} alt="kora" edt className="koraImg2" />
-         {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2" /> : <img src={playerBlue} alt="kora" edt className="playerImg2" /> } 
+          {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2" /> : <img src={playerBlue} alt="kora" edt className="playerImg2" />}
 
           <div className="subHeadersGroup">
             <div className="subHeader332">
@@ -110,7 +113,7 @@ class GamePersonWithPerson extends Component {
           </div>
 
           <div className="subHeader42">
-          <div className="countPP">
+            <div className="countPP">
               <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
               <p className="counterParag2">{this.props.play.blueScore}</p>
             </div>
@@ -118,8 +121,6 @@ class GamePersonWithPerson extends Component {
               <img src={counterRed} title="sdd" alt="dd" className="counter2" />
               <p className="counterParag2">{this.props.play.redScore}</p>
             </div>
-
-           
           </div>
         </div>
       </React.Fragment>
