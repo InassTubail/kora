@@ -96,8 +96,8 @@ class GameIndividual extends Component {
               </button>
             )}
           </div>
-          <img src={koraImg} alt="kora" edt className="koraImg" className={this.state.classKora} />
-          <img src={player} alt="kora" edt className="playerImg" />
+          <img src={koraImg} alt="kora" edt className="koraImg" className={`koraImg ${this.state.classKora}`} />
+          <img src={player} alt="kora" edt className="playerImg" className="playerImg" />
 
           <div className="bottomHead">
             <div className="subHeader33Game">

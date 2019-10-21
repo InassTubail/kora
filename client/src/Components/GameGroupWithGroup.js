@@ -14,9 +14,10 @@ import counterBlue from '../assets/counterBlue.png';
 import player from '../assets/player.png';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
+import socket from '../utils/api';
 
 import './GameGroupWithGroup.css';
-const io = require('socket.io-client');
+// const io = require('socket.io-client');
 
 class GameGroupWithGroup extends Component {
   state = {
@@ -39,7 +40,6 @@ class GameGroupWithGroup extends Component {
     const result = el.currentTarget.id
     const { username, room } = this.props.user_info
     const { number1, number2, answers } = questionsAndAnswers(4);
-    const socket = io.connect('http://localhost:8080');
     let data = {
       result, number1, number2, answers, currentPlayer: username
     }

@@ -143,6 +143,7 @@
   justify-content: center;
 }
 
+
 .quesDiv {
   position: relative;
 }
@@ -186,3 +187,42 @@
   }
 
 }
+.answer1-f{
+  animation:  answer1 2s ; /* IE 10+, Fx 29+ */
+
+}
+.answer2-f{
+  animation:  answer2 2s ; /* IE 10+, Fx 29+ */
+
+}
+.answer3-f{
+  animation:  answer3 2s ; /* IE 10+, Fx 29+ */
+
+}
+@keyframes answer1{
+  0%{
+    transform: perspective(200px) translate3d(0,-0,-0);
+  }
+  100%{
+    transform: perspective(200px) translate3d(90px,-229px,-146px);
+  }
+}
+@keyframes answer2{
+  0%{
+    transform: perspective(200px) translate3d(0,-0,-0);
+  }
+  100%{
+    transform: perspective(200px) translate3d(0px,-260px,-150px)
+  }
+}
+
+@keyframes answer3{
+  0%{
+    transform: perspective(200px) translate3d(0,-0,-0);
+  }
+  100%{
+    transform: perspective(200px) translate3d(-127px,-191px,-148px)
+  }
+}
+
+

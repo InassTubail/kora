@@ -8,9 +8,9 @@ import title from '../assets/title.png';
 import enter from '../assets/enter.png';
 import history from '../history';
 import { updateUser } from '../store/actions';
+import socket from '../utils/api';
+
 import './PlayerCharacter.css';
-// import { Socket } from 'net';
-const io = require('socket.io-client');
 
 class PlayerCharacter extends Component {
   state = {
@@ -32,7 +32,6 @@ class PlayerCharacter extends Component {
   };
 
   selectPerson = e => {
-    const socket = io.connect('http://localhost:8080');
     if(this.state.selectedImage.id === 0 ){
       this.setState({ error: "يجب ان تختار صورة لشخصيتك" });
     }else {
