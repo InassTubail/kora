@@ -19,7 +19,10 @@ const io = require('socket.io-client');
 
 class Select extends Component {
   state = {
-    error: ""
+    error: "",
+    filteredOptions: [],
+    // showOptions: false,
+
   }
   // eslint-disable-next-line react/sort-comp
 
@@ -93,7 +96,30 @@ class Select extends Component {
     data.type = 'cancelPlayer';
     socket.emit('sendInviteToPlay', data)
   }
+
+//   search = (e) =>{
+//   const myValue=  this.props.users.filter(element => (
+// element.username === e.target.value)
+// );
+// console.log(myValue,'ll'); 
+//     }
+
+search = (e) => {
+  const  options  = this.props.users;
+  const userInput = e.target.value;
+const filteredOptions = options.filter(
+    (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+  );
+  console.log(filteredOptions ,'filteredOptions ')
+this.setState({
+    filteredOptions ,  
+    // showOptions: true,
+  });
+};
+
+
   render() {
+    let alluser = this.state.filteredOptions || this.props.users 
     return (
       <React.Fragment>
         <div className="selectCompititorsDiv">
@@ -111,14 +137,14 @@ class Select extends Component {
                 alt="dss"
                 className="searchInput"
               />
-              <input type="txt" className="enteringSearchInput" />
+              <input type="txt" className="enteringSearchInput" onChange={this.search} />
             </div>
           </div>
 
           {this.state.error ? <p className="errorMeassageG">* {this.state.error}</p> : null}
           <div className="onlinePlayers">
             <ul>
-              {this.props.users.map(element => (
+              {alluser.map(element => (
                 <li>
                   <div className="rows">
                     <div className="inviteButtons">
