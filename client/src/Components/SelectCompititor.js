@@ -119,7 +119,12 @@ this.setState({
 
 
   render() {
-    let alluser = this.state.filteredOptions || this.props.users 
+    let alluser = this.state.filteredOptions || this.props.users ;
+console.log(this.props.user_info.username,'this.props.user_info');
+
+     const alluserWithoutMe=  this.props.users.filter(element => (element.username !== this.props.user_info.username))
+    console.log(alluserWithoutMe,'alluserWithoutMe');
+
     return (
       <React.Fragment>
         <div className="selectCompititorsDiv">
@@ -144,7 +149,7 @@ this.setState({
           {this.state.error ? <p className="errorMeassageG">* {this.state.error}</p> : null}
           <div className="onlinePlayers">
             <ul>
-              {alluser.map(element => (
+              {alluserWithoutMe.map(element => (
                 <li>
                   <div className="rows">
                     <div className="inviteButtons">
