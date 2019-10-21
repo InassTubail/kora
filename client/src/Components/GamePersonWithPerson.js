@@ -15,8 +15,9 @@ import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import './GamePersonWithPerson.css';
 // import './GameIndividual.css'
+import socket from '../utils/api';
 
-const io = require('socket.io-client');
+// const io = require('socket.io-client');
 
 class GamePersonWithPerson extends Component {
   state = {
@@ -34,7 +35,6 @@ class GamePersonWithPerson extends Component {
   selectAnswer = (el) => {
     const { isMyRole } = this.props.play
     if (isMyRole) {
-      const socket = io.connect('http://localhost:8080');
       const result = el.currentTarget.id
       const { room } = this.props.user_info
       const { number1, number2, answers } = questionsAndAnswers(4);

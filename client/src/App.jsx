@@ -17,11 +17,9 @@ import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 // import { Redirect } from 'react-router-dom';
 import Snackbar from './Components/snackpar'
-
+import socket from './utils/api'
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
 // import history from './history';
-
-const io = require('socket.io-client');
 
 async function detrmineRedABlue(red_team, blue_team, users) {
   let redTeam = [], blueTeam = []
@@ -38,7 +36,6 @@ async function detrmineRedABlue(red_team, blue_team, users) {
 }
 class App extends Component {
   componentDidMount() {
-    const socket = io.connect('http://localhost:8080');
     this.getUser(socket);
     this.newInvitation(socket);
     this.refresh(socket);
@@ -157,6 +154,9 @@ class App extends Component {
         resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
       }
+      if (finalData.numberOfQuestion === 13) {
+        this.props.history.push('/CongratsPWP')
+      }
       setTimeout(() => {
         this.props.updateGame(finalData)
       }, 2000);
@@ -191,7 +191,6 @@ class App extends Component {
     });
   };
   handleAccept = () => {
-    const socket = io.connect('http://localhost:8080');
     const data = {};
     data.to = this.props.user_info.with;
     data.from = this.props.user_info.username; // current user
@@ -201,7 +200,6 @@ class App extends Component {
     this.props.openDialog({ from: '', type: 'accept' });
   };
   handleReject = () => {
-    const socket = io.connect('http://localhost:8080');
     const data = {};
     data.to = this.props.user_info.with;
     data.from = this.props.user_info.username; // current user
@@ -210,7 +208,6 @@ class App extends Component {
     this.props.closeDialog();
   };
   withdrawal = () => {
-    const socket = io.connect('http://localhost:8080');
     const data = {};
     data.to = this.props.user_info.with;
     data.from = this.props.user_info.username;
@@ -238,7 +235,7 @@ class App extends Component {
           />
           <Route exact path="/game-individual" component={GameIndividual} />
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
-          <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} />
+          {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
         </Switch>
