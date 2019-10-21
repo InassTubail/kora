@@ -9,7 +9,8 @@ import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counterRed from '../assets/counterRed.png';
 import counterBlue from '../assets/counterBlue.png';
-import player from '../assets/player.png';
+import playerRed from '../assets/player.png';
+import playerBlue from '../assets/playerBlue.png';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
@@ -47,7 +48,7 @@ class GamePersonWithPerson extends Component {
     }
   }
   render() {
-    const { number1, number2, answers, blueTeam, redTeam, role, resultPrevPlayer } = this.props.play
+    const { number1, number2, answers, blueTeam, redTeam, role, resultPrevPlayer, color } = this.props.play
     return (
       <React.Fragment>
         <div className="gameScreen2">
@@ -63,8 +64,8 @@ class GamePersonWithPerson extends Component {
               <p className="questionStatement2">{`${number1} * ${number2}`}</p>
             </div>
           </div>
-          <img src={haresBlue} alt="hares" className="hares2" />
-          {/* <img src={haresRed} alt="hares" className="hares2" /> */}
+          {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2" />:
+          <img src={haresRed} alt="hares" className="hares2" />}
 
 
          <div className="answers2">
@@ -75,7 +76,8 @@ class GamePersonWithPerson extends Component {
             )}
           </div>
           <img src={koraImg} alt="kora" edt className="koraImg2" />
-          <img src={player} alt="kora" edt className="playerImg2" />
+         {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2" /> : <img src={playerBlue} alt="kora" edt className="playerImg2" /> } 
+
           <div className="subHeadersGroup">
             <div className="subHeader332">
               {blueTeam && blueTeam.map((el) =>
@@ -108,15 +110,16 @@ class GamePersonWithPerson extends Component {
           </div>
 
           <div className="subHeader42">
+          <div className="countPP">
+              <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
+              <p className="counterParag2">{this.props.play.blueScore}</p>
+            </div>
             <div className="countPP">
               <img src={counterRed} title="sdd" alt="dd" className="counter2" />
               <p className="counterParag2">{this.props.play.redScore}</p>
             </div>
 
-            <div className="countPP">
-              <img src={counterBlue} title="sdd" alt="dd" className="counter2" />
-              <p className="counterParag2">{this.props.play.blueScore}</p>
-            </div>
+           
           </div>
         </div>
       </React.Fragment>
