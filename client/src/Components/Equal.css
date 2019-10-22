@@ -1,0 +1,119 @@
+.equalDiv {
+  max-width: 991px;
+  height: 100vh;
+  background-image: url("../assets/congrat.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.equalTitleDiv {
+  margin-top: 26px;
+  text-align: center;
+}
+
+.congratTitleImg {
+  width: 80%;
+}
+
+.congratPlayerImage {
+  justify-content: space-between;
+  position: relative;
+  display: flex;
+}
+
+.selectedImageCongrat {
+  height: 105px;
+  position: absolute;
+  left: 48px;
+}
+
+
+.selectedImageCongrat2 {
+  height: 105px;
+  position: absolute;
+  left: 206px;
+}
+
+
+
+.selectedImageFrameCongrat {
+  height: 151px;
+}
+
+
+.winnerPlayerCongrat {
+  margin-top: -18px;
+  text-align: center;
+  font-size: 129%;
+  color: yellow;
+  font-weight: bold;
+}
+
+.playersImagesCongrat {
+  padding: 20px;
+}
+
+
+/* .congratCup {
+  display: flex;
+  justify-content: center;
+}
+
+
+.congratCup img {
+  position: absolute;
+  top: 45%;
+  width: 70%;
+} */
+
+.vsEqual {
+  margin-top: -6%;
+  text-align: center;
+}
+
+.vsEqualImg {
+  width: 28%;
+}
+
+
+.playAgainCongratImg {
+  top: 86%;
+  position: absolute;
+  width: 24%;
+  left: 40%
+}
+
+@media (min-width: 576px) {
+  .selectedImageCongrat {
+    height: 185px;
+    position: absolute;
+    left: 70px;
+  }
+
+  .selectedImageCongrat2 {
+    height: 185px;
+    position: absolute;
+    left: 302px
+  }
+
+  .winnerPlayerCongrat {
+    font-size: 213%;
+  }
+
+  .selectedImageFrameCongrat {
+    height: 251px;
+  }
+
+  .playAgainCongratImg {
+    top: 99%;
+  }
+}
