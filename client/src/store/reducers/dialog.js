@@ -3,7 +3,8 @@ import { DIALOG } from '../actionTypes';
 const initialState = {
   open: false,
   come_from: '',
-  type: ''
+  type: '',
+  removeAfterTime: false
 };
 
 export default (state = initialState, action) => {
@@ -16,13 +17,15 @@ export default (state = initialState, action) => {
         open: true,
         come_from: payload.from,
         type: payload.type,
+        removeAfterTime: payload.removeAfterTime || false,
       };
     case `${DIALOG}_CLOSE`:
       return {
         ...state,
         open: false,
-        // come_from: '',
-        // type: ''
+        removeAfterTime: false,
+        come_from: '',
+        type: ''
       };
     default:
       return state;

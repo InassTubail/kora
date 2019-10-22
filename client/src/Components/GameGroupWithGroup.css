@@ -14,6 +14,41 @@
   position: relative;
 }
 
+.play0,
+.play1 {
+  position: absolute;
+  height: 66px;
+}
+
+.play0 {
+  left: 20px;
+  top: -2px;
+
+}
+
+.play1 {
+  left: 20px;
+  top: 100px;
+}
+
+
+
+.countPPg,
+.countPP {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counterParag2g {
+  position: absolute;
+  top: 19%;
+  font-size: 26px;
+  color: white;
+}
+
+
 .header2g {
   display: flex;
   flex-direction: column;
@@ -101,14 +136,15 @@
   height: 95px;
 }
 
+/* 
 .selectedImage332g {
   position: absolute;
   height: 48px;
   left: 30px;
   top: 20px;
-}
+} */
 
-.counterParag2g {
+/* .counterParag2g {
   left: 5%;
   height: 60px;
   position: absolute;
@@ -116,7 +152,7 @@
   color: white;
   font-weight: bold;
   font-size: 170%;
-}
+} */
 
 .counter2g {
   height: 95px;
@@ -141,13 +177,13 @@
 }
 
 .quesDiv2g {
-  margin-top: 106px;
+  margin-top: 71px;
   position: relative;
 }
 
 .questionStatement2g {
   position: absolute;
-  top: 53%;
+  top: 47%;
   width: 48%;
   left: 25%;
   background: transparent;
@@ -165,10 +201,12 @@
 }
 
 .subHeadersGroupg {
+  margin-left: 2%;
+  margin-right: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: -76%;
+  margin-top: -71%;
 }
 
 .redColorg,
@@ -180,9 +218,8 @@
   color: white;
 }
 
-.play1 {
-  top: 50%;
-}
+
+
 
 .redColorg {
   background-color: #cf002c;
@@ -198,6 +235,11 @@
     margin-top: 43%;
   }
 
+  .subHeadersGroupg {
+    margin-top: -76%;
+  }
+
+
 }
 
 @media (min-width: 576px) {
@@ -212,7 +254,7 @@
   }
 
   .subHeadersGroupg {
-    margin-top: -59%;
+    margin-top: -55%;
   }
 
   .playNow {
@@ -236,5 +278,31 @@
   .counter2g {
     height: 177px;
     width: 174px;
+  }
+
+  .play1 {
+    top: 174px;
+  }
+
+  .blueColorg,
+  .redColorg {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .countPPg,
+  .countPP {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .counterParag2g {
+    position: absolute;
+    top: 19%;
+    font-size: 47px;
+    color: white;
+    font-weight: bold;
   }
 }

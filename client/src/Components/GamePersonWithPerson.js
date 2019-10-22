@@ -5,9 +5,7 @@ import koraImg from '../assets/kora.png';
 import frame from '../assets/frame.png';
 import haresBlue from '../assets/haresBlue.png';
 import haresRed from '../assets/haresRed.png';
-// import titleImg from '../assets/tit.png';
 import gWithg from '../assets/tit.png';
-
 import questions from '../assets/questions.png';
 import counterRed from '../assets/counterRed.png';
 import counterBlue from '../assets/counterBlue.png';
@@ -18,7 +16,6 @@ import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 
 import './GameGroupWithGroup.css';
-// import './GameIndividual.css'
 import socket from '../utils/api';
 
 // const io = require('socket.io-client');
@@ -102,7 +99,7 @@ class GamePersonWithPerson extends Component {
             </div>
 
             <div className="subHeader3321g">
-              {redTeam && redTeam.map((el) =>
+              {redTeam && redTeam.map((el,index) =>
                 <React.Fragment>
                   <img
                     src={frame}
@@ -110,7 +107,7 @@ class GamePersonWithPerson extends Component {
                     alt="dss"
                     className="selectedImageFrame332g"
                   />
-                  <img src={person(el.person)} title="person" alt="person" className="selectedImage332g" />
+                  <img src={person(el.person)} title="person" alt="person" className={`selectedImage332g play${index} `} />
                   <div className="redColorg"><p>{el.username}</p></div>
                 </React.Fragment>
               )}
@@ -120,7 +117,7 @@ class GamePersonWithPerson extends Component {
           <div className="subHeader42g">
             <div className="countPPg">
               <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
-              <p className="counterParag2">{this.props.play.blueScore}</p>
+              <p className="counterParag2g">{this.props.play.blueScore}</p>
             </div>
             <div className="countPP">
               <img src={counterRed} title="sdd" alt="dd" className="counter2g" />

@@ -9,7 +9,7 @@ import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
 import PopAccept from './Components/PopAccept';
 import CongratIndivid from './Components/CongratIndivid';
-import GameGroupWithGroup from './Components/GameGroupWithGroup'
+// import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 import Congrat from './Components/Congrat'
@@ -33,6 +33,14 @@ async function detrmineRedABlue(red_team, blue_team, users) {
   return { redTeam, blueTeam }
 }
 class App extends Component {
+  componentDidUpdate() {
+    const { open, removeAfterTime } = this.props;
+    if (open && removeAfterTime) {
+      setTimeout(() => {
+        this.props.closeDialog();
+      }, 2000);
+    }
+  }
   componentDidMount() {
     this.getUser(socket);
     this.newInvitation(socket);
@@ -46,10 +54,7 @@ class App extends Component {
     socket.on('withdrawal', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        this.props.openDialog({ from: data.from, type: 'withdrawal' });
-        setTimeout(() => {
-          this.props.closeDialog();
-        }, 5000);
+        this.props.openDialog({ from: data.from, type: 'withdrawal', removeAfterTime: true });
       }
     })
   }
@@ -57,10 +62,9 @@ class App extends Component {
     socket.on('cancelInvite', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        this.props.openDialog({ from: data.from, type: 'cancelInvite' });
-        setTimeout(() => {
-          this.props.closeDialog();
-        }, 5000);
+        console.log('how much');
+        
+        this.props.openDialog({ from: data.from, type: 'cancelInvite', removeAfterTime: true });
       }
     })
   }
@@ -68,10 +72,7 @@ class App extends Component {
     socket.on('cancelPlayer', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        this.props.openDialog({ from: data.from, type: 'cancelPlayer' });
-        setTimeout(() => {
-          this.props.closeDialog();
-        }, 5000);
+        this.props.openDialog({ from: data.from, type: 'cancelPlayer', removeAfterTime: true });
       }
     })
   }
@@ -89,6 +90,8 @@ class App extends Component {
   }
   getUser = socket => {
     socket.on('usernames', username => {
+      console.log({ username }, '77777');
+
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
         if (this.props.user_info.username === value.username) {
@@ -102,6 +105,7 @@ class App extends Component {
   gamingRoom = socket => {
     let { redScore, blueScore, numberOfQuestion } = this.props.play;
     let role, color, isMyRole
+    console.log({ socket }, '**/*/');
 
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
@@ -177,7 +181,7 @@ class App extends Component {
           this.props.openDialog({ from: dataNewMassg.from, type: 'invite' });
         }
         if (dataNewMassg.type === 'reject') {
-          this.props.openDialog({ from: dataNewMassg.from, type: 'reject' });
+          this.props.openDialog({ from: dataNewMassg.from, type: 'reject', removeAfterTime: true });
         }
       }
       if (
@@ -218,13 +222,11 @@ class App extends Component {
     this.props.closeDialog();
   }
   render() {
+    const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject']
     return (
       <div>
-        <Snackbar props={this.props} />
-        {this.props.type !== 'cancelInvite' &&
-          this.props.type !== 'withdrawal' &&
-          this.props.type !== 'cancelPlayer' &&
-          this.props.type !== 'reject' &&
+        {type.includes(this.props.type) && <Snackbar props={this.props} />}
+        {!type.includes(this.props.type) &&
           <PopAccept props={this.props} handleAccept={this.handleAccept} handleReject={this.handleReject} withdrawal={this.withdrawal} />}
         <Switch>
           <Route exact path="/" component={LogIn} />
@@ -237,7 +239,7 @@ class App extends Component {
           />
           <Route exact path="/game-individual" component={GameIndividual} />
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
-          <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} />
+          {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
           <Route exact path="/congrat" component={Congrat} />
@@ -257,6 +259,7 @@ const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   open: state.dialog.open,
   type: state.dialog.type,
+  removeAfterTime: state.dialog.removeAfterTime,
   come_from: state.dialog.come_from,
 });
 export default withRouter(connect(
