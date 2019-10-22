@@ -21,10 +21,12 @@ import './GameGroupWithGroup.css';
 
 class GameGroupWithGroup extends Component {
   state = {
-    blueTeam: {
-    },
-    redTeam: {}
+    blueTeam: [],
+    redTeam: [],
+    error: "",
+    count: 0
   }
+
   componentDidMount() {
     const { blueTeam, redTeam } = this.props.play;
     this.props.users.forEach((el, index) => {

@@ -1,5 +1,5 @@
 .gameScreen2g {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -134,7 +134,7 @@
 
 .subHeader42g {
   display: flex;
-  margin-top: 82%;
+  margin-top: 61%;
   justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
@@ -167,8 +167,8 @@
 .subHeadersGroupg {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: -66%;
+  justify-content: space-between;
+  margin-top: -76%;
 }
 
 .redColorg,
@@ -176,8 +176,12 @@
   text-align: center;
   margin-top: -50%;
   width: 95%;
-  height: 28%;
+  height: 9%;
   color: white;
+}
+
+.play1 {
+  top: 50%;
 }
 
 .redColorg {
@@ -186,4 +190,51 @@
 
 .blueColorg {
   background-color: #3f198d;
+}
+
+
+@media (max-width: 320px) {
+  .subHeader42g {
+    margin-top: 43%;
+  }
+
+}
+
+@media (min-width: 576px) {
+  .selectedImageFrame332g {
+    height: 194px;
+  }
+
+  .selectedImage332g {
+    height: 138px;
+    left: 40px;
+    top: -1px;
+  }
+
+  .subHeadersGroupg {
+    margin-top: -59%;
+  }
+
+  .playNow {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .questionStatement2g {
+    font-size: 32px
+  }
+
+  .titleImage2g {
+    width: 66%;
+  }
+
+  .subHeader42g {
+    display: flex;
+    margin-top: 44%;
+  }
+
+  .counter2g {
+    height: 177px;
+    width: 174px;
+  }
 }

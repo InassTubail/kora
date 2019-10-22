@@ -156,7 +156,7 @@ class App extends Component {
       if (finalData.numberOfQuestion === 13 && blueScore === redScore) {
         this.props.history.push('/equal')
       }
-      if(finalData.numberOfQuestion === 13 && blueScore !== redScore){        
+      if (finalData.numberOfQuestion === 13 && blueScore !== redScore) {
         this.props.history.push('/congrat')
       }
       setTimeout(() => {
@@ -237,7 +237,7 @@ class App extends Component {
           />
           <Route exact path="/game-individual" component={GameIndividual} />
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
-          {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
+          <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} />
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
           <Route exact path="/congrat" component={Congrat} />
