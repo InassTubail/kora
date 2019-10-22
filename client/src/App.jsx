@@ -9,7 +9,7 @@ import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
 import PopAccept from './Components/PopAccept';
 import CongratIndivid from './Components/CongratIndivid';
-import GameGroupWithGroup from './Components/GameGroupWithGroup'
+// import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
 import Congrat from './Components/Congrat'

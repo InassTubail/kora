@@ -30,9 +30,13 @@ const GameType = () => {
         </Link>
         </div>
 
+
+
        <div className="kora">
           <img className="centerKora" src={centerKora} alt="ddfd" />
         </div> 
+
+
 
  <div className="playWithGroup">
  <img src={playWithGroup} alt="playWithGroupImg"  className="playWithGroupImg"/>
@@ -45,6 +49,8 @@ const GameType = () => {
 <img src={vsPlayType} alt="vsPlayType" className="vsPlayTypeImg"/>
 <span className="">Team2</span>
 </div> 
+
+
 
 
          <div className="select-compititorButton">

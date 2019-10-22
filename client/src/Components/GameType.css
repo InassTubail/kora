@@ -11,33 +11,26 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  /* position: relative; */
 }
+
+
 
 .selectGameTypes {
-  position: absolute;
+  margin-top: 5%;
   height: 8%;
-  /* text-align: center; */
-  /* align-items: center; */
   top: 3%;
-  /* justify-content: center; */
-}
+  text-align: center;
 
+}
 
 .selectGameTypesImg {
   width: 91%;
-  /* margin-bottom: 146%; */
 }
 
 .playIndividual {
   text-align: center;
-  top: 16%;
-  position: absolute;
+  margin-top: 10%;
 }
 
 
@@ -47,11 +40,10 @@
 
 
 .game-individualButton {
-  position: absolute;
+  margin-bottom: 10%;
+  margin-top: -2%;
   text-align: center;
-  top: 25%;
 }
-
 
 .button-game-individual {
   width: 41%;
@@ -60,9 +52,9 @@
 
 
 .playWithGroup {
-  position: absolute;
   top: 69%;
   text-align: center;
+  margin-top: 9%;
 }
 
 .playWithGroupImg {
@@ -72,12 +64,11 @@
 
 .vsPlayType {
   font-size: 20px;
-  position: absolute;
-  top: 76%;
   color: white;
   font-weight: bold;
-  display: flex;
-  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 9px;
 }
 
 .vsPlayTypeImg {
@@ -89,18 +80,10 @@
   margin-right: 30px;
 }
 
-/* .vsPlayType {
-  position: absolute;
-  top: 75%;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-} */
 
 .select-compititorButton {
-  position: absolute;
-  top: 87%;
   text-align: center;
+  margin-top: 2%;
 }
 
 .button2-select-compititor {
@@ -108,16 +91,39 @@
 
 }
 
-/* .vsPlayTypeImg {
-  width: 22%;
-} */
+
 
 .centerKora {
+  /* width: 80%; */
   width: 80%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  /*  */
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 9%;
 }
 
+
+
+
 .kora {
-  width: 150px;
+
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 12px solid #fff;
+  border-radius: 50%;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  /* width: 150px;
   height: 150px;
   display: flex;
   justify-content: center;
@@ -126,7 +132,7 @@
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%); */
 }
 
 .kora:after,
@@ -135,18 +141,27 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  height: 12px;
+  width: 250%;
+  background: #fff;
+  /* content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   height: 10px;
   width: 200%;
-  background: #fff;
+  background: #fff; */
 }
 
 .kora:after {
-  left: -200%;
+  left: -250%;
 }
 
 .kora:before {
-  right: -200%;
+  right: -250%;
 }
+
+
 
 @media (min-width: 576px) {
   .vsPlayTypeImg {
@@ -162,5 +177,11 @@
   .kora {
     width: 200px;
     height: 200px;
+    border: 25px solid #fff;
+  }
+
+  .kora:after,
+  .kora:before {
+    height: 25px;
   }
 }

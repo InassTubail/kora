@@ -1,5 +1,5 @@
 .gameScreen2g {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
@@ -13,6 +13,41 @@
   overflow: hidden;
   position: relative;
 }
+
+.play0,
+.play1 {
+  position: absolute;
+  height: 66px;
+}
+
+.play0 {
+  left: 20px;
+  top: -2px;
+
+}
+
+.play1 {
+  left: 20px;
+  top: 100px;
+}
+
+
+
+.countPPg,
+.countPP {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counterParag2g {
+  position: absolute;
+  top: 19%;
+  font-size: 26px;
+  color: white;
+}
+
 
 .header2g {
   display: flex;
@@ -101,14 +136,15 @@
   height: 95px;
 }
 
+/* 
 .selectedImage332g {
   position: absolute;
   height: 48px;
   left: 30px;
   top: 20px;
-}
+} */
 
-.counterParag2g {
+/* .counterParag2g {
   left: 5%;
   height: 60px;
   position: absolute;
@@ -116,7 +152,7 @@
   color: white;
   font-weight: bold;
   font-size: 170%;
-}
+} */
 
 .counter2g {
   height: 95px;
@@ -134,20 +170,20 @@
 
 .subHeader42g {
   display: flex;
-  margin-top: 82%;
+  margin-top: 61%;
   justify-content: space-between;
   margin-left: 10px;
   margin-right: 10px;
 }
 
 .quesDiv2g {
-  margin-top: 106px;
+  margin-top: 71px;
   position: relative;
 }
 
 .questionStatement2g {
   position: absolute;
-  top: 53%;
+  top: 47%;
   width: 48%;
   left: 25%;
   background: transparent;
@@ -165,10 +201,12 @@
 }
 
 .subHeadersGroupg {
+  margin-left: 2%;
+  margin-right: 2%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: -66%;
+  justify-content: space-between;
+  margin-top: -71%;
 }
 
 .redColorg,
@@ -176,9 +214,12 @@
   text-align: center;
   margin-top: -50%;
   width: 95%;
-  height: 28%;
+  height: 9%;
   color: white;
 }
+
+
+
 
 .redColorg {
   background-color: #cf002c;
@@ -186,4 +227,82 @@
 
 .blueColorg {
   background-color: #3f198d;
+}
+
+
+@media (max-width: 320px) {
+  .subHeader42g {
+    margin-top: 43%;
+  }
+
+  .subHeadersGroupg {
+    margin-top: -76%;
+  }
+
+
+}
+
+@media (min-width: 576px) {
+  .selectedImageFrame332g {
+    height: 194px;
+  }
+
+  .selectedImage332g {
+    height: 138px;
+    left: 40px;
+    top: -1px;
+  }
+
+  .subHeadersGroupg {
+    margin-top: -55%;
+  }
+
+  .playNow {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .questionStatement2g {
+    font-size: 32px
+  }
+
+  .titleImage2g {
+    width: 66%;
+  }
+
+  .subHeader42g {
+    display: flex;
+    margin-top: 44%;
+  }
+
+  .counter2g {
+    height: 177px;
+    width: 174px;
+  }
+
+  .play1 {
+    top: 174px;
+  }
+
+  .blueColorg,
+  .redColorg {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .countPPg,
+  .countPP {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .counterParag2g {
+    position: absolute;
+    top: 19%;
+    font-size: 47px;
+    color: white;
+    font-weight: bold;
+  }
 }
