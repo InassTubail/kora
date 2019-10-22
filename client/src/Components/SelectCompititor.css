@@ -16,8 +16,8 @@
 }
 
 .startButton {
-  height: 78px;
-  width: 192px;
+  height: 64px;
+  width: 137px;
 }
 
 .searchDiv {
@@ -51,12 +51,13 @@
   position: relative;
   max-width: 260px;
   justify-content: center;
-
+  display: flex
 }
+
 
 .enteringSearchInput {
   position: absolute;
-  left: 4px;
+  left: 9px;
   width: 213px;
   height: 33px;
   background: transparent;
@@ -295,6 +296,17 @@ ul {
     left: 14px;
   }
 
+
+  .enteringSearchInput {
+    top: 10%;
+    left: -15%;
+    width: 125%;
+  }
+
+  .enteringSearchInput::placeholder {
+    font-size: 20px;
+  }
+
   .rows {
     margin-bottom: 13px;
   }
@@ -321,7 +333,7 @@ ul {
 
   .searchInput {
     height: 71px;
-    width: 133%;
+    width: 180%;
   }
 
   .searchButton {
@@ -331,9 +343,8 @@ ul {
 
 
   .startButton {
-    font-size: 30px;
-    padding: 15px 20px;
     width: 250px;
+    height: 88px;
   }
 
   .errorMeassageG {
