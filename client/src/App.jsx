@@ -7,15 +7,11 @@ import playerCharacter from './Components/PlayerCharacter';
 import GameType from './Components/GameType';
 import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
-// import PopWaiting from './Components/PopWaiting';
 import PopAccept from './Components/PopAccept';
-// import popUpCongrat from './Components/popUpCongrat';
-// import popUpLose from './Components/popUpLose';
 import CongratIndivid from './Components/CongratIndivid';
 import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
-// import { Redirect } from 'react-router-dom';
 import Congrat from './Components/Congrat'
 import Equal from './Components/Equal'
 import Snackbar from './Components/snackpar'
@@ -157,8 +153,11 @@ class App extends Component {
         resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
       }
-      if (finalData.numberOfQuestion === 13) {
-        this.props.history.push('/CongratsPWP')
+      if (finalData.numberOfQuestion === 13 && blueScore === redScore) {
+        this.props.history.push('/equal')
+      }
+      if(finalData.numberOfQuestion === 13 && blueScore !== redScore){        
+        this.props.history.push('/congrat')
       }
       setTimeout(() => {
         this.props.updateGame(finalData)

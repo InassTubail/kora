@@ -12,7 +12,8 @@ import True from '../assets/true.png';
 // import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
-import startButton from '../assets/startButton.png' 
+import socket from '../utils/api';
+import startButton from '../assets/startButton.png'
 
 import './SelectCompititor.css';
 
@@ -23,7 +24,7 @@ class Select extends Component {
     error: "",
     filteredOptions: [],
     // showOptions: false,
-    alluser:[]
+    alluser: []
 
   }
   // eslint-disable-next-line react/sort-comp
@@ -50,11 +51,11 @@ class Select extends Component {
   };
 
   onSelectUser = e => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     this.sendInvite(socket, e.target.id);
   };
   startPlay = () => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     const { username, accpet } = this.props.user_info
     if (accpet.length !== 3 && accpet.length !== 1) {
       this.setState({ error: 'يجب قبول شخص أو 3 اشخاص لبدء اللعبه' })
@@ -83,7 +84,7 @@ class Select extends Component {
   //   }
   // }
   cancelInvite = (e) => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user
@@ -91,7 +92,7 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
   cancelPlayer = (e) => {
-    const socket = io.connect('http://localhost:8080');
+    // const socket = io.connect('http://localhost:8080');
     let data = {}
     data.to = e.target.id;
     data.from = this.props.user_info.username; // current user
@@ -99,39 +100,39 @@ class Select extends Component {
     socket.emit('sendInviteToPlay', data)
   }
 
-//   search = (e) =>{
-//   const myValue=  this.props.users.filter(element => (
-// element.username === e.target.value)
-// );
-// console.log(myValue,'ll'); 
-//     }
+  //   search = (e) =>{
+  //   const myValue=  this.props.users.filter(element => (
+  // element.username === e.target.value)
+  // );
+  // console.log(myValue,'ll'); 
+  //     }
 
-search = (e) => {
-  const  options  = this.props.users.filter(element => (element.username !== this.props.user_info.username));
-  const userInput = e.target.value;
-const filteredOptions = options.filter(
-    (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-  );
-  console.log(filteredOptions ,'filteredOptions ')
-this.setState({
-    filteredOptions ,  
-    // showOptions: true,
-  });
-};
-// componentDidMount= () => {
-//   console.log({alluser},'DID')
-//   this.setState({alluser})
-// }
+  search = (e) => {
+    const options = this.props.users.filter(element => (element.username !== this.props.user_info.username));
+    const userInput = e.target.value;
+    const filteredOptions = options.filter(
+      (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+    );
+    // console.log(filteredOptions ,'filteredOptions ')
+    this.setState({
+      filteredOptions,
+      // showOptions: true,
+    });
+  };
+  // componentDidMount= () => {
+  //   console.log({alluser},'DID')
+  //   this.setState({alluser})
+  // }
 
-render() {
-  let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
-  console.log({alluser});
-  let filterop =  this.state.filteredOptions.length > 0 && this.state.filteredOptions
-  console.log({filterop});
-  let alluser2 = filterop || alluser
-  console.log({alluser2});
-  // console.log(this.state.alluser,'this.state.alluser');
-  
+  render() {
+    let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
+    console.log({ alluser });
+    let filterop = this.state.filteredOptions.length > 0 && this.state.filteredOptions
+    console.log({ filterop });
+    let alluser2 = filterop || alluser
+    console.log({ alluser2 });
+    // console.log(this.state.alluser,'this.state.alluser');
+
     return (
       <React.Fragment>
         <div className="selectCompititorsDiv">
@@ -165,6 +166,7 @@ render() {
                         id={element.username}
                         key={element}
                         onClick={this.onSelectUser}
+                        disabled={element.is_playing ? true : false}
                       >
                         دعــوة
                         </button>
@@ -286,7 +288,7 @@ render() {
           </div> */}
           <div className="searchDiv">
             <div className="buttonDiv">
-            <img src={startButton} alt="startButton" className="startButton" onClick={this.startPlay}/>
+              <img src={startButton} alt="startButton" className="startButton" onClick={this.startPlay} />
               {/* <button className="startButton" onClick={this.startPlay}>بدء اللعبه</button> */}
             </div>
           </div>
