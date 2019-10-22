@@ -12,6 +12,7 @@ import True from '../assets/true.png';
 // import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
+import startButton from '../assets/startButton.png' 
 
 import './SelectCompititor.css';
 
@@ -285,7 +286,8 @@ render() {
           </div> */}
           <div className="searchDiv">
             <div className="buttonDiv">
-              <button className="startButton" onClick={this.startPlay}>بدء اللعبه</button>
+            <img src={startButton} alt="startButton" className="startButton" onClick={this.startPlay}/>
+              {/* <button className="startButton" onClick={this.startPlay}>بدء اللعبه</button> */}
             </div>
           </div>
         </div>

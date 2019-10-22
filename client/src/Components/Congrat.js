@@ -8,6 +8,7 @@ import playAgain from '../assets/playAgain.png';
 import { connect } from 'react-redux';
 import { updateUser } from '../store/actions';
 
+
 import './Congrat.css';
 
 class Congrat extends Component {
@@ -18,6 +19,7 @@ class Congrat extends Component {
   render() {
     return (
       <React.Fragment>
+
         <div className="congratDiv">
 
         <div className="congratTitleDiv">

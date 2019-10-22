@@ -15,6 +15,9 @@ import PopUpLose from './popUpLose';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import './GameIndividual.css';
+import Sound from './SoundAhsant'
+import TryAgainSound from './TryAgainSound'
+
 
 class GameIndividual extends Component {
   state = {
@@ -25,20 +28,22 @@ class GameIndividual extends Component {
     NOTrue: 0,
     isClick: false,
     showPopup: false,
+    voice:false,
+    tryAgainVoice:false,
     showCongratePopup: false,
     classKora: '',
     NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
   }
   componentDidUpdate() {
-    const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;
+    const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup,voice ,tryAgainVoice} = this.state;
     const { level } = this.props.user_info
     if (level !== 4) {
       if (NOQuestion === 6) {
         if (NOTrue >= 3 && !showCongratePopup) {
-          this.setState({ showCongratePopup: true, NOQuestion: 0, NOTrue: 0 })
+          this.setState({ showCongratePopup: true, NOQuestion: 0, NOTrue: 0 ,voice:true })
           this.props.updateUser({ ...this.props.user_info, level: this.props.user_info.level + 1 })
         } else if (NOTrue < 3 && !showPopup) {
-          this.setState({ showPopup: true, NOQuestion: 0, NOTrue: 0 })
+          this.setState({ showPopup: true, NOQuestion: 0, NOTrue: 0,tryAgainVoice:true })
         }
       }
       if (isClick) {
@@ -71,13 +76,15 @@ class GameIndividual extends Component {
 
   }
   closePopUp = () => {
-    this.setState({ showCongratePopup: false, showPopup: false })
+    this.setState({ showCongratePopup: false, showPopup: false ,voice:false,tryAgainVoice:false })
   }
   render() {
-    const { number1, number2, answers, showPopup, showCongratePopup } = this.state;
+    const { number1, number2, answers, showPopup, showCongratePopup,voice,tryAgainVoice } = this.state;
     return (
       <React.Fragment>
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
+        <Sound voice={voice}/>
+        <TryAgainSound TryAgainVoice={tryAgainVoice}/>
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">

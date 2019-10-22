@@ -16,17 +16,8 @@
 }
 
 .startButton {
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
-  background-color: #8cc63f;
-  padding: 10px 20px;
-  border-radius: 42px;
-  display: inline-block;
-  border: 3px solid #fff;
-  transition: all 0.4s ease 0s;
-  width: 130px;
+  height: 78px;
+  width: 192px;
 }
 
 .searchDiv {
