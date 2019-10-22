@@ -8,6 +8,8 @@ import playAgain from '../assets/playAgain.png';
 import { connect } from 'react-redux';
 import { updateUser } from '../store/actions';
 import { person } from './playersImage';
+import clup from '../assets/clup.mp3'
+
 
 import './Congrat.css';
 
@@ -28,6 +30,8 @@ class Congrat extends Component {
     return (
       <React.Fragment>
         <div className="congratDiv">
+        <audio autoPlay src={clup}  />
+
           <div className="congratTitleDiv">
             <img src={mabrouk} alt="" className="congratTitleImg" />
           </div>
@@ -35,12 +39,14 @@ class Congrat extends Component {
             {winTeam.map((el) =>
               <div className="playersImagesCongrat">
                 <img
-                  src={person(el.person)}
+                  src={frame}
                   title="ti"
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img src={person} title="sdd" alt="dd" className="selectedImageCongrat" />
+                <img     
+                 src={person(el.person)}
+ title="sdd" alt="dd" className="selectedImageCongrat" />
                 <p className="winnerPlayerCongrat">{el.username}</p>
               </div>
             )}
