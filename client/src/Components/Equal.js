@@ -8,6 +8,8 @@ import vs from '../assets/VS.png'
 import { connect } from 'react-redux';
 import { updateUser } from '../store/actions';
 import { person } from './playersImage';
+import clup from '../assets/clup.mp3'
+
 
 import './Equal.css';
 
@@ -20,6 +22,8 @@ class Equal extends Component {
     return (
       <React.Fragment>
         <div className="equalDiv">
+        <audio autoPlay src={clup}  />
+
           <div className="equalTitleDiv">
             <img src={mabrouk} alt="" className="congratTitleImg" />
           </div>
