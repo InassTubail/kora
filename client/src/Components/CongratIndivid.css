@@ -1,13 +1,13 @@
 .congratIndivid {
-  max-width: 600px;
+  max-width: 991px;
   height: 100vh;
   margin-right: auto;
   margin-left: auto;
   background: #ddd;
   background-image: url("../assets/congratIndivid.jpg");
   background-size: cover;
-  background-position: center;
-  background-position: center center;
+  /* background-position: center; */
+  /* background-position: center center; */
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow: hidden;
@@ -21,7 +21,7 @@
   position: absolute;
   top: 4%;
   color: #d0f400;
-  font-size: 60px;
+  font-size: 35px;
 }
 
 .playAgain {
@@ -31,4 +31,25 @@
 
 .playAgain img {
   height: 90px;
+}
+
+
+
+@media (min-width: 576px) {
+  .winnerPlayerDiv {
+    top: 14%;
+    font-size: 80px;
+  }
+
+  .winnerPlayerDiv {
+    font-size: 40px;
+  }
+
+  .playAgain {
+    top: 87%;
+  }
+
+  .playAgain img {
+    height: 136px;
+  }
 }

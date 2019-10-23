@@ -52,6 +52,8 @@
   top: 80%;
   left: 26%;
   height: 21%;
+
+
 }
 
 .hares {
@@ -59,7 +61,24 @@
   width: 15%;
   top: 63%;
   left: 44%;
+
+  animation-name: example;
+  animation-duration: 5s;
+  animation-iteration-count: 300;
 }
+
+@keyframes example {
+  0% {
+    left: 44%;
+    top: 63%;
+  }
+
+  25% {
+    left: 20px;
+    top: 63%;
+  }
+}
+
 
 .answers {
   display: flex;
