@@ -17,7 +17,7 @@
 .play0,
 .play1 {
   position: absolute;
-  height: 66px;
+  height: 87px;
 }
 
 .play0 {
@@ -61,6 +61,7 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
+  /* padding-top: 10px; */
 }
 
 .correct2g {
@@ -133,7 +134,7 @@
 }
 
 .selectedImageFrame332g {
-  height: 95px;
+  height: 120px;
 }
 
 /* 
@@ -169,11 +170,13 @@
 }
 
 .subHeader42g {
+  width: 100%;
+  position: absolute;
   display: flex;
-  margin-top: 61%;
+  text-align: center;
   justify-content: space-between;
-  margin-left: 10px;
-  margin-right: 10px;
+  top: 84%;
+
 }
 
 .quesDiv2g {
@@ -230,13 +233,19 @@
 }
 
 
-@media (max-width: 320px) {
+@media (max-width: 420px) {
   .subHeader42g {
-    margin-top: 43%;
+    width: 100%;
+    position: absolute;
+    /* margin-top: 43%; */
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    top: 82%;
   }
 
   .subHeadersGroupg {
-    margin-top: -76%;
+    margin-top: -69%;
   }
 
 
@@ -271,8 +280,14 @@
   }
 
   .subHeader42g {
+    width: 100%;
+    position: absolute;
+    /* margin-top: 43%; */
     display: flex;
-    margin-top: 44%;
+    text-align: center;
+    justify-content: space-between;
+    top: 83%;
+
   }
 
   .counter2g {

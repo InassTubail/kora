@@ -208,31 +208,31 @@
 
 @keyframes answer1 {
   0% {
-    transform: perspective(200px) translate3d(0, -0, -0);
+    transform: perspective(230px) translate3d(0, -0, -0);
   }
 
   100% {
-    transform: perspective(200px) translate3d(90px, -229px, -146px);
+    transform: perspective(230px) translate3d(127px, -229px, -146px);
   }
 }
 
 @keyframes answer2 {
   0% {
-    transform: perspective(200px) translate3d(0, -0, -0);
+    transform: perspective(300px) translate3d(0, -0, -0);
   }
 
   100% {
-    transform: perspective(200px) translate3d(0px, -260px, -150px)
+    transform: perspective(300px) translate3d(0px, -260px, -150px)
   }
 }
 
 @keyframes answer3 {
   0% {
-    transform: perspective(200px) translate3d(0, -0, -0);
+    transform: perspective(250px) translate3d(0, -0, -0);
   }
 
   100% {
-    transform: perspective(200px) translate3d(-127px, -191px, -148px)
+    transform: perspective(250px) translate3d(-127px, -191px, -148px)
   }
 }
 
@@ -247,27 +247,60 @@
     }
 
     100% {
-      transform: perspective(400px) translate3d(90px, -229px, -146px);
+      transform: perspective(400px) translate3d(127px, -229px, -146px);
     }
   }
 
   @keyframes answer2 {
     0% {
-      transform: perspective(400px) translate3d(0, -0, -0);
+      transform: perspective(650px) translate3d(0, -0, -0);
     }
 
     100% {
-      transform: perspective(400px) translate3d(0px, -260px, -150px)
+      transform: perspective(650px) translate3d(0px, -260px, -150px)
     }
   }
 
   @keyframes answer3 {
     0% {
+      transform: perspective(650px) translate3d(0, -0, -0);
+    }
+
+    100% {
+      transform: perspective(650px) translate3d(-127px, -191px, -148px)
+    }
+  }
+}
+
+
+@media (min-width: 576px) {
+  @keyframes answer1 {
+    0% {
       transform: perspective(400px) translate3d(0, -0, -0);
     }
 
     100% {
-      transform: perspective(400px) translate3d(-127px, -191px, -148px)
+      transform: perspective(400px) translate3d(250px, -290px, -146px);
+    }
+  }
+
+  @keyframes answer2 {
+    0% {
+      transform: perspective(750px) translate3d(0, -0, -0);
+    }
+
+    100% {
+      transform: perspective(750px) translate3d(0px, -350px, -150px)
+    }
+  }
+
+  @keyframes answer3 {
+    0% {
+      transform: perspective(750px) translate3d(0, -0, -0);
+    }
+
+    100% {
+      transform: perspective(750px) translate3d(-200px, -250px, -100px)
     }
   }
 }

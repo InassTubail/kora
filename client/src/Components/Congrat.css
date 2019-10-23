@@ -15,8 +15,22 @@
   align-items: center;
 }
 
+.playerG0 {
+  left: 46px;
+}
+
+.playerG1 {
+  left: 199px;
+}
+
+.selectedImageCongrat {
+  height: 108px;
+  position: absolute;
+}
+
+
 .congratTitleDiv {
-  margin-top: 26px;
+  margin-top: 45px;
   text-align: center;
 }
 
@@ -30,20 +44,13 @@
   display: flex;
 }
 
-.selectedImageCongrat {
+/* .selectedImageCongrat {
   height: 105px;
   position: absolute;
   left: 48px;
 }
 
-
-.selectedImageCongrat2 {
-  height: 105px;
-  position: absolute;
-  left: 206px;
-}
-
-
+ */
 
 .selectedImageFrameCongrat {
   height: 151px;
@@ -87,14 +94,20 @@
   .selectedImageCongrat {
     height: 185px;
     position: absolute;
+    /* left: 70px; */
+  }
+
+  .playerG0 {
     left: 70px;
   }
 
-  .selectedImageCongrat2 {
+  .playerG1 {}
+
+  /* .selectedImageCongrat2 {
     height: 185px;
     position: absolute;
     left: 302px
-  }
+  } */
 
   .winnerPlayerCongrat {
     font-size: 213%;
