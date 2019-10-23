@@ -36,7 +36,7 @@ class Congrat extends Component {
             <img src={mabrouk} alt="" className="congratTitleImg" />
           </div>
           <div className="congratPlayerImage">
-            {winTeam.map((el) =>
+            {winTeam.map((el,index) =>
               <div className="playersImagesCongrat">
                 <img
                   src={frame}
@@ -46,7 +46,7 @@ class Congrat extends Component {
                 />
                 <img     
                  src={person(el.person)}
- title="sdd" alt="dd" className="selectedImageCongrat" />
+ title="sdd" alt="dd" className={`selectedImageCongrat  playerG${index} `} />
                 <p className="winnerPlayerCongrat">{el.username}</p>
               </div>
             )}

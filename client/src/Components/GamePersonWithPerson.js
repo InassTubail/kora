@@ -80,7 +80,7 @@ class GamePersonWithPerson extends Component {
             )}
           </div>
           <img src={koraImg} alt="kora" edt className="koraImg2g" />
-          {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2" />}
+          {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
 
           <div className="subHeadersGroupg">
             <div className="subHeader332g">

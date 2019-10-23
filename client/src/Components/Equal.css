@@ -30,7 +30,7 @@
   display: flex;
 }
 
-.selectedImageCongrat {
+.selectedImageCongratEqual {
   height: 105px;
   position: absolute;
   left: 48px;
@@ -93,7 +93,7 @@
 }
 
 @media (min-width: 576px) {
-  .selectedImageCongrat {
+  .selectedImageCongratEqual {
     height: 185px;
     position: absolute;
     left: 70px;

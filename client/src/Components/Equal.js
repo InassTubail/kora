@@ -36,7 +36,7 @@ class Equal extends Component {
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img src={person(el.person)} title="sdd" alt="dd" className="selectedImageCongrat" />
+                <img src={person(el.person)} title="sdd" alt="dd" className="selectedImageCongratEqual" />
                 <p className="winnerPlayerCongrat">{el.username}</p>
               </div>
             )}
@@ -67,7 +67,7 @@ class Equal extends Component {
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img src={person} title="sdd" alt="dd" className="selectedImageCongrat" />
+                <img src={person} title="sdd" alt="dd" className="selectedImageCongratEqual" />
                 <p className="winnerPlayerCongrat">{el.username}</p>
               </div>
             )}
