@@ -140,6 +140,13 @@ class App extends Component {
       }
       color = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
       isMyRole = role === this.props.user_info.username;
+      
+      if (numberOfQuestion === 12 && blueScore === redScore) {
+        this.props.history.push('/equal')
+      }
+      if (numberOfQuestion === 12 && blueScore !== redScore) {
+        this.props.history.push('/congrat')
+      }
       // بعد 2 ثانيه بدو يغير السزال
       finalData = {
         ...finalData,
@@ -156,12 +163,6 @@ class App extends Component {
         count: 0,
         resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
-      }
-      if (finalData.numberOfQuestion === 13 && blueScore === redScore) {
-        this.props.history.push('/equal')
-      }
-      if (finalData.numberOfQuestion === 13 && blueScore !== redScore) {
-        this.props.history.push('/congrat')
       }
       setTimeout(() => {
         this.props.updateGame(finalData)
