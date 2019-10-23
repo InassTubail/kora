@@ -28,16 +28,18 @@ class Equal extends Component {
             <img src={mabrouk} alt="" className="congratTitleImg" />
           </div>
           <div className="congratPlayerImage">
-            {this.props.play.blueTeam.map((el) =>
-              <div className="playersImagesCongrat">
+            {this.props.play.blueTeam.map((el,index) =>
+              <div className="playersImagesEqual">
                 <img
                   src={frame}
                   title="ti"
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img src={person(el.person)} title="sdd" alt="dd" className="selectedImageCongratEqual" />
-                <p className="winnerPlayerCongrat">{el.username}</p>
+                <img src={person(el.person)} title="sdd" alt="dd" 
+                 className={`selectedImageCongratEqual  playerEqual${index} `} 
+               />
+                <p className="winnerPlayerEqual">{el.username}</p>
               </div>
             )}
 
@@ -59,16 +61,16 @@ class Equal extends Component {
 
 
           <div className="congratPlayerImage">
-            {this.props.play.redTeam.map((el) =>
-              <div className="playersImagesCongrat">
+            {this.props.play.redTeam.map((el,index) =>
+              <div className="playersImagesEqual">
                 <img
-                  src={person(el.person)}
+                  src={frame}
                   title="ti"
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img src={person} title="sdd" alt="dd" className="selectedImageCongratEqual" />
-                <p className="winnerPlayerCongrat">{el.username}</p>
+                <img src={person(el.person)} title="sdd" alt="dd" className={`selectedImageCongratEqual  playerEqual${index} `} />
+                <p className="winnerPlayerEqual">{el.username}</p>
               </div>
             )}
 
@@ -87,7 +89,7 @@ class Equal extends Component {
           </div>
           <div className="playAgainCongrat">
             <Link onClick={this.replay}>
-              <img src={playAgain} alt="playAgainCongratImg" className="playAgainCongratImg" />
+              <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" />
             </Link>
           </div>
         </div>

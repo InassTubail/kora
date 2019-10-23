@@ -15,6 +15,14 @@
   align-items: center;
 }
 
+.playerEqual0 {
+  left: 48px;
+}
+
+.playerEqual1 {
+  left: 221px;
+}
+
 .equalTitleDiv {
   margin-top: 26px;
   text-align: center;
@@ -33,7 +41,7 @@
 .selectedImageCongratEqual {
   height: 105px;
   position: absolute;
-  left: 48px;
+
 }
 
 
@@ -50,16 +58,18 @@
 }
 
 
-.winnerPlayerCongrat {
-  margin-top: -18px;
+.winnerPlayerEqual {
+  margin-top: -40px;
   text-align: center;
   font-size: 129%;
   color: yellow;
   font-weight: bold;
 }
 
-.playersImagesCongrat {
+.playersImagesEqual {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -85,8 +95,8 @@
 }
 
 
-.playAgainCongratImg {
-  top: 86%;
+.playAgainEqualImg {
+  top: 79%;
   position: absolute;
   width: 24%;
   left: 40%
@@ -96,7 +106,14 @@
   .selectedImageCongratEqual {
     height: 185px;
     position: absolute;
+  }
+
+  .playerEqual0 {
     left: 70px;
+  }
+
+  .playerEqual1 {
+    left: 304px;
   }
 
   .selectedImageCongrat2 {
@@ -105,15 +122,16 @@
     left: 302px
   }
 
-  .winnerPlayerCongrat {
+  .winnerPlayerEqual {
     font-size: 213%;
+    margin-top: -51px;
   }
 
   .selectedImageFrameCongrat {
     height: 251px;
   }
 
-  .playAgainCongratImg {
-    top: 99%;
+  .playAgainEqualImg {
+    top: 83%;
   }
 }
