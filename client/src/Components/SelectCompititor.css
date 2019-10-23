@@ -16,8 +16,8 @@
 }
 
 .startButton {
-  height: 64px;
-  width: 137px;
+  height: 44px;
+  width: 100px;
 }
 
 .searchDiv {
@@ -341,10 +341,9 @@ ul {
     font-size: 29px
   }
 
-
   .startButton {
-    height: 50px;
-    width: 110px
+    height: 75px;
+    width: 174px;
   }
 
   .errorMeassageG {
@@ -355,6 +354,8 @@ ul {
   .playersToPlayWith {
     height: 30%;
   }
+
+
 }
 
 /* .invButton {
