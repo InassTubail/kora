@@ -14,6 +14,11 @@
   /* position: relative; */
 }
 
+/* @media (min-width: 991px) {
+  .mainDivv {
+    height: 100%
+  }
+} */
 
 
 .selectGameTypes {
