@@ -13,11 +13,11 @@
   overflow: hidden;
 }
 
-@media (min-width: 991px) {
+/* @media (min-width: 991px) {
   .mainView {
     height: 100%
   }
-}
+} */
 
 .titleImage {
   width: 90%;
