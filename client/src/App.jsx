@@ -15,6 +15,7 @@ import CongratsPWP from './Components/CongratsPWP'
 import Congrat from './Components/Congrat'
 import Equal from './Components/Equal'
 import Snackbar from './Components/snackpar'
+import Tables from './Components/Tables'
 import socket from './utils/api'
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
 // import history from './history';
@@ -63,7 +64,7 @@ class App extends Component {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
         console.log('how much');
-        
+
         this.props.openDialog({ from: data.from, type: 'cancelInvite', removeAfterTime: true });
       }
     })
@@ -140,7 +141,7 @@ class App extends Component {
       }
       color = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
       isMyRole = role === this.props.user_info.username;
-      
+
       if (numberOfQuestion === 12 && blueScore === redScore) {
         this.props.history.push('/equal')
       }
@@ -245,6 +246,7 @@ class App extends Component {
           <Route exact path="/congrat-individ" component={CongratIndivid} />
           <Route exact path="/congrat" component={Congrat} />
           <Route exact path="/equal" component={Equal} />
+          <Route exact path="/tables" component={Tables} />
 
         </Switch>
       </div>
