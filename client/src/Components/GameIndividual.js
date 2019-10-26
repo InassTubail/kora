@@ -10,6 +10,10 @@ import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counter from '../assets/counter.png';
 import koraGreen from '../assets/koGreen.png'
+import koraRed from '../assets/koRed.png'
+import koraBlack from '../assets/koBlack.png'
+import timer from '../assets/timer.png'
+
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
@@ -119,10 +123,12 @@ class GameIndividual extends Component {
               <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
             </div>
             <div className="subHeader4Game">
-              <img src={counter} title="sdd" alt="dd" className="counter" />
-              <p className="counterParagGameInd">{this.props.user_info.level} / 4</p>
-              {/* --- */}
-              {/* <p className="counterParag">{this.props.user_info.level}</p> */}
+            <img src={timer} alt="" className="timer"/>
+          <p className="timerP"> 4</p> 
+
+              {/* <img src={counter} title="sdd" alt="dd" className="counter" />
+              <p className="counterParagGameInd">{this.props.user_info.level} / 4</p> */}
+             
             </div>
           </div>
           <div className="koras">
