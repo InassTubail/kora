@@ -14,6 +14,7 @@
   position: relative;
 }
 
+
 .koras {
   display: flex;
   flex-wrap: wrap;
@@ -34,6 +35,7 @@
   z-index: -1;
   bottom: -22px;
 }
+
 .titleImageInd {
   width: 96%;
   display: block;

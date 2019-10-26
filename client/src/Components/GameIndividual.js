@@ -14,6 +14,11 @@ import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
 import { arabic_num, convert } from '../utils/arabic_num'
+import helping from '../assets/helping.png'
+import displayTable from '../assets/displayTable.png'
+import addTime from '../assets/AddTime.png'
+import deleteAnswer from '../assets/deleteAnswer.png'
+import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
@@ -24,25 +29,29 @@ import Sound from './SoundAhsant'
 import TryAgainSound from './TryAgainSound'
 
 
+let iniaistate = {
+  number1: 0,
+  number2: 0,
+  answers: [],
+  person: "",
+  answered: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //1 true 0 false 2 notanswerd
+  NOTrue: 0,
+  isClick: false,
+  showPopup: false,
+  voice: false,
+  tryAgainVoice: false,
+  showCongratePopup: false,
+  classKora: '',
+  choiceNumber: [],
+  timer: 50,
+  allNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
+  plusTime: false,
+  deleteAnswer: false,
+  showTable: false
+}
 class GameIndividual extends Component {
-  state = {
-    number1: 0,
-    number2: 0,
-    answers: [],
-    person: "",
-    answered: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //1 true 0 false 2 notanswerd
-    NOTrue: 0,
-    isClick: false,
-    showPopup: false,
-    voice: false,
-    tryAgainVoice: false,
-    showCongratePopup: false,
-    classKora: '',
-    choiceNumber: [],
-    timer: 50,
-    allNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
-  }
+  state = { ...iniaistate }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.timer === this.state.timer) {
       const { NOQuestion, isClick } = this.state;
@@ -50,7 +59,7 @@ class GameIndividual extends Component {
       if (NOQuestion < 10) {
         if (isClick) {
           setTimeout(() => {
-            this.setState({ isClick: false })
+            this.setState({ isClick: false, classKora: '' })
             let { id } = this.props.match.params
             const { allNumber } = this.state
             let randomC = Math.floor(Math.random() * (allNumber.length - 1)) + 0;
@@ -66,8 +75,27 @@ class GameIndividual extends Component {
           }, 2000);
         }
       } else {
-        this.props.history.push(`/congrat-individ`);
+        if (this.state.NOTrue >= 6 && !this.state.showCongratePopup) {
+          this.setState({ showCongratePopup: true })
+        } else if (this.state.NOTrue < 6 && !this.state.showPopup) {
+          this.setState({ showPopup: true })
+        }
+        // this.props.history.push(`/congrat-individ`);
       }
+    }
+  }
+  plusTime = () => {
+    this.setState((state) => ({ timer: state.timer + 10, plusTime: true }))
+  }
+  showTable = () => {
+    this.setState((state) => ({ showTable: true }))
+  }
+  deleteAnswer = () => {
+    const { answers } = this.state;
+    if (answers[0].style === 'incorrect') {
+      this.setState({ answers: answers.filter((el, index) => index !== 0) })
+    } else {
+      this.setState({ answers: answers.filter((el, index) => index !== 1) })
     }
   }
   componentDidMount() {
@@ -86,7 +114,11 @@ class GameIndividual extends Component {
     // setInterval(() => {
     //   this.setState((state) => ({ timer: state.timer - 1 }))
     //   if (this.state.timer == 0) {
-    //     this.props.history.push(`/congrat-individ`);
+    // if (this.state.NOTrue > 6) {
+    //   this.setState({ showCongratePopup: true })
+    // }else{
+    //   this.setState({ showPopup: true })
+    // }
     //   }
     // }, 1000)
   }
@@ -100,7 +132,7 @@ class GameIndividual extends Component {
         if (NOQuestion == index) el = 1;
         return el
       })
-      this.setState({ NOQuestion: NOQuestion + 1, answered: answer })
+      this.setState({ NOQuestion: NOQuestion + 1, answered: answer, NOTrue: this.state.NOTrue + 1 })
     } else {
       let answer = answered.map((el, index) => {
         if (NOQuestion == index) el = 0;
@@ -111,30 +143,56 @@ class GameIndividual extends Component {
 
   }
   closePopUp = () => {
-    this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
+    this.setState({ ...iniaistate })
+    if (this.state.NOTrue >= 6) {
+      this.props.history.push(`/tables`);
+    }
+    // this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
   }
   render() {
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;
     return (
       <React.Fragment>
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
+        <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <Sound voice={voice} />
         <TryAgainSound TryAgainVoice={tryAgainVoice} />
-        <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">
             <img src={titleImg} alt="title" className="titleImageInd" />
-            <div className="quesDiv">
-              <img src={questions} alt="title" className="titleImageInd" />
-              <p className="questionStatement">{`${arabic_num[number1]} * ${arabic_num[number2]}`}</p>
-            </div>
           </div>
+
+          <div className="counterWithHelp">
+            <div className="counterNew">
+              {/* <img src={counter} title="sdd" alt="dd" className="counter" />
+              <p className="counterParagGameInd"> 4</p>  */}
+            </div>
+
+            <div className="helpingDiv">
+              <img src={helping} alt="" className="helpingImg" />
+              <div className="choices">
+                {/* <img src={displayTable} alt="" className="displayTable"/> */}
+                {/* <img src={addTime} alt="" className="AddTime"/> */}
+                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+              </div>
+            </div>
+
+
+
+          </div>
+          <div className="quesDiv">
+            <img src={questions} alt="title" className="titleImageInd" />
+            <p className="questionStatement">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
+          </div>
+
           <img src={haresBlue} alt="hares" className="hares" />
 
           <div className="answers">
             {answers.map((el, index) =>
               <button className={!this.state.isClick ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
-                {/* {convert(el.answer)} */} {el.arabic_answer}
+                {el.arabic_answer}
               </button>
             )}
           </div>
