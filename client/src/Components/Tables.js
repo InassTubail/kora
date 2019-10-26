@@ -17,68 +17,44 @@ import table10 from '../assets/table-10.png';
 import tableshort from '../assets/table-short.png';
 import tablebg from '../assets/table-bg.png';
 
-
 import './Tables.css';
 
 class Tables extends Component {
- 
-  render() {
-    return (
-      <React.Fragment>
-      <div class="multiplication-tables">
-        <div class="tables-title">
-            <img src={titleTable}alt="" />
-        </div>
-        <div class="tables-loo">
-            <a href="" class="table-link">
-                <img src={table2} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table3} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table4} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table5} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table6} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table7} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table8} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table9} alt="" />
-            </a>
-            <a href="" class="table-link">
-                <img src={table10} alt="" />
-            </a>
-
-        </div>
-        <div class="footer">
-            <img src={tablebg} alt="" />
-            <a href="" class="short-table">
-                <img src={tableshort} alt="" />
-            </a>
-        </div>
-    </div>
-      </React.Fragment>
-    );
-  }
+    render() {
+        let tables = [table2, table3, table4, table5, table6, table7, table8, table9, table10]
+        return (
+            <React.Fragment>
+                <div class="multiplication-tables">
+                    <div class="tables-title">
+                        <img src={titleTable} alt="" />
+                    </div>
+                    <div class="tables-loo">
+                        {tables.map((el, index) =>
+                            <Link to={`tables/${index + 2}`} class="table-link">
+                                <img src={el} alt="" />
+                            </Link>
+                        )}
+                    </div>
+                    <div class="footer">
+                        <img src={tablebg} alt="" />
+                        <Link to="/tables/short" class="short-table">
+                            <img src={tableshort} alt="" />
+                        </Link>
+                    </div>
+                </div>
+            </React.Fragment>
+        );
+    }
 }
 
 const mapDispatchToProps = { updateUser };
 const mapStateToProps = state => ({
-  user_info: state.user.info,
-  // users: state.user.users,
-  // isLoggedIn: state.user.isLoggedIn,
+    user_info: state.user.info,
+    // users: state.user.users,
+    // isLoggedIn: state.user.isLoggedIn,
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Tables);

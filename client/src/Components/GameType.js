@@ -15,49 +15,45 @@ const GameType = () => {
   return (
     <React.Fragment>
       <div className="mainDivv">
-      
-      <div className="selectGameTypes"> 
-      <img src={selectGameTypes} alt="selectGameTypes" className="selectGameTypesImg"/>
-      </div>
 
-      <div className="playIndividual">
-      <img src={playIndividual} alt="playIndividual" className="playIndividualImg"/>
-      </div>
+        <div className="selectGameTypes">
+          <img src={selectGameTypes} alt="selectGameTypes" className="selectGameTypesImg" />
+        </div>
 
-      <div className="game-individualButton">
-        <Link to="/game-individual">
-          <img className="button-game-individual" src={button1} alt="individual game" />
-        </Link>
+        <div className="playIndividual">
+          <img src={playIndividual} alt="playIndividual" className="playIndividualImg" />
+        </div>
+
+        <div className="game-individualButton">
+          <Link to="/tables">
+            <img className="button-game-individual" src={button1} alt="individual game" />
+          </Link>
         </div>
 
 
 
-       <div className="kora">
+        <div className="kora">
           <img className="centerKora" src={centerKora} alt="ddfd" />
-        </div> 
+        </div>
 
 
 
- <div className="playWithGroup">
- <img src={playWithGroup} alt="playWithGroupImg"  className="playWithGroupImg"/>
-</div> 
+        <div className="playWithGroup">
+          <img src={playWithGroup} alt="playWithGroupImg" className="playWithGroupImg" />
+        </div>
 
 
 
-  <div className="vsPlayType">
-    <span>Team1</span>
-<img src={vsPlayType} alt="vsPlayType" className="vsPlayTypeImg"/>
-<span className="">Team2</span>
-</div> 
-
-
-
-
-         <div className="select-compititorButton">
-        <Link to="/select-compititor">
-          <img className="button2-select-compititor" src={button2} alt="group game" />
-        </Link>
-        </div> 
+        <div className="vsPlayType">
+          <span>Team1</span>
+          <img src={vsPlayType} alt="vsPlayType" className="vsPlayTypeImg" />
+          <span className="">Team2</span>
+        </div>
+        <div className="select-compititorButton">
+          <Link to="/select-compititor">
+            <img className="button2-select-compititor" src={button2} alt="group game" />
+          </Link>
+        </div>
 
       </div>
     </React.Fragment>
