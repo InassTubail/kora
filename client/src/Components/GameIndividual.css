@@ -14,6 +14,43 @@
   position: relative;
 }
 
+.koras {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -17px;
+  z-index: 1;
+  position: relative;
+}
+
+
+.titleImageInd {
+  width: 96%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.KorasImg {
+  height: 40px;
+}
+
+
+@media (max-width: 400px) {
+  .KorasImg {
+    height: 30px;
+  }
+
+  /* .bottomHead {
+    margin-top: 59%;
+  } */
+}
+
+
+
+
+
+
 
 .headerGameIndivid {
   display: flex;
@@ -27,6 +64,7 @@
   background-size: cover;
   /* background: green; */
 }
+
 
 .incorrect {
   background-image: url('../assets/redColor.png') !important;
@@ -61,21 +99,28 @@
   width: 15%;
   top: 63%;
   left: 44%;
-
   animation-name: example;
-  animation-duration: 5s;
-  animation-iteration-count: 300;
+  animation-duration: 8s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite
 }
 
 @keyframes example {
   0% {
-    left: 44%;
-    top: 63%;
+    transform: translateX(0%);
   }
 
   25% {
-    left: 20px;
-    top: 63%;
+    transform: translateX(180%);
+
+  }
+
+  75% {
+    transform: translateX(-180%);
+  }
+
+  100% {
+    transform: translateX(0%);
   }
 }
 
@@ -133,7 +178,7 @@
 .selectedImage33 {
   position: absolute;
   height: 88px;
-  left: 19px;
+  left: 26px;
   top: -8px;
 }
 
@@ -141,6 +186,21 @@
   height: 60px;
   position: absolute;
   top: 17%;
+  color: white;
+  font-weight: bold;
+  font-size: 170%;
+}
+
+.timer {
+
+  height: 80px;
+  width: 80px;
+}
+
+.timerP {
+  height: 60px;
+  position: absolute;
+  top: -2%;
   color: white;
   font-weight: bold;
   font-size: 170%;
@@ -186,13 +246,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 70%;
+  margin-top: 59%;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 
 @media (min-width: 576px) {
+  .timer {
+    height: 120px;
+    width: 120px
+  }
+
   .questionStatement {
     font-size: 39px;
   }
@@ -323,4 +388,61 @@
       transform: perspective(750px) translate3d(-200px, -250px, -100px)
     }
   }
+}
+
+
+@media (min-height: 730px) {
+  .bottomHead {
+    margin-top: 70%;
+  }
+}
+
+@media (min-height: 800px) {
+  .bottomHead {
+    margin-top: 84%;
+  }
+
+  .KorasImg {
+    height: 37px;
+  }
+
+  .koras {
+    margin-top: 5px;
+  }
+
+}
+
+
+@media (min-width: 576px) {
+  .KorasImg {
+    height: 50px;
+  }
+
+  .selectedImage33 {
+    position: absolute;
+    height: 144px;
+    left: 38px;
+    top: -8px;
+  }
+
+  .selectedImageFrame33 {
+    height: 180px;
+  }
+
+  .titleImageInd {
+    width: 77%;
+  }
+
+  .KorasImg {
+    height: 74px;
+  }
+
+
+  .timerP {
+    top: -18px;
+    font-size: 300%;
+
+  }
+
+
 }
