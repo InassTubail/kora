@@ -9,6 +9,7 @@ import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 import counter from '../assets/counter.png';
+import koraGreen from '../assets/koGreen.png'
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
@@ -88,9 +89,9 @@ class GameIndividual extends Component {
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">
-            <img src={titleImg} alt="title" className="titleImage" />
+            <img src={titleImg} alt="title" className="titleImageInd" />
             <div className="quesDiv">
-              <img src={questions} alt="title" className="titleImage" />
+              <img src={questions} alt="title" className="titleImageInd" />
               <p className="questionStatement">{`${number1} * ${number2}`}</p>
             </div>
           </div>
@@ -103,6 +104,7 @@ class GameIndividual extends Component {
               </button>
             )}
           </div>
+    
           <img src={koraImg} alt="kora" edt className="koraImg" className={`koraImg ${this.state.classKora}`} />
           <img src={player} alt="kora" edt className="playerImg" className="playerImg" />
 
@@ -123,6 +125,19 @@ class GameIndividual extends Component {
               {/* <p className="counterParag">{this.props.user_info.level}</p> */}
             </div>
           </div>
+          <div className="koras">
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+             <img src={koraGreen} alt="" className="KorasImg"/>
+          </div>
+          
 
         </div>
       </React.Fragment>
