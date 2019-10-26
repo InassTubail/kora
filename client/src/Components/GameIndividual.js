@@ -16,10 +16,10 @@ import timer from '../assets/timer.png'
 import { arabic_num, convert } from '../utils/arabic_num'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
-
+import timerRed from '../assets/redTimer.png'
 import displayTable from '../assets/displayTable.png'
 import addTime from '../assets/AddTime.png'
-import deleteAnswer from '../assets/deleteAnswer.png'
+// import deleteAnswer from '../assets/deleteAnswer.png'
 import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
@@ -29,7 +29,11 @@ import { shuffle } from '../utils/questionAndAnswer';
 import './GameIndividual.css';
 import Sound from './SoundAhsant'
 import TryAgainSound from './TryAgainSound'
-
+import showTableB from '../assets/showTableB.png'
+import showTableG from '../assets/showTableG.png'
+import plusTimeB from '../assets/plusTimeB.png'
+import plusTimeG from '../assets/plusTimeG.png'
+import deleteTableG from '../assets/deleteTableG.png'
 
 let iniaistate = {
   number1: 0,
@@ -87,7 +91,9 @@ class GameIndividual extends Component {
     }
   }
   plusTime = () => {
+    console.log(this.state.timer, '***');
     this.setState((state) => ({ timer: state.timer + 10, plusTime: true }))
+
   }
   showTable = () => {
     this.setState((state) => ({ showTable: true }))
@@ -95,9 +101,9 @@ class GameIndividual extends Component {
   deleteAnswer = () => {
     const { answers } = this.state;
     if (answers[0].style === 'incorrect') {
-      this.setState({ answers: answers.filter((el, index) => index !== 0) })
+      this.setState({ answers: answers.filter((el, index) => index !== 0), deleteAnswer: true })
     } else {
-      this.setState({ answers: answers.filter((el, index) => index !== 1) })
+      this.setState({ answers: answers.filter((el, index) => index !== 1), deleteAnswer: true })
     }
   }
   componentDidMount() {
@@ -181,11 +187,13 @@ class GameIndividual extends Component {
               <div className="helpingContent">
                 <img src={helping} alt="" className="helpingImg" />
                 <div className="choices">
-                  {/* <img src={displayTable} alt="" className="displayTable"/> */}
-                  {/* <img src={addTime} alt="" className="AddTime"/> */}
-                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
-                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
-                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                  {this.state.deleteAnswer ?
+                    <img src={deleteAnswer2} alt="" className="deleteAnswer2" /> :
+                    <img src={deleteTableG} alt="" className="deleteAnswer2" onClick={this.deleteAnswer} />}
+                  {this.state.showTable ? <img src={showTableB} alt="" className="deleteAnswer2" /> :
+                    <img src={showTableG} alt="" className="deleteAnswer2" onClick={this.showTable} />}
+                  {this.state.plusTime ? <img src={plusTimeB} alt="" className="deleteAnswer2" /> :
+                    <img src={plusTimeG} alt="" className="deleteAnswer2" onClick={this.plusTime} />}
                 </div>
               </div>
             </div>
@@ -222,7 +230,7 @@ class GameIndividual extends Component {
               <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
             </div>
             <div className="subHeader4Game">
-              <img src={timer} alt="" className="timer" />
+              {this.state.timer < 10 ? <img src={timerRed} alt="" className="timer" /> : <img src={timer} alt="" className="timer" />}
               <p className="timerP"> {this.state.timer}</p>
 
               {/* <img src={counter} title="sdd" alt="dd" className="counter" />

@@ -217,6 +217,7 @@
   position: absolute;
   flex-direction: column;
   top: 8%;
+  z-index: 9999;
 }
 
 .choices img {
