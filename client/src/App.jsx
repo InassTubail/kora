@@ -252,6 +252,7 @@ class App extends Component {
           <Route exact path="/congrat" component={Congrat} />
           <Route exact path="/equal" component={Equal} />
           <Route exact path="/tables" component={Tables} />
+          <Route exact path="/tables/:id" component={GameIndividual} />
 
         </Switch>
       </div>
