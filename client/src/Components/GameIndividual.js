@@ -14,7 +14,9 @@ import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
 import { arabic_num, convert } from '../utils/arabic_num'
-import helping from '../assets/helping.png'
+import helping from '../assets/help-tools2.png'
+import helping2 from '../assets/help-tools1.png'
+
 import displayTable from '../assets/displayTable.png'
 import addTime from '../assets/AddTime.png'
 import deleteAnswer from '../assets/deleteAnswer.png'
@@ -111,16 +113,16 @@ class GameIndividual extends Component {
       answers,
       allNumber: all,
     })
-    // setInterval(() => {
-    //   this.setState((state) => ({ timer: state.timer - 1 }))
-    //   if (this.state.timer == 0) {
-    // if (this.state.NOTrue > 6) {
-    //   this.setState({ showCongratePopup: true })
-    // }else{
-    //   this.setState({ showPopup: true })
-    // }
-    //   }
-    // }, 1000)
+    setInterval(() => {
+      this.setState((state) => ({ timer: state.timer - 1 }))
+      if (this.state.timer == 0) {
+        if (this.state.NOTrue > 6) {
+          this.setState({ showCongratePopup: true })
+        } else {
+          this.setState({ showPopup: true })
+        }
+      }
+    }, 1000)
   }
   selectAnswer = (el) => {
     const { id } = el.currentTarget
@@ -143,9 +145,12 @@ class GameIndividual extends Component {
 
   }
   closePopUp = () => {
+    let { id } = this.props.match.params
     this.setState({ ...iniaistate })
     if (this.state.NOTrue >= 6) {
       this.props.history.push(`/tables`);
+    } else {
+      this.props.history.push(`/tables/${id}`);
     }
     // this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
   }
@@ -167,15 +172,21 @@ class GameIndividual extends Component {
               {/* <img src={counter} title="sdd" alt="dd" className="counter" />
               <p className="counterParagGameInd"> 4</p>  */}
             </div>
-
             <div className="helpingDiv">
-              <img src={helping} alt="" className="helpingImg" />
-              <div className="choices">
-                {/* <img src={displayTable} alt="" className="displayTable"/> */}
-                {/* <img src={addTime} alt="" className="AddTime"/> */}
-                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
-                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
-                <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+
+              <div className="helpingTitle">
+                <img src={helping2} alt="" className="helpingTitleImg" />
+              </div>
+
+              <div className="helpingContent">
+                <img src={helping} alt="" className="helpingImg" />
+                <div className="choices">
+                  {/* <img src={displayTable} alt="" className="displayTable"/> */}
+                  {/* <img src={addTime} alt="" className="AddTime"/> */}
+                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                  <img src={deleteAnswer2} alt="" className="deleteAnswer2" />
+                </div>
               </div>
             </div>
 

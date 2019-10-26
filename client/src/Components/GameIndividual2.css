@@ -202,21 +202,28 @@
   justify-content: space-between
 }
 
+.helpingTitleImg {
+  width: 114px;
+}
+
 .helpingImg {
   width: 114px;
-  height: 138px;
+  height: 97px;
 }
+
 
 .choices {
   display: flex;
   position: absolute;
   flex-direction: column;
-  top: 27%;
+  top: 8%;
 }
 
 .choices img {
   width: 112px;
 }
+
+
 
 .helpingDiv {
   position: relative;
@@ -501,13 +508,13 @@
   .choices {
     display: flex;
     position: absolute;
-    left: 31px;
+    left: 9px;
     flex-direction: column;
-    top: 27%;
+    top: 8%;
   }
 
   .choices img {
-    width: 144px;
+    width: 176px;
   }
 
   .counter {
