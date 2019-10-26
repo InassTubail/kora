@@ -13,7 +13,9 @@ import koraGreen from '../assets/koGreen.png'
 import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
-import helping from '../assets/helping.png'
+import helping from '../assets/help-tools2.png'
+import helping2 from '../assets/help-tools1.png'
+
 import displayTable from '../assets/displayTable.png'
 import addTime from '../assets/AddTime.png'
 import deleteAnswer from '../assets/deleteAnswer.png'
@@ -108,7 +110,15 @@ class GameIndividual extends Component {
               <p className="counterParagGameInd"> 4</p>  */}
            </div>
 
+
+
            <div className="helpingDiv">
+
+           <div className="helpingTitle">
+           <img  src={helping2} alt="" className="helpingTitleImg"/>
+           </div>
+
+           <div className="helpingContent">
            <img src={helping} alt="" className="helpingImg"/>
            <div className="choices">
            {/* <img src={displayTable} alt="" className="displayTable"/> */}
@@ -116,6 +126,7 @@ class GameIndividual extends Component {
            <img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
            <img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
            <img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
+           </div>
            </div>
            </div>
 
