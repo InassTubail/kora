@@ -34,6 +34,8 @@ import showTableG from '../assets/showTableG.png'
 import plusTimeB from '../assets/plusTimeB.png'
 import plusTimeG from '../assets/plusTimeG.png'
 import deleteTableG from '../assets/deleteTableG.png'
+import correctSound from '../assets/correct.mp3';
+import ShowTab from './showTables';
 
 let iniaistate = {
   number1: 0,
@@ -54,7 +56,9 @@ let iniaistate = {
   NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
   plusTime: false,
   deleteAnswer: false,
-  showTable: false
+  showTable: false,
+  correctSound: false,
+  openTable: false
 }
 class GameIndividual extends Component {
   state = { ...iniaistate }
@@ -65,7 +69,7 @@ class GameIndividual extends Component {
       if (NOQuestion < 10) {
         if (isClick) {
           setTimeout(() => {
-            this.setState({ isClick: false, classKora: '' })
+            this.setState({ isClick: false, classKora: '', correctSound: false })
             let { id } = this.props.match.params
             const { allNumber } = this.state
             let randomC = Math.floor(Math.random() * (allNumber.length - 1)) + 0;
@@ -96,7 +100,7 @@ class GameIndividual extends Component {
 
   }
   showTable = () => {
-    this.setState((state) => ({ showTable: true }))
+    this.setState((state) => ({ showTable: true, openTable: true }))
   }
   deleteAnswer = () => {
     const { answers } = this.state;
@@ -140,7 +144,7 @@ class GameIndividual extends Component {
         if (NOQuestion == index) el = 1;
         return el
       })
-      this.setState({ NOQuestion: NOQuestion + 1, answered: answer, NOTrue: this.state.NOTrue + 1 })
+      this.setState({ NOQuestion: NOQuestion + 1, answered: answer, NOTrue: this.state.NOTrue + 1, correctSound: true })
     } else {
       let answer = answered.map((el, index) => {
         if (NOQuestion == index) el = 0;
@@ -156,6 +160,7 @@ class GameIndividual extends Component {
     if (this.state.NOTrue >= 6) {
       this.props.history.push(`/tables`);
     } else {
+      this.props.history.push(`/tables/${id}`);
       const { allNumber } = this.state
       let randomC = Math.floor(Math.random() * 10) + 1;
       let answers = [{ answer: randomC * id, style: "correct" }, { answer: (randomC * id) + 2, style: "incorrect" }, { answer: (randomC * id) + 3, style: "incorrect" }];
@@ -167,14 +172,18 @@ class GameIndividual extends Component {
         answers,
         allNumber: all,
       })
-      this.props.history.push(`/tables/${id}`);
     }
     // this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
+  }
+  closee = () => {
+    this.setState({ openTable: false })
   }
   render() {
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;
     return (
       <React.Fragment>
+        {this.state.showTable && this.state.openTable && <ShowTab close={this.closee} />}
+        {this.state.correctSound && <audio autoPlay src={correctSound} />}
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <Sound voice={voice} />
@@ -183,18 +192,15 @@ class GameIndividual extends Component {
           <div className="headerGameIndivid">
             <img src={titleImg} alt="title" className="titleImageInd" />
           </div>
-
           <div className="counterWithHelp">
             <div className="counterNew">
               {/* <img src={counter} title="sdd" alt="dd" className="counter" />
               <p className="counterParagGameInd"> 4</p>  */}
             </div>
             <div className="helpingDiv">
-
               <div className="helpingTitle">
                 <img src={helping2} alt="" className="helpingTitleImg" />
               </div>
-
               <div className="helpingContent">
                 <img src={helping} alt="" className="helpingImg" />
                 <div className="choices">
@@ -208,9 +214,6 @@ class GameIndividual extends Component {
                 </div>
               </div>
             </div>
-
-
-
           </div>
           <div className="quesDiv">
             <img src={questions} alt="title" className="titleImageInd" />
@@ -243,10 +246,6 @@ class GameIndividual extends Component {
             <div className="subHeader4Game">
               {this.state.timer < 10 ? <img src={timerRed} alt="" className="timer" /> : <img src={timer} alt="" className="timer" />}
               <p className="timerP"> {this.state.timer}</p>
-
-              {/* <img src={counter} title="sdd" alt="dd" className="counter" />
-              <p className="counterParagGameInd">{this.props.user_info.level} / 4</p> */}
-
             </div>
           </div>
           <div className="koras">

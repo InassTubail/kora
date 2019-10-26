@@ -21,6 +21,8 @@ export function convert(number) {
             el.arabic_answer =  `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}`
         }else if (sNumber.length === 1){            
             el.arabic_answer =  `${arabic_num[sNumber[0]]}`
+        }else if (sNumber.length === 3){            
+            el.arabic_answer =  `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}${arabic_num[sNumber[2]]}`
         }
         return el;
     })
