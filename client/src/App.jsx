@@ -9,6 +9,8 @@ import SelectCompititor from './Components/SelectCompititor';
 import GameIndividual from './Components/GameIndividual';
 import PopAccept from './Components/PopAccept';
 import CongratIndivid from './Components/CongratIndivid';
+import GameIndividual2 from './Components/GameIndividual2';
+
 // import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson'
 import CongratsPWP from './Components/CongratsPWP'
@@ -240,10 +242,13 @@ class App extends Component {
             component={SelectCompititor}
           />
           <Route exact path="/game-individual" component={GameIndividual} />
+          <Route exact path="/game-individual2" component={GameIndividual2} />
+
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
           {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
           <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
+
           <Route exact path="/congrat" component={Congrat} />
           <Route exact path="/equal" component={Equal} />
           <Route exact path="/tables" component={Tables} />

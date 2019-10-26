@@ -25,12 +25,12 @@ import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
-import './GameIndividual.css';
+import './GameIndividual2.css';
 import Sound from './SoundAhsant'
 import TryAgainSound from './TryAgainSound'
 
 
-class GameIndividual extends Component {
+class GameIndividual2 extends Component {
   state = {
     number1: 0,
     number2: 0,
@@ -104,8 +104,8 @@ class GameIndividual extends Component {
 
 <div className="counterWithHelp">
           <div className="counterNew">   
-               {/* <img src={counter} title="sdd" alt="dd" className="counter" />
-              <p className="counterParagGameInd"> 4</p>  */}
+               <img src={counter} title="sdd" alt="dd" className="counter" />
+              <p className="counterParagGameInd"> 4</p> 
            </div>
 
            <div className="helpingDiv">
@@ -190,4 +190,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GameIndividual);
+)(GameIndividual2);
