@@ -156,6 +156,17 @@ class GameIndividual extends Component {
     if (this.state.NOTrue >= 6) {
       this.props.history.push(`/tables`);
     } else {
+      const { allNumber } = this.state
+      let randomC = Math.floor(Math.random() * 10) + 1;
+      let answers = [{ answer: randomC * id, style: "correct" }, { answer: (randomC * id) + 2, style: "incorrect" }, { answer: (randomC * id) + 3, style: "incorrect" }];
+      answers = shuffle(answers)
+      answers = convert(answers)
+      let all = allNumber.filter((el) => el !== randomC)
+      this.setState({
+        number1: randomC, number2: id,
+        answers,
+        allNumber: all,
+      })
       this.props.history.push(`/tables/${id}`);
     }
     // this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
