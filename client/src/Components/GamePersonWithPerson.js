@@ -14,7 +14,6 @@ import playerBlue from '../assets/playerBlue.png';
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
-
 import './GameGroupWithGroup.css';
 import socket from '../utils/api';
 
@@ -25,9 +24,17 @@ class GamePersonWithPerson extends Component {
     blueTeam: [],
     redTeam: [],
     error: "",
-    count: 0
+    timer: 0,
+    
   }
-
+  getDerivedStateFromProps(props, state) {
+    if (props.selected !== state.selected) {
+      return {
+        selected: props.selected,
+      };
+    }
+    return null;
+  }
   componentDidUpdate() {
     if (this.state.error) {
       setTimeout(async () => {
@@ -55,7 +62,7 @@ class GamePersonWithPerson extends Component {
       <React.Fragment>
         <div className="gameScreen2g">
           <div className="header2g">
-          <div>
+            <div>
               <img src={gWithg} alt="title" className="titleImage2g" />
             </div>
             {/* <p>{this.state.count}</p> */}
@@ -84,7 +91,7 @@ class GamePersonWithPerson extends Component {
 
           <div className="subHeadersGroupg">
             <div className="subHeader332g">
-              {blueTeam && blueTeam.map((el,index) =>
+              {blueTeam && blueTeam.map((el, index) =>
                 <React.Fragment>
                   <img
                     src={frame}
@@ -92,14 +99,14 @@ class GamePersonWithPerson extends Component {
                     alt="dss"
                     className="selectedImageFrame332g"
                   />
-                  <img src={person(el.person)} title="sdd" alt="dsdd" className={`selectedImage332g play${index}`}  />
+                  <img src={person(el.person)} title="sdd" alt="dsdd" className={`selectedImage332g play${index}`} />
                   <div className="blueColorg"><p>{el.username}</p></div>
                 </React.Fragment>
               )}
             </div>
 
             <div className="subHeader3321g">
-              {redTeam && redTeam.map((el,index) =>
+              {redTeam && redTeam.map((el, index) =>
                 <React.Fragment>
                   <img
                     src={frame}
