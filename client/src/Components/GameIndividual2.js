@@ -39,7 +39,7 @@ import correctSound from '../assets/correct.mp3';
 import ShowTab from './showTables';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 import timerRed from '../assets/redTimer.png'
-import correctSound from '../assets/correct.mp3';
+// import correctSound from '../assets/correct.mp3';
 
 class GameIndividual2 extends Component {
   state = {
