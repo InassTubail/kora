@@ -173,7 +173,7 @@ class GameIndividual2 extends Component {
       deleteAnswer: false,
       showTable: false,
       NOQuestion: 1,
-      timer: 15,
+      timer: 25,
       // again: true,
       // isClick: true,
       openTable: false,
