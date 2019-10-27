@@ -14,10 +14,10 @@ import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
 // import helping from '../assets/helping.png'
-import displayTable from '../assets/displayTable.png'
-import addTime from '../assets/AddTime.png'
-import deleteAnswer from '../assets/deleteAnswer.png'
-import deleteAnswer2 from '../assets/deleteAnswer2.png'
+// import displayTable from '../assets/displayTable.png'
+// import addTime from '../assets/AddTime.png'
+// import deleteAnswer from '../assets/deleteAnswer.png'
+// import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
 import { shortTable } from '../utils/customPlay'
@@ -34,10 +34,12 @@ import showTableG from '../assets/showTableG.png'
 import plusTimeB from '../assets/plusTimeB.png'
 import plusTimeG from '../assets/plusTimeG.png'
 import deleteTableG from '../assets/deleteTableG.png'
+import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import correctSound from '../assets/correct.mp3';
 import ShowTab from './showTables';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 import timerRed from '../assets/redTimer.png'
+import correctSound from '../assets/correct.mp3';
 
 class GameIndividual2 extends Component {
   state = {
@@ -60,6 +62,7 @@ class GameIndividual2 extends Component {
     correctSound: false,
     openTable: false,
     NOQuestion: 1,
+    correctSound: false,
     again: false
   }
   plusTime = () => {
@@ -79,7 +82,7 @@ class GameIndividual2 extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if ((prevState.timer === this.state.timer)) {
-      const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;  
+      const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;
       const { level } = this.props.user_info
       if (level !== 4) {
         if (NOQuestion === 10) {
@@ -90,11 +93,11 @@ class GameIndividual2 extends Component {
             this.setState({ showPopup: true, NOQuestion: 1, NOTrue: 0, tryAgainVoice: true, again: false })
           }
         } else if (isClick && NOQuestion < 10) {
-          
-          setTimeout( () => {
-            this.setState({ isClick: false, classKora: '', again: false })
+
+          setTimeout(() => {
+            this.setState({ isClick: false, classKora: '', correctSound: false })
             const { level } = this.props.user_info
-            let questions = shortTable[level];  
+            let questions = shortTable[level];
             let number1 = questions[NOQuestion - 1][0]
             let number2 = questions[NOQuestion - 1][1]
             let answers = [{ answer: number1 * number2, style: "correct" },
@@ -143,7 +146,7 @@ class GameIndividual2 extends Component {
         if (NOQuestion == index + 1) el = 1;
         return el
       })
-      this.setState({ NOQuestion: NOQuestion + 1, NOTrue: NOTrue + 1, answered: answer })
+      this.setState({ NOQuestion: NOQuestion + 1, NOTrue: NOTrue + 1, answered: answer, correctSound: true })
     } else {
       let answer = answered.map((el, index) => {
         if (NOQuestion == index + 1) el = 0;
@@ -185,6 +188,7 @@ class GameIndividual2 extends Component {
     const { level } = this.props.user_info
     return (
       <React.Fragment>
+        {this.state.correctSound && <audio autoPlay src={correctSound} />}
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
         <Sound voice={voice} />
         <TryAgainSound TryAgainVoice={tryAgainVoice} />
@@ -228,7 +232,7 @@ class GameIndividual2 extends Component {
           <div className="answers">
             {answers.map((el, index) =>
               <button className={!this.state.isClick ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
-                 {el.arabic_answer}
+                {el.arabic_answer}
               </button>
             )}
           </div>
