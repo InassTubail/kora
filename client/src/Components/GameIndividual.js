@@ -8,7 +8,7 @@ import frame from '../assets/frame.png';
 import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
-import counter from '../assets/counter.png';
+// import counter from '../assets/counter.png';
 import koraGreen from '../assets/koGreen.png'
 import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
@@ -86,7 +86,7 @@ class GameIndividual extends Component {
         if (this.state.NOTrue >= 6 && !this.state.showCongratePopup) {
           this.setState({ showCongratePopup: true })
         } else if (this.state.NOTrue < 6 && !this.state.showPopup) {
-          this.setState({ showPopup: true })
+          this.setState({ showPopup: true ,tryAgainVoice:true })
         }
         // this.props.history.push(`/congrat-individ`);
       }
