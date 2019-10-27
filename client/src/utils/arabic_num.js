@@ -13,19 +13,27 @@ export const arabic_num = {
     11: '١١',
 }
 export function convert(number) {
-    console.log({number});
-    let arabic = number.map((el)=>{
+    let arabic = number.map((el) => {
         let sNumber = el.answer.toString()
         if (sNumber.length === 2) {
             // f = arabic_num[sNumber[0]]
-            el.arabic_answer =  `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}`
-        }else if (sNumber.length === 1){            
-            el.arabic_answer =  `${arabic_num[sNumber[0]]}`
-        }else if (sNumber.length === 3){            
-            el.arabic_answer =  `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}${arabic_num[sNumber[2]]}`
+            el.arabic_answer = `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}`
+        } else if (sNumber.length === 1) {
+            el.arabic_answer = `${arabic_num[sNumber[0]]}`
+        } else if (sNumber.length === 3) {
+            el.arabic_answer = `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}${arabic_num[sNumber[2]]}`
         }
         return el;
     })
     return arabic
 }
-// export default arabic_num;
+export function convertT(number) {
+    let sNumber = number.toString()
+    if (sNumber.length === 2) {
+        return `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}`
+    } else if (sNumber.length === 1) {
+        return `${arabic_num[sNumber[0]]}`
+    } else if (sNumber.length === 3) {
+        return `${arabic_num[sNumber[0]]}${arabic_num[sNumber[1]]}${arabic_num[sNumber[2]]}`
+    }
+}

@@ -95,7 +95,6 @@ class GameIndividual extends Component {
     }
   }
   plusTime = () => {
-    console.log(this.state.timer, '***');
     this.setState((state) => ({ timer: state.timer + 10, plusTime: true }))
 
   }
@@ -160,8 +159,9 @@ class GameIndividual extends Component {
     if (this.state.NOTrue >= 6) {
       this.props.history.push(`/tables`);
     } else {
-      this.props.history.push(`/tables/${id}`);
-      const { allNumber } = this.state
+      // this.props.history.push(`/tables/${id}`);
+      // const { allNumber } = this.state
+      let allNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       let randomC = Math.floor(Math.random() * 10) + 1;
       let answers = [{ answer: randomC * id, style: "correct" }, { answer: (randomC * id) + 2, style: "incorrect" }, { answer: (randomC * id) + 3, style: "incorrect" }];
       answers = shuffle(answers)

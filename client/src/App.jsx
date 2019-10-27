@@ -242,7 +242,7 @@ class App extends Component {
             component={SelectCompititor}
           />
           <Route exact path="/game-individual" component={GameIndividual} />
-          <Route exact path="/game-individual2" component={GameIndividual2} />
+          <Route exact path="/tables/short" component={GameIndividual2} />
 
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
           {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
