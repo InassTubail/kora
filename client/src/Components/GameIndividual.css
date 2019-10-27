@@ -34,6 +34,7 @@
   z-index: -1;
   bottom: -22px;
 }
+
 .titleImageInd {
   width: 96%;
   display: block;
@@ -457,7 +458,8 @@
 
 @media (min-height: 800px) {
   .bottomHead {
-    margin-top: 74%;
+    margin-top: 38%
+      /* new margin-top: 74%; */
   }
 
   .KorasImg {
@@ -504,7 +506,8 @@
 
 
   .helpingTitleImg {
-    width: 187px;
+    width: 184px;
+
   }
 
   .helpingImg {
