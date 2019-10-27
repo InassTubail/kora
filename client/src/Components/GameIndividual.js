@@ -17,8 +17,6 @@ import { arabic_num, convert } from '../utils/arabic_num'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
 import timerRed from '../assets/redTimer.png'
-import displayTable from '../assets/displayTable.png'
-import addTime from '../assets/AddTime.png'
 // import deleteAnswer from '../assets/deleteAnswer.png'
 import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import player from '../assets/player.png';
@@ -179,10 +177,11 @@ class GameIndividual extends Component {
     this.setState({ openTable: false })
   }
   render() {
+    let { id } = this.props.match.params
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;
     return (
       <React.Fragment>
-        {this.state.showTable && this.state.openTable && <ShowTab close={this.closee} />}
+        {this.state.showTable && this.state.openTable && <ShowTab id={id} close={this.closee} />}
         {this.state.correctSound && <audio autoPlay src={correctSound} />}
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />

@@ -14,10 +14,10 @@ import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
 // import helping from '../assets/helping.png'
-import displayTable from '../assets/displayTable.png'
-import addTime from '../assets/AddTime.png'
-import deleteAnswer from '../assets/deleteAnswer.png'
-import deleteAnswer2 from '../assets/deleteAnswer2.png'
+// import displayTable from '../assets/displayTable.png'
+// import addTime from '../assets/AddTime.png'
+// import deleteAnswer from '../assets/deleteAnswer.png'
+// import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
 
@@ -121,9 +121,9 @@ class GameIndividual2 extends Component {
 <div className="choices">
 {/* <img src={displayTable} alt="" className="displayTable"/> */}
 {/* <img src={addTime} alt="" className="AddTime"/> */}
+{/* <img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
 <img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
-<img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
-<img src={deleteAnswer2} alt="" className="deleteAnswer2"/>
+<img src={deleteAnswer2} alt="" className="deleteAnswer2"/> */}
 </div>
 </div>
 </div>
