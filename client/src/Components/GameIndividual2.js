@@ -62,7 +62,7 @@ class GameIndividual2 extends Component {
     correctSound: false,
     openTable: false,
     NOQuestion: 1,
-    correctSound: false,
+    // correctSound: false,
     again: false
   }
   plusTime = () => {
