@@ -93,7 +93,6 @@ class GameIndividual2 extends Component {
             this.setState({ showPopup: true, NOQuestion: 1, NOTrue: 0, tryAgainVoice: true, again: false })
           }
         } else if (isClick && NOQuestion < 10) {
-
           setTimeout(() => {
             this.setState({ isClick: false, classKora: '', correctSound: false })
             const { level } = this.props.user_info
@@ -129,6 +128,7 @@ class GameIndividual2 extends Component {
       if (this.state.timer == 0) {
         if (this.state.NOTrue > 5) {
           this.setState({ showCongratePopup: true })
+          this.props.updateUser({ ...this.props.user_info, level: this.props.user_info.level + 1 })
         } else {
           this.setState({ showPopup: true })
         }
