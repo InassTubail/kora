@@ -97,8 +97,31 @@
   width: 15%;
   top: 63%;
   left: 44%;
+
+  animation-name: example;
+  animation-duration: 8s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite
 }
 
+@keyframes example {
+  0% {
+    transform: translateX(0%);
+  }
+
+  25% {
+    transform: translateX(180%);
+
+  }
+
+  75% {
+    transform: translateX(-180%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
 
 .answers {
   display: flex;

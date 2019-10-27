@@ -8,23 +8,25 @@ import frame from '../assets/frame.png';
 import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
-// import counter from '../assets/counter.png';
+import counter from '../assets/asset32.png';
 import koraGreen from '../assets/koGreen.png'
 import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
 import timer from '../assets/timer.png'
-import { arabic_num, convert } from '../utils/arabic_num'
+// import helping from '../assets/helping.png'
+// import displayTable from '../assets/displayTable.png'
+// import addTime from '../assets/AddTime.png'
+// import deleteAnswer from '../assets/deleteAnswer.png'
+// import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
-import timerRed from '../assets/redTimer.png'
-// import deleteAnswer from '../assets/deleteAnswer.png'
-import deleteAnswer2 from '../assets/deleteAnswer2.png'
+import { shortTable } from '../utils/customPlay'
 import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
 import { updateUser } from '../store/actions';
 import { shuffle } from '../utils/questionAndAnswer';
-import './GameIndividual.css';
+import './GameIndividual2.css';
 import Sound from './SoundAhsant'
 import TryAgainSound from './TryAgainSound'
 import showTableB from '../assets/showTableB.png'
@@ -32,65 +34,36 @@ import showTableG from '../assets/showTableG.png'
 import plusTimeB from '../assets/plusTimeB.png'
 import plusTimeG from '../assets/plusTimeG.png'
 import deleteTableG from '../assets/deleteTableG.png'
+import deleteAnswer2 from '../assets/deleteAnswer2.png'
 import correctSound from '../assets/correct.mp3';
 import ShowTab from './showTables';
+import { arabic_num, convert, convertT } from '../utils/arabic_num'
+import timerRed from '../assets/redTimer.png'
+// import correctSound from '../assets/correct.mp3';
 
-let iniaistate = {
-  number1: 0,
-  number2: 0,
-  answers: [],
-  person: "",
-  answered: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //1 true 0 false 2 notanswerd
-  NOTrue: 0,
-  isClick: false,
-  showPopup: false,
-  voice: false,
-  tryAgainVoice: false,
-  showCongratePopup: false,
-  classKora: '',
-  choiceNumber: [],
-  timer: 50,
-  allNumber: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  NOQuestion: 0, //when on Click it must be +1 when become 6 appear popup
-  plusTime: false,
-  deleteAnswer: false,
-  showTable: false,
-  correctSound: false,
-  openTable: false
-}
-class GameIndividual extends Component {
-  state = { ...iniaistate }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.timer === this.state.timer) {
-      const { NOQuestion, isClick } = this.state;
-      // const { level } = this.props.user_info
-      if (NOQuestion < 10) {
-        if (isClick) {
-          setTimeout(() => {
-            this.setState({ isClick: false, classKora: '', correctSound: false })
-            let { id } = this.props.match.params
-            const { allNumber } = this.state
-            let randomC = Math.floor(Math.random() * (allNumber.length - 1)) + 0;
-            let answers = [{ answer: allNumber[randomC] * id, style: "correct" }, { answer: (allNumber[randomC] * id) + 2, style: "incorrect" }, { answer: (allNumber[randomC] * id) + 3, style: "incorrect" }];
-            answers = shuffle(answers)
-            let all = allNumber.filter((el) => el !== allNumber[randomC])
-            answers = convert(answers)
-            this.setState({
-              number1: allNumber[randomC], number2: id,
-              answers,
-              allNumber: all,
-            })
-          }, 2000);
-        }
-      } else {
-        if (this.state.NOTrue >= 6 && !this.state.showCongratePopup) {
-          this.setState({ showCongratePopup: true })
-        } else if (this.state.NOTrue < 6 && !this.state.showPopup) {
-          this.setState({ showPopup: true ,tryAgainVoice:true })
-        }
-        // this.props.history.push(`/congrat-individ`);
-      }
-    }
+class GameIndividual2 extends Component {
+  state = {
+    number1: 0,
+    number2: 0,
+    answers: [],
+    person: "",
+    NOTrue: 0,
+    timer: 25,
+    isClick: false,
+    showPopup: false,
+    answered: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+    voice: false,
+    tryAgainVoice: false,
+    showCongratePopup: false,
+    classKora: '',
+    plusTime: false,
+    deleteAnswer: false,
+    showTable: false,
+    correctSound: false,
+    openTable: false,
+    NOQuestion: 1,
+    // correctSound: false,
+    again: false
   }
   plusTime = () => {
     this.setState((state) => ({ timer: state.timer + 10, plusTime: true }))
@@ -107,24 +80,55 @@ class GameIndividual extends Component {
       this.setState({ answers: answers.filter((el, index) => index !== 1), deleteAnswer: true })
     }
   }
+  componentDidUpdate(prevProps, prevState) {
+    if ((prevState.timer === this.state.timer)) {
+      const { NOQuestion, NOTrue, isClick, showCongratePopup, showPopup } = this.state;
+      const { level } = this.props.user_info
+      if (level !== 4) {
+        if (NOQuestion === 10) {
+          if (NOTrue >= 5 && !showCongratePopup) {
+            this.setState({ showCongratePopup: true, NOQuestion: 1, NOTrue: 0, voice: true, again: false })
+            this.props.updateUser({ ...this.props.user_info, level: this.props.user_info.level + 1 })
+          } else if (NOTrue < 5 && !showPopup) {
+            this.setState({ showPopup: true, NOQuestion: 1, NOTrue: 0, tryAgainVoice: true, again: false })
+          }
+        } else if (isClick && NOQuestion < 10) {
+          setTimeout(() => {
+            this.setState({ isClick: false, classKora: '', correctSound: false })
+            const { level } = this.props.user_info
+            let questions = shortTable[level];
+            let number1 = questions[NOQuestion - 1][0]
+            let number2 = questions[NOQuestion - 1][1]
+            let answers = [{ answer: number1 * number2, style: "correct" },
+            { answer: (number1 * number2) + 2, style: "incorrect" },
+            { answer: (number1 * number2) + 3, style: "incorrect" }];
+            answers = shuffle(answers)
+            answers = convert(answers)
+            this.setState({ number1, number2, answers })
+          }, 2000);
+        }
+      } else {
+        this.props.history.push(`/congrat-individ`);
+      }
+    }
+  }
   componentDidMount() {
-    let { id } = this.props.match.params
-    const { allNumber } = this.state
-    let randomC = Math.floor(Math.random() * 10) + 1;
-    let answers = [{ answer: randomC * id, style: "correct" }, { answer: (randomC * id) + 2, style: "incorrect" }, { answer: (randomC * id) + 3, style: "incorrect" }];
+    const { level } = this.props.user_info
+    let questions = shortTable[level];
+    let number1 = questions[0][0]
+    let number2 = questions[0][1]
+    let answers = [{ answer: number1 * number2, style: "correct" },
+    { answer: (number1 * number2) + 2, style: "incorrect" },
+    { answer: (number1 * number2) + 3, style: "incorrect" }];
     answers = shuffle(answers)
     answers = convert(answers)
-    let all = allNumber.filter((el) => el !== randomC)
-    this.setState({
-      number1: randomC, number2: id,
-      answers,
-      allNumber: all,
-    })
+    this.setState({ number1, number2, answers })
     setInterval(() => {
       this.setState((state) => ({ timer: state.timer - 1 }))
       if (this.state.timer == 0) {
-        if (this.state.NOTrue > 6) {
+        if (this.state.NOTrue > 5) {
           this.setState({ showCongratePopup: true })
+          this.props.updateUser({ ...this.props.user_info, level: this.props.user_info.level + 1 })
         } else {
           this.setState({ showPopup: true })
         }
@@ -134,17 +138,18 @@ class GameIndividual extends Component {
   selectAnswer = (el) => {
     const { id } = el.currentTarget
     // console.log(el.currentTarget.className,'***');
-    this.setState({ classKora: `${el.currentTarget.className}-f`, isClick: true })
-    const { number2, number1, NOQuestion, answered } = this.state;
+    this.setState({ classKora: `${el.currentTarget.className}-f` })
+    const { number2, number1, NOQuestion, NOTrue, answered } = this.state;
+    this.setState({ isClick: true })
     if (number2 * number1 == id) {
       let answer = answered.map((el, index) => {
-        if (NOQuestion == index) el = 1;
+        if (NOQuestion == index + 1) el = 1;
         return el
       })
-      this.setState({ NOQuestion: NOQuestion + 1, answered: answer, NOTrue: this.state.NOTrue + 1, correctSound: true })
+      this.setState({ NOQuestion: NOQuestion + 1, NOTrue: NOTrue + 1, answered: answer, correctSound: true })
     } else {
       let answer = answered.map((el, index) => {
-        if (NOQuestion == index) el = 0;
+        if (NOQuestion == index + 1) el = 0;
         return el
       })
       this.setState({ NOQuestion: NOQuestion + 1, answered: answer })
@@ -152,54 +157,57 @@ class GameIndividual extends Component {
 
   }
   closePopUp = () => {
-    let { id } = this.props.match.params
-    this.setState({ ...iniaistate })
-    if (this.state.NOTrue >= 6) {
-      this.props.history.push(`/tables`);
-    } else {
-      // this.props.history.push(`/tables/${id}`);
-      // const { allNumber } = this.state
-      let allNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-      let randomC = Math.floor(Math.random() * 10) + 1;
-      let answers = [{ answer: randomC * id, style: "correct" }, { answer: (randomC * id) + 2, style: "incorrect" }, { answer: (randomC * id) + 3, style: "incorrect" }];
-      answers = shuffle(answers)
-      answers = convert(answers)
-      let all = allNumber.filter((el) => el !== randomC)
-      this.setState({
-        number1: randomC, number2: id,
-        answers,
-        allNumber: all,
-      })
-    }
-    // this.setState({ showCongratePopup: false, showPopup: false, voice: false, tryAgainVoice: false })
-  }
-  closee = () => {
-    this.setState({ openTable: false })
+    const { level } = this.props.user_info
+    let questions = shortTable[level];
+    let number1 = questions[0][0]
+    let number2 = questions[0][1]
+    let answers = [{ answer: number1 * number2, style: "correct" },
+    { answer: (number1 * number2) + 2, style: "incorrect" },
+    { answer: (number1 * number2) + 3, style: "incorrect" }];
+    answers = shuffle(answers)
+    answers = convert(answers)
+    // this.setState({ number1, number2, answers })
+    this.setState({
+      showCongratePopup: false,
+      answered: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+      deleteAnswer: false,
+      showTable: false,
+      NOQuestion: 1,
+      timer: 25,
+      // again: true,
+      // isClick: true,
+      openTable: false,
+      number1, number2, answers,
+      showPopup: false, voice: false, tryAgainVoice: false
+    })
+    // console.log(this.state.NOQuestion, '*****');
+
   }
   render() {
-    let { id } = this.props.match.params
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;
+    const { level } = this.props.user_info
     return (
       <React.Fragment>
-        {this.state.showTable && this.state.openTable && <ShowTab id={id} close={this.closee} />}
         {this.state.correctSound && <audio autoPlay src={correctSound} />}
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
-        <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <Sound voice={voice} />
         <TryAgainSound TryAgainVoice={tryAgainVoice} />
+        <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">
             <img src={titleImg} alt="title" className="titleImageInd" />
           </div>
           <div className="counterWithHelp">
             <div className="counterNew">
-              {/* <img src={counter} title="sdd" alt="dd" className="counter" />
-              <p className="counterParagGameInd"> 4</p>  */}
+              <img src={counter} title="sdd" alt="dd" className="counter" />
+              <p className="counterParagGameInd"> {arabic_num[level]}</p>
             </div>
             <div className="helpingDiv">
+
               <div className="helpingTitle">
                 <img src={helping2} alt="" className="helpingTitleImg" />
               </div>
+
               <div className="helpingContent">
                 <img src={helping} alt="" className="helpingImg" />
                 <div className="choices">
@@ -244,7 +252,7 @@ class GameIndividual extends Component {
             </div>
             <div className="subHeader4Game">
               {this.state.timer < 10 ? <img src={timerRed} alt="" className="timer" /> : <img src={timer} alt="" className="timer" />}
-              <p className="timerP"> {this.state.timer}</p>
+              <p className="timerP"> {convertT(this.state.timer)}</p>
             </div>
           </div>
           <div className="koras">
@@ -273,4 +281,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GameIndividual);
+)(GameIndividual2);

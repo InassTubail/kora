@@ -1,0 +1,68 @@
+.multiplication-tables {
+  background: #29abe2;
+  max-width: 991px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  position: relative;
+  /* padding-top: 10px; */
+}
+
+.tables-title {
+  margin-top: 15px;
+}
+
+.multiplication-tables .tables-title img {
+  width: 96%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.multiplication-tables .tables-loo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 40px;
+  flex-direction: row-reverse;
+}
+
+.multiplication-tables .table-link {
+  width: calc(100% / 3 - 20px);
+  display: block;
+  margin-bottom: 30px;
+}
+
+.multiplication-tables .table-link img {
+  max-width: 100%;
+}
+
+.multiplication-tables .footer {
+  position: absolute;
+  /* position: relative; */
+  bottom: -10px;
+}
+
+.multiplication-tables .footer img {
+  max-width: 100%;
+}
+
+.multiplication-tables .short-table {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (min-width:500px) {
+  .multiplication-tables .table-link {
+    width: calc(100% / 4 - 20px);
+  }
+}
+
+@media (min-width:767px) {
+  .multiplication-tables .table-link {
+    width: calc(100% / 5 - 20px);
+  }
+}
