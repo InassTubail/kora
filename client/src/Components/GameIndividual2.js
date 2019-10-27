@@ -8,7 +8,7 @@ import frame from '../assets/frame.png';
 import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
-import counter from '../assets/counter.png';
+import counter from '../assets/asset32.png';
 import koraGreen from '../assets/koGreen.png'
 import koraRed from '../assets/koRed.png'
 import koraBlack from '../assets/koBlack.png'
