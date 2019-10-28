@@ -1,0 +1,74 @@
+.multiplication-tables1 {
+  background: #29abe2;
+  max-width: 991px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  position: relative;
+  /* padding-top: 10px; */
+}
+
+.tables-title1 {
+  margin-top: 15px;
+}
+
+.multiplication-tables1 .tables-title1 img {
+  width: 96%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.multiplication-tables1 .tables-loo1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 40px;
+  flex-direction: row-reverse;
+}
+
+.multiplication-tables1 .table-link1 {
+  width: calc(100% / 2 - 20px);
+  display: block;
+  margin-bottom: 30px;
+}
+
+.multiplication-tables1 .table-link1 img {
+  max-width: 100%;
+  z-index: 1;
+  position: relative;
+}
+
+.multiplication-tables1 .footer1 {
+  position: absolute;
+  /* position: relative; */
+  bottom: -10px;
+}
+
+.multiplication-tables1 .footer1 img {
+  max-width: 100%;
+}
+
+.multiplication-tables1 .short-table1 {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (min-width:500px) {
+  .multiplication-tables1 .table-link1 {
+    width: calc(100% / 2 - 20px);
+  }
+}
+
+@media (min-width:767px) {
+  .multiplication-tables1 .table-link1 {
+    width: calc(100% / 2 - 20px);
+  }
+
+  .multiplication-tables1 .footer1 {
+    bottom: -68px;
+  }
+}
