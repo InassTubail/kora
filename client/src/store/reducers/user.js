@@ -23,12 +23,13 @@ const initialState = {
     number1: 0,
     number2: 0,
     answers: [],
-    redScore:0,
-    blueScore:0,
-    redTeam:[],
-    blueTeam:[],
+    redScore: 0,
+    blueScore: 0,
+    redTeam: [],
+    blueTeam: [],
     numberOfQuestion: 0,
-    resultPrevPlayer: 0
+    resultPrevPlayer: 0,
+    timer: 0
   }
 };
 
