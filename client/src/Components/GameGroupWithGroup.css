@@ -14,6 +14,23 @@
   position: relative;
 }
 
+.tim {
+  margin-top: 40px;
+  position: relative;
+}
+
+.timImg {
+  width: 60px;
+}
+
+.tim p {
+  top: -15px;
+  left: 24px;
+  font-weight: bold;
+  font-size: 29px;
+  position: absolute;
+}
+
 .play0,
 .play1 {
   position: absolute;
@@ -28,7 +45,7 @@
 
 .play1 {
   left: 20px;
-  top: 100px;
+  top: 115px;
 }
 
 
@@ -272,9 +289,11 @@
   }
 
 
+
 }
 
 @media (min-width: 576px) {
+
   .selectedImageFrame332g {
     height: 194px;
   }
@@ -346,5 +365,35 @@
     font-size: 47px;
     color: white;
     font-weight: bold;
+  }
+}
+
+
+@media (min-height: 800px) {
+  .tim {
+    margin-top: 50px;
+  }
+
+  .timImg {
+    width: 70px;
+  }
+}
+
+
+@media (min-width: 576px) {
+
+  .tim {
+    margin-top: 61px;
+  }
+
+  .timImg {
+    width: 100px;
+  }
+
+  .tim p {
+    top: -17px;
+    left: 41px;
+    font-weight: bold;
+    font-size: 42px;
   }
 }

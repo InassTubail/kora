@@ -11,6 +11,8 @@ import counterRed from '../assets/counterRed.png';
 import counterBlue from '../assets/counterBlue.png';
 import playerRed from '../assets/player.png';
 import playerBlue from '../assets/playerBlue.png';
+import timer from '../assets/timer.png'
+import timerRed from '../assets/redTimer.png'
 import { updateUser } from '../store/actions';
 import { questionsAndAnswers } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
@@ -105,6 +107,10 @@ class GamePersonWithPerson extends Component {
               )}
             </div>
 
+<div className="tim">
+<img src={timer} alt="" className="timImg"/>
+<p>7</p>
+</div>
             <div className="subHeader3321g">
               {redTeam && redTeam.map((el, index) =>
                 <React.Fragment>
