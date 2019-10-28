@@ -18,6 +18,8 @@ import Congrat from './Components/Congrat'
 import Equal from './Components/Equal'
 import Snackbar from './Components/snackpar'
 import Tables from './Components/Tables'
+import Tables2 from './Components/Tables2'
+
 import socket from './utils/api'
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
 // import history from './history';
@@ -112,11 +114,26 @@ class App extends Component {
 
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
+      // this.props.updateGame({
+      //   ...this.props.play,
+      //   timer: 10,
+      // });
       const { location } = this.props;
+      // setTimeout(() => {
+        const timerId = setInterval(async () => {
+            this.props.updateGame({
+              ...this.props.play,
+              timer: this.props.play.timer - 1,
+            })
+        }, 1000)
+      // },2000)
+      // store timerId in redux store
       if (location.pathname !== '/GamePersinWithPerson') {
         this.props.closeDialog();
         this.props.history.push('/GamePersinWithPerson')
       }
+      console.log('22222222222');
+      
       let finalData = {}
       let { number1, number2, answers, result } = data.data
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
@@ -133,7 +150,7 @@ class App extends Component {
         }
         this.props.updateGame({
           ...this.props.play,
-          resultPrevPlayer: result, //نتيحة سؤال اللاعب الحالي ي سمر
+          resultPrevPlayer: result,
         })
       }
       if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
@@ -152,7 +169,7 @@ class App extends Component {
       }
       // بعد 2 ثانيه بدو يغير السزال
       finalData = {
-        ...finalData,
+        ...this.props.play,
         role,
         isMyRole,
         color,
@@ -164,6 +181,7 @@ class App extends Component {
         redTeam, blueTeam,
         blueScore,
         count: 0,
+        timer:10,
         resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
       }
@@ -252,6 +270,8 @@ class App extends Component {
           <Route exact path="/congrat" component={Congrat} />
           <Route exact path="/equal" component={Equal} />
           <Route exact path="/tables" component={Tables} />
+          <Route exact path="/tables2" component={Tables2} />
+
           <Route exact path="/tables/:id" component={GameIndividual} />
 
         </Switch>

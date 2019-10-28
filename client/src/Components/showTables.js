@@ -10,11 +10,13 @@ import table7 from '../assets/table7.png'
 import table8 from '../assets/table8.png'
 import table9 from '../assets/table9.png'
 import table10 from '../assets/table10.png'
+import tab from '../assets/tab.png'
 
 import x from '../assets/x.png'
 
 
 let tables = {
+  0:tab,
   2:table2,
   3:table3,
   4:table4,
@@ -29,13 +31,21 @@ let tables = {
 class Table extends Component {
 
   render() {
-    // const { props } = propss;
+    // const { props } = propss;    
     return( <div className="popup1" style={{ background: '#21212194' }}>
 
         <div className="popupCongrat1">
             <button onClick={this.props.close} >X</button>
             {/* <div className='popWaiting'> */}
-            <img src={tables[this.props.id]}  style={{ width: '50%;' }} width="50%" />
+
+
+          {this.props.id == 0  ? <img src={tab}   className="tabb" /> : 
+            <img src={tables[this.props.id]} style={{ width: '50%;' }} width="50%" /> }
+
+            {/* <img src={tables[this.props.id]} 
+            style={{ width: '50%;' }} width="50%" /> */}
+
+
             {/* </div> */}
         </div>
     </div>)
