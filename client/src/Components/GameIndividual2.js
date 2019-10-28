@@ -188,10 +188,12 @@ class GameIndividual2 extends Component {
     const { level } = this.props.user_info
     return (
       <React.Fragment>
+        {this.state.showTable && this.state.openTable && <ShowTab id="0" close={this.closee} />}
         {this.state.correctSound && <audio autoPlay src={correctSound} />}
         <PopUpCongrat showPopup={showCongratePopup} onClick={this.closePopUp} />
         <Sound voice={voice} />
         <TryAgainSound TryAgainVoice={tryAgainVoice} />
+
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">

@@ -18,6 +18,8 @@ import Congrat from './Components/Congrat'
 import Equal from './Components/Equal'
 import Snackbar from './Components/snackpar'
 import Tables from './Components/Tables'
+import Tables2 from './Components/Tables2'
+
 import socket from './utils/api'
 import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
 // import history from './history';
@@ -268,6 +270,8 @@ class App extends Component {
           <Route exact path="/congrat" component={Congrat} />
           <Route exact path="/equal" component={Equal} />
           <Route exact path="/tables" component={Tables} />
+          <Route exact path="/tables2" component={Tables2} />
+
           <Route exact path="/tables/:id" component={GameIndividual} />
 
         </Switch>
