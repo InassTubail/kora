@@ -29,7 +29,9 @@ const initialState = {
     blueTeam: [],
     numberOfQuestion: 0,
     resultPrevPlayer: 0,
-    timer: 0
+    timer: 0,
+    questions: [],
+    classKora: ''
   }
 };
 

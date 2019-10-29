@@ -120,12 +120,12 @@ class App extends Component {
       // });
       const { location } = this.props;
       // setTimeout(() => {
-        const timerId = setInterval(async () => {
-            this.props.updateGame({
-              ...this.props.play,
-              timer: this.props.play.timer - 1,
-            })
-        }, 1000)
+        // const timerId = setInterval(async () => {
+        //     this.props.updateGame({
+        //       ...this.props.play,
+        //       timer: this.props.play.timer - 1,
+        //     })
+        // }, 1000)
       // },2000)
       // store timerId in redux store
       if (location.pathname !== '/GamePersinWithPerson') {
@@ -135,7 +135,7 @@ class App extends Component {
       console.log('22222222222');
       
       let finalData = {}
-      let { number1, number2, answers, result } = data.data
+      let { number1, number2, answers, result,questions,classKora } = data.data
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
       let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
       let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
@@ -168,14 +168,17 @@ class App extends Component {
         this.props.history.push('/congrat')
       }
       // بعد 2 ثانيه بدو يغير السزال
+      this.props.updateGame({...this.props.play,classKora})
       finalData = {
         ...this.props.play,
+        questions,
         role,
         isMyRole,
         color,
         number1,
         number2,
         answers,
+        classKora: '',
         numberOfQuestion: numberOfQuestion++,
         redScore,
         redTeam, blueTeam,
