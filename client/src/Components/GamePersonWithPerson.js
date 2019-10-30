@@ -11,12 +11,15 @@ import counterRed from '../assets/counterRed.png';
 import counterBlue from '../assets/counterBlue.png';
 import playerRed from '../assets/player.png';
 import playerBlue from '../assets/playerBlue.png';
-import timer from '../assets/timer.png'
+import { updateUser, updateGame } from '../store/actions';
 import timerRed from '../assets/redTimer.png'
-import { updateUser } from '../store/actions';
-import { questionsAndAnswers } from '../utils/questionAndAnswer'
+import { questionsAndAnswers, groupGame } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
+import timerImg from '../assets/timer.png'
+import { arabic_num, convert, convertT } from '../utils/arabic_num'
+
 import './GameGroupWithGroup.css';
+
 import socket from '../utils/api';
 
 // const io = require('socket.io-client');
@@ -26,18 +29,44 @@ class GamePersonWithPerson extends Component {
     blueTeam: [],
     redTeam: [],
     error: "",
-    timer: 0,
-    
+    // timer: 0,
+
   }
-  getDerivedStateFromProps(props, state) {
-    if (props.selected !== state.selected) {
-      return {
-        selected: props.selected,
-      };
-    }
-    return null;
-  }
-  componentDidUpdate() {
+  // componentDidMount(){
+  //   // socket.on('timer',function(){
+
+  //   // })\
+  //   // const timerId = setInterval(() => {
+  //   //   if(timer === 0 ) {
+  //       // end the turn and choose wrong answer
+  //       clearInterval(timerId);  
+  //     }
+  //     // update the timer
+  //   })
+  // }
+  // getDerivedStateFromProps(props, state) {
+  //   if (props.selected !== state.selected) {
+  //     return {
+  //       selected: props.selected,
+  //     };
+  //   }
+  //   return null;
+  // }
+  componentDidUpdate(prevProps, prevState) {
+    // if (this.props.play.timer == 0) {
+    //   this.props.updateGame({
+    //     ...this.props.play,
+    //     timer: 10,
+    //   })
+
+      // const result = 'ff'
+      // const { room } = this.props.user_info
+      // const { number1, number2, answers } = questionsAndAnswers(4);
+      // let data = {
+      //   result, number1, number2, answers, currentPlayer: this.props.play.role
+      // }
+      // socket.emit('startGame', { room, data })
+    // }
     if (this.state.error) {
       setTimeout(async () => {
         this.setState({ error: "" })
@@ -45,13 +74,15 @@ class GamePersonWithPerson extends Component {
     }
   }
   selectAnswer = (el) => {
-    const { isMyRole } = this.props.play
+    // clearInter
+    const { isMyRole, questions } = this.props.play
     if (isMyRole) {
       const result = el.currentTarget.id
       const { room } = this.props.user_info
-      const { number1, number2, answers } = questionsAndAnswers(4);
+      const { number1, number2, answers, filterdQuestions } = groupGame(questions);
       let data = {
-        result, number1, number2, answers, currentPlayer: this.props.play.role
+        result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
+        classKora: `${el.currentTarget.className}-f`
       }
       socket.emit('startGame', { room, data })
     } else {
@@ -59,7 +90,9 @@ class GamePersonWithPerson extends Component {
     }
   }
   render() {
-    const { number1, number2, answers, blueTeam, redTeam, role, resultPrevPlayer, color } = this.props.play
+
+    const { number1, timer, number2, answers, blueTeam, redTeam, role, resultPrevPlayer, color,classKora } = this.props.play
+    // console.log({ timer }, '//');
     return (
       <React.Fragment>
         <div className="gameScreen2g">
@@ -88,9 +121,12 @@ class GamePersonWithPerson extends Component {
               </button>
             )}
           </div>
-          <img src={koraImg} alt="kora" edt className="koraImg2g" />
+          <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
           {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
-
+          {/* <div className="subHeader4Game">
+            <img src={timerImg} alt="" className="timer" />
+            <p className="timerP"> {convertT(timer)}</p>
+          </div> */}
           <div className="subHeadersGroupg">
             <div className="subHeader332g">
               {blueTeam && blueTeam.map((el, index) =>
@@ -107,10 +143,10 @@ class GamePersonWithPerson extends Component {
               )}
             </div>
 
-<div className="tim">
-<img src={timer} alt="" className="timImg"/>
-<p>7</p>
-</div>
+            <div className="tim">
+              <img src={timerImg} alt="" className="timImg" />
+              <p>7</p>
+            </div>
             <div className="subHeader3321g">
               {redTeam && redTeam.map((el, index) =>
                 <React.Fragment>
@@ -143,7 +179,7 @@ class GamePersonWithPerson extends Component {
   }
 };
 
-const mapDispatchToProps = { updateUser };
+const mapDispatchToProps = { updateUser, updateGame };
 const mapStateToProps = state => ({
   user_info: state.user.info,
   play: state.user.play,
