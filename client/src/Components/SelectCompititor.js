@@ -60,12 +60,8 @@ class Select extends Component {
     } else if (invite.length !== 0) {
       this.setState({ error: 'يجب الغاء الاشخاص المدعويين او انتظار قبول دعوتهم لبدء اللعبة' })
     } else {
-      let room = JSON.stringify([username, ...accpet])
-      const { number1, number2, answers } = questionsAndAnswers(4);
-      let data = {
-        number1, number2, answers, currentPlayer: username, result: false
-      }
-      socket.emit('startGame', { room, data })
+      // border: 5px solid red;
+      this.props.history.push('/tables2');
     }
   }
   // componentDidUpdate() {

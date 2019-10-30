@@ -16,8 +16,8 @@ app.get('*', (_req, res) => {
   res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 var usernames = [];
-io.sockets.on('connection', function(socket) {
-  socket.on('new user', function(data) {
+io.sockets.on('connection', function (socket) {
+  socket.on('new user', function (data) {
     socket.username = data;
     usernames.push({
       username: socket.username,
@@ -33,7 +33,7 @@ io.sockets.on('connection', function(socket) {
     // map the user and socket obj to sockets hashmap for future use
     sockets[socket.username] = socket;
   });
-  socket.on('addRefresh', function(data) {
+  socket.on('addRefresh', function (data) {
     let isEx = false;
     let clients = usernames.map((value, index) => {
       if (data.username == value.username) {
@@ -47,7 +47,7 @@ io.sockets.on('connection', function(socket) {
     }
   });
   io.sockets.emit('usernames', JSON.stringify(usernames));
-  socket.on('update_pic', function(data) {
+  socket.on('update_pic', function (data) {
     usernames.map((value, index) => {
       if (data.username == value.username) {
         usernames[index] = { ...usernames[index], person: data.person };
@@ -57,7 +57,7 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('usernames', JSON.stringify(usernames));
   });
 
-  socket.on('sendInviteToPlay', function(data) {
+  socket.on('sendInviteToPlay', function (data) {
     let from, to;
     usernames.forEach((el, index) => {
       if (el.username == data.from) {
@@ -156,7 +156,7 @@ io.sockets.on('connection', function(socket) {
     io.emit('usernames', JSON.stringify(usernames));
   });
 
-  socket.on('replyInvite', function(data) {
+  socket.on('replyInvite', function (data) {
     if (data.type == 'accept') {
       let from, to;
       usernames.forEach((el, index) => {
@@ -272,28 +272,67 @@ io.sockets.on('connection', function(socket) {
     });
     io.emit('usernames', JSON.stringify(usernames));
   });
+  // when the turns swap, takes roomId and player username
+  // clears the last timer and starts a new one
+  socket.on('turnend', function (message) {
+    console.log({ message });
 
+    // const { roomId, username } = message;
+    // console.log({roomId, username});
+
+  });
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
-  socket.on('startGame', function(data) {
+  socket.on('startGame', function (data) {
+    let role, color, roomName;
     let player = JSON.parse(data.room);
+    console.log('/////////////////');
+
     usernames.map((el, index) => {
+      // console.log(player.includes(el.username));
+      // console.log(el.username,'el.username');
+
       if (player.includes(el.username)) {
         el.room = data.room;
+        // console.log(el.roomName,'9999');
+        roomName = el.roomName
       }
       return el;
     });
+    let currentPlayer = player.findIndex(el => el === data.data.currentPlayer)
+    if (currentPlayer === player.length - 1) {
+      role = player[0];
+    } else {
+      role = player[currentPlayer + 1];
+    }
+    color =
+      (player.findIndex(el => el === role) +
+        1) %
+        2 ===
+        0
+        ? 'red'
+        : 'blue';
+
+    let currentPlayerColor =
+      (player.findIndex(el => el === role) +
+        1) %
+        2 ===
+        0
+        ? 'red'
+        : 'blue';
+    data.data.currentPlayerColor = currentPlayerColor
+    data.data.color = color
+    data.data.role = role
+    let message = { roomName, role }
+    io.emit('turnend', message);
+    // console.log(JSON.stringify(message), '8');
+
     io.sockets.emit('usernames', JSON.stringify(usernames));
     io.sockets.emit('data.room', data);
     // starts the timer
   });
 
-  // when the turns swap, takes roomId and player username
-  // clears the last timer and starts a new one
-  socket.on('turn.end', message => {
-    const { roomId, username } = message;
-  });
 
-  socket.on('disconnect', function(data) {
+  socket.on('disconnect', function (data) {
     if (!socket.username) return;
     let clients = usernames.map((value, index) => {
       if (socket.username == value.username) {
@@ -306,6 +345,6 @@ io.sockets.on('connection', function(socket) {
   });
 });
 
-const server = http.listen(process.env.PORT || 8080, function() {
+const server = http.listen(process.env.PORT || 8080, function () {
   console.log('listening on *:8080');
 });
