@@ -67,14 +67,19 @@ class App extends Component {
     this.cancelPlayer(socket);
     this.handleWithdrawal(socket);
     this.handleTestRoom(socket);
+    this.turnRoleRoom(socket);
   }
-
   handleTestRoom = socket => {
     socket.on('test room', message => {
       console.log({ message }, 'test room channel');
     });
   };
-
+  turnRoleRoom = socket => {
+    socket.on('turn role', message => {
+      console.log({ message }, 'turnRoleRoom room channel');
+      socket.emit('turn.end', message)
+    });
+  };
   handleWithdrawal = socket => {
     socket.on('withdrawal', data => {
       data = JSON.parse(data);

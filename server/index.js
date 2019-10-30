@@ -274,26 +274,26 @@ io.sockets.on('connection', function (socket) {
   });
   // when the turns swap, takes roomId and player username
   // clears the last timer and starts a new one
-  socket.on('turnend', function (message) {
-    console.log({ message });
-
-    // const { roomId, username } = message;
-    // console.log({roomId, username});
-
+  socket.on('turn.end', function (message) {
+    const { roomName, role } = message;
+    // first role
+    // if (roomsTimerIds[roomName]) {
+      // create timerId
+    // }
+    // clear last timer and begin new one
+    clearInterval()
+    let timerId = setInterval(() => {
+      io.in(roomName).emit('timer',   );
+    }, 1000);
+    // update roomsTimerIds[roomName]
   });
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
   socket.on('startGame', function (data) {
     let role, color, roomName;
     let player = JSON.parse(data.room);
-    console.log('/////////////////');
-
     usernames.map((el, index) => {
-      // console.log(player.includes(el.username));
-      // console.log(el.username,'el.username');
-
       if (player.includes(el.username)) {
         el.room = data.room;
-        // console.log(el.roomName,'9999');
         roomName = el.roomName
       }
       return el;
@@ -323,9 +323,7 @@ io.sockets.on('connection', function (socket) {
     data.data.color = color
     data.data.role = role
     let message = { roomName, role }
-    io.emit('turnend', message);
-    // console.log(JSON.stringify(message), '8');
-
+    io.in(roomName).emit('turn role',  message );
     io.sockets.emit('usernames', JSON.stringify(usernames));
     io.sockets.emit('data.room', data);
     // starts the timer
