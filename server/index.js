@@ -8,7 +8,8 @@ const { join } = require('path');
 
 let roomCounter = 0;
 const sockets = {};
-let roomsTimerIds = [];
+let roomsTimerIds = {};
+let timerIds = {};
 
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
@@ -79,6 +80,7 @@ io.sockets.on('connection', function (socket) {
       if (!usernames[from].roomName) {
         roomCounter++;
         const roomName = `room-${roomCounter}`;
+        timerIds[roomName] = 11
         usernames[from].roomName = roomName;
         // create a new room
         sockets[usernames[from].username].join(roomName);
@@ -274,18 +276,23 @@ io.sockets.on('connection', function (socket) {
   });
   // when the turns swap, takes roomId and player username
   // clears the last timer and starts a new one
+  socket.on('switch timer', function (roomName) {
+    if (timerIds[roomName] !== 11) {
+      timerIds[roomName] = 11
+    }
+  })
   socket.on('turn.end', function (message) {
     const { roomName, role } = message;
-    // first role
-    // if (roomsTimerIds[roomName]) {
-      // create timerId
-    // }
-    // clear last timer and begin new one
-    clearInterval()
-    let timerId = setInterval(() => {
-      io.in(roomName).emit('timer',   );
-    }, 1000);
-    // update roomsTimerIds[roomName]
+    // console.log(timerIds[roomName], ';');
+    if (!roomsTimerIds[roomName]) {
+      let timerId = setInterval(() => {
+        if (timerIds[roomName] <= 11 && timerIds[roomName] > 0) {
+          timerIds[roomName] = timerIds[roomName] - 1
+          io.in(roomName).emit('timer', timerIds[roomName]);
+        }
+      }, 1000);
+      roomsTimerIds[roomName] = timerId
+    }
   });
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
   socket.on('startGame', function (data) {
@@ -322,8 +329,9 @@ io.sockets.on('connection', function (socket) {
     data.data.currentPlayerColor = currentPlayerColor
     data.data.color = color
     data.data.role = role
+    data.data.roomName = roomName
     let message = { roomName, role }
-    io.in(roomName).emit('turn role',  message );
+    io.in(roomName).emit('turn role', message);
     io.sockets.emit('usernames', JSON.stringify(usernames));
     io.sockets.emit('data.room', data);
     // starts the timer

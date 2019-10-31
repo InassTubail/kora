@@ -170,13 +170,6 @@ class App extends Component {
         newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
       }
       if (result) {
-        // let currentPlayerColor =
-        //   (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
-        //     1) %
-        //     2 ===
-        //     0
-        //     ? 'red'
-        //     : 'blue';
         let isTrue =
           this.props.play.number1 * this.props.play.number2 ===
           parseInt(result, 10);
@@ -190,18 +183,6 @@ class App extends Component {
           resultPrevPlayer: result
         });
       }
-      // if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
-      //   role = JSON.parse(this.props.user_info.room)[0];
-      // } else {
-      //   role = JSON.parse(this.props.user_info.room)[currentPlayer + 1];
-      // }
-      // color =
-      //   (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
-      //     1) %
-      //     2 ===
-      //   0
-      //     ? 'red'
-      //     : 'blue';
       isMyRole = role === this.props.user_info.username;
 
       if (numberOfQuestion === 20 && blueScore === redScore) {
@@ -228,11 +209,12 @@ class App extends Component {
         blueTeam: blueTeam.length > 0 ? blueTeam : newTeam.blueTeamNew,
         blueScore,
         count: 0,
-        timer: 10,
+        // timer: 10,
         resultPrevPlayer: 0 //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
       };
       setTimeout(() => {
+        socket.emit('switch timer',data.data.roomName)
         this.props.updateGame(finalData);
       }, 2000);
     });

@@ -11,7 +11,7 @@ function PopAccept(propss) {
     <div className='popupAccept'>
       <div className="containerGame">
         <div className="quesTitl">
-          <h1>هل تود اللعب مع ...</h1>
+          <h1>هل تود اللعب مع {props.come_from}</h1>
         </div>
         <div className='popup_innerAccept'>
           <div className="cancelInvitationAccept">
