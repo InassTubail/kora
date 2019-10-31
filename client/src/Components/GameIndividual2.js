@@ -174,14 +174,10 @@ class GameIndividual2 extends Component {
       showTable: false,
       NOQuestion: 1,
       timer: 25,
-      // again: true,
-      // isClick: true,
       openTable: false,
       number1, number2, answers,
       showPopup: false, voice: false, tryAgainVoice: false
     })
-    // console.log(this.state.NOQuestion, '*****');
-
   }
   render() {
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;

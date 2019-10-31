@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogIn from './Components/LogIn';
 // import Dailog from './Components/Dialog';
@@ -12,30 +17,37 @@ import CongratIndivid from './Components/CongratIndivid';
 import GameIndividual2 from './Components/GameIndividual2';
 
 // import GameGroupWithGroup from './Components/GameGroupWithGroup'
-import GamePersinWithPerson from './Components/GamePersonWithPerson'
-import CongratsPWP from './Components/CongratsPWP'
-import Congrat from './Components/Congrat'
-import Equal from './Components/Equal'
-import Snackbar from './Components/snackpar'
-import Tables from './Components/Tables'
-import Tables2 from './Components/Tables2'
+import GamePersinWithPerson from './Components/GamePersonWithPerson';
+import CongratsPWP from './Components/CongratsPWP';
+import Congrat from './Components/Congrat';
+import Equal from './Components/Equal';
+import Snackbar from './Components/snackpar';
+import Tables from './Components/Tables';
+import Tables2 from './Components/Tables2';
 
-import socket from './utils/api'
-import { getUsers, openDialog, closeDialog, updateUser, updateGame } from './store/actions';
+import socket from './utils/api';
+import {
+  getUsers,
+  openDialog,
+  closeDialog,
+  updateUser,
+  updateGame
+} from './store/actions';
 // import history from './history';
 
 async function detrmineRedABlue(red_team, blue_team, users) {
-  let redTeam = [], blueTeam = []
-  let s = users.map((el) => {
+  let redTeamNew = [],
+    blueTeamNew = [];
+  let s = users.map(el => {
     if (blue_team.findIndex(elment => elment === el.username) !== -1) {
-      blueTeam = blueTeam.concat({ username: el.username, person: el.person })
+      blueTeamNew = blueTeamNew.concat({ username: el.username, person: el.person });
     }
     if (red_team.findIndex(elment => elment === el.username) !== -1) {
-      redTeam = redTeam.concat({ username: el.username, person: el.person })
+      redTeamNew = redTeamNew.concat({ username: el.username, person: el.person });
     }
-  })
-  await Promise.all(s)
-  return { redTeam, blueTeam }
+  });
+  await Promise.all(s);
+  return { redTeamNew, blueTeamNew };
 }
 class App extends Component {
   componentDidUpdate() {
@@ -54,45 +66,74 @@ class App extends Component {
     this.cancelInvite(socket);
     this.cancelPlayer(socket);
     this.handleWithdrawal(socket);
+    this.handleTestRoom(socket);
+    this.turnRoleRoom(socket);
   }
+  handleTestRoom = socket => {
+    socket.on('test room', message => {
+      console.log({ message }, 'test room channel');
+    });
+  };
+  turnRoleRoom = socket => {
+    socket.on('turn role', message => {
+      console.log({ message }, 'turnRoleRoom room channel');
+      socket.emit('turn.end', message)
+    });
+  };
   handleWithdrawal = socket => {
     socket.on('withdrawal', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        this.props.openDialog({ from: data.from, type: 'withdrawal', removeAfterTime: true });
+        this.props.openDialog({
+          from: data.from,
+          type: 'withdrawal',
+          removeAfterTime: true
+        });
       }
-    })
-  }
+    });
+  };
   cancelInvite = socket => {
     socket.on('cancelInvite', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
         console.log('how much');
 
-        this.props.openDialog({ from: data.from, type: 'cancelInvite', removeAfterTime: true });
+        this.props.openDialog({
+          from: data.from,
+          type: 'cancelInvite',
+          removeAfterTime: true
+        });
       }
-    })
-  }
+    });
+  };
   cancelPlayer = socket => {
     socket.on('cancelPlayer', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        this.props.openDialog({ from: data.from, type: 'cancelPlayer', removeAfterTime: true });
+        this.props.openDialog({
+          from: data.from,
+          type: 'cancelPlayer',
+          removeAfterTime: true
+        });
       }
-    })
-  }
+    });
+  };
   refresh = socket => {
     var isExit = false;
-    this.props.isLoggedIn && this.props.users.map(value => {
-      if (this.props.user_info.username && this.props.user_info.username === value.username) {
-        isExit = true;
-      }
-      return value;
-    });
+    this.props.isLoggedIn &&
+      this.props.users.map(value => {
+        if (
+          this.props.user_info.username &&
+          this.props.user_info.username === value.username
+        ) {
+          isExit = true;
+        }
+        return value;
+      });
     if (isExit && this.props.isLoggedIn) {
       socket.emit('addRefresh', this.props.user_info);
     }
-  }
+  };
   getUser = socket => {
     socket.on('usernames', username => {
       console.log({ username }, '77777');
@@ -108,67 +149,50 @@ class App extends Component {
   };
 
   gamingRoom = socket => {
-    let { redScore, blueScore, numberOfQuestion } = this.props.play;
-    let role, color, isMyRole
-    console.log({ socket }, '**/*/');
+    let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
+    // let role, color, isMyRole;
+    let newTeam, isMyRole;
+    // console.log({ socket }, '**/*/');
 
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
-      // this.props.updateGame({
-      //   ...this.props.play,
-      //   timer: 10,
-      // });
       const { location } = this.props;
-      // setTimeout(() => {
-        // const timerId = setInterval(async () => {
-        //     this.props.updateGame({
-        //       ...this.props.play,
-        //       timer: this.props.play.timer - 1,
-        //     })
-        // }, 1000)
-      // },2000)
-      // store timerId in redux store
       if (location.pathname !== '/GamePersinWithPerson') {
         this.props.closeDialog();
-        this.props.history.push('/GamePersinWithPerson')
+        this.props.history.push('/GamePersinWithPerson');
       }
-      console.log('22222222222');
-      
       let finalData = {}
-      let { number1, number2, answers, result,questions,classKora } = data.data
-      let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
-      let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
-      let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
-      const { redTeam, blueTeam } = await detrmineRedABlue(red_team, blue_team, this.props.users);
+      let { number1, number2, answers, result, questions, classKora, role, color, currentPlayerColor } = data.data
+      // let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+      if (redTeam.length === 0 && blueTeam.length === 0) {
+        let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
+        let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
+        newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
+      }
       if (result) {
-        let currentPlayerColor = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
-        let isTrue = this.props.play.number1 * this.props.play.number2 === parseInt(result, 10)
+        let isTrue =
+          this.props.play.number1 * this.props.play.number2 ===
+          parseInt(result, 10);
         if (currentPlayerColor === 'red' && isTrue) {
-          redScore++
+          redScore++;
         } else if (currentPlayerColor === 'blue' && isTrue) {
-          blueScore++
+          blueScore++;
         }
         this.props.updateGame({
           ...this.props.play,
-          resultPrevPlayer: result,
-        })
+          resultPrevPlayer: result
+        });
       }
-      if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
-        role = JSON.parse(this.props.user_info.room)[0]
-      } else {
-        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1]
-      }
-      color = (JSON.parse(this.props.user_info.room).findIndex(el => el === role) + 1) % 2 === 0 ? 'red' : 'blue';
       isMyRole = role === this.props.user_info.username;
 
-      if (numberOfQuestion === 12 && blueScore === redScore) {
-        this.props.history.push('/equal')
+      if (numberOfQuestion === 20 && blueScore === redScore) {
+        this.props.history.push('/equal');
       }
-      if (numberOfQuestion === 12 && blueScore !== redScore) {
-        this.props.history.push('/congrat')
+      if (numberOfQuestion === 20 && blueScore !== redScore) {
+        this.props.history.push('/congrat');
       }
       // بعد 2 ثانيه بدو يغير السزال
-      this.props.updateGame({...this.props.play,classKora})
+      this.props.updateGame({ ...this.props.play, classKora })
       finalData = {
         ...this.props.play,
         questions,
@@ -181,18 +205,20 @@ class App extends Component {
         classKora: '',
         numberOfQuestion: numberOfQuestion++,
         redScore,
-        redTeam, blueTeam,
+        redTeam: redTeam.length > 0 ? redTeam : newTeam.redTeamNew,
+        blueTeam: blueTeam.length > 0 ? blueTeam : newTeam.blueTeamNew,
         blueScore,
         count: 0,
-        timer:10,
-        resultPrevPlayer: 0, //نتيحة سؤال اللاعب الحالي ي سمر
+        // timer: 10,
+        resultPrevPlayer: 0 //نتيحة سؤال اللاعب الحالي ي سمر
         // resultPrevPlayer
-      }
+      };
       setTimeout(() => {
-        this.props.updateGame(finalData)
+        socket.emit('switch timer',data.data.roomName)
+        this.props.updateGame(finalData);
       }, 2000);
-    })
-  }
+    });
+  };
   newInvitation = socket => {
     socket.on('new message', dataNewMassg => {
       if (dataNewMassg.to === this.props.user_info.username) {
@@ -201,12 +227,16 @@ class App extends Component {
             ...this.props.user_info,
             is_playing: 'pending',
             with: dataNewMassg.from,
-            room: null,
+            room: null
           });
           this.props.openDialog({ from: dataNewMassg.from, type: 'invite' });
         }
         if (dataNewMassg.type === 'reject') {
-          this.props.openDialog({ from: dataNewMassg.from, type: 'reject', removeAfterTime: true });
+          this.props.openDialog({
+            from: dataNewMassg.from,
+            type: 'reject',
+            removeAfterTime: true
+          });
         }
       }
       if (
@@ -245,29 +275,35 @@ class App extends Component {
     data.type = 'withdrawal';
     socket.emit('replyInvite', data);
     this.props.closeDialog();
-  }
+  };
   render() {
-    const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject']
+    const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject'];
     return (
       <div>
         {type.includes(this.props.type) && <Snackbar props={this.props} />}
-        {!type.includes(this.props.type) &&
-          <PopAccept props={this.props} handleAccept={this.handleAccept} handleReject={this.handleReject} withdrawal={this.withdrawal} />}
+        {!type.includes(this.props.type) && (
+          <PopAccept
+            props={this.props}
+            handleAccept={this.handleAccept}
+            handleReject={this.handleReject}
+            withdrawal={this.withdrawal}
+          />
+        )}
         <Switch>
           <Route exact path="/" component={LogIn} />
           <Route exact path="/player-Character" component={playerCharacter} />
           <Route exact path="/select-game-type" component={GameType} />
-          <Route
-            exact
-            path="/select-compititor"
-            component={SelectCompititor}
-          />
+          <Route exact path="/select-compititor" component={SelectCompititor} />
           <Route exact path="/game-individual" component={GameIndividual} />
           <Route exact path="/tables/short" component={GameIndividual2} />
 
           <Route exact path="/CongratsPWP" component={CongratsPWP} />
           {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
-          <Route exact path="/GamePersinWithPerson" component={GamePersinWithPerson} />
+          <Route
+            exact
+            path="/GamePersinWithPerson"
+            component={GamePersinWithPerson}
+          />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
 
           <Route exact path="/congrat" component={Congrat} />
@@ -276,14 +312,19 @@ class App extends Component {
           <Route exact path="/tables2" component={Tables2} />
 
           <Route exact path="/tables/:id" component={GameIndividual} />
-
         </Switch>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = { getUsers, openDialog, closeDialog, updateUser, updateGame };
+const mapDispatchToProps = {
+  getUsers,
+  openDialog,
+  closeDialog,
+  updateUser,
+  updateGame
+};
 const mapStateToProps = state => ({
   user_info: state.user.info,
   play: state.user.play,
@@ -292,10 +333,11 @@ const mapStateToProps = state => ({
   open: state.dialog.open,
   type: state.dialog.type,
   removeAfterTime: state.dialog.removeAfterTime,
-  come_from: state.dialog.come_from,
+  come_from: state.dialog.come_from
 });
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
-)
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

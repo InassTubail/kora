@@ -29,44 +29,28 @@ class GamePersonWithPerson extends Component {
     blueTeam: [],
     redTeam: [],
     error: "",
-    // timer: 0,
+    timer: 0,
 
   }
-  // componentDidMount(){
-  //   // socket.on('timer',function(){
-
-  //   // })\
-  //   // const timerId = setInterval(() => {
-  //   //   if(timer === 0 ) {
-  //       // end the turn and choose wrong answer
-  //       clearInterval(timerId);  
-  //     }
-  //     // update the timer
-  //   })
-  // }
-  // getDerivedStateFromProps(props, state) {
-  //   if (props.selected !== state.selected) {
-  //     return {
-  //       selected: props.selected,
-  //     };
-  //   }
-  //   return null;
-  // }
+  componentDidMount() {
+    socket.on('timer', timer => {
+      this.setState({ timer })
+    });
+  }
   componentDidUpdate(prevProps, prevState) {
-    // if (this.props.play.timer == 0) {
-    //   this.props.updateGame({
-    //     ...this.props.play,
-    //     timer: 10,
-    //   })
+    const { isMyRole, questions } = this.props.play
+    if (isMyRole && this.state.timer === 0 && prevState.timer !== this.state.timer) {
+      const result = 'false'
+      const { room } = this.props.user_info
+      let { number1, number2, answers, filterdQuestions } = groupGame(questions);
+      answers = convert(answers)
+      let data = {
+        result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
+        classKora: ``
+      }
 
-      // const result = 'ff'
-      // const { room } = this.props.user_info
-      // const { number1, number2, answers } = questionsAndAnswers(4);
-      // let data = {
-      //   result, number1, number2, answers, currentPlayer: this.props.play.role
-      // }
-      // socket.emit('startGame', { room, data })
-    // }
+      socket.emit('startGame', { room, data })
+    }
     if (this.state.error) {
       setTimeout(async () => {
         this.setState({ error: "" })
@@ -79,7 +63,8 @@ class GamePersonWithPerson extends Component {
     if (isMyRole) {
       const result = el.currentTarget.id
       const { room } = this.props.user_info
-      const { number1, number2, answers, filterdQuestions } = groupGame(questions);
+      let { number1, number2, answers, filterdQuestions } = groupGame(questions);
+      answers = convert(answers)
       let data = {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
         classKora: `${el.currentTarget.className}-f`
@@ -90,9 +75,7 @@ class GamePersonWithPerson extends Component {
     }
   }
   render() {
-
-    const { number1, timer, number2, answers, blueTeam, redTeam, role, resultPrevPlayer, color,classKora } = this.props.play
-    // console.log({ timer }, '//');
+    const { number1, number2, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play
     return (
       <React.Fragment>
         <div className="gameScreen2g">
@@ -101,13 +84,16 @@ class GamePersonWithPerson extends Component {
               <img src={gWithg} alt="title" className="titleImage2g" />
             </div>
             {/* <p>{this.state.count}</p> */}
-
-            <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
+            {isMyRole ?
+              <p className="playNow"><span className="playNowName"> أنت </span> تلعب الان</p>
+              :
+              <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
+            }
 
             {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
             <div className="quesDiv2g">
               <img src={questions} alt="title" className="titleImage2g" />
-              <p className="questionStatement2g">{`${number1} * ${number2}`}</p>
+              <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
             </div>
           </div>
           {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2g" /> :
@@ -117,7 +103,7 @@ class GamePersonWithPerson extends Component {
           <div className="answers">
             {answers.map((el, index) =>
               <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
-                {el.answer}
+                {el.arabic_answer}
               </button>
             )}
           </div>
@@ -145,7 +131,7 @@ class GamePersonWithPerson extends Component {
 
             <div className="tim">
               <img src={timerImg} alt="" className="timImg" />
-              <p>7</p>
+              <p>{this.state.timer}</p>
             </div>
             <div className="subHeader3321g">
               {redTeam && redTeam.map((el, index) =>

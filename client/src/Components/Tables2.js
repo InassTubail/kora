@@ -12,6 +12,7 @@ import table5 from '../assets/89.png';
 import tableshort from '../assets/table-short.png';
 import tablebg from '../assets/table-bg.png';
 import { groupGame } from '../utils/questionAndAnswer';
+import { arabic_num, convert, convertT } from '../utils/arabic_num'
 
 import './Tables2.css';
 let type_index = {
@@ -34,7 +35,8 @@ class Tables2 extends Component {
         const { username, accpet } = this.props.user_info
         // console.log(index.target.id);
         let room = JSON.stringify([username, ...accpet])
-        const { number1, number2, answers, filterdQuestions } = groupGame(type_index[index.target.id]);
+        let { number1, number2, answers, filterdQuestions } = groupGame(type_index[index.target.id]);
+        answers = convert(answers)
         let data = {
             number1, number2, answers, currentPlayer: username, result: false, questions: filterdQuestions
         }
