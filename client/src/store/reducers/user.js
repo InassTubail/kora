@@ -9,6 +9,7 @@ const initialState = {
     room: null,
     person: null,
     level: 1,
+    roomName: '',
     invite: [],
     accpet: []
   },
@@ -31,7 +32,7 @@ const initialState = {
     resultPrevPlayer: 0,
     timer: 0,
     questions: [],
-    classKora: ''
+    classKora: '',
   }
 };
 

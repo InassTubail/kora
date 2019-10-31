@@ -71,12 +71,12 @@ class App extends Component {
   }
   handleTestRoom = socket => {
     socket.on('test room', message => {
-      console.log({ message }, 'test room channel');
+      // console.log({ message }, 'test room channel');
     });
   };
   turnRoleRoom = socket => {
     socket.on('turn role', message => {
-      console.log({ message }, 'turnRoleRoom room channel');
+      // console.log({ message }, 'turnRoleRoom room channel');
       socket.emit('turn.end', message)
     });
   };
@@ -96,7 +96,7 @@ class App extends Component {
     socket.on('cancelInvite', data => {
       data = JSON.parse(data);
       if (data.to.username === this.props.user_info.username) {
-        console.log('how much');
+        // console.log('how much');
 
         this.props.openDialog({
           from: data.from,
@@ -136,11 +136,13 @@ class App extends Component {
   };
   getUser = socket => {
     socket.on('usernames', username => {
-      console.log({ username }, '77777');
+      // console.log({ username }, '77777');
 
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
         if (this.props.user_info.username === value.username) {
+          console.log({value});
+          
           this.props.updateUser(value);
         }
         return value;
@@ -150,8 +152,8 @@ class App extends Component {
 
   gamingRoom = socket => {
     let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
-    // let role, color, isMyRole;
-    let newTeam, isMyRole;
+    let role, color, isMyRole;
+    let newTeam;
     // console.log({ socket }, '**/*/');
 
     socket.on('data.room', async data => {
@@ -162,8 +164,29 @@ class App extends Component {
         this.props.history.push('/GamePersinWithPerson');
       }
       let finalData = {}
-      let { number1, number2, answers, result, questions, classKora, role, color, currentPlayerColor } = data.data
+      let { number1, number2, answers, result, questions, classKora } = data.data
       // let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+      let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+      if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
+        role = JSON.parse(this.props.user_info.room)[0];
+      } else {
+        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1];
+      }
+      color =
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+          1) %
+          2 ===
+          0
+          ? 'red'
+          : 'blue';
+  
+      let currentPlayerColor =
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+          1) %
+          2 ===
+          0
+          ? 'red'
+          : 'blue';
       if (redTeam.length === 0 && blueTeam.length === 0) {
         let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
         let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
@@ -214,7 +237,7 @@ class App extends Component {
         // resultPrevPlayer
       };
       setTimeout(() => {
-        socket.emit('switch timer',data.data.roomName)
+        socket.emit('switch timer',this.props.user_info.roomName)
         this.props.updateGame(finalData);
       }, 2000);
     });

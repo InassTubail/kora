@@ -40,7 +40,9 @@ class Tables2 extends Component {
         let data = {
             number1, number2, answers, currentPlayer: username, result: false, questions: filterdQuestions
         }
-        socket.emit('startGame', { room, data })
+        console.log(this.props.user_info.roomName,'this.props.user_info.roomName');
+        
+        socket.emit('startGame', { room, data },this.props.user_info.roomName)
     }
     render() {
         let tables = [table2, table3, table4, table5]
@@ -73,6 +75,7 @@ const mapDispatchToProps = { updateUser, updateGame };
 
 const mapStateToProps = state => ({
     open: state.dialog.open,
+    play: state.user.play,
     user_info: state.user.info,
     users: state.user.users,
     isLoggedIn: state.user.isLoggedIn,

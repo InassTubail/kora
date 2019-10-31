@@ -24,12 +24,12 @@ import socket from '../utils/api';
 
 // const io = require('socket.io-client');
 
-class GamePersonWithPerson extends Component {
+class GamePersonWithPerson2 extends Component {
   state = {
     blueTeam: [],
     redTeam: [],
     error: "",
-    timer: 0,
+    timer: 1,
 
   }
   componentDidMount() {
@@ -46,10 +46,9 @@ class GamePersonWithPerson extends Component {
       answers = convert(answers)
       let data = {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
-        classKora: ``
+        classKora: ``,fromEqual: true
       }
-
-      socket.emit('startGame', { room, data }, this.props.user_info.roomName)
+      socket.emit('startGame', { room, data })
     }
     if (this.state.error) {
       setTimeout(async () => {
@@ -67,11 +66,9 @@ class GamePersonWithPerson extends Component {
       answers = convert(answers)
       let data = {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
-        classKora: `${el.currentTarget.className}-f`
+        classKora: `${el.currentTarget.className}-f`, fromEqual: true
       }
-      console.log(this.props.user_info.roomName,'//roommnmae');
-      
-      socket.emit('startGame', { room, data },this.props.user_info.roomName)
+      socket.emit('startGame', { room, data, timer: this.state.timer })
     } else {
       this.setState({ error: 'انتظر دورك' });
     }
@@ -85,7 +82,6 @@ class GamePersonWithPerson extends Component {
             <div>
               <img src={gWithg} alt="title" className="titleImage2g" />
             </div>
-            {/* <p>{this.state.count}</p> */}
             {isMyRole ?
               <p className="playNow"><span className="playNowName"> أنت </span> تلعب الان</p>
               :
@@ -111,10 +107,6 @@ class GamePersonWithPerson extends Component {
           </div>
           <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
           {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
-          {/* <div className="subHeader4Game">
-            <img src={timerImg} alt="" className="timer" />
-            <p className="timerP"> {convertT(timer)}</p>
-          </div> */}
           <div className="subHeadersGroupg">
             <div className="subHeader332g">
               {blueTeam && blueTeam.map((el, index) =>
@@ -133,7 +125,7 @@ class GamePersonWithPerson extends Component {
 
             <div className="tim">
               <img src={timerImg} alt="" className="timImg" />
-              <p>{this.state.timer}</p>
+              <p>{convertT(this.state.timer)}</p>
             </div>
             <div className="subHeader3321g">
               {redTeam && redTeam.map((el, index) =>
@@ -154,11 +146,11 @@ class GamePersonWithPerson extends Component {
           <div className="subHeader42g">
             <div className="countPPg">
               <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
-              <p className="counterParag2g">{this.props.play.redScore}</p>
+              <p className="counterParag2g">{this.props.play.blueScore}</p>
             </div>
             <div className="countPP">
               <img src={counterRed} title="sdd" alt="dd" className="counter2g" />
-              <p className="counterParag2g">{this.props.play.blueScore}</p>
+              <p className="counterParag2g">{this.props.play.redScore}</p>
             </div>
           </div>
         </div>
@@ -179,4 +171,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GamePersonWithPerson);
+)(GamePersonWithPerson2);
