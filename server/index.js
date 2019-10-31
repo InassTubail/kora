@@ -57,7 +57,13 @@ io.sockets.on('connection', function (socket) {
     });
     io.sockets.emit('usernames', JSON.stringify(usernames));
   });
-
+  socket.on('remove timer', function (roomName) {
+    // if (timerIds[roomName] !== 11) {
+    clearInterval(roomsTimerIds[roomName])
+    roomsTimerIds[roomName] = false
+    timerIds[roomName] = 11
+    // }
+  })
   socket.on('sendInviteToPlay', function (data) {
     let from, to;
     usernames.forEach((el, index) => {
@@ -296,7 +302,7 @@ io.sockets.on('connection', function (socket) {
     }
   });
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
-  socket.on('startGame', function (data,roomName) {
+  socket.on('startGame', function (data, roomName) {
     // let role, color, roomName;
     let player = JSON.parse(data.room);
     usernames.map((el, index) => {
@@ -311,7 +317,7 @@ io.sockets.on('connection', function (socket) {
     roomsTimerIds[roomName] = false
     io.in(roomName).emit('turn role', message);
     io.sockets.emit('usernames', JSON.stringify(usernames));
-    io.sockets.emit('data.room', data);
+    io.in(roomName).emit('data.room', data);
     // starts the timer
   });
 

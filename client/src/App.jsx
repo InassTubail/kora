@@ -141,8 +141,8 @@ class App extends Component {
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
         if (this.props.user_info.username === value.username) {
-          console.log({value});
-          
+          console.log({ value });
+
           this.props.updateUser(value);
         }
         return value;
@@ -179,7 +179,7 @@ class App extends Component {
           0
           ? 'red'
           : 'blue';
-  
+
       let currentPlayerColor =
         (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
           1) %
@@ -210,9 +210,11 @@ class App extends Component {
 
       if (numberOfQuestion === 20 && blueScore === redScore) {
         this.props.history.push('/equal');
+        socket.emit('remove timer', this.props.user_info.roomName)
       }
       if (numberOfQuestion === 20 && blueScore !== redScore) {
         this.props.history.push('/congrat');
+        socket.emit('remove timer', this.props.user_info.roomName)
       }
       // بعد 2 ثانيه بدو يغير السزال
       this.props.updateGame({ ...this.props.play, classKora })
@@ -237,7 +239,7 @@ class App extends Component {
         // resultPrevPlayer
       };
       setTimeout(() => {
-        socket.emit('switch timer',this.props.user_info.roomName)
+        socket.emit('switch timer', this.props.user_info.roomName)
         this.props.updateGame(finalData);
       }, 2000);
     });
