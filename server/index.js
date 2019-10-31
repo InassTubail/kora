@@ -177,6 +177,7 @@ io.sockets.on('connection', function (socket) {
       // join the roomName provided in to (room owner)
       const fromPlayer = usernames[from];
       const toPlayer = usernames[to];
+      usernames[from].roomName = usernames[to].roomName;
       sockets[fromPlayer.username].join(toPlayer.roomName);
       io.in(toPlayer.roomName).emit('test room', { a: 'socket room message' });
 
@@ -295,8 +296,8 @@ io.sockets.on('connection', function (socket) {
     }
   });
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
-  socket.on('startGame', function (data) {
-    let role, color, roomName;
+  socket.on('startGame', function (data,roomName) {
+    // let role, color, roomName;
     let player = JSON.parse(data.room);
     usernames.map((el, index) => {
       if (player.includes(el.username)) {
@@ -305,32 +306,9 @@ io.sockets.on('connection', function (socket) {
       }
       return el;
     });
-    let currentPlayer = player.findIndex(el => el === data.data.currentPlayer)
-    if (currentPlayer === player.length - 1) {
-      role = player[0];
-    } else {
-      role = player[currentPlayer + 1];
-    }
-    color =
-      (player.findIndex(el => el === role) +
-        1) %
-        2 ===
-        0
-        ? 'red'
-        : 'blue';
-
-    let currentPlayerColor =
-      (player.findIndex(el => el === role) +
-        1) %
-        2 ===
-        0
-        ? 'red'
-        : 'blue';
-    data.data.currentPlayerColor = currentPlayerColor
-    data.data.color = color
-    data.data.role = role
-    data.data.roomName = roomName
-    let message = { roomName, role }
+    let message = { roomName }
+    clearInterval(roomsTimerIds[roomName])
+    roomsTimerIds[roomName] = false
     io.in(roomName).emit('turn role', message);
     io.sockets.emit('usernames', JSON.stringify(usernames));
     io.sockets.emit('data.room', data);

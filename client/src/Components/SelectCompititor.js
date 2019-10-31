@@ -64,20 +64,6 @@ class Select extends Component {
       this.props.history.push('/tables2');
     }
   }
-  // componentDidUpdate() {
-  //   const { open } = this.props;
-  //   if (open) {
-  //     setTimeout(() => {
-  //       this.props.closeDialog();
-  //       this.props.updateUser({
-  //          ...this.props.user_info.username,
-  //         is_playing: false,
-  //         with: null,
-  //         room: null,
-  //       });
-  //     }, 10000);
-  //   }
-  // }
   cancelInvite = (e) => {
     let data = {}
     data.to = e.target.id;
@@ -92,13 +78,6 @@ class Select extends Component {
     data.type = 'cancelPlayer';
     socket.emit('sendInviteToPlay', data)
   }
-
-  //   search = (e) =>{
-  //   const myValue=  this.props.users.filter(element => (
-  // element.username === e.target.value)
-  // );
-  // console.log(myValue,'ll'); 
-  //     }
 
   search = (e) => {
     const options = this.props.users.filter(element => (element.username !== this.props.user_info.username));
@@ -119,11 +98,11 @@ class Select extends Component {
 
   render() {
     let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
-    console.log({ alluser });
+    // console.log({ alluser });
     let filterop = this.state.filteredOptions.length > 0 && this.state.filteredOptions
-    console.log({ filterop });
+    // console.log({ filterop });
     let alluser2 = filterop || alluser
-    console.log({ alluser2 });
+    // console.log({ alluser2 });
     // console.log(this.state.alluser,'this.state.alluser');
 
     return (
