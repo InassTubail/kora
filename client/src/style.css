@@ -6,16 +6,20 @@ body,
   padding: 0;
   margin: 0;
   font-family: 'Lato', sans-serif !important;
+  overflow: hidden;
 }
+
 .body-container {
   min-height: calc(100vh - 106px) !important;
 }
+
 .loading {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 50%);
 }
-.svg-inline--fa.fa-w-6{
+
+.svg-inline--fa.fa-w-6 {
   width: 14px !important;
 }
