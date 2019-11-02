@@ -4,6 +4,8 @@ body {
   margin: 0;
   padding: 0;
   background: #ddd;
+  overflow: hidden;
+
 }
 
 .welcomeP {
@@ -46,6 +48,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
 
 
