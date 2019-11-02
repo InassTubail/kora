@@ -46,9 +46,9 @@ class GamePersonWithPerson2 extends Component {
       answers = convert(answers)
       let data = {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
-        classKora: ``,fromEqual: true
+        classKora: ``, fromEqual: true
       }
-      socket.emit('startGame', { room, data })
+      socket.emit('startGame', { room, data }, this.props.play.roomName)
     }
     if (this.state.error) {
       setTimeout(async () => {
@@ -60,15 +60,16 @@ class GamePersonWithPerson2 extends Component {
     // clearInter
     const { isMyRole, questions } = this.props.play
     if (isMyRole) {
+      socket.emit('remove timer', this.props.user_info.roomName)
       const result = el.currentTarget.id
       const { room } = this.props.user_info
       let { number1, number2, answers, filterdQuestions } = groupGame(questions);
       answers = convert(answers)
       let data = {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
-        classKora: `${el.currentTarget.className}-f`, fromEqual: true
+        classKora: `${el.currentTarget.className}-f`, fromEqual: true, timer: this.state.timer
       }
-      socket.emit('startGame', { room, data, timer: this.state.timer })
+      socket.emit('startGame', { room, data }, this.props.play)
     } else {
       this.setState({ error: 'انتظر دورك' });
     }

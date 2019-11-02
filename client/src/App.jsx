@@ -18,6 +18,7 @@ import GameIndividual2 from './Components/GameIndividual2';
 
 // import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson';
+import GamePersinWithPerson2 from './Components/GamePersonWithPerson2';
 import CongratsPWP from './Components/CongratsPWP';
 import Congrat from './Components/Congrat';
 import Equal from './Components/Equal';
@@ -68,6 +69,7 @@ class App extends Component {
     this.handleWithdrawal(socket);
     this.handleTestRoom(socket);
     this.turnRoleRoom(socket);
+    this.gamingRoomEqual(socket)
   }
   handleTestRoom = socket => {
     socket.on('test room', message => {
@@ -141,7 +143,7 @@ class App extends Component {
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
         if (this.props.user_info.username === value.username) {
-          console.log({ value });
+          // console.log({ value });
 
           this.props.updateUser(value);
         }
@@ -149,7 +151,98 @@ class App extends Component {
       });
     });
   };
+  gamingRoomEqual = socket => {
+    let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
+    let role, color, isMyRole;
+    let newTeam;
+    socket.on('data.room.equal', async (data, timer) => {
+      if (data.room !== this.props.user_info.room) return;
+      const { location } = this.props;
+      if (location.pathname !== '/play-equal') {
+        this.props.closeDialog();
+        this.props.history.push('/play-equal');
+      }
+      let finalData = {}
+      let { number1, number2, answers, result, questions, classKora } = data.data
+      // let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+      let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
+      if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
+        role = JSON.parse(this.props.user_info.room)[0];
+      } else {
+        role = JSON.parse(this.props.user_info.room)[currentPlayer + 1];
+      }
+      color =
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+          1) %
+          2 ===
+          0
+          ? 'red'
+          : 'blue';
 
+      let currentPlayerColor =
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+          1) %
+          2 ===
+          0
+          ? 'red'
+          : 'blue';
+      if (redTeam.length === 0 && blueTeam.length === 0) {
+        let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
+        let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
+        newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
+      }
+      let isTrue =
+        this.props.play.number1 * this.props.play.number2 ===
+        parseInt(result, 10);
+      if (result) {
+        if (currentPlayerColor === 'red' && isTrue) {
+          redScore++;
+        } else if (currentPlayerColor === 'blue' && isTrue) {
+          blueScore++;
+        }
+        this.props.updateGame({
+          ...this.props.play,
+          resultPrevPlayer: result
+        });
+      }
+      isMyRole = role === this.props.user_info.username;
+      // بعد 2 ثانيه بدو يغير السزال
+      this.props.updateGame({
+        ...this.props.play, classKora, timer: this.props.play.timer.concat({
+          currentPlayerColor, time: data.data.timer, isTrue
+        })
+      })
+      if (numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
+        // let redTime, blueTime;
+        this.props.history.push('/equal');
+        return;
+      }
+      finalData = {
+        ...this.props.play,
+        questions,
+        role,
+        isMyRole,
+        color,
+        number1,
+        number2,
+        answers,
+        classKora: '',
+        numberOfQuestion: numberOfQuestion++,
+        redScore,
+        redTeam: redTeam.length > 0 ? redTeam : newTeam.redTeamNew,
+        blueTeam: blueTeam.length > 0 ? blueTeam : newTeam.blueTeamNew,
+        blueScore,
+        count: 0,
+        // timer: 10,
+        resultPrevPlayer: 0 //نتيحة سؤال اللاعب الحالي ي سمر
+        // resultPrevPlayer
+      };
+      setTimeout(() => {
+        socket.emit('switch timer', this.props.user_info.roomName)
+        this.props.updateGame(finalData);
+      }, 2000);
+    });
+  };
   gamingRoom = socket => {
     let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
     let role, color, isMyRole;
@@ -207,16 +300,16 @@ class App extends Component {
         });
       }
       isMyRole = role === this.props.user_info.username;
-
-      if (numberOfQuestion === 20 && blueScore === redScore) {
+      if (numberOfQuestion === 2 && blueScore === redScore) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
+        return;
       }
       if (numberOfQuestion === 20 && blueScore !== redScore) {
         this.props.history.push('/congrat');
         socket.emit('remove timer', this.props.user_info.roomName)
+        return;
       }
-      // بعد 2 ثانيه بدو يغير السزال
       this.props.updateGame({ ...this.props.play, classKora })
       finalData = {
         ...this.props.play,
@@ -328,6 +421,11 @@ class App extends Component {
             exact
             path="/GamePersinWithPerson"
             component={GamePersinWithPerson}
+          />
+          <Route
+            exact
+            path="/play-equal"
+            component={GamePersinWithPerson2}
           />
           <Route exact path="/congrat-individ" component={CongratIndivid} />
 
