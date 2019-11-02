@@ -10,7 +10,7 @@ let roomCounter = 0;
 const sockets = {};
 let roomsTimerIds = {};
 let timerIds = {};
-
+let timers = {}
 app.use(express.static(join(__dirname, '..', 'client', 'build')));
 
 app.get('*', (_req, res) => {
@@ -285,6 +285,8 @@ io.sockets.on('connection', function (socket) {
   // clears the last timer and starts a new one
   socket.on('switch timer', function (roomName) {
     if (timerIds[roomName] !== 11) {
+      // clearInterval(roomsTimerIds[roomName])
+      // roomsTimerIds[roomName] = false
       timerIds[roomName] = 11
     }
   })
@@ -317,7 +319,11 @@ io.sockets.on('connection', function (socket) {
     roomsTimerIds[roomName] = false
     io.in(roomName).emit('turn role', message);
     io.sockets.emit('usernames', JSON.stringify(usernames));
-    io.in(roomName).emit('data.room', data);
+    if (data.data.fromEqual) {
+      io.in(roomName).emit('data.room.equal', data, timers[roomName]);
+    } else {
+      io.in(roomName).emit('data.room', data);
+    }
     // starts the timer
   });
 

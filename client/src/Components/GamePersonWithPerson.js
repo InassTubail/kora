@@ -58,8 +58,8 @@ class GamePersonWithPerson extends Component {
     }
   }
   selectAnswer = (el) => {
-    // clearInter
     const { isMyRole, questions } = this.props.play
+    socket.emit('remove timer', this.props.user_info.roomName)
     if (isMyRole) {
       const result = el.currentTarget.id
       const { room } = this.props.user_info
@@ -69,8 +69,6 @@ class GamePersonWithPerson extends Component {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
         classKora: `${el.currentTarget.className}-f`
       }
-      console.log(this.props.user_info.roomName,'//roommnmae');
-      
       socket.emit('startGame', { room, data },this.props.user_info.roomName)
     } else {
       this.setState({ error: 'انتظر دورك' });
