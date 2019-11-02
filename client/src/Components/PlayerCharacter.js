@@ -100,10 +100,10 @@ class PlayerCharacter extends Component {
           انتقل الى اختيار نوع اللعبة فردي ام ثنائي
         </Link> */}
          <div className="welcomess">
-        <p className="welcomeP">فكرة واعداد البروفيسور الأستاذ</p>
+        <p className="welcomeP">فكرة واعداد الأستاذ</p>
         <p>عبد العزيز عبدالله الحازمي</p>
       </div>
-      
+
         </div>
       </React.Fragment>
     );

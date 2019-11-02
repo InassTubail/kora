@@ -65,7 +65,7 @@ class LogIn extends Component {
           </form>
         </div>
         <div className="welcomess">
-        <p className="welcomeP">فكرة واعداد البروفيسور الأستاذ</p>
+        <p className="welcomeP">فكرة واعداد الأستاذ</p>
         <p>عبد العزيز عبدالله الحازمي</p>
       </div>
       </div>
