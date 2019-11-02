@@ -15,6 +15,15 @@
   align-items: center;
 }
 
+.playAgainWait {
+  color: #ffd400;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  font-weight: bold;
+  font-size: 29px;
+}
+
 .playerEqual0 {
   left: 48px;
 }
