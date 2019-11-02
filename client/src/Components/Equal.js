@@ -88,9 +88,15 @@ class Equal extends Component {
 
           </div>
           <div className="playAgainCongrat">
-            <Link onClick={this.replay}>
-              <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" />
-            </Link>
+          <p className="playAgainWait">
+           شارك في التحدي الأخير ,,, اللاعب الأسرع هو الرابح 
+           <br/>
+           انتظر 10 ثواني
+          </p>
+            {/* <Link onClick={this.replay}> */}
+            {/* ffd400 */}
+              {/* <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" /> */}
+            {/* </Link> */}
           </div>
         </div>
       </React.Fragment>
