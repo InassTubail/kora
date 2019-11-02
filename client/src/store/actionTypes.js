@@ -4,7 +4,8 @@ export const USER = {
   LOGIN: 'USER_LOGIN',
   USERS: 'USERS',
   UPDATE_GAME: 'UPDATE_GAME',
-  UPLOAD: 'UPLOAD'
+  UPLOAD: 'UPLOAD',
+  REPLAY_GAME: 'REPLAY_GAME'
 };
 export const DIALOG = {
   DIALOG: 'DIALOG',

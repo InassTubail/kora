@@ -7,7 +7,7 @@ import frame from '../assets/frame.png';
 import playAgain from '../assets/playAgain.png';
 import vs from '../assets/VS.png'
 import { connect } from 'react-redux';
-import { updateGame } from '../store/actions';
+import { updateGame, replay_Game } from '../store/actions';
 import { person } from './playersImage';
 import clup from '../assets/clup.mp3'
 import socket from '../utils/api';
@@ -40,7 +40,7 @@ class Equal extends Component {
             number1, number2, answers, currentPlayer: JSON.parse(room)[0],
             result: false, questions: filterdQuestions, fromEqual: true
           }
-          socket.emit('startGame', { room, data }, this.props.play.roomName)
+          socket.emit('startGame', { room, data }, this.props.user_info.roomName)
         }
       }, 10000);
     } else {
@@ -58,7 +58,11 @@ class Equal extends Component {
       this.setState({ redTime, blueTime })
     }
   }
-
+  replayGame = () => {
+    socket.emit('finishGame', this.props.user_info.room,  this.props.user_info.roomName)
+    this.props.replay_Game();
+    this.props.history.push('/select-game-type')
+  }
   render() {
     let result, winTeam;
     let { blueTime, redTime } = this.state
@@ -118,7 +122,7 @@ class Equal extends Component {
 
             </div>
             <div className="playAgainCongrat">
-              {!this.state.replay ? <Link onClick={this.replay}>
+              {!this.state.replay ? <Link onClick={this.replayGame}>
                 <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" />
               </Link> :
                 <p className="playAgainWait">
@@ -161,19 +165,17 @@ class Equal extends Component {
               <img src={cup} alt="" className="cup" />
             </div>
             <div className="playAgainCongrat">
-              <Link onClick={this.replay}>
+              <Link onClick={this.replayGame}>
                 <img src={playAgain} alt="playAgainCongratImg" className="playAgainCongratImg" />
               </Link>
             </div>
           </div>
-
-          {/* </div> */}
         </React.Fragment>
       );
   }
 };
 
-const mapDispatchToProps = { updateGame };
+const mapDispatchToProps = { updateGame, replay_Game };
 const mapStateToProps = state => ({
   user_info: state.user.info,
   play: state.user.play
