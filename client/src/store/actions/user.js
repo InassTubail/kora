@@ -24,7 +24,9 @@ export const updateGame = payload => ({
   type: `${USER.UPDATE_GAME}`,
   payload,
 });
-
+export const replay_Game = () => ({
+  type: `${USER.REPLAY_GAME}`
+});
 export const clearError = () => ({ type: USER.CLEAR_ERROR });
 export const hideUpdateSuccessMessage = () => ({
   type: USER.CLEAR_SUCCESS,

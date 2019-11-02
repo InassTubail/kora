@@ -17,6 +17,7 @@ import { questionsAndAnswers, groupGame } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import timerImg from '../assets/timer.png'
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
+import ReactLoading from 'react-loading';
 
 import './GameGroupWithGroup.css';
 
@@ -59,8 +60,8 @@ class GamePersonWithPerson extends Component {
   }
   selectAnswer = (el) => {
     const { isMyRole, questions } = this.props.play
-    socket.emit('remove timer', this.props.user_info.roomName)
     if (isMyRole) {
+      socket.emit('remove timer', this.props.user_info.roomName)
       const result = el.currentTarget.id
       const { room } = this.props.user_info
       let { number1, number2, answers, filterdQuestions } = groupGame(questions);
@@ -69,99 +70,100 @@ class GamePersonWithPerson extends Component {
         result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
         classKora: `${el.currentTarget.className}-f`
       }
-      socket.emit('startGame', { room, data },this.props.user_info.roomName)
+      socket.emit('startGame', { room, data }, this.props.user_info.roomName)
     } else {
       this.setState({ error: 'انتظر دورك' });
     }
   }
   render() {
     const { number1, number2, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play
-    return (
-      <React.Fragment>
-        <div className="gameScreen2g">
-          <div className="header2g">
-            <div>
-              <img src={gWithg} alt="title" className="titleImage2g" />
+    return answers.length == 0 ? <div className="gameScreen2g"> <p>جاري التحميل ...</p> </div>
+      : (
+        <React.Fragment>
+          <div className="gameScreen2g">
+            <div className="header2g">
+              <div>
+                <img src={gWithg} alt="title" className="titleImage2g" />
+              </div>
+              {/* <p>{this.state.count}</p> */}
+              {isMyRole ?
+                <p className="playNow"><span className="playNowName"> أنت </span> تلعب الان</p>
+                :
+                <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
+              }
+
+              {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
+              <div className="quesDiv2g">
+                <img src={questions} alt="title" className="titleImage2g" />
+                <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
+              </div>
             </div>
-            {/* <p>{this.state.count}</p> */}
-            {isMyRole ?
-              <p className="playNow"><span className="playNowName"> أنت </span> تلعب الان</p>
-              :
-              <p className="playNow"><span className="playNowName"> {role}</span> يلعب الان</p>
-            }
+            {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2g" /> :
+              <img src={haresRed} alt="hares" className="hares2g" />}
 
-            {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
-            <div className="quesDiv2g">
-              <img src={questions} alt="title" className="titleImage2g" />
-              <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
+
+            <div className="answers">
+              {answers.map((el, index) =>
+                <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
+                  {el.arabic_answer}
+                </button>
+              )}
             </div>
-          </div>
-          {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2g" /> :
-            <img src={haresRed} alt="hares" className="hares2g" />}
-
-
-          <div className="answers">
-            {answers.map((el, index) =>
-              <button className={(resultPrevPlayer === 0) ? `answer${index + 1}` : `answer${index + 1} ${el.style}`} id={el.answer} onClick={this.selectAnswer}>
-                {el.arabic_answer}
-              </button>
-            )}
-          </div>
-          <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
-          {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
-          {/* <div className="subHeader4Game">
+            <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
+            {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
+            {/* <div className="subHeader4Game">
             <img src={timerImg} alt="" className="timer" />
             <p className="timerP"> {convertT(timer)}</p>
           </div> */}
-          <div className="subHeadersGroupg">
-            <div className="subHeader332g">
-              {blueTeam && blueTeam.map((el, index) =>
-                <React.Fragment>
-                  <img
-                    src={frame}
-                    title="ti"
-                    alt="dss"
-                    className="selectedImageFrame332g"
-                  />
-                  <img src={person(el.person)} title="sdd" alt="dsdd" className={`selectedImage332g play${index}`} />
-                  <div className="blueColorg"><p>{el.username}</p></div>
-                </React.Fragment>
-              )}
+            <div className="subHeadersGroupg">
+              <div className="subHeader332g">
+                {blueTeam && blueTeam.map((el, index) =>
+                  <React.Fragment>
+                    <img
+                      src={frame}
+                      title="ti"
+                      alt="dss"
+                      className="selectedImageFrame332g"
+                    />
+                    <img src={person(el.person)} title="sdd" alt="dsdd" className={`selectedImage332g play${index}`} />
+                    <div className="blueColorg"><p>{el.username}</p></div>
+                  </React.Fragment>
+                )}
+              </div>
+
+              <div className="tim">
+                <img src={timerImg} alt="" className="timImg" />
+                <p>{this.state.timer}</p>
+              </div>
+              <div className="subHeader3321g">
+                {redTeam && redTeam.map((el, index) =>
+                  <React.Fragment>
+                    <img
+                      src={frame}
+                      title="ti"
+                      alt="dss"
+                      className="selectedImageFrame332g"
+                    />
+                    <img src={person(el.person)} title="person" alt="person" className={`selectedImage332g play${index} `} />
+                    <div className="redColorg"><p>{el.username}</p></div>
+                  </React.Fragment>
+                )}
+              </div>
             </div>
 
-            <div className="tim">
-              <img src={timerImg} alt="" className="timImg" />
-              <p>{this.state.timer}</p>
-            </div>
-            <div className="subHeader3321g">
-              {redTeam && redTeam.map((el, index) =>
-                <React.Fragment>
-                  <img
-                    src={frame}
-                    title="ti"
-                    alt="dss"
-                    className="selectedImageFrame332g"
-                  />
-                  <img src={person(el.person)} title="person" alt="person" className={`selectedImage332g play${index} `} />
-                  <div className="redColorg"><p>{el.username}</p></div>
-                </React.Fragment>
-              )}
+            <div className="subHeader42g">
+              <div className="countPPg">
+                <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
+                <p className="counterParag2g">{this.props.play.redScore}</p>
+              </div>
+              <div className="countPP">
+                <img src={counterRed} title="sdd" alt="dd" className="counter2g" />
+                <p className="counterParag2g">{this.props.play.blueScore}</p>
+              </div>
             </div>
           </div>
-
-          <div className="subHeader42g">
-            <div className="countPPg">
-              <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
-              <p className="counterParag2g">{this.props.play.redScore}</p>
-            </div>
-            <div className="countPP">
-              <img src={counterRed} title="sdd" alt="dd" className="counter2g" />
-              <p className="counterParag2g">{this.props.play.blueScore}</p>
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
   }
 };
 

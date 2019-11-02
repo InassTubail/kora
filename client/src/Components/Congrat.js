@@ -6,19 +6,19 @@ import frame from '../assets/frame.png';
 import cup from '../assets/cup.png'
 import playAgain from '../assets/playAgain.png';
 import { connect } from 'react-redux';
-import { updateUser } from '../store/actions';
+import { updateUser, replay_Game } from '../store/actions';
 import { person } from './playersImage';
 import clup from '../assets/clup.mp3'
-
+import socket from '../utils/api';
 
 import './Congrat.css';
 
 class Congrat extends Component {
-  // replay = () => {
-  //   this.props.updateUser({ ...this.props.user_info, level: 1 })
-  //   this.props.history.push(`/select-game-type`);
-  // }
-
+  replay = () => {
+    socket.emit('finishGame', this.props.user_info.room,  this.props.user_info.roomName)
+    this.props.replay_Game();
+    this.props.history.push('/select-game-type')
+  }
   render() {
     let winTeam = []
     const { redScore, redTeam, blueTeam, blueScore } = this.props.play;
@@ -30,13 +30,13 @@ class Congrat extends Component {
     return (
       <React.Fragment>
         <div className="congratDiv">
-        <audio autoPlay src={clup}  />
+          <audio autoPlay src={clup} />
 
           <div className="congratTitleDiv">
             <img src={mabrouk} alt="" className="congratTitleImg" />
           </div>
           <div className="congratPlayerImage">
-            {winTeam.map((el,index) =>
+            {winTeam.map((el, index) =>
               <div className="playersImagesCongrat">
                 <img
                   src={frame}
@@ -44,24 +44,12 @@ class Congrat extends Component {
                   alt="dss"
                   className="selectedImageFrameCongrat"
                 />
-                <img     
-                 src={person(el.person)}
- title="sdd" alt="dd" className={`selectedImageCongrat  playerG${index} `} />
+                <img
+                  src={person(el.person)}
+                  title="sdd" alt="dd" className={`selectedImageCongrat  playerG${index} `} />
                 <p className="winnerPlayerCongrat">{el.username}</p>
               </div>
             )}
-
-            {/* <div className="playersImagesCongrat">
-              <img
-                src={frame}
-
-                title="ti"
-                alt="dss"
-                className="selectedImageFrameCongrat"
-              />
-              <img src={person} title="sdd" alt="dd" className="selectedImageCongrat2" />
-              <p className="winnerPlayerCongrat">"sammaaar"</p>
-            </div> */}
 
           </div>
           <div className="congratCup">
@@ -78,7 +66,7 @@ class Congrat extends Component {
   }
 };
 
-const mapDispatchToProps = { updateUser };
+const mapDispatchToProps = { updateUser, replay_Game };
 const mapStateToProps = state => ({
   user_info: state.user.info,
   play: state.user.play

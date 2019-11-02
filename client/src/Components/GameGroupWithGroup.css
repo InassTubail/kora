@@ -13,7 +13,11 @@
   overflow: hidden;
   position: relative;
 }
-
+.load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .tim {
   margin-top: 40px;
   position: relative;

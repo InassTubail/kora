@@ -74,10 +74,45 @@ export default (state = initialState, action) => {
         ...state,
         info: payload,
       }
+
     case `${USER.UPDATE_GAME}`:
       return {
         ...state,
         play: payload,
+      }
+    case `${USER.REPLAY_GAME}`:
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          is_playing: false,
+          with: null,
+          room: null,
+          level: 1,
+          roomName: '',
+          invite: [],
+          accpet: []
+        },
+        play: {
+          // room: '',
+          role: '',
+          isMyRole: false,
+          color: '',
+          number1: 0,
+          number2: 0,
+          answers: [],
+          redScore: 0,
+          blueScore: 0,
+          redTeam: [],
+          blueTeam: [],
+          numberOfQuestion: 0,
+          resultPrevPlayer: 0,
+          // timer: 0,
+          questions: [],
+          classKora: '',
+          indexOfQuestion: 0,
+          timer: []
+        },
       }
     default:
       return state;

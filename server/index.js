@@ -135,6 +135,9 @@ io.sockets.on('connection', function (socket) {
     }
     if (data.type == 'cancelPlayer') {
       let withI = usernames[from].accpet;
+      const fromPlayer = usernames[from];
+      const toPlayer = usernames[to];
+      sockets[toPlayer.username].leave(fromPlayer.roomName);
       usernames[from] = {
         ...usernames[from],
         accpet: withI.filter(el => el !== data.to)
@@ -303,6 +306,24 @@ io.sockets.on('connection', function (socket) {
       roomsTimerIds[roomName] = timerId
     }
   });
+  socket.on('finishGame', function (room, roomName) {
+    let player = JSON.parse(room);
+    usernames.map((el, index) => {
+      if (player.includes(el.username)) {
+        sockets[el.username].leave(roomName);
+        el.invite = []
+        el.accpet = []
+        el.is_playing = false
+        el.with = ''
+        el.room = null;
+        el.roomName = '';
+      }
+      return el;
+    });
+    delete roomsTimerIds[roomName]
+    delete timerIds[roomName]
+    io.sockets.emit('usernames', JSON.stringify(usernames));
+  })
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
   socket.on('startGame', function (data, roomName) {
     // let role, color, roomName;
@@ -310,7 +331,7 @@ io.sockets.on('connection', function (socket) {
     usernames.map((el, index) => {
       if (player.includes(el.username)) {
         el.room = data.room;
-        roomName = el.roomName
+        // roomName = el.roomName
       }
       return el;
     });
