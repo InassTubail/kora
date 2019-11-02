@@ -1,7 +1,32 @@
+@import url(https://fonts.googleapis.com/earlyaccess/amiri.css);
+
 body {
   margin: 0;
   padding: 0;
   background: #ddd;
+}
+
+.welcomeP {
+  margin-bottom: -12px
+}
+
+.welcomess {
+  position: absolute;
+  bottom: -1%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Amiri' !important;
+}
+
+.welcomess p {
+  font-size: 16px;
+  color: white;
+  /* margin-top: 36% */
+
 }
 
 .signInBox {
@@ -19,6 +44,8 @@ body {
   justify-content: center;
   align-items: center;
   display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 
@@ -136,4 +163,9 @@ form#nameForm {
     width: 250px;
 
   }
+
+  .welcomess p {
+    font-size: 30px
+  }
+
 }
