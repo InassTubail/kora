@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import mabrouk from '../assets/equal.png';
+import mabroukCongrate from '../assets/mabrouk.png';
 // import person from '../assets/1.png';
 import frame from '../assets/frame.png';
 import playAgain from '../assets/playAgain.png';
@@ -117,9 +118,16 @@ class Equal extends Component {
 
             </div>
             <div className="playAgainCongrat">
-              <Link onClick={this.replay}>
+              {!this.state.replay ? <Link onClick={this.replay}>
                 <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" />
-              </Link>
+              </Link> :
+                <p className="playAgainWait">
+                  شارك في التحدي الأخير ,,, اللاعب الأسرع هو الرابح
+           <br />
+                  انتظر 10 ثواني
+          </p>
+
+              }
             </div>
           </div>
         </React.Fragment>
@@ -130,7 +138,7 @@ class Equal extends Component {
             <audio autoPlay src={clup} />
 
             <div className="congratTitleDiv">
-              <img src={mabrouk} alt="" className="congratTitleImg" />
+              <img src={mabroukCongrate} alt="" className="congratTitleImg" />
             </div>
             <div className="congratPlayerImage">
               {winTeam.map((el, index) =>
@@ -158,8 +166,10 @@ class Equal extends Component {
               </Link>
             </div>
           </div>
+
+          {/* </div> */}
         </React.Fragment>
-      )
+      );
   }
 };
 

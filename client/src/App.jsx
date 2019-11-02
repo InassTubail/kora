@@ -212,11 +212,6 @@ class App extends Component {
           currentPlayerColor, time: data.data.timer, isTrue
         })
       })
-      // if (numberOfQuestion === JSON.parse(this.props.user_info.room).length && blueScore !== redScore) {
-      //   this.props.history.push('/congrat');
-      //   socket.emit('remove timer', this.props.user_info.roomName)
-      //   return;
-      // }
       if (numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
         // let redTime, blueTime;
         this.props.history.push('/equal');
