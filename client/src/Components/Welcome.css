@@ -1,0 +1,27 @@
+/* .WelcomeBox {
+  max-width: 991px;
+  height: 100vh;
+  margin-right: auto;
+  margin-left: auto;
+  background: #ddd;
+  background-image: url("../assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column
+}
+
+.welcome {
+  width: 70%
+}
+
+.WelcomeBox p {
+  font-weight: bold;
+  color: white;
+  font-size: 148%;
+} */
