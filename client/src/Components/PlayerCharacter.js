@@ -99,8 +99,8 @@ class PlayerCharacter extends Component {
         <Link to="/select-game-type">
           انتقل الى اختيار نوع اللعبة فردي ام ثنائي
         </Link> */}
-         <div className="welcomess">
-        <p className="welcomeP">فكرة واعداد الأستاذ</p>
+         <div className="welcomess2">
+        <p className="welcomeP2">فكرة واعداد الأستاذ</p>
         <p>عبد العزيز عبدالله الحازمي</p>
       </div>
 
