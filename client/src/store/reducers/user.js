@@ -22,6 +22,7 @@ const initialState = {
     isMyRole: false,
     color: '',
     number1: 0,
+    number3: 0,
     number2: 0,
     answers: [],
     redScore: 0,

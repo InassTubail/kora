@@ -49,13 +49,25 @@ export function questionsAndAnswers(level) {
 
 export function groupGame(arrayOfnumber) {
   let random_num = Math.floor(Math.random() * arrayOfnumber.length);
-  let ques = arrayOfnumber[random_num];  
+  let ques = arrayOfnumber[random_num];
   let number1 = ques[0]
   let number2 = ques[1]
   let final = [{ answer: number1 * number2, style: "correct" }, { answer: (number1 * number2) + 2, style: "incorrect" }, { answer: (number1 * number2) + 1, style: "incorrect" }]
   let answers = shuffle(final);
   let filterdQuestions = arrayOfnumber.filter((el, index) => index !== random_num)
   return { number1, number2, answers, filterdQuestions }
+}
+
+export function groupEqual(arrayOfnumber) {
+  let random_num = Math.floor(Math.random() * arrayOfnumber.length);
+  let number3 = Math.floor(Math.random() * 10);
+  let ques = arrayOfnumber[random_num];
+  let number1 = ques[0]
+  let number2 = ques[1]
+  let final = [{ answer: number1 * number2 * number3, style: "correct" }, { answer: (number1 * number2 * number3) + 2, style: "incorrect" }, { answer: (number1 * number2 * number3) + 3, style: "incorrect" }]
+  let answers = shuffle(final);
+  let filterdQuestions = arrayOfnumber.filter((el, index) => index !== random_num)
+  return { number1, number2, answers, filterdQuestions, number3 }
 }
 
 //0  23 
