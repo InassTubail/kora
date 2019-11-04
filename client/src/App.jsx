@@ -303,7 +303,7 @@ class App extends Component {
         });
       }
       isMyRole = role === this.props.user_info.username;
-      if (numberOfQuestion === 2 && blueScore === redScore) {
+      if (numberOfQuestion === 20 && blueScore === redScore) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
