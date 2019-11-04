@@ -16,6 +16,8 @@ import PopAccept from './Components/PopAccept';
 import CongratIndivid from './Components/CongratIndivid';
 import GameIndividual2 from './Components/GameIndividual2';
 
+import Welcome from './Components/Welcome';
+
 // import GameGroupWithGroup from './Components/GameGroupWithGroup'
 import GamePersinWithPerson from './Components/GamePersonWithPerson';
 import GamePersinWithPerson2 from './Components/GamePersonWithPerson2';
@@ -431,6 +433,8 @@ class App extends Component {
           <Route exact path="/congrat-individ" component={CongratIndivid} />
 
           <Route exact path="/congrat" component={Congrat} />
+          <Route exact path="/Welcome" component={Welcome} />
+
           <Route exact path="/equal" component={Equal} />
           <Route exact path="/tables" component={Tables} />
           <Route exact path="/tables2" component={Tables2} />

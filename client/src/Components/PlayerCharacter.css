@@ -11,7 +11,32 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow: hidden;
+  position: relative;
 }
+
+.welcomeP2 {
+  margin-bottom: -12px
+}
+
+.welcomess2 {
+  position: absolute;
+  top: 9%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Amiri' !important;
+}
+
+.welcomess2 p {
+  font-size: 14px;
+  color: white;
+  /* margin-top: 36% */
+
+}
+
 
 /* @media (min-width: 991px) {
   .mainView {
@@ -187,5 +212,9 @@
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .welcomess2 p {
+    font-size: 30px
   }
 }

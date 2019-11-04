@@ -64,7 +64,12 @@ class LogIn extends Component {
             </button>
           </form>
         </div>
+        <div className="welcomess">
+        <p className="welcomeP">فكرة واعداد الأستاذ</p>
+        <p>عبد العزيز عبدالله الحازمي</p>
       </div>
+      </div>
+     
     );
   }
 }
