@@ -13,7 +13,7 @@ import playerRed from '../assets/player.png';
 import playerBlue from '../assets/playerBlue.png';
 import { updateUser, updateGame } from '../store/actions';
 import timerRed from '../assets/redTimer.png'
-import { questionsAndAnswers, groupGame } from '../utils/questionAndAnswer'
+import { questionsAndAnswers, groupEqual } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import timerImg from '../assets/timer.png'
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
@@ -43,10 +43,10 @@ class GamePersonWithPerson2 extends Component {
     if (isMyRole && this.state.timer === 0 && prevState.timer !== this.state.timer) {
       const result = 'false'
       const { room } = this.props.user_info
-      let { number1, number2, answers, filterdQuestions } = groupGame(questions);
+      let { number1, number2, number3, answers, filterdQuestions } = groupEqual(questions);
       answers = convert(answers)
       let data = {
-        result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
+        result, number1, number2, number3, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
         classKora: ``, fromEqual: true
       }
       socket.emit('startGame', { room, data }, this.props.user_info.roomName)
@@ -64,10 +64,10 @@ class GamePersonWithPerson2 extends Component {
       socket.emit('remove timer', this.props.user_info.roomName)
       const result = el.currentTarget.id
       const { room } = this.props.user_info
-      let { number1, number2, answers, filterdQuestions } = groupGame(questions);
+      let { number1, number2, number3, answers, filterdQuestions } = groupEqual(questions);
       answers = convert(answers)
       let data = {
-        result, number1, number2, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
+        result, number1, number2, number3, answers, currentPlayer: this.props.play.role, questions: filterdQuestions,
         classKora: `${el.currentTarget.className}-f`, fromEqual: true, timer: this.state.timer
       }
       socket.emit('startGame', { room, data }, this.props.user_info.roomName)
@@ -76,7 +76,9 @@ class GamePersonWithPerson2 extends Component {
     }
   }
   render() {
-    const { number1, number2, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play
+    const { number1, number2, number3, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play;
+    // console.log({number1, number2, number3});
+    
     return answers.length == 0 ? <div className="gameScreen2g"> <p>جاري التحميل ...</p> </div>
       : (
         <React.Fragment>
@@ -94,7 +96,7 @@ class GamePersonWithPerson2 extends Component {
               {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
               <div className="quesDiv2g">
                 <img src={questions} alt="title" className="titleImage2g" />
-                <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
+                <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]} × ${arabic_num[number3]}`}</p>
               </div>
             </div>
             {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2g" /> :

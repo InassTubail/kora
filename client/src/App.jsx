@@ -165,7 +165,7 @@ class App extends Component {
         this.props.history.push('/play-equal');
       }
       let finalData = {}
-      let { number1, number2, answers, result, questions, classKora } = data.data
+      let { number1, number2, answers, result, number3, questions, classKora } = data.data
       // let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
       if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
@@ -194,7 +194,7 @@ class App extends Component {
         newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
       }
       let isTrue =
-        this.props.play.number1 * this.props.play.number2 ===
+        this.props.play.number1 * this.props.play.number2 * this.props.play.number3 ===
         parseInt(result, 10);
       if (result) {
         if (currentPlayerColor === 'red' && isTrue) {
@@ -226,6 +226,7 @@ class App extends Component {
         isMyRole,
         color,
         number1,
+        number3,
         number2,
         answers,
         classKora: '',
