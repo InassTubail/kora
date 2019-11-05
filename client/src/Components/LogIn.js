@@ -44,6 +44,7 @@ class LogIn extends Component {
       <Redirect to="/player-Character" />
     ) : (
       <div id="signInBox" className="signInBox">
+      <h1 className="signInTitle">دوري نجـوم الضرب</h1>
         <div className="signInContainer">
           {/* <h1 className="signInTitle">تسجيل الدخول</h1> */}
           <form id="nameForm">
