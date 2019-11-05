@@ -5,7 +5,7 @@ body {
   padding: 0;
   background: #ddd;
   overflow: hidden;
-
+  height: 100vh;
 }
 
 .welcomeP {
