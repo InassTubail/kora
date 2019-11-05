@@ -141,7 +141,8 @@ form#nameForm {
   font-weight: bold;
   text-align: center;
   background: #fff;
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 9px;
   border-radius: 10px;
   font-size: 19px;
   margin-top: 47px;
