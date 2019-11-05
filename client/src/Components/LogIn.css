@@ -81,7 +81,6 @@ body {
   -moz-box-sizing: border-box;
   border: 1px solid #BEBEBE;
   padding: 7px;
-
   transition: all 0.30s ease-in-out;
   outline: none;
   border-radius: 3px;
@@ -101,8 +100,8 @@ form#nameForm {
 
 .nameToLogIn:focus,
 .nameToLogIn:hover {
-  -moz-box-shadow: 0 0 8px #8cc63f;
-  -webkit-box-shadow: 0 0 8px #8cc63f;
+  /* -moz-box-shadow: 0 0 8px #8cc63f;
+  -webkit-box-shadow: 0 0 8px #8cc63f; */
   box-shadow: 0 0 8px #8cc63f;
   border: 1px solid #8cc63f;
 }
