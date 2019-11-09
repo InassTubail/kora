@@ -17,6 +17,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .popup {
   position: fixed;
   top: 0;
@@ -38,14 +39,16 @@
 .excellent {
   width: 333px;
 }
-.gameScreen.popupBlur{
+
+.gameScreen.popupBlur {
   filter: blur(5px);
   -webkit-filter: blur(6px);
 }
+
 .nextStage {
   position: absolute;
   top: 60%;
-  background-image: url('../assets/tryAgain.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533750-4ab8da80-0335-11ea-8c5c-bda180f18a04.png');
   background-size: cover;
   background-position: center;
   background-position: center center;

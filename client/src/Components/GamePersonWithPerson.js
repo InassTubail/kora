@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import koraImg from '../assets/kora.png';
-import frame from '../assets/frame.png';
-import gWithg from '../assets/tit.png';
-import questions from '../assets/questions.png';
+// import koraImg from '../assets/kora.png';
+// import frame from '../assets/frame.png';
+// import gWithg from '../assets/tit.png';
+// import questions from '../assets/questions.png';
 import { updateUser, updateGame } from '../store/actions';
 import { questionsAndAnswers, groupGame } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
-import timerImg from '../assets/timer.png'
+// import timerImg from '../assets/timer.png'
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 
 import './GameGroupWithGroup.css';
@@ -75,7 +75,7 @@ class GamePersonWithPerson extends Component {
           <div className="gameScreen2g">
             <div className="header2g">
               <div>
-                <img src={gWithg} alt="title" className="titleImage2g" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534485-bb63f500-033d-11ea-8fbc-9c35c2c1c26d.png'} alt="title" className="titleImage2g" />
               </div>
               {/* <p>{this.state.count}</p> */}
               {isMyRole ?
@@ -86,7 +86,7 @@ class GamePersonWithPerson extends Component {
 
               {this.state.error ? <p className="errorMeassage">* {this.state.error}</p> : null}
               <div className="quesDiv2g">
-                <img src={questions} alt="title" className="titleImage2g" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534308-b56d1480-033b-11ea-9af3-9b8c5affe604.png'} alt="title" className="titleImage2g" />
                 <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
               </div>
             </div>
@@ -101,14 +101,14 @@ class GamePersonWithPerson extends Component {
                 </button>
               )}
             </div>
-            <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
+            <img src={'https://user-images.githubusercontent.com/30287981/68534189-05e37280-033a-11ea-9293-e877ff99f10c.png'} alt="kora" edt className={`koraImg2g ${classKora}`} />
             {color === 'red' ? <img src={'https://user-images.githubusercontent.com/30325727/68528142-774e0180-02f7-11ea-8ec0-fa2acc7d62ed.png'} alt="kora" edt className="playerImg2g" /> : <img src={'https://user-images.githubusercontent.com/30325727/68528141-774e0180-02f7-11ea-94d9-b18b3c889ccc.png'} alt="kora" edt className="playerImg2g" />}
             <div className="subHeadersGroupg">
               <div className="subHeader332g">
                 {blueTeam && blueTeam.map((el, index) =>
                   <React.Fragment>
                     <img
-                      src={frame}
+                      src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                       title="ti"
                       alt="dss"
                       className="selectedImageFrame332g"
@@ -120,14 +120,14 @@ class GamePersonWithPerson extends Component {
               </div>
 
               <div className="tim">
-                <img src={timerImg} alt="" className="timImg" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534404-f1ed4000-033c-11ea-8d8c-5bc9750ca951.png'} alt="" className="timImg" />
                 <p>{this.state.timer}</p>
               </div>
               <div className="subHeader3321g">
                 {redTeam && redTeam.map((el, index) =>
                   <React.Fragment>
                     <img
-                      src={frame}
+                      src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                       title="ti"
                       alt="dss"
                       className="selectedImageFrame332g"

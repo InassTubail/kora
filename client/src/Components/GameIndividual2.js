@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import koraImg from '../assets/kora.png';
+// import koraImg from '../assets/kora.png';
 import { person } from './playersImage';
-import frame from '../assets/frame.png';
-import titleImg from '../assets/tit.png';
-import questions from '../assets/questions.png';
-import counter from '../assets/asset32.png';
-import koraGreen from '../assets/koGreen.png'
-import koraRed from '../assets/koRed.png'
-import koraBlack from '../assets/koBlack.png'
-import timer from '../assets/timer.png'
-import helping from '../assets/help-tools2.png'
-import helping2 from '../assets/help-tools1.png'
+// import frame from '../assets/frame.png';
+// import titleImg from '../assets/tit.png';
+// import questions from '../assets/questions.png';
+// import counter from '../assets/asset32.png';
+// import koraGreen from '../assets/koGreen.png'
+// import koraRed from '../assets/koRed.png'
+// import koraBlack from '../assets/koBlack.png'
+// import timer from '../assets/timer.png'
+// import helping from '../assets/help-tools2.png'
+// import helping2 from '../assets/help-tools1.png'
 import { shortTable } from '../utils/customPlay'
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
@@ -19,14 +19,14 @@ import { updateUser } from '../store/actions';
 import { shuffle } from '../utils/questionAndAnswer';
 import Sound from './SoundAhsant'
 import TryAgainSound from './TryAgainSound'
-import showTableB from '../assets/showTableB.png'
-import showTableG from '../assets/showTableG.png'
-import plusTimeB from '../assets/plusTimeB.png'
-import plusTimeG from '../assets/plusTimeG.png'
+// import showTableB from '../assets/showTableB.png'
+// import showTableG from '../assets/showTableG.png'
+// import plusTimeB from '../assets/plusTimeB.png'
+// import plusTimeG from '../assets/plusTimeG.png'
 import correctSound from '../assets/correct.mp3';
 import ShowTab from './showTables';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
-import timerRed from '../assets/redTimer.png'
+// import timerRed from '../assets/redTimer.png'
 import './GameIndividual2.css';
 
 class GameIndividual2 extends Component {
@@ -181,35 +181,35 @@ class GameIndividual2 extends Component {
         <PopUpLose showPopup={showPopup} onClick={this.closePopUp} />
         <div className={showPopup || showCongratePopup ? "gameScreen popupBlur" : "gameScreen"}>
           <div className="headerGameIndivid">
-            <img src={titleImg} alt="title" className="titleImageInd" />
+            <img src={'https://user-images.githubusercontent.com/30287981/68534485-bb63f500-033d-11ea-8fbc-9c35c2c1c26d.png'} alt="title" className="titleImageInd" />
           </div>
           <div className="counterWithHelp">
             <div className="counterNew">
-              <img src={counter} title="sdd" alt="dd" className="counter" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533908-4988ad00-0337-11ea-8547-d1bdb33ad103.png'} title="sdd" alt="dd" className="counter" />
               <p className="counterParagGameInd"> {arabic_num[level]}</p>
             </div>
             <div className="helpingDiv">
 
               <div className="helpingTitle">
-                <img src={helping2} alt="" className="helpingTitleImg" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534136-89509400-0339-11ea-9f6a-977425586624.png'} alt="" className="helpingTitleImg" />
               </div>
 
               <div className="helpingContent">
-                <img src={helping} alt="" className="helpingImg" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534146-adac7080-0339-11ea-90b7-fa5c4df7e48e.png'} alt="" className="helpingImg" />
                 <div className="choices">
                   {this.state.deleteAnswer ?
                     <img src={'https://user-images.githubusercontent.com/30325727/68527977-fb06ee80-02f5-11ea-9fec-4210c3bcfce6.png'} alt="" className="deleteAnswer2" /> :
                     <img src={'https://user-images.githubusercontent.com/30325727/68527975-f17d8680-02f5-11ea-95d8-af067eb2ff73.png'} alt="" className="deleteAnswer2" onClick={this.deleteAnswer} />}
-                  {this.state.showTable ? <img src={showTableB} alt="" className="deleteAnswer2" /> :
-                    <img src={showTableG} alt="" className="deleteAnswer2" onClick={this.showTable} />}
-                  {this.state.plusTime ? <img src={plusTimeB} alt="" className="deleteAnswer2" /> :
-                    <img src={plusTimeG} alt="" className="deleteAnswer2" onClick={this.plusTime} />}
+                  {this.state.showTable ? <img src={'https://user-images.githubusercontent.com/30287981/68534363-62e02800-033c-11ea-8c47-c8e25ada4869.png'} alt="" className="deleteAnswer2" /> :
+                    <img src={'https://user-images.githubusercontent.com/30287981/68534382-a9ce1d80-033c-11ea-9de1-6ef125810eac.png'} alt="" className="deleteAnswer2" onClick={this.showTable} />}
+                  {this.state.plusTime ? <img src={'https://user-images.githubusercontent.com/30287981/68534289-80f95880-033b-11ea-8d62-c2a59a2fec23.png'} alt="" className="deleteAnswer2" /> :
+                    <img src={'https://user-images.githubusercontent.com/30287981/68534292-822a8580-033b-11ea-8097-4c4cc0017b57.png'} alt="" className="deleteAnswer2" onClick={this.plusTime} />}
                 </div>
               </div>
             </div>
           </div>
           <div className="quesDiv">
-            <img src={questions} alt="title" className="titleImageInd" />
+            <img src={'https://user-images.githubusercontent.com/30287981/68534308-b56d1480-033b-11ea-9af3-9b8c5affe604.png'} alt="title" className="titleImageInd" />
             <p className="questionStatement">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
           </div>
 
@@ -223,13 +223,13 @@ class GameIndividual2 extends Component {
             )}
           </div>
 
-          <img src={koraImg} alt="kora" edt className="koraImg" className={`koraImg ${this.state.classKora}`} />
+          <img src={'https://user-images.githubusercontent.com/30287981/68534189-05e37280-033a-11ea-9293-e877ff99f10c.png'} alt="kora" edt className="koraImg" className={`koraImg ${this.state.classKora}`} />
           <img src={'https://user-images.githubusercontent.com/30325727/68528142-774e0180-02f7-11ea-8ec0-fa2acc7d62ed.png'} alt="kora" edt className="playerImg" className="playerImg" />
 
           <div className="bottomHead">
             <div className="subHeader33Game">
               <img
-                src={frame}
+                src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                 title="ti"
                 alt="dss"
                 className="selectedImageFrame33"
@@ -237,15 +237,15 @@ class GameIndividual2 extends Component {
               <img src={person(this.props.user_info.person)} title="sdd" alt="dd" className="selectedImage33" />
             </div>
             <div className="subHeader4Game">
-              {this.state.timer < 10 ? <img src={timerRed} alt="" className="timer" /> : <img src={timer} alt="" className="timer" />}
+              {this.state.timer < 10 ? <img src={'https://user-images.githubusercontent.com/30287981/68534362-5e1b7400-033c-11ea-9bcf-7d570c3f9a19.png'} alt="" className="timer" /> : <img src={'https://user-images.githubusercontent.com/30287981/68534404-f1ed4000-033c-11ea-8d8c-5bc9750ca951.png'} alt="" className="timer" />}
               <p className="timerP"> {convertT(this.state.timer)}</p>
             </div>
           </div>
           <div className="koras">
             {answered.map((el) => {
-              if (el == 2) return <img src={koraBlack} alt="" className="KorasImg" />
-              if (el == 1) return <img src={koraGreen} alt="" className="KorasImg" />
-              if (el == 0) return <img src={koraRed} alt="" className="KorasImg" />
+              if (el == 2) return <img src={'https://user-images.githubusercontent.com/30287981/68534187-024feb80-033a-11ea-8183-c43af8ef2ca1.png'} alt="" className="KorasImg" />
+              if (el == 1) return <img src={'https://user-images.githubusercontent.com/30287981/68534188-0419af00-033a-11ea-8e62-dce1de6dd54c.png'} alt="" className="KorasImg" />
+              if (el == 0) return <img src={'https://user-images.githubusercontent.com/30287981/68534192-07ad3600-033a-11ea-89c9-f82c2baf5f2d.png'} alt="" className="KorasImg" />
             })}
           </div>
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import playAgain from '../assets/playAgain.png'
+// import playAgain from '../assets/playAgain.png'
 import { connect } from 'react-redux';
-import frame from '../assets/frame.png';
+// import frame from '../assets/frame.png';
 // import person from '../assets/1.png'
 import './CongratsPWP.css';
 
@@ -14,7 +14,7 @@ class CongratsPWP extends Component {
 
            <div className="subHeaderPWP">
               <img
-                src={frame}
+                src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                 title="ti"
                 alt="dss"
                 className="selectedImageFramePWP"
@@ -32,7 +32,7 @@ class CongratsPWP extends Component {
           <div className="playAgainn">
           <Link>
 
-<img src={playAgain} alt="playAgain"/>
+<img src={'https://user-images.githubusercontent.com/30287981/68533807-0712a080-0336-11ea-9ff1-62450694e1a4.png'} alt="playAgain"/>
 </Link>
 
           </div>

@@ -4,7 +4,7 @@
   margin-right: auto;
   margin-left: auto;
   background: #ddd;
-  background-image: url("../assets/gameScreen2.png");
+  background-image: url("https://user-images.githubusercontent.com/30287981/68534046-d54f0900-0338-11ea-8366-d07951446ed3.png");
   background-size: cover;
   background-position: center;
   background-position: center center;
@@ -72,14 +72,14 @@
 }
 
 .correct {
-  background-image: url('../assets/greenColor.png') !important;
+  background-image: url('https://user-images.githubusercontent.com/30287981/68534047-d7b16300-0338-11ea-9fc6-32f6e46e42c4.png') !important;
   background-size: cover;
   /* background: green; */
 }
 
 
 .incorrect {
-  background-image: url('../assets/redColor.png') !important;
+  background-image: url('https://user-images.githubusercontent.com/30287981/68534307-b3a35100-033b-11ea-89fc-14dfedd3424b.png') !important;
   background-size: cover;
   /* background: red; */
 }
@@ -153,7 +153,7 @@
   border: 3px solid #fff;
   border-radius: 50%;
   position: absolute;
-  background-image: url('../assets/defaultColor.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533972-0a0e9080-0338-11ea-85fd-43c93838e2b5.png');
   background-size: cover;
 
   /* background-color: springgreen */

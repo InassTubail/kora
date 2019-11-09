@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import lose from '../assets/lose.png';
+// import lose from '../assets/lose.png';
 import './popUpLose.css';
 
 class popUpLose extends Component {
@@ -21,7 +21,7 @@ class popUpLose extends Component {
           <div className="popup">
             <div className='popupCongrat'>
               <div className="excellentDiv" >
-                <img src={lose} alt="excellent" className="excellent" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68534258-029cb680-033b-11ea-9747-2cfe7a3b8471.png'} alt="excellent" className="excellent" />
               </div>
               <button className="nextStage" onClick={this.props.onClick} />
             </div>

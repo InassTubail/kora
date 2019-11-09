@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import mabrouk from '../assets/mabrouk.png';
-import frame from '../assets/frame.png';
-import cup from '../assets/cup.png'
-import playAgain from '../assets/playAgain.png';
+// import mabrouk from '../assets/mabrouk.png';
+// import frame from '../assets/frame.png';
+// import cup from '../assets/cup.png'
+// import playAgain from '../assets/playAgain.png';
 import { connect } from 'react-redux';
 import { updateUser, replay_Game } from '../store/actions';
 import { person } from './playersImage';
@@ -32,13 +32,13 @@ class Congrat extends Component {
           <audio autoPlay src={clup} />
 
           <div className="congratTitleDiv">
-            <img src={mabrouk} alt="" className="congratTitleImg" />
+            <img src={'https://user-images.githubusercontent.com/30287981/68533806-0548dd00-0336-11ea-93c0-7ba5ceb69904.png'} alt="" className="congratTitleImg" />
           </div>
           <div className="congratPlayerImage">
             {winTeam.map((el, index) =>
               <div className="playersImagesCongrat">
                 <img
-                  src={frame}
+                  src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                   title="ti"
                   alt="dss"
                   className="selectedImageFrameCongrat"
@@ -52,11 +52,11 @@ class Congrat extends Component {
 
           </div>
           <div className="congratCup">
-            <img src={cup} alt="" className="cup" />
+            <img src={'https://user-images.githubusercontent.com/30287981/68533971-0844cd00-0338-11ea-878b-abd537d54ade.png'} alt="" className="cup" />
           </div>
           <div className="playAgainCongrat">
             <Link onClick={this.replay}>
-              <img src={playAgain} alt="playAgainCongratImg" className="playAgainCongratImg" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533807-0712a080-0336-11ea-9ff1-62450694e1a4.png'} alt="playAgainCongratImg" className="playAgainCongratImg" />
             </Link>
           </div>
         </div>
