@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import mabrouk from '../assets/equal.png';
-import mabroukCongrate from '../assets/mabrouk.png';
-import frame from '../assets/frame.png';
-import playAgain from '../assets/playAgain.png';
-import vs from '../assets/VS.png'
+// import mabrouk from '../assets/equal.png';
+// import mabroukCongrate from '../assets/mabrouk.png';
+// import frame from '../assets/frame.png';
+// import playAgain from '../assets/playAgain.png';
+// import vs from '../assets/VS.png'
 import { connect } from 'react-redux';
 import { updateGame, replay_Game } from '../store/actions';
 import { person } from './playersImage';
@@ -14,7 +14,7 @@ import { groupEqual } from '../utils/questionAndAnswer';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 import { type_index } from '../utils/customPlay'
 // import clup from '../assets/clup.mp3'
-import cup from '../assets/cup.png'
+// import cup from '../assets/cup.png'
 
 import './Congrat.css';
 import './Equal.css';
@@ -83,13 +83,13 @@ class Equal extends Component {
             <audio autoPlay src={clup} />
 
             <div className="equalTitleDiv">
-              <img src={mabrouk} alt="" className="congratTitleImg" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533892-0af2f280-0337-11ea-860d-a0fdd9bf27b2.png'} alt="" className="congratTitleImg" />
             </div>
             <div className="congratPlayerImage">
               {this.props.play.blueTeam.map((el, index) =>
                 <div className="playersImagesEqual">
                   <img
-                    src={frame}
+                    src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                     title="ti"
                     alt="dss"
                     className="selectedImageFrameCongrat"
@@ -103,13 +103,13 @@ class Equal extends Component {
             </div>
 
             <div className="vsEqual">
-              <img src={vs} alt="vs" className="vsEqualImg" /></div>
+              <img src={'https://user-images.githubusercontent.com/30287981/68533609-61f6c880-0333-11ea-8d05-a761803c7eeb.png'}  alt="vs" className="vsEqualImg"  /></div>
 
             <div className="congratPlayerImage">
               {this.props.play.redTeam.map((el, index) =>
                 <div className="playersImagesEqual">
                   <img
-                    src={frame}
+                    src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                     title="ti"
                     alt="dss"
                     className="selectedImageFrameCongrat"
@@ -122,7 +122,7 @@ class Equal extends Component {
             </div>
             <div className="playAgainCongrat">
               {!this.state.replay ? <Link onClick={this.replayGame}>
-                <img src={playAgain} alt="playAgainCongratImg" className="playAgainEqualImg" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68533807-0712a080-0336-11ea-9ff1-62450694e1a4.png'} alt="playAgainCongratImg" className="playAgainEqualImg" />
               </Link> :
                 <p className="playAgainWait">
                   شارك في التحدي الأخير ,,, اللاعب الأسرع هو الرابح
@@ -141,13 +141,13 @@ class Equal extends Component {
             <audio autoPlay src={clup} />
 
             <div className="congratTitleDiv">
-              <img src={mabroukCongrate} alt="" className="congratTitleImg" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533806-0548dd00-0336-11ea-93c0-7ba5ceb69904.png'} alt="" className="congratTitleImg" />
             </div>
             <div className="congratPlayerImage">
               {winTeam.map((el, index) =>
                 <div className="playersImagesCongrat">
                   <img
-                    src={frame}
+                    src={'https://user-images.githubusercontent.com/30287981/68534044-d2ecaf00-0338-11ea-8523-8bf353a3359a.png'}
                     title="ti"
                     alt="dss"
                     className="selectedImageFrameCongrat"
@@ -161,11 +161,11 @@ class Equal extends Component {
 
             </div>
             <div className="congratCup">
-              <img src={cup} alt="" className="cup" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533971-0844cd00-0338-11ea-878b-abd537d54ade.png'} alt="" className="cup" />
             </div>
             <div className="playAgainCongrat">
               <Link onClick={this.replayGame}>
-                <img src={playAgain} alt="playAgainCongratImg" className="playAgainCongratImg" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68533807-0712a080-0336-11ea-9ff1-62450694e1a4.png'} alt="playAgainCongratImg" className="playAgainCongratImg" />
               </Link>
             </div>
           </div>

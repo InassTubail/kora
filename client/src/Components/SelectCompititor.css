@@ -104,7 +104,7 @@
 }
 
 .onButton {
-  background-image: url('../assets/onColor.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533793-bdc25100-0335-11ea-8f4e-893fc8b7d4a0.png');
   text-align: center;
   vertical-align: middle;
 }
@@ -115,12 +115,12 @@
 }
 
 .invButton {
-  background-image: url('../assets/invColor.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68534148-b0a76100-0339-11ea-99c5-b1a5cb520c25.png');
 
 }
 
 .busyButton {
-  background-image: url('../assets/busyColor.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533909-4b527080-0337-11ea-9087-c37b835dd00a.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

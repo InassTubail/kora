@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, closeDialog } from '../store/actions';
-import inputDiv from '../assets/InputDiv.png';
-import playerName from '../assets/playerName.png';
-import True from '../assets/true.png';
-import title2 from '../assets/title2.png';
+// import inputDiv from '../assets/InputDiv.png';
+// import playerName from '../assets/playerName.png';
+// import True from '../assets/true.png';
+// import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
 import socket from '../utils/api';
-import startButton from '../assets/startButton.png'
+// import startButton from '../assets/startButton.png'
 
 import './SelectCompititor.css';
 
@@ -89,12 +89,12 @@ class Select extends Component {
       <React.Fragment>
         <div className="selectCompititorsDiv">
           <div className="titleImage1">
-            <img src={title2} title="sss" alt="Sss" className="titleImage" />
+            <img src={'https://user-images.githubusercontent.com/30287981/68534457-66c07a00-033d-11ea-922d-eb66192a75aa.png'} title="sss" alt="Sss" className="titleImage" />
           </div>
           <div className="searchDiv">
             <div className="inputDiv">
               <img
-                src={inputDiv}
+                src={'https://user-images.githubusercontent.com/30287981/68534147-af763400-0339-11ea-8398-9ea8420a9e95.png'}
                 title="ti"
                 alt="dss"
                 className="searchInput"
@@ -123,7 +123,7 @@ class Select extends Component {
                     <div className="playersName">
                       {' '}
                       <img
-                        src={playerName}
+                        src={'https://user-images.githubusercontent.com/30287981/68533809-08dc6400-0336-11ea-9b94-494308582f6a.png'}
                         title="compiteButton"
                         alt="compiteButton"
                         className="buttons"
@@ -168,7 +168,7 @@ class Select extends Component {
                     <div className="playersName2">
                       {' '}
                       <img
-                        src={playerName}
+                        src={'https://user-images.githubusercontent.com/30287981/68533809-08dc6400-0336-11ea-9b94-494308582f6a.png'}
                         title="compiteButton"
                         alt="compiteButton"
                         className="buttons"
@@ -183,7 +183,7 @@ class Select extends Component {
                     <div className="onlineButtons">
                       <span className="buttons busyButton">بانتظار القبول</span>
                     </div>
-                    <img src={True} alt="true" className="true" />
+                    <img src={'https://user-images.githubusercontent.com/30287981/68534459-6aec9780-033d-11ea-95eb-fdd3963bb55f.png'} alt="true" className="true" />
                   </div>
                 </li>
               ))}
@@ -203,7 +203,7 @@ class Select extends Component {
                       <div className="playersName2">
                         {' '}
                         <img
-                          src={playerName}
+                          src={'https://user-images.githubusercontent.com/30287981/68533809-08dc6400-0336-11ea-9b94-494308582f6a.png'}
                           title="compiteButton"
                           alt="compiteButton"
                           className="buttons"
@@ -218,7 +218,7 @@ class Select extends Component {
                       <div className="onlineButtons">
                         <span className="buttons onButton">قبل الدعوة</span>
                       </div>
-                      <img src={True} alt="true" className="true" />
+                      <img src={'https://user-images.githubusercontent.com/30287981/68534459-6aec9780-033d-11ea-95eb-fdd3963bb55f.png'} alt="true" className="true" />
                     </div>
                   </li>
                 ))
@@ -237,7 +237,7 @@ class Select extends Component {
           </div> */}
           <div className="searchDiv">
             <div className="buttonDiv">
-              <img src={startButton} alt="startButton" className="startButton" onClick={this.startPlay} />
+              <img src={'https://user-images.githubusercontent.com/30287981/68534403-f0237c80-033c-11ea-9540-d8a4f45e7587.png'} alt="startButton" className="startButton" onClick={this.startPlay} />
               {/* <button className="startButton" onClick={this.startPlay}>بدء اللعبه</button> */}
             </div>
           </div>

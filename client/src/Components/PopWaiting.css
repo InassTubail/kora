@@ -4,7 +4,7 @@
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(0, 0, 0, 0.5);
-  background-image: url('../assets/wait.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533748-48568080-0335-11ea-9966-68dd19044856.png');
   background-size: cover;
   background-position: center;
   background-position: center center;
@@ -24,7 +24,7 @@
   position: absolute;
   height: 36%;
   top: 60%;
-  background-image: url('../assets/invColor.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68534148-b0a76100-0339-11ea-99c5-b1a5cb520c25.png');
   color: #fff;
   font-size: 90%;
   font-weight: bold;
