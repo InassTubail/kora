@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import mabrouk from '../assets/equal.png';
 import mabroukCongrate from '../assets/mabrouk.png';
-// import person from '../assets/1.png';
 import frame from '../assets/frame.png';
 import playAgain from '../assets/playAgain.png';
 import vs from '../assets/VS.png'

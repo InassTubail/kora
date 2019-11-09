@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import playAgain from '../assets/playAgain.png'
 import { connect } from 'react-redux';
 import frame from '../assets/frame.png';
-import person from '../assets/1.png'
+// import person from '../assets/1.png'
 import './CongratsPWP.css';
 
 class CongratsPWP extends Component {
@@ -20,7 +20,7 @@ class CongratsPWP extends Component {
                 className="selectedImageFramePWP"
               />
                 <img
-                  src={person}
+                  src={'https://user-images.githubusercontent.com/30325727/68527261-abbcc000-02ed-11ea-9b23-4ae3b5c7c212.png'}
                   className="selectedImagePWP"
                 />
             </div>

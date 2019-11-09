@@ -4,13 +4,6 @@ import { connect } from 'react-redux';
 import history from '../history';
 import { updateUser, updateGame } from '../store/actions';
 import socket from '../utils/api';
-import titleTable from '../assets/table-title.png';
-import table2 from '../assets/23.png';
-import table3 from '../assets/45.png';
-import table4 from '../assets/67.png';
-import table5 from '../assets/89.png';
-import tableshort from '../assets/table-short.png';
-import tablebg from '../assets/table-bg.png';
 import { groupGame } from '../utils/questionAndAnswer';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 import { type_index } from '../utils/customPlay'
@@ -30,12 +23,15 @@ class Tables2 extends Component {
         socket.emit('startGame', { room, data }, this.props.user_info.roomName)
     }
     render() {
-        let tables = [table2, table3, table4, table5]
+        let tables = ['https://user-images.githubusercontent.com/30325727/68527824-0ce79200-02f4-11ea-93e5-827c55b53800.png',
+         'https://user-images.githubusercontent.com/30325727/68527823-0ce79200-02f4-11ea-85f5-345bb112ea11.png',
+          'https://user-images.githubusercontent.com/30325727/68527822-0ce79200-02f4-11ea-9b44-987d747597f6.png',
+           'https://user-images.githubusercontent.com/30325727/68527821-0ce79200-02f4-11ea-990d-f5a9c5ffaf4a.png']
         return (
             <React.Fragment>
                 <div class="multiplication-tables1">
                     <div class="tables-title1">
-                        <img src={titleTable} alt="" />
+                        <img src={'https://user-images.githubusercontent.com/30325727/68527635-c5600680-02f1-11ea-99f6-b91e7e4ef9c6.png'} alt="" />
                     </div>
                     <div class="tables-loo1">
                         {tables.map((el, index) =>
@@ -45,9 +41,9 @@ class Tables2 extends Component {
                         )}
                     </div>
                     <div class="footer1">
-                        <img src={tablebg} alt="" />
+                        <img src={'https://user-images.githubusercontent.com/30325727/68527637-c5f89d00-02f1-11ea-8329-495bff217397.png'} alt="" />
                         <Link to="/tables/short" class="short-table1">
-                            <img src={tableshort} alt="" id={4} onClick={this.selectTab} />
+                            <img src={'https://user-images.githubusercontent.com/30325727/68527636-c5600680-02f1-11ea-8b5b-d8282b605c22.png'} alt="" id={4} onClick={this.selectTab} />
                         </Link>
                     </div>
                 </div>
