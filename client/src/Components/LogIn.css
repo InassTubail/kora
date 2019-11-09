@@ -5,7 +5,7 @@ body {
   padding: 0;
   background: #ddd;
   overflow: hidden;
-
+  height: 100vh;
 }
 
 .welcomeP {
@@ -14,7 +14,7 @@ body {
 
 .welcomess {
   position: absolute;
-  bottom: -1%;
+  bottom: 6%;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -61,10 +61,12 @@ body {
 
 .signInTitle {
   color: white;
-  margin-bottom: 30px;
+  font-weight: 50%;
   text-align: center;
-  font-weight: 300;
-  font-size: 28px;
+  font-size: 36px;
+  font-family: 'Lateef', serif !important;
+  /* font-family: 'Amiri' !important; */
+  margin-top: -104px
 }
 
 .signInContainer img {
@@ -79,7 +81,6 @@ body {
   -moz-box-sizing: border-box;
   border: 1px solid #BEBEBE;
   padding: 7px;
-
   transition: all 0.30s ease-in-out;
   outline: none;
   border-radius: 3px;
@@ -99,8 +100,8 @@ form#nameForm {
 
 .nameToLogIn:focus,
 .nameToLogIn:hover {
-  -moz-box-shadow: 0 0 8px #8cc63f;
-  -webkit-box-shadow: 0 0 8px #8cc63f;
+  /* -moz-box-shadow: 0 0 8px #8cc63f;
+  -webkit-box-shadow: 0 0 8px #8cc63f; */
   box-shadow: 0 0 8px #8cc63f;
   border: 1px solid #8cc63f;
 }
@@ -119,7 +120,7 @@ form#nameForm {
   transition: all 0.4s ease 0s;
   margin-top: -34px;
   position: relative;
-  bottom: -140px;
+  bottom: -100px;
   width: 150px;
   display: block;
   margin-right: auto;
@@ -139,7 +140,8 @@ form#nameForm {
   font-weight: bold;
   text-align: center;
   background: #fff;
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 9px;
   border-radius: 10px;
   font-size: 19px;
   margin-top: 47px;
@@ -169,6 +171,20 @@ form#nameForm {
 
   .welcomess p {
     font-size: 30px
+  }
+
+  .signInTitle {
+    font-weight: 50%;
+    font-size: 50px;
+  }
+}
+
+
+@media (max-width: 320px) {
+
+  .welcomess {
+    bottom: -1%;
+    font-size: 32px;
   }
 
 }
