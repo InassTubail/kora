@@ -6,8 +6,6 @@ import store from './store';
 import { Router } from 'react-router-dom';
 import history from './history';
 import * as serviceWorker from './serviceWorker';
-import '@fortawesome/fontawesome-free/css/all.css';
-import '@fortawesome/fontawesome-free/js/all';
 
 ReactDOM.render(
   <Provider store={store}>
