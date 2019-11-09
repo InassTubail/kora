@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import mabrouk from '../assets/mabrouk.png';
-// import person from '../assets/1.png';
 import frame from '../assets/frame.png';
 import cup from '../assets/cup.png'
 import playAgain from '../assets/playAgain.png';

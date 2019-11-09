@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import button1 from '../assets/button1.png';
-import button2 from '../assets/button2.png';
+// import button1 from '../assets/button1.png';
+// import button2 from '../assets/button2.png';
 import centerKora from '../assets/kora.png';
 import selectGameTypes from '../assets/selectGameTypes.png';
 import playIndividual from '../assets/playIndividual.png';
@@ -26,7 +26,7 @@ const GameType = () => {
 
         <div className="game-individualButton">
           <Link to="/tables">
-            <img className="button-game-individual" src={button1} alt="individual game" />
+            <img className="button-game-individual" src={'https://user-images.githubusercontent.com/30325727/68527820-0c4efb80-02f4-11ea-9af8-5daae7b563e9.png'} alt="individual game" />
           </Link>
         </div>
 
@@ -51,7 +51,7 @@ const GameType = () => {
         </div>
         <div className="select-compititorButton">
           <Link to="/select-compititor">
-            <img className="button2-select-compititor" src={button2} alt="group game" />
+            <img className="button2-select-compititor" src={'https://user-images.githubusercontent.com/30325727/68527819-0c4efb80-02f4-11ea-972d-c8fe3c58e113.png'} alt="group game" />
           </Link>
         </div>
 

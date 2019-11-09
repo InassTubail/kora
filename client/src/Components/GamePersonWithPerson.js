@@ -3,21 +3,13 @@ import { connect } from 'react-redux';
 
 import koraImg from '../assets/kora.png';
 import frame from '../assets/frame.png';
-import haresBlue from '../assets/haresBlue.png';
-import haresRed from '../assets/haresRed.png';
 import gWithg from '../assets/tit.png';
 import questions from '../assets/questions.png';
-import counterRed from '../assets/counterRed.png';
-import counterBlue from '../assets/counterBlue.png';
-import playerRed from '../assets/player.png';
-import playerBlue from '../assets/playerBlue.png';
 import { updateUser, updateGame } from '../store/actions';
-import timerRed from '../assets/redTimer.png'
 import { questionsAndAnswers, groupGame } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
 import timerImg from '../assets/timer.png'
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
-import ReactLoading from 'react-loading';
 
 import './GameGroupWithGroup.css';
 
@@ -98,8 +90,8 @@ class GamePersonWithPerson extends Component {
                 <p className="questionStatement2g">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
               </div>
             </div>
-            {color === 'red' ? <img src={haresBlue} alt="hares" className="hares2g" /> :
-              <img src={haresRed} alt="hares" className="hares2g" />}
+            {color === 'red' ? <img src={'https://user-images.githubusercontent.com/30325727/68527970-ec203c00-02f5-11ea-8636-a1b3893e5e7b.png'} alt="hares" className="hares2g" /> :
+              <img src={'https://user-images.githubusercontent.com/30325727/68527969-eaef0f00-02f5-11ea-9a5f-6926e1b17309.png'} alt="hares" className="hares2g" />}
 
 
             <div className="answers">
@@ -110,11 +102,7 @@ class GamePersonWithPerson extends Component {
               )}
             </div>
             <img src={koraImg} alt="kora" edt className={`koraImg2g ${classKora}`} />
-            {color === 'red' ? <img src={playerRed} alt="kora" edt className="playerImg2g" /> : <img src={playerBlue} alt="kora" edt className="playerImg2g" />}
-            {/* <div className="subHeader4Game">
-            <img src={timerImg} alt="" className="timer" />
-            <p className="timerP"> {convertT(timer)}</p>
-          </div> */}
+            {color === 'red' ? <img src={'https://user-images.githubusercontent.com/30325727/68528142-774e0180-02f7-11ea-8ec0-fa2acc7d62ed.png'} alt="kora" edt className="playerImg2g" /> : <img src={'https://user-images.githubusercontent.com/30325727/68528141-774e0180-02f7-11ea-94d9-b18b3c889ccc.png'} alt="kora" edt className="playerImg2g" />}
             <div className="subHeadersGroupg">
               <div className="subHeader332g">
                 {blueTeam && blueTeam.map((el, index) =>
@@ -153,11 +141,11 @@ class GamePersonWithPerson extends Component {
 
             <div className="subHeader42g">
               <div className="countPPg">
-                <img src={counterBlue} title="sdd" alt="dd" className="counter2g" />
+                <img src={'https://user-images.githubusercontent.com/30325727/68527983-01956600-02f6-11ea-81a4-c2a58724dc62.png'} title="sdd" alt="dd" className="counter2g" />
                 <p className="counterParag2g">{this.props.play.redScore}</p>
               </div>
               <div className="countPP">
-                <img src={counterRed} title="sdd" alt="dd" className="counter2g" />
+                <img src={'https://user-images.githubusercontent.com/30325727/68527982-00fccf80-02f6-11ea-94f7-331392c26b5b.png'} title="sdd" alt="dd" className="counter2g" />
                 <p className="counterParag2g">{this.props.play.blueScore}</p>
               </div>
             </div>

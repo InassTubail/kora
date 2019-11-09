@@ -1,32 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import history from '../history';
 import { updateUser } from '../store/actions';
-import socket from '../utils/api';
-import titleTable from '../assets/table-title.png';
-import table2 from '../assets/table-2.png';
-import table3 from '../assets/table-3.png';
-import table4 from '../assets/table-4.png';
-import table5 from '../assets/table-5.png';
-import table6 from '../assets/table-6.png';
-import table7 from '../assets/table-7.png';
-import table8 from '../assets/table-8.png';
-import table9 from '../assets/table-9.png';
-import table10 from '../assets/table-10.png';
-import tableshort from '../assets/table-short.png';
-import tablebg from '../assets/table-bg.png';
 
 import './Tables.css';
 
 class Tables extends Component {
     render() {
-        let tables = [table2, table3, table4, table5, table6, table7, table8, table9, table10]
+        let tables = ['https://user-images.githubusercontent.com/30325727/68527514-428a7c00-02f0-11ea-979e-620bc2c93a77.png',
+            'https://user-images.githubusercontent.com/30325727/68527513-428a7c00-02f0-11ea-8c06-6347f819b32c.png',
+            'https://user-images.githubusercontent.com/30325727/68527512-41f1e580-02f0-11ea-908c-eae4835b5dd7.png',
+            'https://user-images.githubusercontent.com/30325727/68527511-41f1e580-02f0-11ea-9830-6ccb0275f6a6.png',
+            'https://user-images.githubusercontent.com/30325727/68527510-41f1e580-02f0-11ea-9cc2-89b6fa1631e8.png',
+            'https://user-images.githubusercontent.com/30325727/68527509-41f1e580-02f0-11ea-8623-644b01badc23.png',
+            'https://user-images.githubusercontent.com/30325727/68527508-41594f00-02f0-11ea-86fc-aab1d68d162b.png',
+            'https://user-images.githubusercontent.com/30325727/68527507-41594f00-02f0-11ea-8792-249c3087698d.png',
+            'https://user-images.githubusercontent.com/30325727/68527506-41594f00-02f0-11ea-80b4-d5d0b15b555b.png']
         return (
             <React.Fragment>
                 <div class="multiplication-tables">
                     <div class="tables-title">
-                        <img src={titleTable} alt="" />
+                        <img src={'https://user-images.githubusercontent.com/30325727/68527635-c5600680-02f1-11ea-99f6-b91e7e4ef9c6.png'} alt="" />
                     </div>
                     <div class="tables-loo">
                         {tables.map((el, index) =>
@@ -36,9 +30,9 @@ class Tables extends Component {
                         )}
                     </div>
                     <div class="footer">
-                        <img src={tablebg} alt="" />
+                        <img src={'https://user-images.githubusercontent.com/30325727/68527637-c5f89d00-02f1-11ea-8329-495bff217397.png'} alt="" />
                         <Link to="/tables/short" class="short-table">
-                            <img src={tableshort} alt="" />
+                            <img src={'https://user-images.githubusercontent.com/30325727/68527636-c5600680-02f1-11ea-8b5b-d8282b605c22.png'} alt="" />
                         </Link>
                     </div>
                 </div>

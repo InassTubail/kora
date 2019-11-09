@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, closeDialog } from '../store/actions';
-// import Frame from '../assets/frame.png';
-// import Vs from '../assets/VS.png';
-// import person from '../assets/playerInitial.png';
 import inputDiv from '../assets/InputDiv.png';
-// import buttonDiv from '../assets/buttonDiv.png';
-import compiteButton from '../assets/compiteButton.png';
 import playerName from '../assets/playerName.png';
 import True from '../assets/true.png';
-// import False from '../assets/false.png';
 import title2 from '../assets/title2.png';
 import { questionsAndAnswers } from '../utils/questionAndAnswer';
 import socket from '../utils/api';
@@ -23,19 +17,17 @@ class Select extends Component {
   state = {
     error: "",
     filteredOptions: [],
-    // showOptions: false,
     alluser: []
 
   }
   // eslint-disable-next-line react/sort-comp
-
   sendInvite = (socket, selectedUser) => {
     const { invite, accpet } = this.props.user_info
     let total = invite.length + accpet.length;
     if (total < 3) {
       const data = {};
       data.to = selectedUser;
-      data.from = this.props.user_info.username; // current user
+      data.from = this.props.user_info.username;
       data.type = 'invite';
       socket.emit('sendInviteToPlay', data);
       this.props.updateUser({
@@ -60,21 +52,20 @@ class Select extends Component {
     } else if (invite.length !== 0) {
       this.setState({ error: 'يجب الغاء الاشخاص المدعويين او انتظار قبول دعوتهم لبدء اللعبة' })
     } else {
-      // border: 5px solid red;
       this.props.history.push('/tables2');
     }
   }
   cancelInvite = (e) => {
     let data = {}
     data.to = e.target.id;
-    data.from = this.props.user_info.username; // current user
+    data.from = this.props.user_info.username;
     data.type = 'cancelInvite';
     socket.emit('sendInviteToPlay', data)
   }
   cancelPlayer = (e) => {
     let data = {}
     data.to = e.target.id;
-    data.from = this.props.user_info.username; // current user
+    data.from = this.props.user_info.username;
     data.type = 'cancelPlayer';
     socket.emit('sendInviteToPlay', data)
   }
@@ -85,26 +76,15 @@ class Select extends Component {
     const filteredOptions = options.filter(
       (option) => option.username.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-    // console.log(filteredOptions ,'filteredOptions ')
     this.setState({
       filteredOptions,
-      // showOptions: true,
     });
   };
-  // componentDidMount= () => {
-  //   console.log({alluser},'DID')
-  //   this.setState({alluser})
-  // }
 
   render() {
     let alluser = this.props.users.filter(element => (element.username !== this.props.user_info.username))
-    // console.log({ alluser });
     let filterop = this.state.filteredOptions.length > 0 && this.state.filteredOptions
-    // console.log({ filterop });
     let alluser2 = filterop || alluser
-    // console.log({ alluser2 });
-    // console.log(this.state.alluser,'this.state.alluser');
-
     return (
       <React.Fragment>
         <div className="selectCompititorsDiv">
@@ -112,9 +92,6 @@ class Select extends Component {
             <img src={title2} title="sss" alt="Sss" className="titleImage" />
           </div>
           <div className="searchDiv">
-            {/* <div className="buttonDiv">
-              <button className="searchButton">بدء البحـث</button>
-            </div> */}
             <div className="inputDiv">
               <img
                 src={inputDiv}

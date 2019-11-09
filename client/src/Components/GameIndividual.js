@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import koraImg from '../assets/kora.png';
-// import person from '../assets/1.png';
 import { person } from './playersImage';
 import frame from '../assets/frame.png';
-import haresBlue from '../assets/haresBlue.png';
 import titleImg from '../assets/tit.png';
 import questions from '../assets/questions.png';
 // import counter from '../assets/counter.png';
@@ -17,9 +15,6 @@ import { arabic_num, convert } from '../utils/arabic_num'
 import helping from '../assets/help-tools2.png'
 import helping2 from '../assets/help-tools1.png'
 import timerRed from '../assets/redTimer.png'
-// import deleteAnswer from '../assets/deleteAnswer.png'
-import deleteAnswer2 from '../assets/deleteAnswer2.png'
-import player from '../assets/player.png';
 import PopUpCongrat from './popUpCongrat';
 import PopUpLose from './popUpLose';
 import { updateUser } from '../store/actions';
@@ -31,7 +26,6 @@ import showTableB from '../assets/showTableB.png'
 import showTableG from '../assets/showTableG.png'
 import plusTimeB from '../assets/plusTimeB.png'
 import plusTimeG from '../assets/plusTimeG.png'
-import deleteTableG from '../assets/deleteTableG.png'
 import correctSound from '../assets/correct.mp3';
 import ShowTab from './showTables';
 
@@ -204,8 +198,8 @@ class GameIndividual extends Component {
                 <img src={helping} alt="" className="helpingImg" />
                 <div className="choices">
                   {this.state.deleteAnswer ?
-                    <img src={deleteAnswer2} alt="" className="deleteAnswer2" /> :
-                    <img src={deleteTableG} alt="" className="deleteAnswer2" onClick={this.deleteAnswer} />}
+                    <img src={'https://user-images.githubusercontent.com/30325727/68527977-fb06ee80-02f5-11ea-9fec-4210c3bcfce6.png'} alt="" className="deleteAnswer2" /> :
+                    <img src={'https://user-images.githubusercontent.com/30325727/68527975-f17d8680-02f5-11ea-95d8-af067eb2ff73.png'} alt="" className="deleteAnswer2" onClick={this.deleteAnswer} />}
                   {this.state.showTable ? <img src={showTableB} alt="" className="deleteAnswer2" /> :
                     <img src={showTableG} alt="" className="deleteAnswer2" onClick={this.showTable} />}
                   {this.state.plusTime ? <img src={plusTimeB} alt="" className="deleteAnswer2" /> :
@@ -219,7 +213,7 @@ class GameIndividual extends Component {
             <p className="questionStatement">{`${arabic_num[number1]} × ${arabic_num[number2]}`}</p>
           </div>
 
-          <img src={haresBlue} alt="hares" className="hares" />
+          <img src={'https://user-images.githubusercontent.com/30325727/68527970-ec203c00-02f5-11ea-8636-a1b3893e5e7b.png'} alt="hares" className="hares" />
 
           <div className="answers">
             {answers.map((el, index) =>
@@ -230,7 +224,7 @@ class GameIndividual extends Component {
           </div>
 
           <img src={koraImg} alt="kora" edt className="koraImg" className={`koraImg ${this.state.classKora}`} />
-          <img src={player} alt="kora" edt className="playerImg" className="playerImg" />
+          <img src={'https://user-images.githubusercontent.com/30325727/68528142-774e0180-02f7-11ea-8ec0-fa2acc7d62ed.png'} alt="kora" edt className="playerImg" className="playerImg" />
 
           <div className="bottomHead">
             <div className="subHeader33Game">
