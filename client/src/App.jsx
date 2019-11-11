@@ -27,6 +27,7 @@ import Equal from './Components/Equal';
 import Snackbar from './Components/snackpar';
 import Tables from './Components/Tables';
 import Tables2 from './Components/Tables2';
+import WindowResize from 'react-window-resize'
 
 import socket from './utils/api';
 import {
@@ -61,6 +62,9 @@ class App extends Component {
       }, 2000);
     }
   }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setWindowWidth);
+  }
   componentDidMount() {
     this.getUser(socket);
     this.newInvitation(socket);
@@ -72,15 +76,28 @@ class App extends Component {
     this.handleTestRoom(socket);
     this.turnRoleRoom(socket);
     this.gamingRoomEqual(socket)
+    // this.setWindowWidth if open it as window make it as mobile 
+    // console.log(window.innerHeight,window.innerWidth,'innerWidth'); //736 414  
+    // window.addEventListener('resize', {height: '736',width: '414'});
   }
   handleTestRoom = socket => {
-    socket.on('test room', message => {
-      // console.log({ message }, 'test room channel');
+    socket.on(`leave-partener`, message => {
+      console.log({ message }, '------');
+      if (this.props.user_info.accpet.length > 0 && this.props.user_info.accpet.includes(message.person)) {
+        this.props.updateUser({
+          ...this.props.user_info, accpet: this.props.user_info.accpet.filter(el=> el !== message.person)
+        })
+      }
+      if (this.props.user_info.invite.length > 0 && this.props.user_info.invite.includes(message.person)) {
+        this.props.updateUser({
+          ...this.props.user_info, invite: this.props.user_info.invite.filter(el=> el !== message.person)
+        })
+      }
+      this.props.closeDialog();
     });
   };
   turnRoleRoom = socket => {
     socket.on('turn role', message => {
-      // console.log({ message }, 'turnRoleRoom room channel');
       socket.emit('turn.end', message)
     });
   };
@@ -98,10 +115,8 @@ class App extends Component {
   };
   cancelInvite = socket => {
     socket.on('cancelInvite', data => {
-      data = JSON.parse(data);
-      if (data.to.username === this.props.user_info.username) {
-        // console.log('how much');
-
+      data = JSON.parse(data);      
+      if (data.to === this.props.user_info.username) {
         this.props.openDialog({
           from: data.from,
           type: 'cancelInvite',
@@ -113,7 +128,7 @@ class App extends Component {
   cancelPlayer = socket => {
     socket.on('cancelPlayer', data => {
       data = JSON.parse(data);
-      if (data.to.username === this.props.user_info.username) {
+      if (data.to === this.props.user_info.username) {
         this.props.openDialog({
           from: data.from,
           type: 'cancelPlayer',
@@ -140,13 +155,9 @@ class App extends Component {
   };
   getUser = socket => {
     socket.on('usernames', username => {
-      // console.log({ username }, '77777');
-
       this.props.getUsers(JSON.parse(username));
       this.props.users.map(value => {
         if (this.props.user_info.username === value.username) {
-          // console.log({ value });
-
           this.props.updateUser(value);
         }
         return value;
@@ -400,6 +411,7 @@ class App extends Component {
   render() {
     const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject'];
     return (
+      <WindowResize width={414} height={736}>
       <div>
         {type.includes(this.props.type) && <Snackbar props={this.props} />}
         {!type.includes(this.props.type) && (
@@ -442,6 +454,7 @@ class App extends Component {
           <Route exact path="/tables/:id" component={GameIndividual} />
         </Switch>
       </div>
+      </WindowResize>
     );
   }
 }
