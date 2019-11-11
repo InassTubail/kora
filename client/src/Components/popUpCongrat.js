@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import excellent from '../assets/excellent.png'
+// import excellent from '../assets/excellent.png'
 import ahsant from '../assets/ahsant.WAV'
 import './popUpCongrat.css';
 
@@ -18,7 +18,7 @@ class popUpCongrat extends Component {
           <Sound  />
             <div className='popupCongrat1'>
               <div className="excellentDiv1" >
-                <img src={excellent} alt="excellent" className="excellent1" />
+                <img src={'https://user-images.githubusercontent.com/30287981/68533977-11359e80-0338-11ea-99fd-ea51b79ff323.png'} alt="excellent" className="excellent1" />
               </div>
               <button className="nextStage1" onClick={this.props.onClick} />
             </div>

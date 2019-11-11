@@ -4,7 +4,7 @@
   margin-right: auto;
   margin-left: auto;
   background: #ddd;
-  background-image: url("../assets/gameScreen2.png");
+  background-image: url("https://user-images.githubusercontent.com/30287981/68534046-d54f0900-0338-11ea-8366-d07951446ed3.png");
   background-size: cover;
   background-position: center;
   background-position: center center;
@@ -13,11 +13,13 @@
   overflow: hidden;
   position: relative;
 }
+
 .load {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .tim {
   margin-top: 40px;
   position: relative;

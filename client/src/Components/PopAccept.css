@@ -4,7 +4,7 @@
   margin-left: auto;
   margin-right: auto;
   background-color: rgba(0, 0, 0, 0.5);
-  background-image: url('../assets/accept.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533907-48578000-0337-11ea-9406-e49f071e47a9.png');
   background-size: cover;
   background-position: center;
   background-position: center center;
@@ -45,11 +45,11 @@
 }
 
 .acceptInPop {
-  background-image: url('../assets/yes.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533769-8a7fc200-0335-11ea-9e88-635d9886ff9a.png');
 }
 
 .rejectInPop {
-  background-image: url('../assets/no.png');
+  background-image: url('https://user-images.githubusercontent.com/30287981/68533788-b7cc7000-0335-11ea-9f2a-424406cb4a47.png');
 }
 
 .buttonPop {

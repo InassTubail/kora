@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import playAgain from '../assets/playAgain.png'
+// import playAgain from '../assets/playAgain.png'
 import { connect } from 'react-redux';
 import { updateUser } from '../store/actions';
 
@@ -20,7 +20,7 @@ class GameIndividual extends Component {
           </div>
           <div className="playAgain">
             <Link onClick={this.replay}>
-              <img src={playAgain} alt="playAgain" />
+              <img src={'https://user-images.githubusercontent.com/30287981/68533807-0712a080-0336-11ea-9ff1-62450694e1a4.png'} alt="playAgain" />
             </Link>
           </div>
         </div>
