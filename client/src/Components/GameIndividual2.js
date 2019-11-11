@@ -167,6 +167,9 @@ class GameIndividual2 extends Component {
       showPopup: false, voice: false, tryAgainVoice: false
     })
   }
+  closee = () => {
+    this.setState({ openTable: false })
+  }
   render() {
     const { number1, number2, answers, showPopup, showCongratePopup, voice, tryAgainVoice, answered } = this.state;
     const { level } = this.props.user_info
