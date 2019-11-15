@@ -325,7 +325,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('finishGame', function (room, roomName) {
     let player = JSON.parse(room);
     usernames.map((el, index) => {
-      if (player.length > 0 && player.includes(el.username)) {
+      if (player && player.includes(el.username)) {
         sockets[el.username].leave(roomName);
         el.invite = []
         el.accpet = []
@@ -342,12 +342,10 @@ io.sockets.on('connection', function (socket) {
   })
   // when the game starts, starts a timer and store timerId in roomsTimerIds array
   socket.on('startGame', function (data, roomName) {
-    // let role, color, roomName;
     let player = JSON.parse(data.room);
     usernames.map((el, index) => {
       if (player.includes(el.username)) {
         el.room = data.room;
-        // roomName = el.roomName
       }
       return el;
     });
