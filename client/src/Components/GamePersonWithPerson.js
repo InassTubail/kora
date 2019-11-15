@@ -142,11 +142,11 @@ class GamePersonWithPerson extends Component {
             <div className="subHeader42g">
               <div className="countPPg">
                 <img src={'https://user-images.githubusercontent.com/30325727/68527983-01956600-02f6-11ea-81a4-c2a58724dc62.png'} title="sdd" alt="dd" className="counter2g" />
-                <p className="counterParag2g">{this.props.play.redScore}</p>
+                <p className="counterParag2g">{this.props.play.blueScore}</p>
               </div>
               <div className="countPP">
                 <img src={'https://user-images.githubusercontent.com/30325727/68527982-00fccf80-02f6-11ea-94f7-331392c26b5b.png'} title="sdd" alt="dd" className="counter2g" />
-                <p className="counterParag2g">{this.props.play.blueScore}</p>
+                <p className="counterParag2g">{this.props.play.redScore}</p>
               </div>
             </div>
           </div>

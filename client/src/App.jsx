@@ -85,12 +85,12 @@ class App extends Component {
       console.log({ message }, '------');
       if (this.props.user_info.accpet.length > 0 && this.props.user_info.accpet.includes(message.person)) {
         this.props.updateUser({
-          ...this.props.user_info, accpet: this.props.user_info.accpet.filter(el=> el !== message.person)
+          ...this.props.user_info, accpet: this.props.user_info.accpet.filter(el => el !== message.person)
         })
       }
       if (this.props.user_info.invite.length > 0 && this.props.user_info.invite.includes(message.person)) {
         this.props.updateUser({
-          ...this.props.user_info, invite: this.props.user_info.invite.filter(el=> el !== message.person)
+          ...this.props.user_info, invite: this.props.user_info.invite.filter(el => el !== message.person)
         })
       }
       this.props.closeDialog();
@@ -115,7 +115,7 @@ class App extends Component {
   };
   cancelInvite = socket => {
     socket.on('cancelInvite', data => {
-      data = JSON.parse(data);      
+      data = JSON.parse(data);
       if (data.to === this.props.user_info.username) {
         this.props.openDialog({
           from: data.from,
@@ -193,7 +193,7 @@ class App extends Component {
           : 'blue';
 
       let currentPlayerColor =
-        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === currentPlayer) +
           1) %
           2 ===
           0
@@ -209,10 +209,19 @@ class App extends Component {
         parseInt(result, 10);
       if (result) {
         if (currentPlayerColor === 'red' && isTrue) {
-          redScore++;
+          this.props.updateGame({
+            ...this.props.play,
+            redScore: redScore++
+            // resultPrevPlayer: result
+          });
         } else if (currentPlayerColor === 'blue' && isTrue) {
-          blueScore++;
+          this.props.updateGame({
+            ...this.props.play,
+            blueScore: blueScore++
+            // resultPrevPlayer: result
+          });
         }
+        console.log({ currentPlayerColor }, { blueScore }, { redScore });
         this.props.updateGame({
           ...this.props.play,
           resultPrevPlayer: result
@@ -285,10 +294,9 @@ class App extends Component {
           2 ===
           0
           ? 'red'
-          : 'blue';
-
+          : 'blue';      
       let currentPlayerColor =
-        (JSON.parse(this.props.user_info.room).findIndex(el => el === role) +
+        (JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer) +
           1) %
           2 ===
           0
@@ -304,9 +312,15 @@ class App extends Component {
           this.props.play.number1 * this.props.play.number2 ===
           parseInt(result, 10);
         if (currentPlayerColor === 'red' && isTrue) {
-          redScore++;
+          this.props.updateGame({
+            ...this.props.play,
+            redScore: redScore++
+          });
         } else if (currentPlayerColor === 'blue' && isTrue) {
-          blueScore++;
+          this.props.updateGame({
+            ...this.props.play,
+            blueScore: blueScore++
+          });
         }
         this.props.updateGame({
           ...this.props.play,
@@ -412,48 +426,48 @@ class App extends Component {
     const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject'];
     return (
       <WindowResize width={414} height={736}>
-      <div>
-        {type.includes(this.props.type) && <Snackbar props={this.props} />}
-        {!type.includes(this.props.type) && (
-          <PopAccept
-            props={this.props}
-            handleAccept={this.handleAccept}
-            handleReject={this.handleReject}
-            withdrawal={this.withdrawal}
-          />
-        )}
-        <Switch>
-          <Route exact path="/" component={LogIn} />
-          <Route exact path="/player-Character" component={playerCharacter} />
-          <Route exact path="/select-game-type" component={GameType} />
-          <Route exact path="/select-compititor" component={SelectCompititor} />
-          <Route exact path="/game-individual" component={GameIndividual} />
-          <Route exact path="/tables/short" component={GameIndividual2} />
+        <div>
+          {type.includes(this.props.type) && <Snackbar props={this.props} />}
+          {!type.includes(this.props.type) && (
+            <PopAccept
+              props={this.props}
+              handleAccept={this.handleAccept}
+              handleReject={this.handleReject}
+              withdrawal={this.withdrawal}
+            />
+          )}
+          <Switch>
+            <Route exact path="/" component={LogIn} />
+            <Route exact path="/player-Character" component={playerCharacter} />
+            <Route exact path="/select-game-type" component={GameType} />
+            <Route exact path="/select-compititor" component={SelectCompititor} />
+            <Route exact path="/game-individual" component={GameIndividual} />
+            <Route exact path="/tables/short" component={GameIndividual2} />
 
-          <Route exact path="/CongratsPWP" component={CongratsPWP} />
-          {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
-          <Route
-            exact
-            path="/GamePersinWithPerson"
-            component={GamePersinWithPerson}
-          />
-          <Route
-            exact
-            path="/play-equal"
-            component={GamePersinWithPerson2}
-          />
-          <Route exact path="/congrat-individ" component={CongratIndivid} />
+            <Route exact path="/CongratsPWP" component={CongratsPWP} />
+            {/* <Route exact path="/GameGroupWithGroup" component={GameGroupWithGroup} /> */}
+            <Route
+              exact
+              path="/GamePersinWithPerson"
+              component={GamePersinWithPerson}
+            />
+            <Route
+              exact
+              path="/play-equal"
+              component={GamePersinWithPerson2}
+            />
+            <Route exact path="/congrat-individ" component={CongratIndivid} />
 
-          <Route exact path="/congrat" component={Congrat} />
-          <Route exact path="/Welcome" component={Welcome} />
+            <Route exact path="/congrat" component={Congrat} />
+            <Route exact path="/Welcome" component={Welcome} />
 
-          <Route exact path="/equal" component={Equal} />
-          <Route exact path="/tables" component={Tables} />
-          <Route exact path="/tables2" component={Tables2} />
+            <Route exact path="/equal" component={Equal} />
+            <Route exact path="/tables" component={Tables} />
+            <Route exact path="/tables2" component={Tables2} />
 
-          <Route exact path="/tables/:id" component={GameIndividual} />
-        </Switch>
-      </div>
+            <Route exact path="/tables/:id" component={GameIndividual} />
+          </Switch>
+        </div>
       </WindowResize>
     );
   }
