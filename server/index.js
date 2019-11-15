@@ -48,6 +48,7 @@ io.sockets.on('connection', function (socket) {
       console.log(data.username);
       
       io.sockets.emit('usernames', JSON.stringify(usernames));
+      sockets[data.username] = socket
       sockets[data.username].join(`user${data.username}`);
     }
   });
@@ -83,7 +84,7 @@ io.sockets.on('connection', function (socket) {
       io.in(`user${usernames[from].username}`).emit('leave-partener', {person: data.to});
     }
     // if (from !== null && to !== null) { 
-    if (data.type == 'invite' && to !== null) {
+    if (data.type == 'invite' && to !== null && from !== null) {
       let withI = usernames[from].invite;
       usernames[from] = {
         ...usernames[from],
@@ -324,7 +325,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('finishGame', function (room, roomName) {
     let player = JSON.parse(room);
     usernames.map((el, index) => {
-      if (player.includes(el.username)) {
+      if (player.length > 0 && player.includes(el.username)) {
         sockets[el.username].leave(roomName);
         el.invite = []
         el.accpet = []
