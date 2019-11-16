@@ -66,6 +66,29 @@ class App extends Component {
     window.removeEventListener('resize', this.setWindowWidth);
   }
   componentDidMount() {
+    const { history } = this.props;
+
+    history.listen((newLocation, action) => {
+      if (action === "PUSH") {
+        if (
+          newLocation.pathname !== this.currentPathname ||
+          newLocation.search !== this.currentSearch
+        ) {
+          // Save new location
+          this.currentPathname = newLocation.pathname;
+          this.currentSearch = newLocation.search;
+
+          // Clone location object and push it to history
+          history.push({
+            pathname: newLocation.pathname,
+            search: newLocation.search
+          });
+        }
+      } else {
+        // Send user back if they try to navigate back
+        history.go(1);
+      }
+    });
     this.getUser(socket);
     this.newInvitation(socket);
     this.refresh(socket);
@@ -263,14 +286,14 @@ class App extends Component {
   };
   gamingRoom = socket => {
     // console.log({ socket }, '**/*/');
-    
+
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
       let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
       let role, color, isMyRole;
       let newTeam;
       console.log({ redScore, blueScore, numberOfQuestion, redTeam, blueTeam });
-      
+
       const { location } = this.props;
       if (location.pathname !== '/GamePersinWithPerson') {
         this.props.closeDialog();
@@ -291,7 +314,7 @@ class App extends Component {
           2 ===
           0
           ? 'red'
-          : 'blue';      
+          : 'blue';
       let currentPlayerColor =
         (JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer) +
           1) %
