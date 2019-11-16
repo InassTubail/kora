@@ -165,11 +165,11 @@ class App extends Component {
     });
   };
   gamingRoomEqual = socket => {
-    let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
-    let role, color, isMyRole;
-    let newTeam;
     socket.on('data.room.equal', async (data, timer) => {
       if (data.room !== this.props.user_info.room) return;
+      let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
+      let role, color, isMyRole;
+      let newTeam;
       const { location } = this.props;
       if (location.pathname !== '/play-equal') {
         this.props.closeDialog();
@@ -262,13 +262,13 @@ class App extends Component {
     });
   };
   gamingRoom = socket => {
-    let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
-    let role, color, isMyRole;
-    let newTeam;
     // console.log({ socket }, '**/*/');
-
+    
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
+      let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
+      let role, color, isMyRole;
+      let newTeam;
       console.log({ redScore, blueScore, numberOfQuestion, redTeam, blueTeam });
       
       const { location } = this.props;
