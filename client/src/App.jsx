@@ -212,30 +212,25 @@ class App extends Component {
           this.props.updateGame({
             ...this.props.play,
             redScore: redScore++
-            // resultPrevPlayer: result
           });
         } else if (currentPlayerColor === 'blue' && isTrue) {
           this.props.updateGame({
             ...this.props.play,
             blueScore: blueScore++
-            // resultPrevPlayer: result
           });
         }
-        console.log({ currentPlayerColor }, { blueScore }, { redScore });
         this.props.updateGame({
           ...this.props.play,
           resultPrevPlayer: result
         });
       }
       isMyRole = role === this.props.user_info.username;
-      // بعد 2 ثانيه بدو يغير السزال
       this.props.updateGame({
         ...this.props.play, classKora, timer: this.props.play.timer.concat({
           currentPlayerColor, time: data.data.timer, isTrue
         })
       })
       if (numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
-        // let redTime, blueTime;
         this.props.history.push('/equal');
         return;
       }
@@ -274,6 +269,8 @@ class App extends Component {
 
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
+      console.log({ redScore, blueScore, numberOfQuestion, redTeam, blueTeam });
+      
       const { location } = this.props;
       if (location.pathname !== '/GamePersinWithPerson') {
         this.props.closeDialog();
