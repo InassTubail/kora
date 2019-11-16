@@ -13,8 +13,9 @@ body {
 }
 
 .welcomess {
-  position: absolute;
-  bottom: 6%;
+  margin-top: 30%;
+  /* position: absolute;
+  bottom: 6%; */
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -66,7 +67,8 @@ body {
   font-size: 36px;
   font-family: 'Lateef', serif !important;
   /* font-family: 'Amiri' !important; */
-  margin-top: -104px
+  /* margin-top: -104px */
+  margin-top: 108px;
 }
 
 .signInContainer img {
@@ -183,7 +185,7 @@ form#nameForm {
 @media (max-width: 320px) {
 
   .welcomess {
-    bottom: -1%;
+    /* bottom: -1%; */
     font-size: 32px;
   }
 
