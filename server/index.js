@@ -46,7 +46,7 @@ io.sockets.on('connection', function (socket) {
     if (!isEx) {
       usernames.push(data);
       console.log(data.username);
-      
+
       io.sockets.emit('usernames', JSON.stringify(usernames));
       sockets[data.username] = socket
       sockets[data.username].join(`user${data.username}`);
@@ -63,14 +63,15 @@ io.sockets.on('connection', function (socket) {
     io.sockets.emit('usernames', JSON.stringify(usernames));
   });
   socket.on('remove timer', function (roomName) {
-    // if (timerIds[roomName] !== 11) {
     clearInterval(roomsTimerIds[roomName])
     roomsTimerIds[roomName] = false
-    timerIds[roomName] = 11
-    // }
+    timerIds[roomName] = {
+      time: 11,
+      isTimePused: false
+    }
   })
   socket.on('sendInviteToPlay', function (data) {
-    let from = null, to=  null;
+    let from = null, to = null;
     usernames.forEach((el, index) => {
       if (el.username == data.from) {
         from = index;
@@ -79,9 +80,8 @@ io.sockets.on('connection', function (socket) {
         to = index;
       }
     });
-    if(from !== null && to === null) 
-    {
-      io.in(`user${usernames[from].username}`).emit('leave-partener', {person: data.to});
+    if (from !== null && to === null) {
+      io.in(`user${usernames[from].username}`).emit('leave-partener', { person: data.to });
     }
     // if (from !== null && to !== null) { 
     if (data.type == 'invite' && to !== null && from !== null) {
@@ -136,7 +136,7 @@ io.sockets.on('connection', function (socket) {
         is_playing: false,
         with: null,
         room: null
-      }: null
+      } : null
 
       io.emit(
         'cancelInvite',
@@ -174,18 +174,18 @@ io.sockets.on('connection', function (socket) {
         JSON.stringify({ to: data.to, from: usernames[from].username })
       );
     }
-  // }else{
+    // }else{
     // (from !== null && to === null) 
     // {
     //   io.in(`user${usernames[from].username}`).emit('leave-partener', {person: data.to});
     // }
     // to !== null && io.in(`user${usernames[to].username}`).emit('leave-partener', {person: data.from});
-  // }
+    // }
     io.emit('usernames', JSON.stringify(usernames));
   });
 
   socket.on('replyInvite', function (data) {
-    let from = null, to=null;
+    let from = null, to = null;
     usernames.forEach((el, index) => {
       if (el.username == data.from) {
         from = index;
@@ -194,18 +194,18 @@ io.sockets.on('connection', function (socket) {
         to = index;
       }
     });
-    if(from !== null && to === null) {
-      io.in(`user${usernames[from].username}`).emit('leave-partener', {person: data.to});
+    if (from !== null && to === null) {
+      io.in(`user${usernames[from].username}`).emit('leave-partener', { person: data.to });
       usernames[from] = {
         ...usernames[from],
         is_playing: false,
         with: null,
         room: null
-    } 
-    io.emit('usernames', JSON.stringify(usernames));
-    return;
-  }
-  console.log('******affter return');
+      }
+      io.emit('usernames', JSON.stringify(usernames));
+      return;
+    }
+    console.log('******affter return');
     // if (to !== null) {
     //   io.in(`user${usernames[to].username}`).emit('leave-partener', {person: data.from});
     // }
@@ -215,7 +215,7 @@ io.sockets.on('connection', function (socket) {
         ...usernames[from],
         is_playing: 'accept',
         with: data.to
-      }: null
+      } : null
       // join the roomName provided in to (room owner)
       const fromPlayer = usernames[from];
       const toPlayer = usernames[to];
@@ -230,7 +230,7 @@ io.sockets.on('connection', function (socket) {
         with: data.to,
         invite: invite.filter((value, index, arr) => value !== data.from),
         accpet: accpet.concat(data.from)
-      }: null
+      } : null
     } else if (data.type == 'reject') {
       let invite = usernames[to] && usernames[to].invite;
       usernames[from] ? usernames[from] = {
@@ -268,11 +268,11 @@ io.sockets.on('connection', function (socket) {
         is_playing: false,
         with: null,
         room: null
-      }: null
+      } : null
       usernames[to] ? usernames[to] = {
         ...usernames[to],
         accpet: withI.filter(el => el !== data.to)
-      }: null
+      } : null
       if (
         usernames[to].accpet.length === 0 &&
         usernames[to].invite.length === 0
@@ -294,28 +294,35 @@ io.sockets.on('connection', function (socket) {
       to: data.to,
       type: data.type
     });
-  // }else{
+    // }else{
     // from !== null && io.in(`user${usernames[from].username}`).emit('leave-partener', {person: usernames[to].username});
     // to !== null && io.in(`user${usernames[to].username}`).emit('leave-partener', {person: usernames[from].username});
-  // }
+    // }
     io.emit('usernames', JSON.stringify(usernames));
   });
-  // when the turns swap, takes roomId and player username
-  // clears the last timer and starts a new one
   socket.on('switch timer', function (roomName) {
-    if (timerIds[roomName] !== 11) {
-      // clearInterval(roomsTimerIds[roomName])
-      // roomsTimerIds[roomName] = false
-      timerIds[roomName] = 11
+    if (timerIds[roomName].time !== 11) {
+      timerIds[roomName] = {
+        time: 11,
+        isTimePused: false
+      }
     }
+  })
+  socket.on('timerP', function (roomName) {
+    // if (timerIds[roomName] !== 11) {
+    timerIds[roomName] = {
+      time: 11,
+      isTimePused: true
+    }
+    // }
   })
   socket.on('turn.end', function (message) {
     const { roomName, role } = message;
     // console.log(timerIds[roomName], ';');
     if (!roomsTimerIds[roomName]) {
       let timerId = setInterval(() => {
-        if (timerIds[roomName] <= 11 && timerIds[roomName] > 0) {
-          timerIds[roomName] = timerIds[roomName] - 1
+        if (timerIds[roomName].time <= 11 && timerIds[roomName].time > 0) {
+          timerIds[roomName].time = timerIds[roomName].time - 1
           io.in(roomName).emit('timer', timerIds[roomName]);
         }
       }, 1000);
@@ -324,6 +331,8 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on('finishGame', function (room, roomName) {
     let player = JSON.parse(room);
+    console.log({room},socket.username);
+    
     usernames.map((el, index) => {
       if (player && player.includes(el.username)) {
         sockets[el.username].leave(roomName);
@@ -374,7 +383,7 @@ io.sockets.on('connection', function (socket) {
       return value;
     });
     console.log({ usernames }, 'usernames frOM DISCONNECT');
-    
+
     io.emit('usernames', JSON.stringify(usernames));
     sockets[socket.username].leave(`user${socket.username}`);
   });

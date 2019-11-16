@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-// import koraImg from '../assets/kora.png';
-// import frame from '../assets/frame.png';
-// import gWithg from '../assets/tit.png';
-// import questions from '../assets/questions.png';
 import { updateUser, updateGame } from '../store/actions';
 import { questionsAndAnswers, groupEqual } from '../utils/questionAndAnswer'
 import { person } from './playersImage';
-// import timerImg from '../assets/timer.png'
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 
 import './GameGroupWithGroup.css';
 
 import socket from '../utils/api';
-
-// const io = require('socket.io-client');
 
 class GamePersonWithPerson2 extends Component {
   state = {
@@ -23,11 +15,14 @@ class GamePersonWithPerson2 extends Component {
     redTeam: [],
     error: "",
     timer: 1,
-
+    isTimePused: false
   }
   componentDidMount() {
     socket.on('timer', timer => {
-      this.setState({ timer })
+      this.setState({ isTimePused:timer.isTimePused })
+      if (!timer.isTimePused) {
+        this.setState({ timer: timer.time, isTimePused:timer.isTimePused })
+      }
     });
   }
   componentDidUpdate(prevProps, prevState) {
@@ -53,7 +48,7 @@ class GamePersonWithPerson2 extends Component {
     // clearInter
     const { isMyRole, questions } = this.props.play
     if (isMyRole) {
-      socket.emit('remove timer', this.props.user_info.roomName)
+      socket.emit('timerP', this.props.user_info.roomName)
       const result = el.currentTarget.id
       const { room } = this.props.user_info
       let { number1, number2, number3, answers, filterdQuestions } = groupEqual(questions);

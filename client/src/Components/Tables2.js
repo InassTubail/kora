@@ -12,9 +12,10 @@ import './Tables2.css';
 class Tables2 extends Component {
     selectTab = (index) => {
         const { username, accpet } = this.props.user_info
-        // console.log(index.target.id);
         let room = JSON.stringify([username, ...accpet])
         this.props.updateGame({ ...this.props.play,indexOfQuestion: index.target.id })
+        console.log(this.props.play,'this.props.play');
+        
         let { number1, number2, answers, filterdQuestions } = groupGame(type_index[index.target.id]);
         answers = convert(answers)
         let data = {
