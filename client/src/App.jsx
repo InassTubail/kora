@@ -65,30 +65,34 @@ class App extends Component {
   componentWillUnmount() {
     window.removeEventListener('resize', this.setWindowWidth);
   }
+
   componentDidMount() {
-    const { history } = this.props;
 
-    history.listen((newLocation, action) => {
-      if (action === "PUSH") {
-        if (
-          newLocation.pathname !== this.currentPathname ||
-          newLocation.search !== this.currentSearch
-        ) {
-          // Save new location
-          this.currentPathname = newLocation.pathname;
-          this.currentSearch = newLocation.search;
 
-          // Clone location object and push it to history
-          history.push({
-            pathname: newLocation.pathname,
-            search: newLocation.search
-          });
-        }
-      } else {
-        // Send user back if they try to navigate back
-        history.go(1);
-      }
-    });
+
+    // const { history } = this.props;
+    // history.listen((newLocation, action) => {
+    //   if (action === "PUSH") {
+    //     if (
+    //       newLocation.pathname !== this.currentPathname ||
+    //       newLocation.search !== this.currentSearch
+    //     ) {
+    //       // Save new location
+    //       this.currentPathname = newLocation.pathname;
+    //       this.currentSearch = newLocation.search;
+
+    //       // Clone location object and push it to history
+    //       history.push({
+    //         pathname: newLocation.pathname,
+    //         search: newLocation.search
+    //       });
+    //     }
+    //   } else {
+    //     // Send user back if they try to navigate back
+    //     history.go(1);
+    //   }
+    // });
+
     this.getUser(socket);
     this.newInvitation(socket);
     this.refresh(socket);
@@ -444,6 +448,18 @@ class App extends Component {
   };
   render() {
     const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject'];
+    if (this.props.location.pathname === "/select-compititor" ||
+      this.props.location.pathname === "/GamePersinWithPerson" ||
+      this.props.location.pathname === "/equal" ||
+      this.props.location.pathname === "/congrat" ||
+      this.props.location.pathname === "/congrat-individ"
+    ) {
+      window.history.pushState(null, document.title, window.location.href);
+      window.addEventListener('popstate', function (event) {
+        window.history.pushState(null, document.title, window.location.href);
+      });
+    }
+
     return (
       <WindowResize width={414} height={736}>
         <div>
