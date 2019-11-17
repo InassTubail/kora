@@ -45,7 +45,6 @@ class GamePersonWithPerson2 extends Component {
     }
   }
   selectAnswer = (el) => {
-    // clearInter
     const { isMyRole, questions } = this.props.play
     if (isMyRole) {
       socket.emit('timerP', this.props.user_info.roomName)
@@ -63,9 +62,7 @@ class GamePersonWithPerson2 extends Component {
     }
   }
   render() {
-    const { number1, number2, number3, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play;
-    // console.log({number1, number2, number3});
-    
+    const { number1, number2, number3, answers, blueTeam, isMyRole, redTeam, role, resultPrevPlayer, color, classKora } = this.props.play;    
     return answers.length == 0 ? <div className="gameScreen2g"> <p>جاري التحميل ...</p> </div>
       : (
         <React.Fragment>

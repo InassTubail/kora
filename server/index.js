@@ -45,8 +45,6 @@ io.sockets.on('connection', function (socket) {
     });
     if (!isEx) {
       usernames.push(data);
-      console.log(data.username);
-
       io.sockets.emit('usernames', JSON.stringify(usernames));
       sockets[data.username] = socket
       sockets[data.username].join(`user${data.username}`);
@@ -301,7 +299,7 @@ io.sockets.on('connection', function (socket) {
     io.emit('usernames', JSON.stringify(usernames));
   });
   socket.on('switch timer', function (roomName) {
-    if (timerIds[roomName].time !== 11) {
+    if (timerIds[roomName] && timerIds[roomName].time !== 11) {
       timerIds[roomName] = {
         time: 11,
         isTimePused: false
@@ -309,19 +307,17 @@ io.sockets.on('connection', function (socket) {
     }
   })
   socket.on('timerP', function (roomName) {
-    // if (timerIds[roomName] !== 11) {
     timerIds[roomName] = {
       time: 11,
       isTimePused: true
     }
-    // }
   })
   socket.on('turn.end', function (message) {
     const { roomName, role } = message;
     // console.log(timerIds[roomName], ';');
     if (!roomsTimerIds[roomName]) {
       let timerId = setInterval(() => {
-        if (timerIds[roomName].time <= 11 && timerIds[roomName].time > 0) {
+        if (timerIds[roomName] && timerIds[roomName].time <= 11 && timerIds[roomName].time > 0) {
           timerIds[roomName].time = timerIds[roomName].time - 1
           io.in(roomName).emit('timer', timerIds[roomName]);
         }
@@ -330,9 +326,7 @@ io.sockets.on('connection', function (socket) {
     }
   });
   socket.on('finishGame', function (room, roomName) {
-    let player = JSON.parse(room);
-    console.log({room},socket.username);
-    
+    let player = JSON.parse(room);    
     usernames.map((el, index) => {
       if (player && player.includes(el.username)) {
         sockets[el.username].leave(roomName);
