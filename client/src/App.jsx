@@ -255,9 +255,9 @@ class App extends Component {
           currentPlayerColor, time: data.data.timer, isTrue
         })
       })
-      console.log(this.props.play.numberOfQuestion === JSON.parse(this.props.user_info.room).length,'****');
-      console.log(this.props.play.numberOfQuestion,JSON.parse(this.props.user_info.room));
-      
+      console.log(this.props.play.numberOfQuestion === JSON.parse(this.props.user_info.room).length, '****');
+      console.log(this.props.play.numberOfQuestion, JSON.parse(this.props.user_info.room));
+
       if (this.props.play.numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
@@ -280,7 +280,7 @@ class App extends Component {
         blueTeam: this.props.play.blueTeam.length > 0 ? this.props.play.blueTeam : newTeam.blueTeamNew,
         blueScore: this.props.play.blueScore,
         count: 0,
-        resultPrevPlayer: 0 
+        resultPrevPlayer: 0
       };
       setTimeout(() => {
         socket.emit('switch timer', this.props.user_info.roomName)
@@ -347,12 +347,12 @@ class App extends Component {
         });
       }
       isMyRole = role === this.props.user_info.username;
-      if (this.props.play.numberOfQuestion === 19 && this.props.play.blueScore === this.props.play.redScore) {
+      if (this.props.play.numberOfQuestion === 20 && this.props.play.blueScore === this.props.play.redScore) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
       }
-      if (this.props.play.numberOfQuestion === 19 && this.props.play.blueScore !== this.props.play.redScore) {
+      if (this.props.play.numberOfQuestion === 20 && this.props.play.blueScore !== this.props.play.redScore) {
         this.props.history.push('/congrat');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
@@ -443,7 +443,8 @@ class App extends Component {
   };
   render() {
     const type = ['cancelInvite', 'withdrawal', 'cancelPlayer', 'reject'];
-    if (this.props.location.pathname === "/select-compititor" ||
+    if (
+      // this.props.location.pathname === "/select-compititor" ||
       this.props.location.pathname === "/GamePersinWithPerson" ||
       this.props.location.pathname === "/equal" ||
       this.props.location.pathname === "/congrat" ||
