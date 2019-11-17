@@ -347,12 +347,12 @@ class App extends Component {
         });
       }
       isMyRole = role === this.props.user_info.username;
-      if (this.props.play.numberOfQuestion === 19 && this.props.play.blueScore === this.props.play.redScore) {
+      if (this.props.play.numberOfQuestion === 20 && this.props.play.blueScore === this.props.play.redScore) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
       }
-      if (this.props.play.numberOfQuestion === 19 && this.props.play.blueScore !== this.props.play.redScore) {
+      if (this.props.play.numberOfQuestion === 20 && this.props.play.blueScore !== this.props.play.redScore) {
         this.props.history.push('/congrat');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
