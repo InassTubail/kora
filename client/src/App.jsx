@@ -167,7 +167,6 @@ class App extends Component {
   gamingRoomEqual = socket => {
     socket.on('data.room.equal', async (data, timer) => {
       if (data.room !== this.props.user_info.room) return;
-      let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
       let role, color, isMyRole;
       let newTeam;
       const { location } = this.props;
@@ -177,7 +176,6 @@ class App extends Component {
       }
       let finalData = {}
       let { number1, number2, answers, result, number3, questions, classKora } = data.data
-      // let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
       let currentPlayer = JSON.parse(this.props.user_info.room).findIndex(el => el === data.data.currentPlayer)
       if (currentPlayer === JSON.parse(this.props.user_info.room).length - 1) {
         role = JSON.parse(this.props.user_info.room)[0];
@@ -199,7 +197,7 @@ class App extends Component {
           0
           ? 'red'
           : 'blue';
-      if (redTeam.length === 0 && blueTeam.length === 0) {
+      if (this.props.play.redTeam.length === 0 && this.props.play.blueTeam.length === 0) {
         let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
         let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
         newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
@@ -211,12 +209,12 @@ class App extends Component {
         if (currentPlayerColor === 'red' && isTrue) {
           this.props.updateGame({
             ...this.props.play,
-            redScore: redScore++
+            redScore: this.props.play.redScore + 1
           });
         } else if (currentPlayerColor === 'blue' && isTrue) {
           this.props.updateGame({
             ...this.props.play,
-            blueScore: blueScore++
+            blueScore: this.props.play.blueScore + 1
           });
         }
         this.props.updateGame({
@@ -230,8 +228,12 @@ class App extends Component {
           currentPlayerColor, time: data.data.timer, isTrue
         })
       })
-      if (numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
+      console.log(this.props.play.numberOfQuestion === JSON.parse(this.props.user_info.room).length,'****');
+      console.log(this.props.play.numberOfQuestion,JSON.parse(this.props.user_info.room));
+      
+      if (this.props.play.numberOfQuestion === JSON.parse(this.props.user_info.room).length) {
         this.props.history.push('/equal');
+        socket.emit('remove timer', this.props.user_info.roomName)
         return;
       }
       finalData = {
@@ -245,15 +247,13 @@ class App extends Component {
         number2,
         answers,
         classKora: '',
-        numberOfQuestion: numberOfQuestion++,
-        redScore,
-        redTeam: redTeam.length > 0 ? redTeam : newTeam.redTeamNew,
-        blueTeam: blueTeam.length > 0 ? blueTeam : newTeam.blueTeamNew,
-        blueScore,
+        numberOfQuestion: this.props.play.numberOfQuestion + 1,
+        redScore: this.props.play.redScore,
+        redTeam: this.props.play.redTeam.length > 0 ? this.props.play.redTeam : newTeam.redTeamNew,
+        blueTeam: this.props.play.blueTeam.length > 0 ? this.props.play.blueTeam : newTeam.blueTeamNew,
+        blueScore: this.props.play.blueScore,
         count: 0,
-        // timer: 10,
-        resultPrevPlayer: 0 //نتيحة سؤال اللاعب الحالي ي سمر
-        // resultPrevPlayer
+        resultPrevPlayer: 0 
       };
       setTimeout(() => {
         socket.emit('switch timer', this.props.user_info.roomName)
@@ -266,10 +266,9 @@ class App extends Component {
     
     socket.on('data.room', async data => {
       if (data.room !== this.props.user_info.room) return;
-      let { redScore, blueScore, numberOfQuestion, redTeam, blueTeam } = this.props.play;
       let role, color, isMyRole;
       let newTeam;
-      console.log({ redScore, blueScore, numberOfQuestion, redTeam, blueTeam });
+      // console.log({ redScore, blueScore, numberOfQuestion, redTeam, blueTeam });
       
       const { location } = this.props;
       if (location.pathname !== '/GamePersinWithPerson') {
@@ -299,7 +298,7 @@ class App extends Component {
           0
           ? 'red'
           : 'blue';
-      if (redTeam.length === 0 && blueTeam.length === 0) {
+      if (this.props.play.redTeam.length === 0 && this.props.play.blueTeam.length === 0) {
         let red_team = [JSON.parse(this.props.user_info.room)[1], JSON.parse(this.props.user_info.room)[3]]
         let blue_team = [JSON.parse(this.props.user_info.room)[0], JSON.parse(this.props.user_info.room)[2]]
         newTeam = await detrmineRedABlue(red_team, blue_team, this.props.users);
@@ -311,12 +310,12 @@ class App extends Component {
         if (currentPlayerColor === 'red' && isTrue) {
           this.props.updateGame({
             ...this.props.play,
-            redScore: redScore++
+            redScore: this.props.play.redScore + 1
           });
         } else if (currentPlayerColor === 'blue' && isTrue) {
           this.props.updateGame({
             ...this.props.play,
-            blueScore: blueScore++
+            blueScore: this.props.play.blueScore + 1
           });
         }
         this.props.updateGame({
@@ -325,12 +324,12 @@ class App extends Component {
         });
       }
       isMyRole = role === this.props.user_info.username;
-      if (numberOfQuestion === 19 && blueScore === redScore) {
+      if (this.props.play.numberOfQuestion === 4 && this.props.play.blueScore === this.props.play.redScore) {
         this.props.history.push('/equal');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
       }
-      if (numberOfQuestion === 19 && blueScore !== redScore) {
+      if (this.props.play.numberOfQuestion === 4 && this.props.play.blueScore !== this.props.play.redScore) {
         this.props.history.push('/congrat');
         socket.emit('remove timer', this.props.user_info.roomName)
         return;
@@ -346,11 +345,11 @@ class App extends Component {
         number2,
         answers,
         classKora: '',
-        numberOfQuestion: numberOfQuestion++,
-        redScore,
-        redTeam: redTeam.length > 0 ? redTeam : newTeam.redTeamNew,
-        blueTeam: blueTeam.length > 0 ? blueTeam : newTeam.blueTeamNew,
-        blueScore,
+        numberOfQuestion: this.props.play.numberOfQuestion + 1,
+        redScore: this.props.play.redScore,
+        redTeam: this.props.play.redTeam.length > 0 ? this.props.play.redTeam : newTeam.redTeamNew,
+        blueTeam: this.props.play.blueTeam.length > 0 ? this.props.play.blueTeam : newTeam.blueTeamNew,
+        blueScore: this.props.play.blueScore,
         count: 0,
         // timer: 10,
         resultPrevPlayer: 0 //نتيحة سؤال اللاعب الحالي ي سمر

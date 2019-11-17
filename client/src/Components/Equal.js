@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import mabrouk from '../assets/equal.png';
-// import mabroukCongrate from '../assets/mabrouk.png';
-// import frame from '../assets/frame.png';
-// import playAgain from '../assets/playAgain.png';
-// import vs from '../assets/VS.png'
 import { connect } from 'react-redux';
 import { updateGame, replay_Game } from '../store/actions';
 import { person } from './playersImage';
@@ -13,8 +8,6 @@ import socket from '../utils/api';
 import { groupEqual } from '../utils/questionAndAnswer';
 import { arabic_num, convert, convertT } from '../utils/arabic_num'
 import { type_index } from '../utils/customPlay'
-// import clup from '../assets/clup.mp3'
-// import cup from '../assets/cup.png'
 
 import './Congrat.css';
 import './Equal.css';
@@ -28,11 +21,13 @@ class Equal extends Component {
   componentDidMount() {
     const { room } = this.props.user_info
     const { timer } = this.props.play
+    console.log({timer});
+    
+    this.props.updateGame({ ...this.props.play, numberOfQuestion: 0, blueScore: 0, redScore: 0, number1: 0, number2: 0, answers: [] })
     if (timer.length === 0) {
       this.setState({ replay: true })
       setTimeout(() => {
         if (this.props.play.isMyRole) {
-          this.props.updateGame({ ...this.props.play, numberOfQuestion: 0, blueScore: 0, redScore: 0, number1: 0, number2: 0, answers: [] })
           let { number1, number2, number3, answers, filterdQuestions } = groupEqual(type_index[this.props.play.indexOfQuestion]);
           answers = convert(answers)
           let data = {

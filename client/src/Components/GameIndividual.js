@@ -65,12 +65,13 @@ class GameIndividual extends Component {
             let { id } = this.props.match.params
             const { allNumber } = this.state
             let randomC = Math.floor(Math.random() * (allNumber.length - 1)) + 0;
-            let answers = [{ answer: allNumber[randomC] * id, style: "correct" }, { answer: (allNumber[randomC] * id) + 2, style: "incorrect" }, { answer: (allNumber[randomC] * id) + 3, style: "incorrect" }];
+            let num1 = ( allNumber.length >0 && allNumber[randomC] ? allNumber[randomC]: 1)
+            let answers = [{ answer: num1 * id, style: "correct" }, { answer: (num1 * id) + 2, style: "incorrect" }, { answer: (num1 * id) + 3, style: "incorrect" }];
             answers = shuffle(answers)
-            let all = allNumber.filter((el) => el !== allNumber[randomC])
+            let all = allNumber.filter((el) => el !== num1)
             answers = convert(answers)
             this.setState({
-              number1: allNumber[randomC], number2: id,
+              number1: num1, number2: id,
               answers,
               allNumber: all,
             })
@@ -82,7 +83,6 @@ class GameIndividual extends Component {
         } else if (this.state.NOTrue < 6 && !this.state.showPopup) {
           this.setState({ showPopup: true ,tryAgainVoice:true })
         }
-        // this.props.history.push(`/congrat-individ`);
       }
     }
   }

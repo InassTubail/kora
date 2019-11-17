@@ -80,7 +80,6 @@ class GamePersonWithPerson extends Component {
               <div>
                 <img src={'https://user-images.githubusercontent.com/30287981/68534485-bb63f500-033d-11ea-8fbc-9c35c2c1c26d.png'} alt="title" className="titleImage2g" />
               </div>
-              {/* <p>{this.state.count}</p> */}
               {isMyRole ?
                 <p className="playNow"><span className="playNowName"> أنت </span> تلعب الان</p>
                 :
@@ -124,7 +123,7 @@ class GamePersonWithPerson extends Component {
 
               <div className="tim">
                 <img src={'https://user-images.githubusercontent.com/30287981/68534404-f1ed4000-033c-11ea-8d8c-5bc9750ca951.png'} alt="" className="timImg" />
-                <p>{this.state.timer}</p>
+                <p>{convertT(this.state.timer)}</p>
               </div>
               <div className="subHeader3321g">
                 {redTeam && redTeam.map((el, index) =>
