@@ -15,7 +15,9 @@ class GamePersonWithPerson2 extends Component {
     redTeam: [],
     error: "",
     timer: 1,
-    isTimePused: false
+    isTimePused: false,
+    isAnswered: false
+
   }
   componentDidMount() {
     socket.on('timer', timer => {
@@ -43,10 +45,18 @@ class GamePersonWithPerson2 extends Component {
         this.setState({ error: "" })
       }, 2000);
     }
+    if (this.state.isAnswered) {
+      setTimeout(async () => {
+        this.setState({ isAnswered: false })
+      }, 2000);
+    }
   }
   selectAnswer = (el) => {
     const { isMyRole, questions } = this.props.play
-    if (isMyRole) {
+    const { isAnswered } = this.state
+
+    if (isMyRole && !isAnswered) {
+      this.setState({ isAnswered: true })
       socket.emit('timerP', this.props.user_info.roomName)
       const result = el.currentTarget.id
       const { room } = this.props.user_info
