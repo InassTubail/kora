@@ -20,9 +20,7 @@ class Equal extends Component {
   }
   componentDidMount() {
     const { room } = this.props.user_info
-    const { timer } = this.props.play
-    console.log({timer});
-    
+    const { timer } = this.props.play    
     this.props.updateGame({ ...this.props.play, numberOfQuestion: 0, blueScore: 0, redScore: 0, number1: 0, number2: 0, answers: [] })
     if (timer.length === 0) {
       this.setState({ replay: true })
